@@ -368,6 +368,9 @@
     "vitest-canvas-mock": "^0.3.3"
   },
   "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
