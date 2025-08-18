@@ -1,25 +1,60 @@
-// src/app/api/health/route.ts
+// File: src/app/api/health/route.ts
+// Health/Readiness probe for S0 — type-safe, no 'any'
 import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
 
-export async function GET() {   
-  const startedAt = new Date().toISOString();
-  const required = ['NEXT_PUBLIC_SERVICE_MODE', 'APP_URL'];
-  const envOk = required.every((k) => process.env[k] !== undefined);
+type HealthStatus = 'ok' | 'warn' | 'error';
 
-  return NextResponse.json(
-    {
-      status: envOk ? 'ok' : 'partial',
-      nodeEnv: process.env.NODE_ENV,
-      startedAt,
-      env: {
-        NEXT_PUBLIC_SERVICE_MODE: process.env.NEXT_PUBLIC_SERVICE_MODE ?? null,
-        APP_URL: process.env.APP_URL ?? null,
-      },
-      checks: { required },
+const REQUIRED_ENV_KEYS = [
+  'NEXT_PUBLIC_SERVICE_MODE',
+  'APP_URL',
+  'KEY_VAULTS_SECRET',
+  'DATABASE_URL', // S0: ยังไม่ต่อจริงได้ แต่เตือนล่วงหน้า
+] as const;
+
+// ---- typed global (เลี่ยง any) ----
+declare global {
+  var __bootTime: number | undefined;
+}
+
+function getMissingEnvs() {
+  return REQUIRED_ENV_KEYS.filter((k) => !process.env[k] || `${process.env[k]}`.trim() === '');
+}
+
+function inferStatus(missing: string[]): HealthStatus {
+  if (missing.length === 0) return 'ok';
+  if (missing.length === 1 && missing.includes('DATABASE_URL')) return 'warn';
+  return 'error';
+}
+
+export function GET() {
+  globalThis.__bootTime = globalThis.__bootTime ?? Date.now();
+  const startedAt = globalThis.__bootTime;
+
+  const missing = getMissingEnvs();
+  const status = inferStatus(missing);
+
+  const payload = {
+    status,
+    time: new Date().toISOString(),
+    uptimeSec: Math.round((Date.now() - startedAt) / 1000),
+    app: {
+      mode: process.env.NEXT_PUBLIC_SERVICE_MODE ?? 'unknown',
+      url: process.env.APP_URL ?? 'unknown',
     },
-    { status: envOk ? 200 : 206 },
-  );
+    env: {
+      present: REQUIRED_ENV_KEYS.filter((k) => !missing.includes(k)),
+      missing,
+    },
+    tips:
+      status === 'ok'
+        ? 'พร้อมขึ้นสนาม 🎯'
+        : status === 'warn'
+          ? 'ยังขาด DATABASE_URL (อนุโลมได้ใน S0) — ตั้งค่าใน Vercel ก่อน S1/S2'
+          : 'มี ENV สำคัญหายไป — กรุณาตั้งค่าให้ครบก่อน deploy',
+  };
+
+  const httpStatus = status === 'error' ? 500 : 200;
+  return NextResponse.json(payload, { status: httpStatus });
 }
