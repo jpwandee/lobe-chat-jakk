@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
-  "installCommand": "pnpm install --shamefully-hoist --no-frozen-lockfile",
-  "buildCommand": "pnpm build"
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm -w build",
+  "installCommand": "pnpm install --no-frozen-lockfile"
 }
