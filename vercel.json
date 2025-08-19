@@ -3,6 +3,6 @@
   "installCommand": "bun install || pnpm install --no-frozen-lockfile",
   "buildCommand": "pnpm -w build",
   "functions": {
-    "maxDuration": 200
+    "maxDuration": 60
   }
 }
