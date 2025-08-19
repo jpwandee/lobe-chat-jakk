@@ -1,8 +1,15 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "installCommand": "bun install || pnpm install --no-frozen-lockfile",
+  "installCommand": "pnpm install --no-frozen-lockfile || bun install",
   "buildCommand": "pnpm -w build",
   "functions": {
-    "maxDuration": 60
+    // Next.js app router (Route Handlers)
+    "app/api/**/*.ts": { "maxDuration": 60 },
+    "app/api/**/*.tsx": { "maxDuration": 60 },
+
+    // เผื่อยังมีโค้ด API แบบ pages router
+    "api/**/*.ts": { "maxDuration": 60 },
+    "api/**/*.tsx": { "maxDuration": 60 }
   }
 }
