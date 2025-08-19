@@ -1,106 +1,149 @@
-// File: src/app/api/echo/route.ts
-// Minimal, battle-tested SSE for Next.js 15 (Turbopack dev friendly)
-import type { NextRequest }
+/* src/app/api/echo/route.ts
+   SSE Echo for LobeChat-BEYOND
+   - Edge runtime (Hobby: maxDuration <= 60s)
+   - force-dynamic / no-store to avoid static caching
+   - heartbeat keepalive
+   - named + default events
+*/
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+import type { NextRequest } from 'next/server';
 
-// helper: default event
-function sseBlock(data: string, opts?: { id?: number | string; retry?: number }) {
-  const lines: string[] = [];lines
-  if (opts?.id !== undefined) lines.push(`id: ${opts.id}`);
-  if (opts?.retry !== undefined) lines.push(`retry: ${opts.retry}`);
-  for (const l of data.split(/\r?\n/)) lines.push(`data: ${l}`);
-  lines.push('');
-  return lines.join('\n');
+// ---------- Route Segment Config ----------
+export const runtime = 'edge' as const;            // ใช้ Edge Function
+export const maxDuration = 60;                     // Hobby limit 60s
+export const dynamic = 'force-dynamic';            // กันถูก prerender
+export const revalidate = 0;                       // no SSG cache
+export const fetchCache = 'force-no-store';        // กัน caching ชั้น fetch
+
+// ---------- SSE Utils ----------
+const encoder = new TextEncoder();
+
+function toUint8(s: string) {
+  return encoder.encode(s);
 }
 
-// helper: named event
-function sseNamed(event: string, data: string, opts?: { id?: number | string; retry?: number }) {
-  const lines: string[] = [];lines
-  lines.push(`event: ${event}`);
-  if (opts?.id !== undefined) lines.push(`id: ${opts.id}`);
-  if (opts?.retry !== undefined) lines.push(`retry: ${opts.retry}`);
-  for (const l of data.split(/\r?\n/)) lines.push(`data: ${l}`);
-  lines.push('');
-  return lines.join('\n');
+function sseData(data: unknown) {
+  return `data: ${typeof data === 'string' ? data : JSON.stringify(data)}\n\n`;
+}
+function sseEvent(event: string, data: unknown) {
+  return `event: ${event}\n${sseData(data)}`;
+}
+function sseComment(text: string) {
+  return `: ${text}\n\n`;
 }
 
-export function get(req: nextrequest) {
-  const headers = new Headers({
+function baseHeaders(): HeadersInit {
+  return {
     'Content-Type': 'text/event-stream; charset=utf-8',
     'Cache-Control': 'no-cache, no-transform',
     'Connection': 'keep-alive',
-  })
-  const traceId = crypto.randomUUID()
-  const url = new URL(req.url)
-  const msg = url.searchParams.get('msg') ?? undefined
-  const encoder = new TextEncoder()
-  let i = 1
-  let interval: returntype<typeof setinterval> | undefined;interval
+    'X-Accel-Buffering': 'no', // ปิดบัฟเฟอร์ (รองรับบาง proxy)
+    // CORS (กรณีเรียกข้ามโดเมน/ทดสอบ)
+    'Access-Control-Allow-Origin': '*',
+  };
+}
 
-  const stream = new ReadableStream<Uint8Array>({
-    start(controller) {
-      // hello (named + default)
-      controller.enqueue(
-        encoder.encode(
-          sseNamed(
-            'hello',
-            JSON.stringify({ message: '👋 echo online', traceId, now: new Date().toISOString() }),
-            {
-              id: i,
-              retry: 3000,
-            },
-          ),
-        ),
-      )
-      controller.enqueue(
-        encoder.encode(
-          sseBlock(
-            JSON.stringify({
-              message: '👋 echo online (default)',
-              traceId,
-              now: new Date().toISOString(),
-            }),
-            {
-              id: i++,
-              retry: 3000,
-            },
-          ),
-        ),
-      )
+type TickPayload = { i: number; ts: number; echo?: unknown };
 
-      // optional echo
-      if (msg) {
-        controller.enqueue(
-          encoder.encode(sseNamed('echo', `คุณส่งมา: ${msg}`, { id: `msg-${i}` })),
-        )
-        controller.enqueue(
-          encoder.encode(sseBlock(JSON.stringify({ echo: msg }), { id: `msg-${i++}` })),
-        )
-      }
+// ---------- Core SSE Handler ----------
+async function handleSSE(req: NextRequest): Promise<Response> {
+  const { readable, writable } = new TransformStream();
+  const writer = writable.getWriter();
 
-      // ticks
-      interval = setInterval(() => {
-        const payload = JSON.stringify({ seq: i, ts: new Date().toISOString() })
-        controller.enqueue(encoder.encode(sseNamed('tick', payload, { id: i })))
-        controller.enqueue(encoder.encode(sseBlock(payload, { id: i })))
-        controller.enqueue(encoder.encode(`: keepalive ${Date.now()}\n\n`))
-        i++
-      }, 800)
+  // เปิดสตรีม: ตั้ง retry เริ่มต้น
+  await writer.write(toUint8(`retry: 3000\n`));
 
-      // cleanup on client abort
-      const abort = () => {
-        if (interval) clearInterval(interval)
-        controller.close()
-      }
-      req.signal.addEventListener('abort', abort)
+  // heartbeat กัน connection timeout จาก proxy/CDN
+  const heartbeat = setInterval(() => {
+    writer.write(toUint8(sseComment(`keepalive ${Date.now()}`))).catch(() => {
+      /* no-op */
+    });
+  }, 20_000);
+
+  // ปิดสตรีมแบบปลอดภัย
+  const safeClose = (reason = 'done') => {
+    clearInterval(heartbeat);
+    writer
+      .write(toUint8(sseEvent('close', { reason, ts: Date.now() })))
+      .catch(() => {})
+      .finally(() => {
+        writer.close().catch(() => {});
+      });
+  };
+
+  // client ยกเลิก (เปลี่ยนหน้า/ปิดแท็บ)
+  req.signal.addEventListener('abort', () => safeClose('client-abort'));
+
+  // พารามิเตอร์ทดสอบ
+  const url = new URL(req.url);
+  const limit = Math.max(1, Math.min(Number(url.searchParams.get('n') ?? 10), 100)); // จำนวน tick
+  const delay = Math.max(100, Math.min(Number(url.searchParams.get('ms') ?? 800), 10_000)); // ช่วงเวลา
+
+  // ถ้ามี echo message (GET: ?q=...  /  POST: body)
+  let initialEcho: unknown = undefined;
+  if (req.method === 'GET') {
+    const q = url.searchParams.get('q');
+    if (q) initialEcho = { q };
+  } else if (req.method === 'POST') {
+    try {
+      const ctype = req.headers.get('content-type') || '';
+      if (ctype.includes('application/json')) initialEcho = await req.json();
+      else initialEcho = await req.text();
+    } catch {
+      // no-op
+    }
+  }
+
+  // ส่งทักทาย (named + default)
+  await writer.write(
+    toUint8(
+      sseEvent('hello', { hello: 'ψJAKK.DEV-COMPANION', ts: Date.now() }) +
+        sseData({ hello: 'ψJAKK.DEV-COMPANION', ts: Date.now() }), // default duplicate
+    ),
+  );
+
+  // ถ้ามีข้อความ echo ส่งออกก่อนหนึ่งชุด
+  if (initialEcho !== undefined) {
+    await writer.write(toUint8(sseEvent('echo', initialEcho) + sseData(initialEcho)));
+  }
+
+  // เริ่ม tick ต่อเนื่อง
+  let i = 0;
+  const timer = setInterval(async () => {
+    i++;
+    const payload: TickPayload = { i, ts: Date.now(), echo: initialEcho };
+    try {
+      await writer.write(toUint8(sseEvent('tick', payload) + sseData(payload)));
+    } catch {
+      clearInterval(timer);
+      return safeClose('writer-error');
+    }
+    if (i >= limit) {
+      clearInterval(timer);
+      safeClose('limit-reached');
+    }
+  }, delay);
+
+  return new Response(readable, { headers: baseHeaders() });
+}
+
+// ---------- HTTP Methods ----------
+export async function GET(req: NextRequest) {
+  return handleSSE(req);
+}
+
+export async function POST(req: NextRequest) {
+  return handleSSE(req);
+}
+
+// (ตัวเลือก) Preflight CORS
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      ...baseHeaders(),
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
-    cancel() {
-      if (interval) clearInterval(interval)
-    },
-  })
-
-  return new Response(stream, { headers })
+  });
 }
