@@ -1,127 +1,203 @@
-// src/app/layout.tsx
-import './globals.css'
-import type { Metadata, Viewport }
+// src/app/api/echo/route.ts
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-// ---------- App Metadata / PWA ----------
-export const metadata: Metadata = {
-  title: 'ψJAKK.DEV-COMPANION — LobeChat-BEYOND',
-  description:
-  'AI OS สำหรับพ่อ: Orchestration + Hybrid KB + Policy + Budget Guard + Observability + Canvas',
-  applicationName: 'LobeChat-BEYOND',
-  manifest: '/manifest.json',
-  icons: {
-    apple: [{;
-    icon: [{; type: 'image/svg+xml' }],; url: '/favicon.ico' }, {; url: '/icon.svg',; url: '/apple-touch-icon.png' }],
-  }
-  ,
-  themeColor: [
-  { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-  { media: '(prefers-color-scheme: dark)', color: '#0b1020' },
-  ],
-  other: {
-    'color-scheme': 'light dark',
-  }
-  ,
-  alternates: { canonical: '/' },
+/**
+ * Run on Edge for low-latency streaming
+ * You can switch to 'nodejs' if you need Node APIs.
+ */
+export const runtime = 'edge';
+/**
+ * Route is always dynamic (no caching), important for streaming.
+ */
+export const dynamic = 'force-dynamic';
+/**
+ * Vercel Functions timeout (in seconds). Plan-dependent upper-bounds.
+ * Must be between 1 and 300 on Vercel.
+ */
+export const maxDuration = 60;
+
+type EchoBody = {
+  message?: string;
+  /** split unit: 'char' | 'word' */
+  unit?: 'char' | 'word';
+  /** delay between chunks in ms */
+  delayMs?: number;
+  /** number of repeats (for load-test) */
+  repeat?: number;
+  /** if false, respond as JSON (non-stream) */
+  stream?: boolean;
 };
 
-export const viewport: Viewport = {
-  width: 'device-width',; color: '#ffffff' }, {; color: '#0b1020' }, ],;
-  initialScale: 1,; media: '(prefers-color-scheme: dark)',;
-  themeColor: [
-    {;
-  viewportFit: 'cover',
+const encoder = new TextEncoder();
+
+/* ----------------------------- CORS Utilities ----------------------------- */
+
+function getCorsHeaders(req?: NextRequest): Record<string, string> {
+  const origin = req?.headers.get('origin') ?? '*';
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
+    'Access-Control-Max-Age': '86400',
+  };
 }
 
-// ---------- Root Layout (Server Component) ----------
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="th" suppressHydrationWarning>
-      <body>
-        <ClientProviders>{children}</ClientProviders>
-      </body>
-    </html>
+export function OPTIONS(req: NextRequest) {
+  return new NextResponse(null, { status: 204, headers: getCorsHeaders(req) });
+}
+
+/* ---------------------------- Helper: SSE write --------------------------- */
+
+function sseWrite(controller: ReadableStreamDefaultController, data: unknown) {
+  const payload =
+    typeof data === 'string' ? data : JSON.stringify(data);
+  controller.enqueue(encoder.encode(`data: ${payload}\n\n`));
+}
+
+function sseEvent(controller: ReadableStreamDefaultController, event: string, data?: unknown) {
+  controller.enqueue(encoder.encode(`event: ${event}\n`));
+  if (data !== undefined) controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n`));
+  controller.enqueue(encoder.encode(`\n`));
+}
+
+/* --------------------------------- GET ----------------------------------- */
+/**
+ * Quick health check (non-stream): /api/echo?message=hi
+ */
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const message = searchParams.get('message') ?? 'pong';
+  return NextResponse.json(
+    { ok: true, message },
+    { headers: getCorsHeaders(req) },
   );
 }
 
-// ---------- Client Providers (Theme, SW, Analytics) ----------
-'use client'
+/* --------------------------------- POST ---------------------------------- */
+/**
+ * Streaming echo (SSE).
+ * Body example:
+ * {
+ *   "message": "สวัสดีครับ พ่อ",
+ *   "unit": "word",
+ *   "delayMs": 80,
+ *   "repeat": 1,
+ *   "stream": true
+ * }
+ */
+export async function POST(req: NextRequest) {
+  let body: EchoBody;
+  try {
+    body = (await req.json()) as EchoBody;
+  } catch {
+    // If no/invalid JSON, fall back to defaults
+    body = {};
+  }
 
-import { useEffect, useMemo, useState }
-import { ConfigProvider, theme as antdTheme, App as AntdApp }
-import { Analytics }
-import { SpeedInsights }
+  const {
+    message = 'Hello from /api/echo 👋',
+    unit = 'char',
+    delayMs = 50,
+    repeat = 1,
+    stream = true,
+  } = body;
 
-// ให้ dark/light ตามระบบอย่างอัจฉริยะ + toggle ได้ทาง data-theme
-function useSmartTheme() {
-  // อ่านจาก <html data-theme> ถ้ามี (ไว้ให้ override ภายหลัง)
-  const [mode, setMode] = useState<'light' | 'dark'>(() => {
-    if (typeof document !== 'undefined') {
-      const preset = document.documentElement.getAttribute('data-theme')
-      if (preset === 'dark' || preset === 'light') return preset
-    }
-    // fallback ตาม prefers-color-scheme
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return 'light'
-  })
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = (e: MediaQueryListEvent) => setMode(e.matches ? 'dark' : 'light')
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', mode)
-  }, [mode])
-  const algorithm =
-    mode === 'dark' ? antdTheme.darkAlgorithm : antdtheme.defaultalgorithm;algorithmmodeantdTheme.darkAlgorithm
+  // Non-stream JSON mode (useful for simple checks or plan limits)
+  if (!stream) {
+    const pieces = splitByUnit(message, unit);
+    return NextResponse.json(
+      { ok: true, unit, count: pieces.length, message },
+      { headers: getCorsHeaders(req) },
+    );
+  }
 
-  const token = useMemo(
-    () => ({
-      // ปรับโทนให้เข้ม/นุ่มขึ้นเล็กน้อย
-      colorPrimary: mode === 'dark' ? '#6ea8ff' : '#1677ff',
-      borderRadius: 12,
-    }),
-    [mode],
-  )
+  const headers: HeadersInit = {
+    ...getCorsHeaders(req),
+    'Content-Type': 'text/event-stream; charset=utf-8',
+    'Cache-Control': 'no-cache, no-transform',
+    'X-Accel-Buffering': 'no', // disable buffering on some proxies
+  };
 
-  return { mode, algorithm, token }
-}
+  const streamResp = new ReadableStream({
+    start(controller) {
+      // Send an initial retry hint for SSE clients (optional)
+      controller.enqueue(encoder.encode('retry: 10000\n\n'));
 
-function ClientProviders({ children }: { children: React.ReactNode }) {
-  const { algorithm, token } = useSmartTheme();
+      // If client disconnects, abort work
+      const abort = () => {
+        try {
+          sseEvent(controller, 'abort', { reason: 'client_disconnected' });
+        } finally {
+          controller.close();
+        }
+      };
 
-  // Register service worker ของ serwist (ตามคำเตือนใน Log)
-  useEffect(() => {
-    // serwist จะถูก inject โดยปลั๊กอินตอน build
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const sw: any = (window as any).serwist;
-    if (sw?.register) {
-      try {
-        sw.register();
-      } catch {
-        // no-op
+      // NextRequest.signal works on Edge; listen to abort
+      const signal = req.signal as AbortSignal | undefined;
+      if (signal) {
+        if (signal.aborted) {
+          abort();
+          return;
+        }
+        const onAbort = () => abort();
+        signal.addEventListener('abort', onAbort, { once: true });
+
+        // Cleanup: remove listener when stream closes
+        const originalClose = controller.close.bind(controller);
+        controller.close = () => {
+          signal.removeEventListener('abort', onAbort);
+          originalClose();
+        };
       }
-    }
-  }, []);
 
-  // ปิด scroll-restore ที่บางทีทำให้ UX กระตุกตอน SSR
-  useEffect(() => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-  }, []);
+      void (async () => {
+        try {
+          const pieces = splitByUnit(message, unit);
+          for (let r = 0; r < Math.max(1, repeat); r++) {
+            for (const chunk of pieces) {
+              // When aborted, stop early
+              if (signal?.aborted) throw new Error('aborted');
 
-  return (
-    <ConfigProvider theme={{ algorithm, token }}>
-      <AntdApp>
-        {children}
-        {/* Observability by Vercel */}
-        <Analytics />
-        <SpeedInsights />
-      </AntdApp>
-    </ConfigProvider>
-  );
+              sseWrite(controller, chunk);
+              // Minimal delay to simulate token streaming
+              if (delayMs > 0) await sleep(delayMs);
+            }
+            if (repeat > 1 && r < repeat - 1) {
+              sseEvent(controller, 'repeat', { index: r + 1 });
+            }
+          }
+
+          sseEvent(controller, 'done', { bytes: message.length });
+          controller.close();
+        } catch (err) {
+          // Graceful error event for SSE clients
+          sseEvent(controller, 'error', {
+            message: err instanceof Error ? err.message : 'unknown_error',
+          });
+          controller.close();
+        }
+      })();
+    },
+    cancel() {
+      // Consumer cancelled; nothing else to do since we close in start() on abort.
+    },
+  });
+
+  return new Response(streamResp, { status: 200, headers });
+}
+
+/* -------------------------------- Utils ---------------------------------- */
+
+function splitByUnit(text: string, unit: 'char' | 'word'): string[] {
+  if (unit === 'word') {
+    // Keep punctuation attached to words for simplicity
+    return text.split(/\s+/).filter(Boolean).map((w, i, arr) => (i < arr.length - 1 ? `${w} ` : w));
+  }
+  // default: char stream
+  return Array.from(text);
+}
+
+function sleep(ms: number) {
+  return new Promise((res) => setTimeout(res, ms));
 }

@@ -4,11 +4,10 @@
   "installCommand": "pnpm install --no-frozen-lockfile || bun install",
   "buildCommand": "pnpm -w build",
   "functions": {
-    // Next.js app router (Route Handlers)
+
     "app/api/**/*.ts": { "maxDuration": 60 },
     "app/api/**/*.tsx": { "maxDuration": 60 },
 
-    // เผื่อยังมีโค้ด API แบบ pages router
     "api/**/*.ts": { "maxDuration": 60 },
     "api/**/*.tsx": { "maxDuration": 60 }
   }
