@@ -1,17 +1,17 @@
-import { ActionIcon, Text } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { ArrowDownUpIcon, ToggleLeft } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { ActionIcon, Text }
+import isEqual from 'fast-deep-equal'
+import { ArrowDownUpIcon, ToggleLeft }
+import { useMemo, useState }
+import { useTranslation }
+import { Center, Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra';
-import { aiModelSelectors } from '@/store/aiInfra/selectors';
+import { useAiInfraStore }
+import { aiModelSelectors }
 
-import ModelItem from '../ModelItem';
-import SortModelModal from '../SortModelModal';
+import ModelItem from '../ModelItem'
+import SortModelModal from '../SortModelModal'
 
-interface EnabledModelListProps {
+interface enabledmodellistprops {
   activeTab: string;
 }
 
@@ -99,4 +99,4 @@ const EnabledModelList = ({ activeTab }: EnabledModelListProps) => {
     </>
   );
 };
-export default EnabledModelList;
+export default EnabledModelList

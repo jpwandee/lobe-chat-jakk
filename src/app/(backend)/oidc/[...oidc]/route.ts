@@ -1,21 +1,19 @@
-import debug from 'debug';
-import { NextRequest, NextResponse } from 'next/server';
-import { URL } from 'node:url';
+import debug from 'debug'
+import { NextRequest, NextResponse }
+import { URL }
 
-import { oidcEnv } from '@/envs/oidc';
-import { createNodeRequest, createNodeResponse } from '@/libs/oidc-provider/http-adapter';
-import { getOIDCProvider } from '@/server/services/oidc/oidcProvider';
+import { oidcEnv }
+import { createNodeRequest, createNodeResponse }
+import { getOIDCProvider }
 
 const log = debug('lobe-oidc:route'); // Create a debug instance with a namespace
 
 const handler = async (req: NextRequest) => {
-  const requestUrl = new URL(req.url);
-  log(`Received ${req.method.toUpperCase()} request: %s %s`, req.method, req.url);
-  log('Path: %s, Pathname: %s', requestUrl.pathname, requestUrl.pathname);
-
+  const requestUrl = new URL(req.url)
+  log(`Received ${req.method.toUpperCase()} request: %s %s`, req.method, req.url)
+  log('Path: %s, Pathname: %s', requestUrl.pathname, requestUrl.pathname)
   // 声明响应收集器
-  let responseCollector;
-
+  let responseCollector
   try {
     if (!oidcEnv.ENABLE_OIDC) {
       log('OIDC is not enabled');
@@ -70,27 +68,28 @@ const handler = async (req: NextRequest) => {
     }
 
     const {
-      responseStatus: finalStatus,
-      responseBody: finalBody,
-      responseHeaders: finalHeaders,
-    } = responseCollector;
+      responseBody: finalbody,;
+      responseHeaders: finalheaders,;
+      responseStatus: finalstatus,
+    } = responseCollector
 
-    log('Final Response Status: %d', finalStatus);
-    log('Final Response Headers: %O', finalHeaders);
+    log('Final Response Status: %d', finalStatus)
+    log('Final Response Headers: %O', finalHeaders)
 
     return new NextResponse(finalBody, {
       // eslint-disable-next-line no-undef
       headers: finalHeaders as HeadersInit,
       status: finalStatus,
-    });
-  } catch (error) {
+    })
+  }
+  catch (error) {
     log(`Error handling OIDC ${req.method} request: %O`, error); // Log method in error
     return new NextResponse(`Internal Server Error: ${(error as Error).message}`, { status: 500 });
   }
 };
 
-export const GET = handler;
-export const POST = handler;
-export const PUT = handler;
-export const DELETE = handler;
-export const PATCH = handler;
+export const GET = handler
+export const POST = handler
+export const PUT = handler
+export const DELETE = handler
+export const PATCH = handler

@@ -1,48 +1,48 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { PropsWithChildren, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { PropsWithChildren, memo }
+import { Flexbox } from 'react-layout-kit'
 
 const useStyles = createStyles(
   ({ css, token }) => css`
-    position: relative;
-    overflow: hidden;
-    background: ${token.colorFillSecondary};
+    position: relative
+    overflow: hidden
+    background: ${token.colorFillSecondary}
 
     &::before {
-      content: '';
+      content: ''
 
-      position: absolute;
-      z-index: 1;
-      inset-block-start: 0;
-      inset-inline-start: 0;
+      position: absolute
+      z-index: 1
+      inset-block-start: 0
+      inset-inline-start: 0
 
-      width: 100%;
-      height: 1px;
+      width: 100%
+      height: 1px
 
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
 
     &::after {
-      content: '';
+      content: ''
 
-      position: absolute;
-      z-index: 1;
-      inset-block-end: 0;
-      inset-inline-start: 0;
+      position: absolute
+      z-index: 1
+      inset-block-end: 0
+      inset-inline-start: 0
 
-      width: 100%;
-      height: 1px;
+      width: 100%
+      height: 1px
 
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
   `,
-);
+)
 
 const Cover = memo<PropsWithChildren>(({ children }) => {
-  const { styles } = useStyles();
-  return <Flexbox className={styles}>{children}</Flexbox>;
-});
+  const { styles } = useStyles()
+  return <Flexbox className={styles}>{children}</Flexbox>
+})
 
-export default Cover;
+export default Cover

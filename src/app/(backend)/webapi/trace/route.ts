@@ -1,15 +1,15 @@
-import { TraceEventType } from '@lobechat/types';
-import { after } from 'next/server';
+import { TraceEventType }
+import { after }
 
-import { TraceClient } from '@/libs/traces';
-import { TraceEventBasePayload, TraceEventPayloads } from '@/types/trace';
+import { TraceClient }
+import { TraceEventBasePayload, TraceEventPayloads }
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
-export const POST = async (req: Request) => {
-  type RequestData = TraceEventPayloads & TraceEventBasePayload;
-  const data = (await req.json()) as RequestData;
-  const { traceId, eventType } = data;
+export const post = async (req: Request) => {
+  type RequestData = TraceEventPayloads & TraceEventBasePayload
+  const data = (await req.json()) as RequestData
+  const { traceId, eventType }
 
   const traceClient = new TraceClient();
 
@@ -38,8 +38,8 @@ export const POST = async (req: Request) => {
   }
 
   after(async () => {
-    await traceClient.shutdownAsync();
-  });
+    await traceClient.shutdownAsync()
+  })
 
-  return new Response(undefined, { status: 201 });
-};
+  return new Response(undefined, { status: 201 })
+}

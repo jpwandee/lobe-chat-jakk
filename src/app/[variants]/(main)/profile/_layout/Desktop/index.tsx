@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { useResponsive } from 'antd-style';
-import { memo, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { useResponsive }
+import { memo, useRef }
+import { useTranslation }
+import { Flexbox }
 
-import InitClientDB from '@/features/InitClientDB';
-import Footer from '@/features/Setting/Footer';
-import SettingContainer from '@/features/Setting/SettingContainer';
-import { useActiveProfileKey } from '@/hooks/useActiveTabKey';
+import InitClientDB from '@/features/InitClientDB'
+import Footer from '@/features/Setting/Footer'
+import SettingContainer from '@/features/Setting/SettingContainer'
+import { useActiveProfileKey }
 
-import { LayoutProps } from '../type';
-import Header from './Header';
-import SideBar from './SideBar';
+import { LayoutProps } from '../type'
+import Header from './Header'
+import SideBar from './SideBar'
 
 const Layout = memo<LayoutProps>(({ children, category }) => {
-  const ref = useRef<any>(null);
-  const { md = true } = useResponsive();
-  const { t } = useTranslation('auth');
-  const activeKey = useActiveProfileKey();
+  const ref = useRef<any>(null)
+  const { md = true } = useResponsive()
+  const { t } = useTranslation('auth')
+  const activeKey = useActiveProfileKey()
 
   return (
     <>
@@ -40,9 +40,9 @@ const Layout = memo<LayoutProps>(({ children, category }) => {
       </Flexbox>
       <InitClientDB />
     </>
-  );
-});
+  )
+})
 
-Layout.displayName = 'DesktopProfileLayout';
+Layout.displayName = 'DesktopProfileLayout'
 
-export default Layout;
+export default Layout

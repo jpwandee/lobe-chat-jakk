@@ -1,41 +1,41 @@
-import { ActionIcon, TextArea } from '@lobehub/ui';
-import { SafeArea } from '@lobehub/ui/mobile';
-import { useSize } from 'ahooks';
-import { createStyles } from 'antd-style';
-import { TextAreaRef } from 'antd/es/input/TextArea';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { rgba } from 'polished';
-import { CSSProperties, ReactNode, forwardRef, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, TextArea }
+import { SafeArea }
+import { useSize }
+import { createStyles }
+import { TextAreaRef }
+import { ChevronDown, ChevronUp }
+import { rgba }
+import { CSSProperties, ReactNode, forwardRef, useEffect, useRef, useState }
+import { useTranslation }
+import { Flexbox }
 
-import InnerContainer from './Container';
+import InnerContainer from './Container'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     container: css`
-      flex: none;
-      padding-block: 12px 12px;
-      border-block-start: 1px solid ${rgba(token.colorBorder, 0.25)};
-      background: ${token.colorFillQuaternary};
+      flex: none
+      padding-block: 12px
+      border-block-start: 1px solid ${rgba(token.colorBorder, 0.25)}
+      background: ${token.colorFillQuaternary}
     `,
     expand: css`
-      position: absolute;
-      height: 100%;
+      position: absolute
+      height: 100%
     `,
     expandButton: css`
-      position: absolute;
-      inset-inline-start: 14px;
+      position: absolute
+      inset-inline-start: 14px
     `,
     textarea: css`
-      flex: 1;
-      transition: none !important;
+      flex: 1
+      transition: none !important
     `,
-  };
-});
+  }
+})
 
-export interface MobileChatInputAreaProps {
-  bottomAddons?: ReactNode;
+export interface mobilechatinputareaprops {
+  bottomAddons?: reactnode;
   className?: string;
   expand?: boolean;
   loading?: boolean;
@@ -43,10 +43,10 @@ export interface MobileChatInputAreaProps {
   onSend?: () => void;
   safeArea?: boolean;
   setExpand?: (expand: boolean) => void;
-  style?: CSSProperties;
-  textAreaLeftAddons?: ReactNode;
-  textAreaRightAddons?: ReactNode;
-  topAddons?: ReactNode;
+  style?: cssproperties;
+  textAreaLeftAddons?: reactnode;
+  textAreaRightAddons?: reactnode;
+  topAddons?: reactnode;
   value: string;
 }
 
@@ -69,20 +69,20 @@ const MobileChatInputArea = forwardRef<TextAreaRef, MobileChatInputAreaProps>(
     },
     ref,
   ) => {
-    const { t } = useTranslation('chat');
-    const isChineseInput = useRef(false);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { cx, styles } = useStyles();
-    const size = useSize(containerRef);
-    const [showFullscreen, setShowFullscreen] = useState<boolean>(false);
-    const [isFocused, setIsFocused] = useState<boolean>(false);
+    const { t } = useTranslation('chat')
+    const isChineseInput = useRef(false)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { cx, styles } = useStyles()
+    const size = useSize(containerRef)
+    const [showFullscreen, setShowFullscreen] = useState<boolean>(false)
+    const [isFocused, setIsFocused] = useState<boolean>(false)
 
     useEffect(() => {
-      if (!size?.height) return;
-      setShowFullscreen(size.height > 72);
-    }, [size]);
+      if (!size?.height) return
+      setShowFullscreen(size.height > 72)
+    }, [size])
 
-    const showAddons = !expand && !isFocused;
+    const showAddons = !expand && !isFocused
 
     return (
       <Flexbox
@@ -117,23 +117,23 @@ const MobileChatInputArea = forwardRef<TextAreaRef, MobileChatInputAreaProps>(
               autoSize={expand ? false : { maxRows: 6, minRows: 0 }}
               className={styles.textarea}
               onBlur={(e) => {
-                onInput?.(e.target.value);
-                setIsFocused(false);
+                onInput?.(e.target.value)
+                setIsFocused(false)
               }}
               onChange={(e) => {
-                onInput?.(e.target.value);
+                onInput?.(e.target.value)
               }}
               onCompositionEnd={() => {
-                isChineseInput.current = false;
+                isChineseInput.current = false
               }}
               onCompositionStart={() => {
-                isChineseInput.current = true;
+                isChineseInput.current = true
               }}
               onFocus={() => setIsFocused(true)}
               onPressEnter={(e) => {
                 if (!loading && !isChineseInput.current && e.shiftKey) {
-                  e.preventDefault();
-                  onSend?.();
+                  e.preventDefault()
+                  onSend?.()
                 }
               }}
               placeholder={t('sendPlaceholder')}
@@ -149,8 +149,8 @@ const MobileChatInputArea = forwardRef<TextAreaRef, MobileChatInputAreaProps>(
         )}
         {safeArea && !isFocused && <SafeArea position={'bottom'} />}
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default MobileChatInputArea;
+export default MobileChatInputArea

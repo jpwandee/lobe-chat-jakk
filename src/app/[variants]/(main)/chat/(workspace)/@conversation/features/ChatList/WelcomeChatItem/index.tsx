@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
+import react, { memo }
 
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
+import { useChatStore }
+import { chatSelectors } from '@/store/chat/selectors'
 
-import InboxWelcome from './InboxWelcome';
-import WelcomeMessage from './WelcomeMessage';
+import InboxWelcome from './InboxWelcome'
+import WelcomeMessage from './WelcomeMessage'
 
 const WelcomeChatItem = memo(() => {
-  const showInboxWelcome = useChatStore(chatSelectors.showInboxWelcome);
+  const showInboxWelcome = useChatStore(chatSelectors.showInboxWelcome)
 
-  if (showInboxWelcome) return <InboxWelcome />;
+  if (showInboxWelcome) return <InboxWelcome />
 
-  return <WelcomeMessage />;
-});
+  return <WelcomeMessage />
+})
 
-export default WelcomeChatItem;
+export default WelcomeChatItem

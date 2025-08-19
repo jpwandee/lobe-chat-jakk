@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { CSSProperties, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { createStyles }
+import { ArrowLeft }
+import Link from 'next/link'
+import { CSSProperties, memo }
+import { useTranslation }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     back: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
 
       &:hover {
-        color: ${token.colorText};
+        color: ${token.colorText}
       }
     `,
-  };
-});
+  }
+})
 
-const Back = memo<{ href: string; style?: CSSProperties }>(({ href, style }) => {
-  const { t } = useTranslation('discover');
-  const { styles } = useStyles();
+const back = memo< { href: string; style?: cssproperties }>(({ href, style }) => {
+  const { t } = useTranslation('discover')
+  const { styles } = useStyles()
 
   return (
     <Link className={styles.back} href={href} style={{ marginBottom: 8, ...style }}>
@@ -31,7 +31,7 @@ const Back = memo<{ href: string; style?: CSSProperties }>(({ href, style }) => 
         {t(`back`)}
       </Flexbox>
     </Link>
-  );
-});
+  )
+})
 
-export default Back;
+export default Back

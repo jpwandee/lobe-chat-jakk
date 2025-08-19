@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
-import { PropsWithChildren } from 'react';
+import { notFound }
+import { PropsWithChildren }
 
-import { serverFeatureFlags } from '@/config/featureFlags';
-import { isServerMode } from '@/const/version';
+import { serverFeatureFlags }
+import { isServerMode }
 
 export default ({ children }: PropsWithChildren) => {
   const enableKnowledgeBase = serverFeatureFlags().enableKnowledgeBase;

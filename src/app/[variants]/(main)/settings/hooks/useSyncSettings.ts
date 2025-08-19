@@ -1,23 +1,23 @@
-import { FormInstance } from 'antd/es/form/hooks/useForm';
-import { useLayoutEffect } from 'react';
+import { FormInstance }
+import { useLayoutEffect }
 
-import { useUserStore } from '@/store/user';
+import { useUserStore }
 
-export const useSyncSettings = (form: FormInstance) => {
+export const usesyncsettings = (form: FormInstance) => {
   useLayoutEffect(() => {
     // set the first time
-    form.setFieldsValue(useUserStore.getState().settings);
+    form.setFieldsValue(useUserStore.getState().settings)
 
     // sync with later updated settings
     const unsubscribe = useUserStore.subscribe(
       (s) => s.settings,
       (settings) => {
-        form.setFieldsValue(settings);
+        form.setFieldsValue(settings)
       },
-    );
+    )
 
     return () => {
-      unsubscribe();
-    };
-  }, []);
-};
+      unsubscribe()
+    }
+  }, [])
+}

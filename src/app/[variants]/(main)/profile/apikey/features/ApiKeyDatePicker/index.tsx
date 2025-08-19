@@ -1,22 +1,22 @@
-import { DatePicker } from '@lobehub/ui';
-import { DatePickerProps, Flex } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { DatePicker }
+import { DatePickerProps, Flex }
+import dayjs, { Dayjs }
+import { FC }
+import { useTranslation }
 
-interface ApiKeyDatePickerProps extends Omit<DatePickerProps, 'onChange'> {
-  onChange?: (date: Dayjs | null) => void;
+interface apikeydatepickerprops extends omit<datepickerprops, 'onChange'> {
+  onChange?: (date: dayjs | null) => void;
 }
 
 const ApiKeyDatePicker: FC<ApiKeyDatePickerProps> = ({ value, onChange, ...props }) => {
-  const { t } = useTranslation('auth');
+  const { t }
 
-  const handleOnChange = (date: Dayjs | null) => {
+  const handleonchange = (date: Dayjs | null) => {
     // 如果选择了日期，设置为当天的 23:59:59
-    const submitData = date ? date.hour(23).minute(59).second(59).millisecond(999) : null;
+    const submitdata = date ? date.hour(23).minute(59).second(59).millisecond(999) : null;23
 
-    onChange?.(submitData);
-  };
+    onChange?.(submitData)
+  }
 
   return (
     <DatePicker
@@ -36,4 +36,4 @@ const ApiKeyDatePicker: FC<ApiKeyDatePickerProps> = ({ value, onChange, ...props
   );
 };
 
-export default ApiKeyDatePicker;
+export default ApiKeyDatePicker

@@ -1,15 +1,15 @@
-import OpenAI from './features/OpenAI';
-import STT from './features/STT';
+import OpenAI from './features/OpenAI'
+import STT from './features/STT'
 
-const Page = () => {
+const page = () => {
   return (
     <>
       <STT />
       <OpenAI />
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'TtsSetting';
+Page.displayName = 'TtsSetting'
 
-export default Page;
+export default Page

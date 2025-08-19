@@ -1,14 +1,14 @@
-import { Button, Icon, Tag, Typography } from '@lobehub/ui';
-import { Divider } from 'antd';
-import { Github, Settings, Share2 } from 'lucide-react';
-import Image from 'next/image';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Icon, Tag, Typography }
+import { Divider }
+import { Github, Settings, Share2 }
+import Image from 'next/image'
+import { memo }
+import { useTranslation }
 
-import { AGENTS_INDEX_GITHUB, imageUrl } from '@/const/url';
+import { AGENTS_INDEX_GITHUB, imageUrl } from '@/const/url'
 
 const Inner = memo(() => {
-  const { t } = useTranslation('discover');
+  const { t } = useTranslation('discover')
   return (
     <Typography fontSize={14} headerMultiple={0.5} marginMultiple={0.4}>
       <Image
@@ -48,7 +48,7 @@ const Inner = memo(() => {
         {t('createGuide.func2.button')}
       </Button>
     </Typography>
-  );
-});
+  )
+})
 
-export default Inner;
+export default Inner

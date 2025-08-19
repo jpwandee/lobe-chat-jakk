@@ -1,47 +1,47 @@
-import { useAnalytics } from '@lobehub/analytics/react';
-import { Empty } from 'antd';
-import { createStyles } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
-import LazyLoad from 'react-lazy-load';
+import { useAnalytics }
+import { Empty }
+import { createStyles }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Center }
+import LazyLoad from 'react-lazy-load'
 
-import { SESSION_CHAT_URL } from '@/const/url';
-import { useSwitchSession } from '@/hooks/useSwitchSession';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { getSessionStoreState, useSessionStore } from '@/store/session';
-import { sessionGroupSelectors, sessionSelectors } from '@/store/session/selectors';
-import { getUserStoreState } from '@/store/user';
-import { userProfileSelectors } from '@/store/user/selectors';
-import { LobeAgentSession } from '@/types/session';
+import { SESSION_CHAT_URL }
+import { useSwitchSession }
+import { featureFlagsSelectors, useServerConfigStore }
+import { getSessionStoreState, useSessionStore }
+import { sessionGroupSelectors, sessionSelectors }
+import { getUserStoreState }
+import { userProfileSelectors }
+import { LobeAgentSession }
 
-import SkeletonList from '../../SkeletonList';
-import AddButton from './AddButton';
-import SessionItem from './Item';
+import SkeletonList from '../../SkeletonList'
+import AddButton from './AddButton'
+import SessionItem from './Item'
 
 const useStyles = createStyles(
   ({ css }) => css`
-    min-height: 70px;
+    min-height: 70px
   `,
-);
-interface SessionListProps {
-  dataSource?: LobeAgentSession[];
+)
+interface sessionlistprops {
+  dataSource?: lobeagentsession[];
   groupId?: string;
   showAddButton?: boolean;
 }
 const SessionList = memo<SessionListProps>(({ dataSource, groupId, showAddButton = true }) => {
-  const { t } = useTranslation('chat');
-  const { analytics } = useAnalytics();
-  const { styles } = useStyles();
+  const { t } = useTranslation('chat')
+  const { analytics } = useAnalytics()
+  const { styles } = useStyles()
 
-  const isInit = useSessionStore(sessionSelectors.isSessionListInit);
-  const { showCreateSession } = useServerConfigStore(featureFlagsSelectors);
-  const mobile = useServerConfigStore((s) => s.isMobile);
+  const isInit = useSessionStore(sessionSelectors.isSessionListInit)
+  const { showCreateSession } = useServerConfigStore(featureFlagsSelectors)
+  const mobile = useServerConfigStore((s) => s.isMobile)
 
-  const switchSession = useSwitchSession();
+  const switchSession = useSwitchSession()
 
-  const isEmpty = !dataSource || dataSource.length === 0;
+  const isEmpty = !dataSource || dataSource.length === 0
   return !isInit ? (
     <SkeletonList />
   ) : !isEmpty ? (
@@ -51,22 +51,22 @@ const SessionList = memo<SessionListProps>(({ dataSource, groupId, showAddButton
           aria-label={id}
           href={SESSION_CHAT_URL(id, mobile)}
           onClick={(e) => {
-            e.preventDefault();
-            switchSession(id);
+            e.preventDefault()
+            switchSession(id)
 
             // Enhanced analytics tracking
             if (analytics) {
-              const userStore = getUserStoreState();
-              const sessionStore = getSessionStoreState();
+              const userStore = getUserStoreState()
+              const sessionStore = getSessionStoreState()
 
-              const userId = userProfileSelectors.userId(userStore);
-              const session = sessionSelectors.getSessionById(id)(sessionStore);
+              const userId = userProfileSelectors.userId(userStore)
+              const session = sessionSelectors.getSessionById(id)(sessionStore)
 
               if (session) {
-                const sessionGroupId = session.group || 'default';
-                const group = sessionGroupSelectors.getGroupById(sessionGroupId)(sessionStore);
+                const sessionGroupId = session.group || 'default'
+                const group = sessionGroupSelectors.getGroupById(sessionGroupId)(sessionStore)
                 const groupName =
-                  group?.name || (sessionGroupId === 'default' ? 'Default' : 'Unknown');
+                  group?.name || (sessionGroupId === 'default' ? 'Default' : 'Unknown')
 
                 analytics?.track({
                   name: 'switch_session',
@@ -79,7 +79,7 @@ const SessionList = memo<SessionListProps>(({ dataSource, groupId, showAddButton
                     spm: 'homepage.chat.session_list_item.click',
                     user_id: userId || 'anonymous',
                   },
-                });
+                })
               }
             }
           }}
@@ -94,7 +94,7 @@ const SessionList = memo<SessionListProps>(({ dataSource, groupId, showAddButton
     <Center>
       <Empty description={t('emptyAgent')} image={Empty.PRESENTED_IMAGE_SIMPLE} />
     </Center>
-  );
-});
+  )
+})
 
-export default SessionList;
+export default SessionList

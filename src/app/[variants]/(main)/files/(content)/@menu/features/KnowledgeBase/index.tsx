@@ -1,28 +1,28 @@
-import { CaretDownFilled, CaretRightOutlined } from '@ant-design/icons';
-import { ActionIcon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { PlusIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { CaretDownFilled, CaretRightOutlined }
+import { ActionIcon }
+import { createStyles }
+import { PlusIcon }
+import { useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useCreateNewModal } from '@/features/KnowledgeBaseModal';
+import { useCreateNewModal }
 
-import KnowledgeBaseList from './KnowledgeBaseList';
+import KnowledgeBaseList from './KnowledgeBaseList'
 
 const useStyles = createStyles(({ css, token }) => ({
   header: css`
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
-const KnowledgeBase = () => {
-  const { t } = useTranslation('file');
-  const { styles } = useStyles();
+const knowledgebase = () => {
+  const { t }
+  const { styles }
 
-  const [showList, setShowList] = useState(true);
+  const [showList, setShowList] = useState(true)
 
-  const { open } = useCreateNewModal();
+  const { open } = useCreateNewModal()
 
   return (
     <Flexbox flex={1} gap={8}>
@@ -37,7 +37,7 @@ const KnowledgeBase = () => {
           <ActionIcon
             icon={(showList ? CaretDownFilled : CaretRightOutlined) as any}
             onClick={() => {
-              setShowList(!showList);
+              setShowList(!showList)
             }}
             size={'small'}
           />
@@ -48,7 +48,7 @@ const KnowledgeBase = () => {
 
       {showList && <KnowledgeBaseList />}
     </Flexbox>
-  );
-};
+  )
+}
 
-export default KnowledgeBase;
+export default KnowledgeBase

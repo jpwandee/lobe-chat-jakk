@@ -1,41 +1,41 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { MessageSquarePlus } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { createStyles }
+import { MessageSquarePlus }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { ProductLogo } from '@/components/Branding';
-import { DESKTOP_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import SyncStatusTag from '@/features/SyncStatusInspector';
-import { useActionSWR } from '@/libs/swr';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { useSessionStore } from '@/store/session';
+import { ProductLogo }
+import { DESKTOP_HEADER_ICON_SIZE }
+import SyncStatusTag from '@/features/SyncStatusInspector'
+import { useActionSWR }
+import { featureFlagsSelectors, useServerConfigStore }
+import { useSessionStore } from '@/store/session'
 
-import TogglePanelButton from '../../../features/TogglePanelButton';
-import SessionSearchBar from '../../features/SessionSearchBar';
+import TogglePanelButton from '../../../features/TogglePanelButton'
+import SessionSearchBar from '../../features/SessionSearchBar'
 
 export const useStyles = createStyles(({ css, token }) => ({
   logo: css`
-    color: ${token.colorText};
-    fill: ${token.colorText};
+    color: ${token.colorText}
+    fill: ${token.colorText}
   `,
   top: css`
-    position: sticky;
-    inset-block-start: 0;
-    padding-block-start: 10px;
+    position: sticky
+    inset-block-start: 0
+    padding-block-start: 10px
   `,
-}));
+}))
 
 const Header = memo(() => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('chat');
-  const [createSession] = useSessionStore((s) => [s.createSession]);
-  const { enableWebrtc, showCreateSession } = useServerConfigStore(featureFlagsSelectors);
+  const { styles } = useStyles()
+  const { t } = useTranslation('chat')
+  const [createSession] = useSessionStore((s) => [s.createSession])
+  const { enableWebrtc, showCreateSession } = useServerConfigStore(featureFlagsSelectors)
 
-  const { mutate, isValidating } = useActionSWR('session.createSession', () => createSession());
+  const { mutate, isValidating } = useActionSWR('session.createSession', () => createSession())
 
   return (
     <Flexbox className={styles.top} gap={16} paddingInline={8}>
@@ -71,7 +71,7 @@ const Header = memo(() => {
       </Flexbox>
       <SessionSearchBar />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

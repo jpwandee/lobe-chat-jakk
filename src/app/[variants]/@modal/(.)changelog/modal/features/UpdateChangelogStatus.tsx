@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { memo, useEffect } from 'react';
+import { memo, useEffect }
 
-import { useGlobalStore } from '@/store/global';
+import { useGlobalStore }
 
-const UpdateChangelogStatus = memo<{ currentId?: string }>(({ currentId }) => {
+const updatechangelogstatus = memo< { currentId?: string }>(({ currentId }) => {
   const [latestChangelogId, updateSystemStatus] = useGlobalStore((s) => [
     s.status.latestChangelogId,
     s.updateSystemStatus,
-  ]);
+  ])
 
   useEffect(() => {
-    if (!currentId || currentId === latestChangelogId) return;
-    updateSystemStatus({ latestChangelogId: currentId });
-  }, [latestChangelogId, currentId]);
+    if (!currentId || currentId === latestChangelogId) return
+    updateSystemStatus({ latestChangelogId: currentId })
+  }, [latestChangelogId, currentId])
 
-  return null;
-});
+  return null
+})
 
-export default UpdateChangelogStatus;
+export default UpdateChangelogStatus

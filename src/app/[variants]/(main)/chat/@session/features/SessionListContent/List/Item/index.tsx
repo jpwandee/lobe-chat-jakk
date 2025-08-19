@@ -1,36 +1,36 @@
-import { ModelTag } from '@lobehub/icons';
-import { memo, useMemo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
-import { shallow } from 'zustand/shallow';
+import { ModelTag }
+import { memo, useMemo, useState }
+import { Flexbox }
+import { shallow }
 
-import { useAgentStore } from '@/store/agent';
-import { agentSelectors } from '@/store/agent/selectors';
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
-import { useSessionStore } from '@/store/session';
-import { sessionHelpers } from '@/store/session/helpers';
-import { sessionMetaSelectors, sessionSelectors } from '@/store/session/selectors';
+import { useAgentStore }
+import { agentSelectors }
+import { useChatStore }
+import { chatSelectors }
+import { useSessionStore }
+import { sessionHelpers }
+import { sessionMetaSelectors, sessionSelectors }
 
-import ListItem from '../../ListItem';
-import CreateGroupModal from '../../Modals/CreateGroupModal';
-import Actions from './Actions';
+import ListItem from '../../ListItem'
+import CreateGroupModal from '../../Modals/CreateGroupModal'
+import Actions from './Actions'
 
-interface SessionItemProps {
+interface sessionitemprops {
   id: string;
 }
 
 const SessionItem = memo<SessionItemProps>(({ id }) => {
-  const [open, setOpen] = useState(false);
-  const [createGroupModalOpen, setCreateGroupModalOpen] = useState(false);
-  const [defaultModel] = useAgentStore((s) => [agentSelectors.inboxAgentModel(s)]);
+  const [open, setOpen] = useState(false)
+  const [createGroupModalOpen, setCreateGroupModalOpen] = useState(false)
+  const [defaultModel] = useAgentStore((s) => [agentSelectors.inboxAgentModel(s)])
 
-  const [active] = useSessionStore((s) => [s.activeId === id]);
-  const [loading] = useChatStore((s) => [chatSelectors.isAIGenerating(s) && id === s.activeId]);
+  const [active] = useSessionStore((s) => [s.activeId === id])
+  const [loading] = useChatStore((s) => [chatSelectors.isAIGenerating(s) && id === s.activeId])
 
   const [pin, title, description, avatar, avatarBackground, updateAt, model, group] =
     useSessionStore((s) => {
-      const session = sessionSelectors.getSessionById(id)(s);
-      const meta = session.meta;
+      const session = sessionSelectors.getSessionById(id)(s)
+      const meta = session.meta
 
       return [
         sessionHelpers.getSessionPinned(session),
@@ -41,10 +41,10 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
         session?.updatedAt,
         session.model,
         session?.group,
-      ];
-    });
+      ]
+    })
 
-  const showModel = model !== defaultModel;
+  const showModel = model !== defaultModel
 
   const actions = useMemo(
     () => (
@@ -56,7 +56,7 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
       />
     ),
     [group, id],
-  );
+  )
 
   const addon = useMemo(
     () =>
@@ -66,7 +66,7 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
         </Flexbox>
       ),
     [showModel, model],
-  );
+  )
 
   return (
     <>
@@ -99,7 +99,7 @@ const SessionItem = memo<SessionItemProps>(({ id }) => {
         open={createGroupModalOpen}
       />
     </>
-  );
-}, shallow);
+  )
+}, shallow)
 
-export default SessionItem;
+export default SessionItem

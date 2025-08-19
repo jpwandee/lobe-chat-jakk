@@ -1,11 +1,11 @@
-import { Suspense, lazy } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Suspense, lazy }
+import { Flexbox }
 
-import { SkeletonList } from '@/features/Conversation';
+import { SkeletonList }
 
-const Content = lazy(() => import('./Content'));
+const Content = lazy(() => import('./Content'))
 
-interface ChatListProps {
+interface chatlistprops {
   mobile?: boolean;
 }
 
@@ -23,6 +23,6 @@ const ChatList = ({ mobile }: ChatListProps) => (
       <Content mobile={mobile} />
     </Suspense>
   </Flexbox>
-);
+)
 
-export default ChatList;
+export default ChatList

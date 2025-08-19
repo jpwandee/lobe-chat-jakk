@@ -1,24 +1,24 @@
-import { serverDB } from '@/database/server';
-import { UserService } from '@/server/services/user';
+import { serverDB }
+import { UserService }
 
-export const runtime = 'nodejs';
+export const runtime = 'nodejs'
 
-type Params = Promise<{ id: string; image: string }>;
+type params = promise< { id: string; image: string }
 
 // 扩展名到内容类型的映射
 const CONTENT_TYPE_MAP: Record<string, string> = {
-  avif: 'image/avif',
-  bmp: 'image/bmp',
-  gif: 'image/gif',
-  heic: 'image/heic',
-  heif: 'image/heif',
-  ico: 'image/x-icon',
-  jpeg: 'image/jpeg',
-  jpg: 'image/jpg',
-  png: 'image/png',
-  svg: 'image/svg+xml',
-  tif: 'image/tiff',
-  tiff: 'image/tiff',
+  avif: 'image/avif',;
+  bmp: 'image/bmp',;
+  gif: 'image/gif',;
+  heic: 'image/heic',;
+  heif: 'image/heif',;
+  ico: 'image/x-icon',;
+  jpeg: 'image/jpeg',;
+  jpg: 'image/jpg',;
+  png: 'image/png',;
+  svg: 'image/svg+xml',;
+  tif: 'image/tiff',;
+  tiff: 'image/tiff',;
   webp: 'image/webp',
 };
 
@@ -47,8 +47,9 @@ export const GET = async (req: Request, segmentData: { params: Params }) => {
         'Content-Type': type,
       },
       status: 200,
-    });
-  } catch (error) {
+    })
+  }
+  catch (error) {
     console.error('Error fetching user avatar:', error);
     return new Response('Internal server error', {
       status: 500,

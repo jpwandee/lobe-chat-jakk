@@ -1,63 +1,64 @@
-import { ActionIcon, Icon, Text, Tooltip } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import dayjs from 'dayjs';
-import isEqual from 'fast-deep-equal';
-import { CircleX, LucideLoaderCircle, LucideRefreshCcwDot } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Icon, Text, Tooltip }
+import { createStyles }
+import dayjs from 'dayjs'
+import isEqual from 'fast-deep-equal'
+import { CircleX, LucideLoaderCircle, LucideRefreshCcwDot }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useUserStore } from '@/store/user';
+import { useUserStore }
+
 import {
   modelConfigSelectors,
   modelProviderSelectors,
   settingsSelectors,
-} from '@/store/user/selectors';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+}
+import { GlobalLLMProviderKey }
 
 const useStyles = createStyles(({ css, token }) => ({
   hover: css`
-    cursor: pointer;
+    cursor: pointer
 
-    padding-block: 4px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
+    padding-block: 4px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out
 
     &:hover {
-      color: ${token.colorText};
-      background-color: ${token.colorFillSecondary};
+      color: ${token.colorText}
+      background-color: ${token.colorFillSecondary}
     }
   `,
-}));
+}))
 
-interface ModelFetcherProps {
-  provider: GlobalLLMProviderKey;
+interface modelfetcherprops {
+  provider: globalllmproviderkey;
 }
 
 const ModelFetcher = memo<ModelFetcherProps>(({ provider }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('setting');
+  const { styles } = useStyles()
+  const { t } = useTranslation('setting')
   const [useFetchProviderModelList, clearObtainedModels] = useUserStore((s) => [
     s.useFetchProviderModelList,
     s.clearObtainedModels,
     s.setModelProviderConfig,
-  ]);
-  const enabledAutoFetch = useUserStore(modelConfigSelectors.isAutoFetchModelsEnabled(provider));
+  ])
+  const enabledAutoFetch = useUserStore(modelConfigSelectors.isAutoFetchModelsEnabled(provider))
   const latestFetchTime = useUserStore(
     (s) => settingsSelectors.providerConfig(provider)(s)?.latestFetchTime,
-  );
+  )
   const totalModels = useUserStore(
     (s) => modelProviderSelectors.getModelCardsById(provider)(s).length,
-  );
+  )
 
   const remoteModels = useUserStore(
     modelProviderSelectors.remoteProviderModelCards(provider),
     isEqual,
-  );
+  )
 
-  const { mutate, isValidating } = useFetchProviderModelList(provider, enabledAutoFetch);
+  const { mutate, isValidating } = useFetchProviderModelList(provider, enabledAutoFetch)
 
   return (
     <Text style={{ fontSize: 12 }} type={'secondary'}>
@@ -100,6 +101,6 @@ const ModelFetcher = memo<ModelFetcherProps>(({ provider }) => {
         </Tooltip>
       </Flexbox>
     </Text>
-  );
-});
-export default ModelFetcher;
+  )
+})
+export default ModelFetcher

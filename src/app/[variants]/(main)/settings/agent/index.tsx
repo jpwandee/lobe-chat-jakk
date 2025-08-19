@@ -1,36 +1,36 @@
-'use client';
+'use client'
 
-import { Tabs } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useTheme } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { useQueryState } from 'nuqs';
-import { memo } from 'react';
+import { Tabs }
+import { Skeleton }
+import { useTheme }
+import isEqual from 'fast-deep-equal'
+import { useQueryState }
+import { memo }
 
-import { INBOX_SESSION_ID } from '@/const/session';
-import { AgentSettings } from '@/features/AgentSetting';
-import { useCategory } from '@/features/AgentSetting/AgentCategory/useCategory';
-import { ChatSettingsTabs } from '@/store/global/initialState';
-import { useServerConfigStore } from '@/store/serverConfig';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
+import { INBOX_SESSION_ID }
+import { AgentSettings }
+import { useCategory }
+import { ChatSettingsTabs }
+import { useServerConfigStore }
+import { useUserStore }
+import { settingsSelectors } from '@/store/user/selectors'
 
 const Page = memo(() => {
-  const cateItems = useCategory();
+  const cateItems = useCategory()
   const [tab, setTab] = useQueryState('tab', {
     defaultValue: ChatSettingsTabs.Prompt,
-  });
-  const config = useUserStore(settingsSelectors.defaultAgentConfig, isEqual);
-  const meta = useUserStore(settingsSelectors.defaultAgentMeta, isEqual);
+  })
+  const config = useUserStore(settingsSelectors.defaultAgentConfig, isEqual)
+  const meta = useUserStore(settingsSelectors.defaultAgentMeta, isEqual)
   const [updateAgent, isUserStateInit] = useUserStore((s) => [
     s.updateDefaultAgent,
     s.isUserStateInit,
-  ]);
+  ])
 
-  const theme = useTheme();
-  const mobile = useServerConfigStore((s) => s.isMobile);
+  const theme = useTheme()
+  const mobile = useServerConfigStore((s) => s.isMobile)
 
-  if (!isUserStateInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />;
+  if (!isUserStateInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />
 
   return (
     <>
@@ -51,17 +51,17 @@ const Page = memo(() => {
         loading={!isUserStateInit}
         meta={meta}
         onConfigChange={(config) => {
-          updateAgent({ config });
+          updateAgent({ config })
         }}
         onMetaChange={(meta) => {
-          updateAgent({ meta });
+          updateAgent({ meta })
         }}
         tab={tab as ChatSettingsTabs}
       />
     </>
-  );
-});
+  )
+})
 
-Page.displayName = 'AgentSetting';
+Page.displayName = 'AgentSetting'
 
-export default Page;
+export default Page

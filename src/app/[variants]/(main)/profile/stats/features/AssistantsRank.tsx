@@ -1,29 +1,29 @@
-import { BarList } from '@lobehub/charts';
-import { ActionIcon, Avatar, FormGroup, Modal } from '@lobehub/ui';
-import { MaximizeIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import qs from 'query-string';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { BarList }
+import { ActionIcon, Avatar, FormGroup, Modal }
+import { MaximizeIcon }
+import Link from 'next/link'
+import { useRouter }
+import qs from 'query-string'
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { DEFAULT_AVATAR } from '@/const/meta';
-import { INBOX_SESSION_ID } from '@/const/session';
-import { useClientDataSWR } from '@/libs/swr';
-import { sessionService } from '@/services/session';
-import { SessionRankItem } from '@/types/session';
+import { FORM_STYLE }
+import { DEFAULT_AVATAR }
+import { INBOX_SESSION_ID }
+import { useClientDataSWR }
+import { sessionService }
+import { SessionRankItem }
 
-export const AssistantsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation(['auth', 'chat']);
-  const router = useRouter();
+export const assistantsrank = memo< { mobile?: boolean }>(({ mobile }) => {
+  const [open, setOpen] = useState(false)
+  const { t } = useTranslation(['auth', 'chat'])
+  const router = useRouter()
   const { data, isLoading } = useClientDataSWR('rank-sessions', async () =>
     sessionService.rankSessions(),
-  );
+  )
 
-  const showExtra = Boolean(data && data?.length > 5);
+  const showExtra = Boolean(data && data?.length > 5)
 
   const mapData = (item: SessionRankItem) => {
     const link = qs.stringifyUrl({
@@ -32,7 +32,7 @@ export const AssistantsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         ...(mobile ? { showMobileWorkspace: true } : {}),
       },
       url: '/chat',
-    });
+    })
 
     return {
       icon: (
@@ -57,8 +57,8 @@ export const AssistantsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         </Link>
       ),
       value: item.count,
-    };
-  };
+    }
+  }
 
   return (
     <>
@@ -110,7 +110,7 @@ export const AssistantsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         </Modal>
       )}
     </>
-  );
-});
+  )
+})
 
-export default AssistantsRank;
+export default AssistantsRank

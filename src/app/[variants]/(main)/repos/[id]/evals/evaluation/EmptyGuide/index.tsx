@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { memo }
+import { useTranslation }
+import { Center, Flexbox }
 
-import CreateEvaluationButton from '../CreateEvaluation';
+import CreateEvaluationButton from '../CreateEvaluation'
 
-interface EmptyGuideProps {
+interface emptyguideprops {
   knowledgeBaseId: string;
 }
 
 const EmptyGuide = memo<EmptyGuideProps>(({ knowledgeBaseId }) => {
-  const { t } = useTranslation('ragEval');
+  const { t } = useTranslation('ragEval')
 
   return (
     <Center gap={24} height={'100%'} width={'100%'}>
@@ -20,6 +20,6 @@ const EmptyGuide = memo<EmptyGuideProps>(({ knowledgeBaseId }) => {
         <CreateEvaluationButton knowledgeBaseId={knowledgeBaseId} />
       </Flexbox>
     </Center>
-  );
-});
-export default EmptyGuide;
+  )
+})
+export default EmptyGuide

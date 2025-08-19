@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
-import { PortalHeader } from '@/features/Portal/router';
+import { PortalHeader }
 
 import Body from '../features/Body';
 
@@ -13,4 +13,4 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Layout;
+export default Layout

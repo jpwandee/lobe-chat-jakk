@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import urlJoin from 'url-join';
+import { memo }
+import urlJoin from 'url-join'
 
-import Menu from '@/components/Menu';
-import { withSuspense } from '@/components/withSuspense';
-import { useActiveSettingsKey } from '@/hooks/useActiveTabKey';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
+import Menu from '@/components/Menu'
+import { withSuspense }
+import { useActiveSettingsKey }
+import { useQueryRoute }
 
-import { useCategory } from '../../hooks/useCategory';
+import { useCategory } from '../../hooks/useCategory'
 
 const CategoryContent = memo(() => {
-  const activeTab = useActiveSettingsKey();
-  const cateItems = useCategory();
-  const router = useQueryRoute();
+  const activeTab = useActiveSettingsKey()
+  const cateItems = useCategory()
+  const router = useQueryRoute()
 
   return (
     <Menu
       compact
       items={cateItems}
       onClick={({ key }) => {
-        router.push(urlJoin('/settings', key));
+        router.push(urlJoin('/settings', key))
       }}
       selectable
       selectedKeys={[activeTab]}
     />
-  );
-});
+  )
+})
 
-export default withSuspense(CategoryContent);
+export default withSuspense(CategoryContent)

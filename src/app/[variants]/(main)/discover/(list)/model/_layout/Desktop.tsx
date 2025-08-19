@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Flexbox }
 
 import CategoryContainer from '../../../components/CategoryContainer';
 import Category from '../features/Category';
@@ -17,6 +17,6 @@ const Layout = async ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'DesktopDiscoverModelsLayout';
+Layout.displayName = 'DesktopDiscoverModelsLayout'
 
-export default Layout;
+export default Layout

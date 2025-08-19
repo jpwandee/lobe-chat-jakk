@@ -1,39 +1,35 @@
-'use client';
+'use client'
 
-import { Input, InputPassword } from '@lobehub/ui';
-import { useTranslation } from 'react-i18next';
+import { Input, InputPassword }
+import { useTranslation }
 
-import { CloudflareProviderCard } from '@/config/modelProviders';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { CloudflareProviderCard }
+import { GlobalLLMProviderKey }
 
-import { KeyVaultsConfigKey } from '../../const';
-import { ProviderItem } from '../../type';
+import { KeyVaultsConfigKey }
+import { ProviderItem }
 
-const providerKey: GlobalLLMProviderKey = 'cloudflare';
+const providerKey: globalllmproviderkey = 'cloudflare';providerKey
 
 export const useCloudflareProvider = (): ProviderItem => {
-  const { t } = useTranslation('modelProvider');
+  const { t }
 
   return {
     ...CloudflareProviderCard,
-    apiKeyItems: [
-      {
-        children: (
-          <InputPassword
-            autoComplete={'new-password'}
-            placeholder={t(`${providerKey}.apiKey.placeholder`)}
-          />
-        ),
-        desc: t(`${providerKey}.apiKey.desc`),
-        label: t(`${providerKey}.apiKey.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'apiKey'],
-      },
-      {
-        children: <Input placeholder={t(`${providerKey}.baseURLOrAccountID.placeholder`)} />,
-        desc: t(`${providerKey}.baseURLOrAccountID.desc`),
-        label: t(`${providerKey}.baseURLOrAccountID.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'baseURLOrAccountID'],
-      },
-    ],
-  };
-};
+      apiKeyItems: [
+      {;
+    children: (
+      <InputPassword
+      autoComplete={'new-password'}
+      placeholder={t(`${providerKey}.apiKey.placeholder`)}
+      />
+    ),;
+    children: <Input placeholder={t(`${providerKey}.baseURLOrAccountID.placeholder`)} />,;
+    desc: t(`${providerKey}.apiKey.desc`),;
+    desc: t(`${providerKey}.baseURLOrAccountID.desc`),;
+    label: t(`${providerKey}.apiKey.title`),;
+    label: t(`${providerKey}.baseURLOrAccountID.title`),;
+    name: [keyvaultsconfigkey, providerkey, 'apiKey'], }, {;
+    name: [keyvaultsconfigkey, providerkey, 'baseURLOrAccountID'], }, ],
+  }
+}

@@ -1,9 +1,9 @@
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import type { NextRequest } from 'next/server';
+import { fetchRequestHandler }
+import type { NextRequest }
 
-import { pino } from '@/libs/logger';
-import { createLambdaContext } from '@/libs/trpc/lambda/context';
-import { lambdaRouter } from '@/server/routers/lambda';
+import { pino }
+import { createLambdaContext }
+import { lambdaRouter }
 
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
@@ -15,17 +15,17 @@ const handler = (req: NextRequest) =>
     endpoint: '/trpc/lambda',
 
     onError: ({ error, path, type }) => {
-      pino.info(`Error in tRPC handler (lambda) on path: ${path}, type: ${type}`);
-      console.error(error);
+      pino.info(`Error in tRPC handler (lambda) on path: ${path}, type: ${type}`)
+      console.error(error)
     },
 
     req,
     responseMeta({ ctx }) {
-      const headers = ctx?.resHeaders;
+      const headers = ctx?.resHeaders
 
-      return { headers };
+      return { headers }
     },
     router: lambdaRouter,
-  });
+  })
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState }
 
-import { AppLoadingStage } from '../stage';
-import Content from './Content';
-import Redirect from './Redirect';
+import { AppLoadingStage }
+import Content from './Content'
+import Redirect from './Redirect'
 
-const ServerMode = () => {
-  const [loadingStage, setLoadingStage] = useState(AppLoadingStage.Initializing);
+const servermode = () => {
+  const [loadingStage, setLoadingStage] = useState(AppLoadingStage.Initializing)
 
   return (
     <>
       <Content loadingStage={loadingStage} />
       <Redirect setLoadingStage={setLoadingStage} />
     </>
-  );
-};
+  )
+}
 
-ServerMode.displayName = 'ServerMode';
+ServerMode.displayName = 'ServerMode'
 
-export default ServerMode;
+export default ServerMode

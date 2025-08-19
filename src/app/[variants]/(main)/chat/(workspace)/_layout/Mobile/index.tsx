@@ -1,7 +1,7 @@
-import MainInterfaceTracker from '@/components/Analytics/MainInterfaceTracker';
-import MobileContentLayout from '@/components/server/MobileNavLayout';
+import MainInterfaceTracker from '@/components/Analytics/MainInterfaceTracker'
+import MobileContentLayout from '@/components/server/MobileNavLayout'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import ChatHeader from './ChatHeader';
 import TopicModal from './TopicModal';
 
@@ -19,6 +19,6 @@ const Layout = ({ children, topic, conversation, portal }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'MobileConversationLayout';
+Layout.displayName = 'MobileConversationLayout'
 
-export default Layout;
+export default Layout

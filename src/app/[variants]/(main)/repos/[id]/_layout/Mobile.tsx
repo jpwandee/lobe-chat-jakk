@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { memo }
+import { Flexbox }
 
-import { useShowMobileWorkspace } from '@/hooks/useShowMobileWorkspace';
+import { useShowMobileWorkspace }
 
-import { LayoutProps } from './type';
+import { LayoutProps } from './type'
 
 const useStyles = createStyles(({ css, token }) => ({
   main: css`
-    position: relative;
-    overflow: hidden;
-    background: ${token.colorBgLayout};
+    position: relative
+    overflow: hidden
+    background: ${token.colorBgLayout}
   `,
-}));
+}))
 
 const Layout = memo<LayoutProps>(({ children }) => {
-  const showMobileWorkspace = useShowMobileWorkspace();
-  const { styles } = useStyles();
+  const showMobileWorkspace = useShowMobileWorkspace()
+  const { styles } = useStyles()
 
   return (
     <Flexbox
@@ -29,9 +29,9 @@ const Layout = memo<LayoutProps>(({ children }) => {
     >
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-Layout.displayName = 'MobileChatLayout';
+Layout.displayName = 'MobileChatLayout'
 
-export default Layout;
+export default Layout

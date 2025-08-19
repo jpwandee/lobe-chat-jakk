@@ -1,63 +1,63 @@
-import { Github, ModelTag, ProviderCombine } from '@lobehub/icons';
-import { ActionIcon, Block, MaskShadow, Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { GlobeIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'nextjs-toploader/app';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Github, ModelTag, ProviderCombine }
+import { ActionIcon, Block, MaskShadow, Text }
+import { createStyles }
+import { GlobeIcon }
+import Link from 'next/link'
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { DiscoverProviderItem } from '@/types/discover';
+import { DiscoverProviderItem } from '@/types/discover'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     author: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
     `,
     code: css`
-      font-family: ${token.fontFamilyCode};
+      font-family: ${token.fontFamilyCode}
     `,
     desc: css`
-      flex: none;
-      margin: 0 !important;
-      color: ${token.colorTextSecondary};
+      flex: none
+      margin: 0 !important
+      color: ${token.colorTextSecondary}
     `,
     footer: css`
-      margin-block-start: 16px;
-      border-block-start: 1px dashed ${token.colorBorder};
-      background: ${token.colorBgContainerSecondary};
+      margin-block-start: 16px
+      border-block-start: 1px dashed ${token.colorBorder}
+      background: ${token.colorBgContainerSecondary}
     `,
     secondaryDesc: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 16px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 16px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
 const ProviderItem = memo<DiscoverProviderItem>(
   ({ url, name, description, identifier, models }) => {
-    const { styles, theme } = useStyles();
-    const router = useRouter();
-    const link = urlJoin('/discover/provider', identifier);
-    const { t } = useTranslation(['discover', 'providers']);
+    const { styles, theme } = useStyles()
+    const router = useRouter()
+    const link = urlJoin('/discover/provider', identifier)
+    const { t } = useTranslation(['discover', 'providers'])
 
     return (
       <Block
         clickable
         height={'100%'}
         onClick={() => {
-          router.push(link);
+          router.push(link)
         }}
         style={{
           overflow: 'hidden',
@@ -129,8 +129,8 @@ const ProviderItem = memo<DiscoverProviderItem>(
           </MaskShadow>
         </Flexbox>
       </Block>
-    );
+    )
   },
-);
+)
 
-export default ProviderItem;
+export default ProviderItem

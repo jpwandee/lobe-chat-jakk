@@ -1,40 +1,40 @@
-'use client';
+'use client'
 
-import { Icon, Tabs } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BookOpenIcon, ListIcon, Settings2Icon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon, Tabs }
+import { createStyles }
+import { BookOpenIcon, ListIcon, Settings2Icon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { SOCIAL_URL } from '@/const/branding';
-import { ModelNavKey } from '@/types/discover';
+import { SOCIAL_URL }
+import { ModelNavKey }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     link: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
 
       &:hover {
-        color: ${token.colorInfo};
+        color: ${token.colorInfo}
       }
     `,
     nav: css`
-      border-block-end: 1px solid ${token.colorBorder};
+      border-block-end: 1px solid ${token.colorBorder}
     `,
-  };
-});
+  }
+})
 
-interface NavProps {
-  activeTab?: ModelNavKey;
+interface navprops {
+  activeTab?: modelnavkey;
   mobile?: boolean;
-  setActiveTab?: (tab: ModelNavKey) => void;
+  setActiveTab?: (tab: modelnavkey) => void;
 }
 
 const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ModelNavKey.Overview }) => {
-  const { t } = useTranslation('discover');
-  const { styles } = useStyles();
+  const { t } = useTranslation('discover')
+  const { styles } = useStyles()
 
   const nav = (
     <Tabs
@@ -59,7 +59,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ModelNavKey.Over
       ]}
       onChange={(key) => setActiveTab?.(key as ModelNavKey)}
     />
-  );
+  )
 
   return mobile ? (
     nav
@@ -86,7 +86,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ModelNavKey.Over
         </Link>
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Nav;
+export default Nav

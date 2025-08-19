@@ -1,23 +1,23 @@
-import { ScrollShadow } from '@lobehub/ui';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ScrollShadow }
+import { memo }
+import { Flexbox }
 
-import { useQuery } from '@/hooks/useQuery';
-import { ProviderNavKey } from '@/types/discover';
+import { useQuery }
+import { ProviderNavKey }
 
-import ActionButton from './ActionButton';
-import Related from './Related';
-import RelatedModels from './RelatedModels';
+import ActionButton from './ActionButton'
+import Related from './Related'
+import RelatedModels from './RelatedModels'
 
-const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { activeTab = ProviderNavKey.Overview } = useQuery() as { activeTab: ProviderNavKey };
+const sidebar = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { activeTab = ProviderNavKey.Overview } = useQuery() as { activeTab: ProviderNavKey }
 
   if (mobile) {
     return (
       <Flexbox gap={32}>
         <ActionButton />
       </Flexbox>
-    );
+    )
   }
 
   return (
@@ -38,7 +38,7 @@ const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
       {activeTab !== ProviderNavKey.Related && <Related />}
       {activeTab !== ProviderNavKey.Overview && <RelatedModels />}
     </ScrollShadow>
-  );
-});
+  )
+})
 
-export default Sidebar;
+export default Sidebar

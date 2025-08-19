@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Flexbox }
 
-import { SCROLL_PARENT_ID } from '@/app/[variants]/(main)/discover/features/const';
+import { SCROLL_PARENT_ID }
 import Footer from '@/features/Setting/Footer';
 
 const MAX_WIDTH = 1440;
@@ -25,6 +25,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'DesktopDiscoverDetailLayout';
+Layout.displayName = 'DesktopDiscoverDetailLayout'
 
-export default Layout;
+export default Layout

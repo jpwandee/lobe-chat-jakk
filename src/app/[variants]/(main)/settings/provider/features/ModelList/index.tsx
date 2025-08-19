@@ -1,8 +1,9 @@
-'use client';
+'use client'
 
-import { Icon, Tabs } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import isEqual from 'fast-deep-equal';
+import { Icon, Tabs }
+import { useTheme }
+
+import isEqual from 'fast-deep-equal'
 import {
   AudioLines,
   BoltIcon,
@@ -10,39 +11,39 @@ import {
   ImageIcon,
   MessageSquareTextIcon,
   MicIcon,
-} from 'lucide-react';
-import { Suspense, memo, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+}
+import { Suspense, memo, useMemo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { aiModelSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { useIsMobile }
+import { aiModelSelectors, useAiInfraStore }
 
-import DisabledModels from './DisabledModels';
-import EmptyModels from './EmptyModels';
-import EnabledModelList from './EnabledModelList';
-import ModelTitle from './ModelTitle';
-import { ProviderSettingsContext, ProviderSettingsContextValue } from './ProviderSettingsContext';
-import SearchResult from './SearchResult';
-import SkeletonList from './SkeletonList';
+import DisabledModels from './DisabledModels'
+import EmptyModels from './EmptyModels'
+import EnabledModelList from './EnabledModelList'
+import ModelTitle from './ModelTitle'
+import { ProviderSettingsContext, ProviderSettingsContextValue }
+import SearchResult from './SearchResult'
+import SkeletonList from './SkeletonList'
 
-interface ContentProps {
+interface contentprops {
   id: string;
 }
 
 const Content = memo<ContentProps>(({ id }) => {
-  const { t } = useTranslation('modelProvider');
-  const [activeTab, setActiveTab] = useState('all');
+  const { t } = useTranslation('modelProvider')
+  const [activeTab, setActiveTab] = useState('all')
 
   const [isSearching, isEmpty, useFetchAiProviderModels] = useAiInfraStore((s) => [
     !!s.modelSearchKeyword,
     aiModelSelectors.isEmptyAiProviderModelList(s),
     s.useFetchAiProviderModels,
-  ]);
+  ])
 
-  const allModels = useAiInfraStore(aiModelSelectors.filteredAiProviderModelList, isEqual);
+  const allModels = useAiInfraStore(aiModelSelectors.filteredAiProviderModelList, isEqual)
 
-  const { isLoading } = useFetchAiProviderModels(id);
+  const { isLoading } = useFetchAiProviderModels(id)
 
   // Count models by type (for all models, not just enabled)
   const modelCounts = useMemo(() => {
@@ -53,22 +54,22 @@ const Content = memo<ContentProps>(({ id }) => {
       image: 0,
       stt: 0,
       tts: 0,
-    };
+    }
 
     allModels.forEach((model) => {
-      const type = model.type;
+      const type = model.type
       if (type && Object.prototype.hasOwnProperty.call(counts, type)) {
-        counts[type as keyof typeof counts]++;
+        counts[type as keyof typeof counts]++
       }
-    });
+    })
 
-    return counts;
-  }, [allModels]);
+    return counts
+  }, [allModels])
 
   // Tab definitions with counts (only show tabs with models > 0, except 'all' tab)
   const tabs = useMemo(() => {
     const formatTabLabel = (baseLabel: string, count: number) =>
-      count > 0 ? `${baseLabel} (${count})` : baseLabel;
+      count > 0 ? `${baseLabel} (${count})` : baseLabel
 
     const allTabs = [
       {
@@ -107,19 +108,19 @@ const Content = memo<ContentProps>(({ id }) => {
         key: 'tts',
         label: formatTabLabel(t('providerModels.tabs.tts'), modelCounts.tts),
       },
-    ];
+    ]
 
     // Only show tabs that have models (count > 0), but always show 'all' tab
-    return allTabs.filter((tab) => tab.key === 'all' || tab.count > 0);
-  }, [modelCounts]);
+    return allTabs.filter((tab) => tab.key === 'all' || tab.count > 0)
+  }, [modelCounts])
 
   // Ensure active tab is available, fallback to 'all' if current tab is hidden
-  const availableTabKeys = tabs.map((tab) => tab.key);
-  const currentActiveTab = availableTabKeys.includes(activeTab) ? activeTab : 'all';
+  const availableTabKeys = tabs.map((tab) => tab.key)
+  const currentActiveTab = availableTabKeys.includes(activeTab) ? activeTab : 'all'
 
-  if (isLoading) return <SkeletonList />;
+  if (isLoading) return <SkeletonList />
 
-  if (isSearching) return <SearchResult />;
+  if (isSearching) return <SearchResult />
 
   return isEmpty ? (
     <EmptyModels provider={id} />
@@ -135,17 +136,17 @@ const Content = memo<ContentProps>(({ id }) => {
       <EnabledModelList activeTab={currentActiveTab} />
       <DisabledModels activeTab={currentActiveTab} />
     </Flexbox>
-  );
-});
+  )
+})
 
-interface ModelListProps extends ProviderSettingsContextValue {
+interface modellistprops extends providersettingscontextvalue {
   id: string;
 }
 
 const ModelList = memo<ModelListProps>(
   ({ id, showModelFetcher, sdkType, showAddNewModel, showDeployName, modelEditable = true }) => {
-    const mobile = useIsMobile();
-    const theme = useTheme();
+    const mobile = useIsMobile()
+    const theme = useTheme()
 
     return (
       <ProviderSettingsContext
@@ -170,8 +171,8 @@ const ModelList = memo<ModelListProps>(
           </Suspense>
         </Flexbox>
       </ProviderSettingsContext>
-    );
+    )
   },
-);
+)
 
-export default ModelList;
+export default ModelList

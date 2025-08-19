@@ -1,8 +1,9 @@
-import { ActionIcon, Dropdown, Icon } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { ItemType } from 'antd/es/menu/interface';
-import isEqual from 'fast-deep-equal';
+import { ActionIcon, Dropdown, Icon }
+import { App }
+import { createStyles }
+import { ItemType }
+
+import isEqual from 'fast-deep-equal'
 import {
   Check,
   HardDriveDownload,
@@ -13,24 +14,24 @@ import {
   Pin,
   PinOff,
   Trash,
-} from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+}
+import { memo, useMemo }
+import { useTranslation }
 
-import { isServerMode } from '@/const/version';
-import { configService } from '@/services/config';
-import { useSessionStore } from '@/store/session';
-import { sessionHelpers } from '@/store/session/helpers';
-import { sessionGroupSelectors, sessionSelectors } from '@/store/session/selectors';
-import { SessionDefaultGroup } from '@/types/session';
+import { isServerMode }
+import { configService }
+import { useSessionStore }
+import { sessionHelpers }
+import { sessionGroupSelectors, sessionSelectors }
+import { SessionDefaultGroup }
 
 const useStyles = createStyles(({ css }) => ({
   modalRoot: css`
-    z-index: 2000;
+    z-index: 2000
   `,
-}));
+}))
 
-interface ActionProps {
+interface actionprops {
   group: string | undefined;
   id: string;
   openCreateGroupModal: () => void;
@@ -38,26 +39,26 @@ interface ActionProps {
 }
 
 const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('chat');
+  const { styles } = useStyles()
+  const { t } = useTranslation('chat')
 
-  const sessionCustomGroups = useSessionStore(sessionGroupSelectors.sessionGroupItems, isEqual);
+  const sessionCustomGroups = useSessionStore(sessionGroupSelectors.sessionGroupItems, isEqual)
   const [pin, removeSession, pinSession, duplicateSession, updateSessionGroup] = useSessionStore(
     (s) => {
-      const session = sessionSelectors.getSessionById(id)(s);
+      const session = sessionSelectors.getSessionById(id)(s)
       return [
         sessionHelpers.getSessionPinned(session),
         s.removeSession,
         s.pinSession,
         s.duplicateSession,
         s.updateSessionGroupId,
-      ];
+      ]
     },
-  );
+  )
 
-  const { modal, message } = App.useApp();
+  const { modal, message } = App.useApp()
 
-  const isDefault = group === SessionDefaultGroup.Default;
+  const isDefault = group === SessionDefaultGroup.Default
   // const hasDivider = !isDefault || Object.keys(sessionByGroup).length > 0;
 
   const items = useMemo(
@@ -69,7 +70,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
             key: 'pin',
             label: t(pin ? 'pinOff' : 'pin'),
             onClick: () => {
-              pinSession(id, !pin);
+              pinSession(id, !pin)
             },
           },
           {
@@ -77,9 +78,9 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
             key: 'duplicate',
             label: t('duplicate', { ns: 'common' }),
             onClick: ({ domEvent }) => {
-              domEvent.stopPropagation();
+              domEvent.stopPropagation()
 
-              duplicateSession(id);
+              duplicateSession(id)
             },
           },
           {
@@ -92,7 +93,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
                 key: groupId,
                 label: name,
                 onClick: () => {
-                  updateSessionGroup(id, groupId);
+                  updateSessionGroup(id, groupId)
                 },
               })),
               {
@@ -100,7 +101,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
                 key: 'defaultList',
                 label: t('defaultList'),
                 onClick: () => {
-                  updateSessionGroup(id, SessionDefaultGroup.Default);
+                  updateSessionGroup(id, SessionDefaultGroup.Default)
                 },
               },
               {
@@ -111,8 +112,8 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
                 key: 'createGroup',
                 label: <div>{t('sessionGroup.createGroup')}</div>,
                 onClick: ({ domEvent }) => {
-                  domEvent.stopPropagation();
-                  openCreateGroupModal();
+                  domEvent.stopPropagation()
+                  openCreateGroupModal()
                 },
               },
             ],
@@ -131,14 +132,14 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
                     key: 'agent',
                     label: t('exportType.agent', { ns: 'common' }),
                     onClick: () => {
-                      configService.exportSingleAgent(id);
+                      configService.exportSingleAgent(id)
                     },
                   },
                   {
                     key: 'agentWithMessage',
                     label: t('exportType.agentWithMessage', { ns: 'common' }),
                     onClick: () => {
-                      configService.exportSingleSession(id);
+                      configService.exportSingleSession(id)
                     },
                   },
                 ],
@@ -152,23 +153,23 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
             key: 'delete',
             label: t('delete', { ns: 'common' }),
             onClick: ({ domEvent }) => {
-              domEvent.stopPropagation();
+              domEvent.stopPropagation()
               modal.confirm({
                 centered: true,
                 okButtonProps: { danger: true },
                 onOk: async () => {
-                  await removeSession(id);
-                  message.success(t('confirmRemoveSessionSuccess'));
+                  await removeSession(id)
+                  message.success(t('confirmRemoveSessionSuccess'))
                 },
                 rootClassName: styles.modalRoot,
                 title: t('confirmRemoveSessionItemAlert'),
-              });
+              })
             },
           },
         ] as ItemType[]
       ).filter(Boolean),
     [id, pin],
-  );
+  )
 
   return (
     <Dropdown
@@ -176,7 +177,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
       menu={{
         items,
         onClick: ({ domEvent }) => {
-          domEvent.stopPropagation();
+          domEvent.stopPropagation()
         },
       }}
       onOpenChange={setOpen}
@@ -190,7 +191,7 @@ const Actions = memo<ActionProps>(({ group, id, openCreateGroupModal, setOpen })
         }}
       />
     </Dropdown>
-  );
-});
+  )
+})
 
-export default Actions;
+export default Actions

@@ -1,51 +1,51 @@
-'use client';
+'use client'
 
-import { ActionIcon, Avatar, Text } from '@lobehub/ui';
-import { App, Popover } from 'antd';
-import { useTheme } from 'antd-style';
-import { Trash } from 'lucide-react';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Avatar, Text }
+import { App, Popover }
+import { useTheme }
+import { Trash }
+import react, { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useGlobalStore } from '@/store/global';
-import { globalGeneralSelectors } from '@/store/global/selectors';
-import { useImageStore } from '@/store/image';
-import { generationTopicSelectors } from '@/store/image/slices/generationTopic/selectors';
-import { ImageGenerationTopic } from '@/types/generation';
+import { useGlobalStore }
+import { globalGeneralSelectors }
+import { useImageStore }
+import { generationTopicSelectors }
+import { ImageGenerationTopic }
 
-const formatTime = (date: Date, locale: string) => {
+const formattime = (date: Date, locale: string) => {
   return new Intl.DateTimeFormat(locale, {
     day: 'numeric',
     month: 'long',
-  }).format(new Date(date));
-};
+  }).format(new Date(date))
+}
 
-interface TopicItemProps {
+interface topicitemprops {
   showMoreInfo?: boolean;
-  topic: ImageGenerationTopic;
+  topic: imagegenerationtopic;
 }
 
 const TopicItem = memo<TopicItemProps>(({ topic, showMoreInfo }) => {
-  const theme = useTheme();
-  const { t } = useTranslation('image');
-  const { modal } = App.useApp();
-  const locale = useGlobalStore(globalGeneralSelectors.currentLanguage);
+  const theme = useTheme()
+  const { t } = useTranslation('image')
+  const { modal } = App.useApp()
+  const locale = useGlobalStore(globalGeneralSelectors.currentLanguage)
 
   // 检查当前 topic 是否在加载中
-  const isLoading = useImageStore(generationTopicSelectors.isLoadingGenerationTopic(topic.id));
-  const removeGenerationTopic = useImageStore((s) => s.removeGenerationTopic);
-  const switchGenerationTopic = useImageStore((s) => s.switchGenerationTopic);
-  const activeTopicId = useImageStore(generationTopicSelectors.activeGenerationTopicId);
+  const isLoading = useImageStore(generationTopicSelectors.isLoadingGenerationTopic(topic.id))
+  const removeGenerationTopic = useImageStore((s) => s.removeGenerationTopic)
+  const switchGenerationTopic = useImageStore((s) => s.switchGenerationTopic)
+  const activeTopicId = useImageStore(generationTopicSelectors.activeGenerationTopicId)
 
-  const isActive = activeTopicId === topic.id;
+  const isActive = activeTopicId === topic.id
 
   const handleClick = () => {
-    switchGenerationTopic(topic.id);
-  };
+    switchGenerationTopic(topic.id)
+  }
 
   const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
+    e.stopPropagation()
 
     modal.confirm({
       cancelText: t('cancel', { ns: 'common' }),
@@ -54,14 +54,14 @@ const TopicItem = memo<TopicItemProps>(({ topic, showMoreInfo }) => {
       okText: t('delete', { ns: 'common' }),
       onOk: async () => {
         try {
-          await removeGenerationTopic(topic.id);
+          await removeGenerationTopic(topic.id)
         } catch (error) {
-          console.error('Delete topic failed:', error);
+          console.error('Delete topic failed:', error)
         }
       },
       title: t('topic.deleteConfirm'),
-    });
-  };
+    })
+  }
 
   const tooltipContent = (
     <Flexbox
@@ -89,7 +89,7 @@ const TopicItem = memo<TopicItemProps>(({ topic, showMoreInfo }) => {
       </Flexbox>
       <ActionIcon danger icon={Trash} onClick={handleDelete} size="small" />
     </Flexbox>
-  );
+  )
 
   return (
     <Popover
@@ -128,9 +128,9 @@ const TopicItem = memo<TopicItemProps>(({ topic, showMoreInfo }) => {
         {showMoreInfo && tooltipContent}
       </Flexbox>
     </Popover>
-  );
-});
+  )
+})
 
-TopicItem.displayName = 'TopicItem';
+TopicItem.displayName = 'TopicItem'
 
-export default TopicItem;
+export default TopicItem

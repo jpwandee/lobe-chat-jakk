@@ -1,27 +1,27 @@
-import { usePathname } from 'next/navigation';
-import qs from 'query-string';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { usePathname }
+import qs from 'query-string'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { getRecommendedDeployment } from '@/features/MCP/utils';
-import Platform from '@/features/MCPPluginDetail/Deployment/Platform';
-import { useDetailContext } from '@/features/MCPPluginDetail/DetailProvider';
-import { McpNavKey } from '@/types/discover';
+import { getRecommendedDeployment }
+import Platform from '@/features/MCPPluginDetail/Deployment/Platform'
+import { useDetailContext }
+import { McpNavKey } from '@/types/discover'
 
-import Title from '../../../../../features/Title';
+import Title from '../../../../../features/Title'
 
 const ServerConfig = memo(() => {
-  const { t } = useTranslation('discover');
-  const pathName = usePathname();
+  const { t } = useTranslation('discover')
+  const pathName = usePathname()
   const installLink = qs.stringifyUrl({
     query: {
       activeTab: McpNavKey.Deployment,
     },
     url: pathName,
-  });
-  const { deploymentOptions = [], identifier } = useDetailContext();
-  const recommendedDeployment = getRecommendedDeployment(deploymentOptions);
+  })
+  const { deploymentOptions = [], identifier } = useDetailContext()
+  const recommendedDeployment = getRecommendedDeployment(deploymentOptions)
 
   return (
     <Flexbox gap={16}>
@@ -30,7 +30,7 @@ const ServerConfig = memo(() => {
       </Title>
       <Platform connection={recommendedDeployment?.connection} identifier={identifier} lite />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ServerConfig;
+export default ServerConfig

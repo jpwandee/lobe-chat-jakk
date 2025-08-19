@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { ActionIcon, SideNav } from '@lobehub/ui';
-import { Cog, DatabaseIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, SideNav }
+import { Cog, DatabaseIcon }
+import { memo, useState }
+import { Flexbox }
 
-import { BRANDING_NAME } from '@/const/branding';
-import PostgresViewer from '@/features/DevPanel/PostgresViewer';
-import SystemInspector from '@/features/DevPanel/SystemInspector';
-import { useStyles } from '@/features/DevPanel/features/FloatPanel';
-import { electronStylish } from '@/styles/electron';
+import { BRANDING_NAME }
+import PostgresViewer from '@/features/DevPanel/PostgresViewer'
+import SystemInspector from '@/features/DevPanel/SystemInspector'
+import { useStyles }
+import { electronStylish } from '@/styles/electron'
 
 const DevTools = memo(() => {
-  const { styles, theme, cx } = useStyles();
+  const { styles, theme, cx } = useStyles()
 
   const items = [
     {
@@ -25,9 +25,9 @@ const DevTools = memo(() => {
       icon: <Cog size={16} />,
       key: 'System Status',
     },
-  ];
+  ]
 
-  const [tab, setTab] = useState<string>(items[0].key);
+  const [tab, setTab] = useState<string>(items[0].key)
 
   return (
     <Flexbox height={'100%'} style={{ overflow: 'hidden', position: 'relative' }} width={'100%'}>
@@ -83,7 +83,7 @@ const DevTools = memo(() => {
         ))}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default DevTools;
+export default DevTools

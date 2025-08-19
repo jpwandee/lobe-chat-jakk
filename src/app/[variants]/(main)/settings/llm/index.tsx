@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox }
 
-import { isCustomBranding } from '@/const/version';
+import { isCustomBranding }
 
-import { useProviderList } from './ProviderList/providers';
-import ProviderConfig from './components/ProviderConfig';
-import Footer from './features/Footer';
+import { useProviderList }
+import ProviderConfig from './components/ProviderConfig'
+import Footer from './features/Footer'
 
-const Page = () => {
-  const list = useProviderList();
+const page = () => {
+  const list = useProviderList()
 
   return (
     <Flexbox gap={24} width={'100%'}>
@@ -18,9 +18,9 @@ const Page = () => {
       ))}
       {!isCustomBranding && <Footer />}
     </Flexbox>
-  );
-};
+  )
+}
 
-Page.displayName = 'LlmSetting';
+Page.displayName = 'LlmSetting'
 
-export default Page;
+export default Page

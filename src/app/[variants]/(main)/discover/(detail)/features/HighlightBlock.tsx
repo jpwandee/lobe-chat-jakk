@@ -1,65 +1,65 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { LucideIcon } from 'lucide-react';
-import { rgba } from 'polished';
-import { ReactNode, memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { Icon }
+import { createStyles }
+import { LucideIcon }
+import { rgba }
+import { ReactNode, memo }
+import { Flexbox, FlexboxProps }
 
-import { useServerConfigStore } from '@/store/serverConfig';
+import { useServerConfigStore }
 
-import CardBanner from '../../components/CardBanner';
+import CardBanner from '../../components/CardBanner'
 
 const useStyles = createStyles(({ css, token }) => ({
   background: css`
-    pointer-events: none;
+    pointer-events: none
 
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    transform: scale(3);
+    position: absolute
+    z-index: 0
+    inset: 0
+    transform: scale(3)
 
-    overflow: hidden;
+    overflow: hidden
 
     &::before {
-      content: '';
+      content: ''
 
-      position: absolute;
-      z-index: 1;
-      inset: 0;
+      position: absolute
+      z-index: 1
+      inset: 0
 
-      width: 100%;
-      height: 100%;
+      width: 100%
+      height: 100%
 
-      background: ${rgba(token.colorBgContainer, 0.5)};
+      background: ${rgba(token.colorBgContainer, 0.5)}
     }
   `,
   container: css`
-    position: relative;
-    overflow: hidden;
-    border-radius: ${token.borderRadiusLG}px;
+    position: relative
+    overflow: hidden
+    border-radius: ${token.borderRadiusLG}px
     box-shadow:
       0 0 0 1px ${token.colorFill} inset,
-      ${token.boxShadowTertiary};
+      ${token.boxShadowTertiary}
   `,
   header: css`
-    position: relative;
-    overflow: hidden;
-    height: 58px;
-    border-block-end: 1px solid ${token.colorBorderSecondary};
+    position: relative
+    overflow: hidden
+    height: 58px
+    border-block-end: 1px solid ${token.colorBorderSecondary}
   `,
-}));
+}))
 
-interface HighlightBlockProps extends FlexboxProps {
-  avatar?: string | ReactNode;
-  icon: LucideIcon;
+interface highlightblockprops extends flexboxprops {
+  avatar?: string | reactnode;
+  icon: lucideicon;
   title: string;
 }
 
 const HighlightBlock = memo<HighlightBlockProps>(({ avatar, title, icon, children, ...rest }) => {
-  const { styles } = useStyles();
-  const mobile = useServerConfigStore((s) => s.isMobile);
+  const { styles } = useStyles()
+  const mobile = useServerConfigStore((s) => s.isMobile)
   return (
     <Flexbox className={styles.container} flex={'none'} width={'100%'} {...rest}>
       <Flexbox
@@ -76,7 +76,7 @@ const HighlightBlock = memo<HighlightBlockProps>(({ avatar, title, icon, childre
       </Flexbox>
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default HighlightBlock;
+export default HighlightBlock

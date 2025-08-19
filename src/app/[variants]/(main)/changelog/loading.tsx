@@ -1,3 +1,4 @@
-import { Skeleton } from 'antd';
+import { Skeleton }
 
-export default () => <Skeleton active paragraph={{ rows: 5 }} title={false} />;
+export default () => <skeleton active paragraph= {{ rows: 5 }}
+title={false} />

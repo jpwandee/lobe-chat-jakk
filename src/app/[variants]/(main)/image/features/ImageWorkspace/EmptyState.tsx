@@ -1,7 +1,7 @@
-import { memo } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { memo }
+import { Center, Flexbox } from 'react-layout-kit'
 
-import PromptInput from '../PromptInput';
+import PromptInput from '../PromptInput'
 
 const EmptyState = memo(() => {
   return (
@@ -17,7 +17,7 @@ const EmptyState = memo(() => {
         <PromptInput showTitle={true} />
       </Center>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default EmptyState;
+export default EmptyState

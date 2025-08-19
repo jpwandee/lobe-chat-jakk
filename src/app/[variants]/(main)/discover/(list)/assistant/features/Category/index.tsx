@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { Icon, Tag } from '@lobehub/ui';
-import Link from 'next/link';
-import { useRouter } from 'nextjs-toploader/app';
-import qs from 'query-string';
-import { memo, useMemo } from 'react';
+import { Icon, Tag }
+import Link from 'next/link'
+import { useRouter }
+import qs from 'query-string'
+import { memo, useMemo }
 
-import { SCROLL_PARENT_ID } from '@/app/[variants]/(main)/discover/features/const';
-import { withSuspense } from '@/components/withSuspense';
-import { useQuery } from '@/hooks/useQuery';
-import { useDiscoverStore } from '@/store/discover';
-import { AssistantCategory } from '@/types/discover';
+import { SCROLL_PARENT_ID }
+import { withSuspense }
+import { useQuery }
+import { useDiscoverStore }
+import { AssistantCategory }
 
-import CategoryMenu from '../../../../components/CategoryMenu';
-import { useCategory } from './useCategory';
+import CategoryMenu from '../../../../components/CategoryMenu'
+import { useCategory } from './useCategory'
 
 const Category = memo(() => {
-  const useAssistantCategories = useDiscoverStore((s) => s.useAssistantCategories);
-  const { category = 'all', q } = useQuery() as { category?: AssistantCategory; q?: string };
-  const { data: items = [] } = useAssistantCategories({ q });
-  const route = useRouter();
-  const cates = useCategory();
+  const useAssistantCategories = useDiscoverStore((s) => s.useAssistantCategories)
+  const { category = 'all', q } = useQuery() as { category?: AssistantCategory q?: string }
+  const { data: items = [] } = useAssistantCategories({ q })
+  const route = useRouter()
+  const cates = useCategory()
 
   const genUrl = (key: AssistantCategory) =>
     qs.stringifyUrl(
@@ -29,21 +29,21 @@ const Category = memo(() => {
         url: '/discover/assistant',
       },
       { skipNull: true },
-    );
+    )
 
   const handleClick = (key: AssistantCategory) => {
-    route.push(genUrl(key));
-    const scrollableElement = document?.querySelector(`#${SCROLL_PARENT_ID}`);
-    if (!scrollableElement) return;
-    scrollableElement.scrollTo({ behavior: 'smooth', top: 0 });
-  };
+    route.push(genUrl(key))
+    const scrollableElement = document?.querySelector(`#${SCROLL_PARENT_ID}`)
+    if (!scrollableElement) return
+    scrollableElement.scrollTo({ behavior: 'smooth', top: 0 })
+  }
 
-  const total = useMemo(() => items.reduce((acc, item) => acc + item.count, 0), [items]);
+  const total = useMemo(() => items.reduce((acc, item) => acc + item.count, 0), [items])
 
   return (
     <CategoryMenu
       items={cates.map((item) => {
-        const itemData = items.find((i) => i.category === item.key);
+        const itemData = items.find((i) => i.category === item.key)
         return {
           extra:
             item.key === 'all'
@@ -72,13 +72,13 @@ const Category = memo(() => {
           ...item,
           icon: <Icon icon={item.icon} size={18} />,
           label: <Link href={genUrl(item.key)}>{item.label}</Link>,
-        };
+        }
       })}
       mode={'inline'}
       onClick={(v) => handleClick(v.key as AssistantCategory)}
       selectedKeys={[category]}
     />
-  );
-});
+  )
+})
 
-export default withSuspense(Category);
+export default withSuspense(Category)

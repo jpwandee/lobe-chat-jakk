@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { DatabaseIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import useSWR from 'swr';
+import { Skeleton }
+import { DatabaseIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import useSWR from 'swr'
 
-import GroupIcon from '@/components/GroupIcon';
-import IndexCard from '@/components/IndexCard';
-import ProgressItem from '@/components/ProgressItem';
-import { formatSize } from '@/utils/format';
+import GroupIcon from '@/components/GroupIcon'
+import IndexCard from '@/components/IndexCard'
+import ProgressItem from '@/components/ProgressItem'
+import { formatSize } from '@/utils/format'
 
 const IndexedDBStorage = memo(() => {
-  const { t } = useTranslation('setting');
+  const { t } = useTranslation('setting')
   const { data, isLoading } = useSWR('fetch-client-usage', async () => {
-    const estimate = await navigator.storage.estimate();
-    const quota = estimate.quota || 0;
-    const usage = estimate.usage || 0;
+    const estimate = await navigator.storage.estimate()
+    const quota = estimate.quota || 0
+    const usage = estimate.usage || 0
 
-    const percent = (usage / quota) * 100;
+    const percent = (usage / quota) * 100
 
-    return { percent: percent < 1 ? 1 : percent, total: quota, used: usage };
-  });
+    return { percent: percent < 1 ? 1 : percent, total: quota, used: usage }
+  })
 
   return (
     <IndexCard
@@ -49,7 +49,7 @@ const IndexedDBStorage = memo(() => {
         </Flexbox>
       )}
     </IndexCard>
-  );
-});
+  )
+})
 
-export default IndexedDBStorage;
+export default IndexedDBStorage

@@ -1,57 +1,57 @@
-'use client';
+'use client'
 
-import { Form, type FormGroupItemType, HotkeyInput, Icon } from '@lobehub/ui';
-import { App, Skeleton } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { Loader2Icon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Form, type FormGroupItemType, HotkeyInput, Icon }
+import { App, Skeleton }
+import isEqual from 'fast-deep-equal'
+import { Loader2Icon }
+import { memo, useState }
+import { useTranslation }
 
-import { DESKTOP_HOTKEYS_REGISTRATION } from '@/const/hotkeys';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import hotkeyMeta from '@/locales/default/hotkey';
-import { useElectronStore } from '@/store/electron';
-import { desktopHotkeysSelectors } from '@/store/electron/selectors';
-import { DesktopHotkeyItem } from '@/types/hotkey';
+import { DESKTOP_HOTKEYS_REGISTRATION }
+import { FORM_STYLE }
+import hotkeyMeta from '@/locales/default/hotkey'
+import { useElectronStore }
+import { desktopHotkeysSelectors }
+import { DesktopHotkeyItem } from '@/types/hotkey'
 
 const HotkeySetting = memo(() => {
-  const { t } = useTranslation(['setting', 'hotkey']);
-  const [form] = Form.useForm();
-  const { message } = App.useApp();
+  const { t } = useTranslation(['setting', 'hotkey'])
+  const [form] = Form.useForm()
+  const { message } = App.useApp()
 
-  const hotkeys = useElectronStore(desktopHotkeysSelectors.hotkeys, isEqual);
+  const hotkeys = useElectronStore(desktopHotkeysSelectors.hotkeys, isEqual)
   const [isHotkeysInit, updateDesktopHotkey, useFetchDesktopHotkeys] = useElectronStore((s) => [
     desktopHotkeysSelectors.isHotkeysInit(s),
     s.updateDesktopHotkey,
     s.useFetchDesktopHotkeys,
-  ]);
+  ])
 
-  useFetchDesktopHotkeys();
+  useFetchDesktopHotkeys()
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  if (!isHotkeysInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />;
+  if (!isHotkeysInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />
 
   const mapHotkeyItem = (item: DesktopHotkeyItem) => ({
     children: (
       <HotkeyInput
         disabled={item.nonEditable}
         onChange={async (value) => {
-          setLoading(true);
+          setLoading(true)
           try {
-            const result = await updateDesktopHotkey(item.id, value);
-            console.log(result);
+            const result = await updateDesktopHotkey(item.id, value)
+            console.log(result)
             if (result.success) {
-              message.success(t('hotkey.updateSuccess', { ns: 'setting' }));
+              message.success(t('hotkey.updateSuccess', { ns: 'setting' }))
             } else {
               // 根据错误类型显示相应的错误消息
 
-              message.error(t(`hotkey.errors.${result.errorType}` as any, { ns: 'setting' }));
+              message.error(t(`hotkey.errors.${result.errorType}` as any, { ns: 'setting' }))
             }
           } catch {
-            message.error(t('hotkey.updateError', { ns: 'setting' }));
+            message.error(t('hotkey.updateError', { ns: 'setting' }))
           } finally {
-            setLoading(false);
+            setLoading(false)
           }
         }}
         placeholder={t('hotkey.record')}
@@ -69,13 +69,13 @@ const HotkeySetting = memo(() => {
       : undefined,
     label: t(`desktop.${item.id}.title`, { ns: 'hotkey' }),
     name: item.id,
-  });
+  })
 
   const desktop: FormGroupItemType = {
     children: DESKTOP_HOTKEYS_REGISTRATION.map((item) => mapHotkeyItem(item)),
     extra: loading && <Icon icon={Loader2Icon} size={16} spin style={{ opacity: 0.5 }} />,
     title: t('hotkey.group.desktop'),
-  };
+  }
 
   return (
     <Form
@@ -86,7 +86,7 @@ const HotkeySetting = memo(() => {
       variant={'borderless'}
       {...FORM_STYLE}
     />
-  );
-});
+  )
+})
 
-export default HotkeySetting;
+export default HotkeySetting

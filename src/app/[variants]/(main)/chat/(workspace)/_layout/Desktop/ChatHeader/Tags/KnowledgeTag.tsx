@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { Dropdown, Icon, type MenuProps, Tag } from '@lobehub/ui';
-import { LibraryBig } from 'lucide-react';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Dropdown, Icon, type MenuProps, Tag }
+import { LibraryBig }
+import { memo }
+import { Flexbox }
 
-import KnowledgeIcon from '@/components/KnowledgeIcon';
-import { oneLineEllipsis } from '@/styles';
-import { KnowledgeItem } from '@/types/knowledgeBase';
+import KnowledgeIcon from '@/components/KnowledgeIcon'
+import { oneLineEllipsis }
+import { KnowledgeItem }
 
-export interface PluginTagProps {
-  data: KnowledgeItem[];
+export interface plugintagprops {
+  data: knowledgeitem[];
 }
 
 const PluginTag = memo<PluginTagProps>(({ data }) => {
-  if (data.length === 0) return null;
+  if (data.length === 0) return null
 
   const items: MenuProps['items'] = data.map((item) => ({
     icon: <KnowledgeIcon fileType={item.fileType} name={item.name} type={item.type} />,
     key: item.id,
     label: <Flexbox style={{ paddingInlineStart: 8 }}>{item.name}</Flexbox>,
-  }));
+  }))
 
-  const count = data.length;
+  const count = data.length
 
   return (
     <Dropdown menu={{ items }}>
@@ -36,7 +36,7 @@ const PluginTag = memo<PluginTagProps>(({ data }) => {
         </Tag>
       </div>
     </Dropdown>
-  );
-});
+  )
+})
 
-export default PluginTag;
+export default PluginTag

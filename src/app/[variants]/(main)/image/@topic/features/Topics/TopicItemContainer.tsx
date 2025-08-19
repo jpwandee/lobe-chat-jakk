@@ -1,75 +1,75 @@
-'use client';
+'use client'
 
-import { Tooltip } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { type ReactNode } from 'react';
-import { Center, CenterProps } from 'react-layout-kit';
+import { Tooltip }
+import { createStyles }
+import { type ReactNode }
+import { Center, CenterProps }
 
 const useStyles = createStyles(({ css, token }) => ({
   activeContainer: css`
-    border: 2px solid ${token.colorPrimary};
-    background: ${token.colorPrimaryBg};
+    border: 2px solid ${token.colorPrimary}
+    background: ${token.colorPrimaryBg}
 
     &:hover {
-      background: ${token.colorPrimaryBgHover};
+      background: ${token.colorPrimaryBgHover}
     }
   `,
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    position: relative;
+    position: relative
 
-    flex: none;
+    flex: none
 
-    width: 50px;
-    height: 50px;
-    border-radius: 6px;
+    width: 50px
+    height: 50px
+    border-radius: 6px
 
-    background: transparent;
+    background: transparent
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out
 
     &::before {
-      pointer-events: none;
-      content: '';
+      pointer-events: none
+      content: ''
 
-      position: absolute;
-      inset: 0;
+      position: absolute
+      inset: 0
 
-      border-radius: 6px;
+      border-radius: 6px
 
-      opacity: 0;
-      background: radial-gradient(circle at center, ${token.colorPrimary}20 0%, transparent 70%);
+      opacity: 0
+      background: radial-gradient(circle at center, ${token.colorPrimary}20 0%, transparent 70%)
 
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease
     }
 
     &:hover {
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     }
 
     &:active {
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
 
     &:active::before {
-      opacity: 1;
+      opacity: 1
     }
   `,
-}));
+}))
 
-interface TopicItemContainerProps extends CenterProps {
+interface topicitemcontainerprops extends centerprops {
   active?: boolean;
-  children: ReactNode;
-  tooltip?: ReactNode;
+  children: reactnode;
+  tooltip?: reactnode;
 }
 
 const TopicItemContainer = ({
-  children,
-  className,
-  active,
-  tooltip,
-  ...rest
+children,
+className,
+active,
+tooltip,
+...rest
 }: TopicItemContainerProps) => {
   const { styles, cx } = useStyles();
 
@@ -88,4 +88,4 @@ const TopicItemContainer = ({
   );
 };
 
-export default TopicItemContainer;
+export default TopicItemContainer

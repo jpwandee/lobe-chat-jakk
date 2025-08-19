@@ -1,8 +1,8 @@
-import MobileContentLayout from '@/components/server/MobileNavLayout';
-import InitClientDB from '@/features/InitClientDB';
-import Footer from '@/features/Setting/Footer';
+import MobileContentLayout from '@/components/server/MobileNavLayout'
+import InitClientDB from '@/features/InitClientDB'
+import Footer from '@/features/Setting/Footer'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import Header from './Header';
 
 const Layout = ({ children }: LayoutProps) => {
@@ -15,6 +15,6 @@ const Layout = ({ children }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'MobileSettingsLayout';
+Layout.displayName = 'MobileSettingsLayout'
 
-export default Layout;
+export default Layout

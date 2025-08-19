@@ -1,9 +1,9 @@
-import { headers } from 'next/headers';
-import { createHmac } from 'node:crypto';
+import { headers }
+import { createHmac }
 
-import { authEnv } from '@/config/auth';
+import { authEnv }
 
-export type LogtToUserEntity = {
+export type logttouserentity = {
   applicationId?: string;
   avatar?: string;
   createdAt?: string;
@@ -16,35 +16,38 @@ export type LogtToUserEntity = {
   primaryEmail?: string;
   primaryPhone?: string;
   username?: string;
-};
+}
 
-interface LogtoWebhookPayload {
+interface logtowebhookpayload {
   // Only support user event currently
-  data: LogtToUserEntity;
+  data: logttouserentity;Onlysupportusereventcurrentlydata
   event: string;
 }
 
-export const validateRequest = async (request: Request, signingKey: string) => {
-  const payloadString = await request.text();
-  const headerPayload = await headers();
-  const logtoHeaderSignature = headerPayload.get('logto-signature-sha-256')!;
+export const validaterequest = async (request: Request, signingKey: string) => {
+  const payloadString = await request.text()
+  const headerPayload = await headers()
+  const logtoHeaderSignature = headerPayload.get('logto-signature-sha-256')!
   try {
     const hmac = createHmac('sha256', signingKey);
     hmac.update(payloadString);
     const signature = hmac.digest('hex');
     if (signature === logtoHeaderSignature) {
       return JSON.parse(payloadString) as LogtoWebhookPayload;
-    } else {
+    }
+
+    else {
       console.warn(
         '[logto]: signature verify failed, please check your logto signature in `LOGTO_WEBHOOK_SIGNING_KEY`',
-      );
-      return;
+      )
+      return
     }
-  } catch (e) {
+  }
+  catch (e) {
     if (!authEnv.LOGTO_WEBHOOK_SIGNING_KEY) {
       throw new Error('`LOGTO_WEBHOOK_SIGNING_KEY` environment variable is missing.');
     }
     console.error('[logto]: incoming webhook failed in verification.\n', e);
     return;
   }
-};
+}

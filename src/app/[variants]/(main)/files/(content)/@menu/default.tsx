@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { useTranslation }
+import { Flexbox }
 
-import PanelTitle from '@/components/PanelTitle';
+import PanelTitle from '@/components/PanelTitle'
 
-import FileMenu from './features/FileMenu';
-import KnowledgeBase from './features/KnowledgeBase';
+import FileMenu from './features/FileMenu'
+import KnowledgeBase from './features/KnowledgeBase'
 
-const Menu = () => {
-  const { t } = useTranslation('file');
+const menu = () => {
+  const { t } = useTranslation('file')
 
   return (
     <Flexbox gap={16} height={'100%'}>
@@ -19,9 +19,9 @@ const Menu = () => {
       </Flexbox>
       <KnowledgeBase />
     </Flexbox>
-  );
-};
+  )
+}
 
-Menu.displayName = 'Menu';
+Menu.displayName = 'Menu'
 
-export default Menu;
+export default Menu

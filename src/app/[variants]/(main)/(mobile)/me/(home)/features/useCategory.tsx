@@ -7,114 +7,63 @@ import {
   Feather,
   FileClockIcon,
   Settings2,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
+}
+import { useRouter }
+import { useTranslation }
 
-import { CellProps } from '@/components/Cell';
-import { enableAuth } from '@/const/auth';
-import { LOBE_CHAT_CLOUD } from '@/const/branding';
-import { DOCUMENTS, FEEDBACK, OFFICIAL_URL, UTM_SOURCE } from '@/const/url';
-import { isServerMode } from '@/const/version';
-import { usePWAInstall } from '@/hooks/usePWAInstall';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/selectors';
+import { CellProps }
+import { enableAuth }
+import { LOBE_CHAT_CLOUD }
+import { DOCUMENTS, FEEDBACK, OFFICIAL_URL, UTM_SOURCE }
+import { isServerMode }
+import { usePWAInstall }
+import { featureFlagsSelectors, useServerConfigStore }
+import { useUserStore }
+import { authSelectors }
 
-import { useCategory as useSettingsCategory } from '../../settings/features/useCategory';
+import { useCategory as useSettingsCategory }
 
-export const useCategory = () => {
-  const router = useRouter();
-  const { canInstall, install } = usePWAInstall();
-  const { t } = useTranslation(['common', 'setting', 'auth']);
-  const { showCloudPromotion, hideDocs } = useServerConfigStore(featureFlagsSelectors);
-  const [isLogin, isLoginWithAuth] = useUserStore((s) => [
-    authSelectors.isLogin(s),
-    authSelectors.isLoginWithAuth(s),
-  ]);
-
-  const profile: CellProps[] = [
-    {
-      icon: CircleUserRound,
-      key: 'profile',
-      label: t('userPanel.profile'),
-      onClick: () => router.push('/me/profile'),
-    },
-  ];
-
-  const settings: CellProps[] = [
-    {
-      icon: Settings2,
-      key: 'setting',
-      label: t('userPanel.setting'),
-      onClick: () => router.push('/me/settings'),
-    },
-    {
-      type: 'divider',
-    },
-  ];
-
-  const pwa: CellProps[] = [
-    {
-      icon: Download,
-      key: 'pwa',
-      label: t('installPWA'),
-      onClick: () => install(),
-    },
-    {
-      type: 'divider',
-    },
-  ];
+export const usecategory = () => {
+  const router = useRouter()
+  const { canInstall, install }
+  const { t }
+  const { showCloudPromotion, hideDocs }
 
   const settingsWithoutAuth = [
     ...useSettingsCategory(),
     {
       type: 'divider',
     },
-  ];
+  ]
 
   /* ↓ cloud slot ↓ */
 
   /* ↑ cloud slot ↑ */
 
-  const data: CellProps[] = [
-    {
-      icon: Database,
-      key: 'data',
-      label: t('userPanel.data'),
-      onClick: () => router.push('/me/data'),
-    },
-    {
-      type: 'divider',
-    },
-  ];
-
-  const helps: CellProps[] = [
-    showCloudPromotion && {
-      icon: Cloudy,
-      key: 'cloud',
-      label: t('userPanel.cloud', { name: LOBE_CHAT_CLOUD }),
-      onClick: () => window.open(`${OFFICIAL_URL}?utm_source=${UTM_SOURCE}`, '__blank'),
-    },
-    {
-      icon: Book,
-      key: 'docs',
-      label: t('document'),
-      onClick: () => window.open(DOCUMENTS, '__blank'),
-    },
-    {
-      icon: Feather,
-      key: 'feedback',
-      label: t('feedback'),
-      onClick: () => window.open(FEEDBACK, '__blank'),
-    },
-    {
-      icon: FileClockIcon,
-      key: 'changelog',
-      label: t('changelog'),
-      onClick: () => router.push('/changelog'),
-    },
-  ].filter(Boolean) as CellProps[];
+  const data: cellprops[] = [
+    {;
+  const helps: cellprops[] = [
+    showcloudpromotion && {;
+  icon: circleuserround,;
+  icon: settings2,;
+  icon: download,;
+  icon: database,;
+  icon: cloudy,;
+  icon: book,;
+  icon: feather,;
+  icon: fileclockicon,;
+  key: 'changelog',;
+  label: t('userPanel.cloud', { name: LOBE_CHAT_CLOUD }),;
+  label: t('changelog'),;
+  onClick: () => router.push('/me/profile'), }, ];
+  onClick: () => router.push('/me/settings'), }, {;
+  onClick: () => install(), }, {;
+  onClick: () => router.push('/me/data'), }, {;
+  onClick: () => window.open(`${OFFICIAL_URL}?utm_source=${UTM_SOURCE}`, '__blank'), }, {;
+  onClick: () => window.open(DOCUMENTS, '__blank'), }, {;
+  onClick: () => window.open(FEEDBACK, '__blank'), }, {;
+  onClick: () => router.push('/changelog'), }, ].filter(Boolean) as CellProps[];
+  type: 'divider', }, ]
 
   const mainItems = [
     {
@@ -128,7 +77,7 @@ export const useCategory = () => {
     ...(canInstall ? pwa : []),
     ...(isLogin && !isServerMode ? data : []),
     ...(!hideDocs ? helps : []),
-  ].filter(Boolean) as CellProps[];
+  ].filter(Boolean) as CellProps[]
 
-  return mainItems;
-};
+  return mainItems
+}

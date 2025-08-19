@@ -1,39 +1,39 @@
-'use client';
+'use client'
 
-import { Tag } from '@lobehub/ui';
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { usePathname } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Tag }
+import { ChatHeader }
+import { usePathname }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { enableAuth } from '@/const/auth';
-import { useActiveSettingsKey } from '@/hooks/useActiveTabKey';
-import { useProviderName } from '@/hooks/useProviderName';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
-import { useShowMobileWorkspace } from '@/hooks/useShowMobileWorkspace';
-import { SettingsTabs } from '@/store/global/initialState';
-import { useSessionStore } from '@/store/session';
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { enableAuth }
+import { useActiveSettingsKey }
+import { useProviderName }
+import { useQueryRoute }
+import { useShowMobileWorkspace }
+import { SettingsTabs }
+import { useSessionStore }
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
 const Header = memo(() => {
-  const { t } = useTranslation('setting');
+  const { t } = useTranslation('setting')
 
-  const router = useQueryRoute();
-  const showMobileWorkspace = useShowMobileWorkspace();
-  const activeSettingsKey = useActiveSettingsKey();
-  const isSessionActive = useSessionStore((s) => !!s.activeId);
-  const pathname = usePathname();
-  const isProvider = pathname.includes('/settings/provider/');
-  const providerName = useProviderName(activeSettingsKey);
+  const router = useQueryRoute()
+  const showMobileWorkspace = useShowMobileWorkspace()
+  const activeSettingsKey = useActiveSettingsKey()
+  const isSessionActive = useSessionStore((s) => !!s.activeId)
+  const pathname = usePathname()
+  const isProvider = pathname.includes('/settings/provider/')
+  const providerName = useProviderName(activeSettingsKey)
 
   const handleBackClick = () => {
     if (isSessionActive && showMobileWorkspace) {
-      router.push('/chat');
+      router.push('/chat')
     } else {
-      router.push(enableAuth ? '/me/settings' : '/me');
+      router.push(enableAuth ? '/me/settings' : '/me')
     }
-  };
+  }
 
   return (
     <ChatHeader
@@ -57,7 +57,7 @@ const Header = memo(() => {
       showBackButton
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

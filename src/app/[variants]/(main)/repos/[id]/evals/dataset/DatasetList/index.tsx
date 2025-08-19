@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { PlusIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import { Virtuoso } from 'react-virtuoso';
+import { ActionIcon }
+import { PlusIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import { Virtuoso }
 
-import { RAGEvalDataSetItem } from '@/types/eval';
+import { RAGEvalDataSetItem }
 
-import Item from './Item';
+import Item from './Item'
 
-interface DatasetListProps {
-  dataSource: RAGEvalDataSetItem[];
+interface datasetlistprops {
+  dataSource: ragevaldatasetitem[];
 }
 
 const DatasetList = memo<DatasetListProps>(({ dataSource }) => {
-  const { t } = useTranslation('ragEval');
+  const { t } = useTranslation('ragEval')
 
   return (
     <Flexbox gap={24} height={'100%'}>
@@ -26,7 +26,7 @@ const DatasetList = memo<DatasetListProps>(({ dataSource }) => {
       </Flexbox>
       <Virtuoso data={dataSource} itemContent={(index, data) => <Item {...data} key={data.id} />} />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default DatasetList;
+export default DatasetList

@@ -1,54 +1,54 @@
-import { notFound } from 'next/navigation';
-import urlJoin from 'url-join';
+import { notFound }
+import urlJoin from 'url-join'
 
-import StructuredData from '@/components/StructuredData';
-import { Locales } from '@/locales/resources';
-import { ldModule } from '@/server/ld';
-import { metadataModule } from '@/server/metadata';
-import { DiscoverService } from '@/server/services/discover';
-import { translation } from '@/server/translation';
-import { DiscoverTab } from '@/types/discover';
-import { PageProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import StructuredData from '@/components/StructuredData'
+import { Locales }
+import { ldModule }
+import { metadataModule }
+import { DiscoverService }
+import { translation }
+import { DiscoverTab }
+import { PageProps }
+import { RouteVariants }
 
-import Breadcrumb from '../../features/Breadcrumb';
-import Client from './Client';
+import Breadcrumb from '../../features/Breadcrumb'
+import Client from './Client'
 
-type DiscoverPageProps = PageProps<
-  { slugs: string[]; variants: string },
-  { hl?: Locales; version?: string }
->;
+type discoverpageprops = pageprops< { slugs: string[]; variants: string }
+, { hl?: locales; version?: string }
+>
 
-const getSharedProps = async (props: DiscoverPageProps) => {
-  const params = await props.params;
-  const { slugs } = params;
-  const identifier = decodeURIComponent(slugs.join('/'));
-  const { isMobile, locale: hl } = await RouteVariants.getVariantsFromProps(props);
-  const discoverService = new DiscoverService();
+const getsharedprops = async (props: DiscoverPageProps) => {
+  const params = await props.params
+  const { slugs }
+  const identifier = decodeURIComponent(slugs.join('/'))
+  const { isMobile, locale: hllocale }
+
+  const discoverService = new DiscoverService()
   const [{ t, locale }, data] = await Promise.all([
     translation('metadata', hl),
     discoverService.getAssistantDetail({ identifier, locale: hl }),
-  ]);
+  ])
   return {
     data,
     identifier,
     isMobile,
     locale,
     t,
-  };
-};
+  }
+}
 
-export const generateMetadata = async (props: DiscoverPageProps) => {
-  const { data, t, locale, identifier } = await getSharedProps(props);
-  if (!data) return;
+export const generatemetadata = async (props: DiscoverPageProps) => {
+  const { data, t, locale, identifier }
+  if (!data) return
 
-  const { tags, createdAt, homepage, author, description, title } = data;
+  const { tags, createdAt, homepage, author, description, title }
 
   return {
     authors: [
-      { name: author, url: homepage },
-      { name: 'LobeHub', url: 'https://github.com/lobehub' },
-      { name: 'LobeChat', url: 'https://github.com/lobehub/lobe-chat' },
+    { name: author, url: homepage },
+    { name: 'LobeHub', url: 'https://github.com/lobehub' },
+    { name: 'LobeChat', url: 'https://github.com/lobehub/lobe-chat' },
     ],
     keywords: tags,
     ...metadataModule.generate({
@@ -60,21 +60,21 @@ export const generateMetadata = async (props: DiscoverPageProps) => {
       title: [title, t('discover.assistants.title')].join(' · '),
       url: urlJoin('/discover/assistant', identifier),
     }),
-    other: {
+    other: {,
+      'robots': 'index,follow,max-image-preview:large',;.toISOString()
+        : new Date().toISOString();
       'article:author': author,
-      'article:published_time': createdAt
-        ? new Date(createdAt).toISOString()
-        : new Date().toISOString(),
-      'robots': 'index,follow,max-image-preview:large',
+        'article:published_time': createdat
+        ? new date(createdat)
     },
-  };
-};
+  }
+}
 
-const Page = async (props: DiscoverPageProps) => {
-  const { data, t, locale, identifier, isMobile } = await getSharedProps(props);
-  if (!data) return notFound();
+const page = async (props: DiscoverPageProps) => {
+  const { data, t, locale, identifier, isMobile }
+  if (!data) return notFound()
 
-  const { tags, title, description, createdAt, author } = data;
+  const { tags, title, description, createdAt, author } = data
 
   const ld = ldModule.generate({
     article: {
@@ -92,7 +92,7 @@ const Page = async (props: DiscoverPageProps) => {
       enable: true,
       search: '/discover/assistant',
     },
-  });
+  })
 
   return (
     <>
@@ -100,11 +100,11 @@ const Page = async (props: DiscoverPageProps) => {
       {!isMobile && <Breadcrumb identifier={identifier} tab={DiscoverTab.Assistants} />}
       <Client identifier={identifier} mobile={isMobile} />
     </>
-  );
-};
+  )
+}
 
-export const generateStaticParams = async () => [];
+export const generateStaticParams = async () => []
 
-Page.DisplayName = 'DiscoverAssistantsDetail';
+Page.DisplayName = 'DiscoverAssistantsDetail'
 
-export default Page;
+export default Page

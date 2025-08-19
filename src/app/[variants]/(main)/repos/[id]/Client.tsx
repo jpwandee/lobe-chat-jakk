@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { memo }
+import { Flexbox }
 
-import FileManager from '@/features/FileManager';
-import FilePanel from '@/features/FileSidePanel';
-import { knowledgeBaseSelectors, useKnowledgeBaseStore } from '@/store/knowledgeBase';
+import FileManager from '@/features/FileManager'
+import FilePanel from '@/features/FileSidePanel'
+import { knowledgeBaseSelectors, useKnowledgeBaseStore }
 
-import Menu from './features/Menu';
-import { useKnowledgeBaseItem } from './hooks/useKnowledgeItem';
+import Menu from './features/Menu'
+import { useKnowledgeBaseItem }
 
-const RepoClientPage = memo<{ id: string }>(({ id }) => {
-  useKnowledgeBaseItem(id);
-  const name = useKnowledgeBaseStore(knowledgeBaseSelectors.getKnowledgeBaseNameById(id));
+const repoclientpage = memo< { id: string }>(({ id }) => {
+  useKnowledgeBaseItem(id)
+  const name = useKnowledgeBaseStore(knowledgeBaseSelectors.getKnowledgeBaseNameById(id))
 
   return (
     <>
@@ -23,7 +23,7 @@ const RepoClientPage = memo<{ id: string }>(({ id }) => {
         <FileManager knowledgeBaseId={id} title={name} />
       </Flexbox>
     </>
-  );
-});
+  )
+})
 
-export default RepoClientPage;
+export default RepoClientPage

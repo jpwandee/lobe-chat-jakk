@@ -1,13 +1,13 @@
-import debug from 'debug';
-import { NextRequest, NextResponse, after } from 'next/server';
+import debug from 'debug'
+import { NextRequest, NextResponse, after }
 
-import { OAuthHandoffModel } from '@/database/models/oauthHandoff';
-import { serverDB } from '@/database/server';
-import { correctOIDCUrl } from '@/utils/server/correctOIDCUrl';
+import { OAuthHandoffModel }
+import { serverDB }
+import { correctOIDCUrl }
 
-const log = debug('lobe-oidc:callback:desktop');
+const log = debug('lobe-oidc:callback:desktop')
 
-const errorPathname = '/oauth/callback/error';
+const errorPathname = '/oauth/callback/error'
 
 /**
  * 安全地构建重定向URL
@@ -39,15 +39,16 @@ const buildRedirectUrl = (req: NextRequest, pathname: string): URL => {
 
   try {
     return new URL(`${actualProto}://${actualHost}${pathname}`);
-  } catch (error) {
+  }
+  catch (error) {
     log('Error constructing URL, using req.nextUrl as fallback: %O', error);
     const fallbackUrl = req.nextUrl.clone();
     fallbackUrl.pathname = pathname;
     return fallbackUrl;
   }
-};
+}
 
-export const GET = async (req: NextRequest) => {
+export const get = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
     const code = searchParams.get('code');
@@ -63,37 +64,38 @@ export const GET = async (req: NextRequest) => {
       return NextResponse.redirect(errorUrl);
     }
 
-    log('Received OIDC callback. state(handoffId): %s', state);
+    log('Received OIDC callback. state(handoffId): %s', state)
 
     // The 'client' is 'desktop' because this redirect_uri is for the desktop client.
-    const client = 'desktop';
-    const payload = { code, state };
-    const id = state;
+    const client = 'desktop'
+    const payload = { code, state }
+    const id = state
 
-    const authHandoffModel = new OAuthHandoffModel(serverDB);
-    await authHandoffModel.create({ client, id, payload });
-    log('Handoff record created successfully for id: %s', id);
+    const authHandoffModel = new OAuthHandoffModel(serverDB)
+    await authHandoffModel.create({ client, id, payload })
+    log('Handoff record created successfully for id: %s', id)
 
-    const successUrl = buildRedirectUrl(req, '/oauth/callback/success');
+    const successUrl = buildRedirectUrl(req, '/oauth/callback/success')
 
     // 添加调试日志
-    log('Request host header: %s', req.headers.get('host'));
-    log('Request x-forwarded-host: %s', req.headers.get('x-forwarded-host'));
-    log('Request x-forwarded-proto: %s', req.headers.get('x-forwarded-proto'));
-    log('Constructed success URL: %s', successUrl.toString());
+    log('Request host header: %s', req.headers.get('host'))
+    log('Request x-forwarded-host: %s', req.headers.get('x-forwarded-host'))
+    log('Request x-forwarded-proto: %s', req.headers.get('x-forwarded-proto'))
+    log('Constructed success URL: %s', successUrl.toString())
 
-    const correctedUrl = correctOIDCUrl(req, successUrl);
-    log('Final redirect URL: %s', correctedUrl.toString());
+    const correctedUrl = correctOIDCUrl(req, successUrl)
+    log('Final redirect URL: %s', correctedUrl.toString())
 
     // cleanup expired
     after(async () => {
-      const cleanedCount = await authHandoffModel.cleanupExpired();
+      const cleanedCount = await authHandoffModel.cleanupExpired()
 
-      log('Cleaned up %d expired handoff records', cleanedCount);
-    });
+      log('Cleaned up %d expired handoff records', cleanedCount)
+    })
 
-    return NextResponse.redirect(correctedUrl);
-  } catch (error) {
+    return NextResponse.redirect(correctedUrl)
+  }
+  catch (error) {
     log('Error in OIDC callback: %O', error);
 
     const errorUrl = buildRedirectUrl(req, errorPathname);
@@ -106,4 +108,4 @@ export const GET = async (req: NextRequest) => {
     log('Redirecting to error URL: %s', errorUrl.toString());
     return NextResponse.redirect(errorUrl);
   }
-};
+}

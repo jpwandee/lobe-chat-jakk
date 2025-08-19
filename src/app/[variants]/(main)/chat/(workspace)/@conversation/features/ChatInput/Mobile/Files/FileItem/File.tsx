@@ -1,52 +1,52 @@
-import { ActionIcon, Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { Trash } from 'lucide-react';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Text }
+import { createStyles }
+import { Trash }
+import { memo }
+import { Flexbox }
 
-import FileIcon from '@/components/FileIcon';
-import { UploadFileItem } from '@/types/files';
+import FileIcon from '@/components/FileIcon'
+import { UploadFileItem }
 
-import UploadDetail from '../../../../../../../../../../../features/ChatInput/components/UploadDetail';
+import UploadDetail from '../../../../../../../../../../../features/ChatInput/components/UploadDetail'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    width: 250px;
-    height: 64px;
-    padding-block: 4px;
-    padding-inline: 8px 24px;
-    border: 1px solid ${token.colorBorder};
-    border-radius: 8px;
+    width: 250px
+    height: 64px
+    padding-block: 4px
+    padding-inline: 8px 24px
+    border: 1px solid ${token.colorBorder}
+    border-radius: 8px
 
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
   `,
   deleteButton: css`
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+    position: absolute
+    inset-block-start: 0
+    inset-inline-end: 0
 
-    color: #fff;
+    color: #fff
 
-    background: ${token.colorBgMask};
+    background: ${token.colorBgMask}
 
     &:hover {
-      background: ${token.colorError};
+      background: ${token.colorError}
     }
   `,
-}));
+}))
 
-interface FileItemProps extends UploadFileItem {
+interface fileitemprops extends uploadfileitem {
   onRemove?: () => void;
 }
 
 const FileItem = memo<FileItemProps>(({ id, onRemove, file, status, uploadState, tasks }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <Flexbox align={'center'} className={styles.container} gap={12} horizontal key={id}>
@@ -60,12 +60,12 @@ const FileItem = memo<FileItemProps>(({ id, onRemove, file, status, uploadState,
         glass
         icon={Trash}
         onClick={(e) => {
-          e.stopPropagation();
-          onRemove?.();
+          e.stopPropagation()
+          onRemove?.()
         }}
         size={'small'}
       />
     </Flexbox>
-  );
-});
-export default FileItem;
+  )
+})
+export default FileItem

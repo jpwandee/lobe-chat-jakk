@@ -1,24 +1,24 @@
-import { Icon } from '@lobehub/ui';
-import { SheetIcon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { SheetIcon }
+import { useTranslation }
+import { Flexbox }
 
-import { createModal } from '@/components/FunctionModal';
+import { createModal }
 
-import CreateForm from './CreateForm';
+import CreateForm from './CreateForm'
 
-const Title = () => {
-  const { t } = useTranslation('ragEval');
+const title = () => {
+  const { t } = useTranslation('ragEval')
 
   return (
     <Flexbox gap={8} horizontal>
       <Icon icon={SheetIcon} />
       {t('addDataset.title')}
     </Flexbox>
-  );
-};
+  )
+}
 
-interface CreateDatasetModalProps {
+interface createdatasetmodalprops {
   knowledgeBaseId: string;
 }
 
@@ -28,10 +28,10 @@ export const useCreateDatasetModal = createModal<CreateDatasetModalProps>((insta
       <CreateForm
         knowledgeBaseId={params!.knowledgeBaseId}
         onClose={() => {
-          instance.current?.destroy();
+          instance.current?.destroy()
         }}
       />
     </Flexbox>
   ),
   title: <Title />,
-}));
+}))

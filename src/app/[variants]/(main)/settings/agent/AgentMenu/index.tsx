@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { Alert } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useTheme } from 'antd-style';
-import { Suspense, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Alert }
+import { Skeleton }
+import { useTheme }
+import { Suspense, memo }
+import { useTranslation }
+import { Flexbox }
 
-import Menu from './Menu';
+import Menu from './Menu'
 
-interface ProviderMenuProps {
+interface providermenuprops {
   mobile?: boolean;
 }
 const ProviderMenu = memo(({ mobile }: ProviderMenuProps) => {
-  const theme = useTheme();
-  const { t } = useTranslation('setting');
+  const theme = useTheme()
+  const { t } = useTranslation('setting')
 
-  const width = mobile ? undefined : 260;
+  const width = mobile ? undefined : 260
   return (
     <Flexbox
       gap={24}
@@ -47,7 +47,7 @@ const ProviderMenu = memo(({ mobile }: ProviderMenuProps) => {
         <Menu />
       </Suspense>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ProviderMenu;
+export default ProviderMenu

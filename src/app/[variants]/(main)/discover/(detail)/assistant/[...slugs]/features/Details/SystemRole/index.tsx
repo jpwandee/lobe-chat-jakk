@@ -1,20 +1,20 @@
-import { Block, Icon, Tag } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { MessageCircleHeartIcon, MessageCircleQuestionIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Block, Icon, Tag }
+import { useTheme }
+import { MessageCircleHeartIcon, MessageCircleQuestionIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import TokenTag from '../../../../../../(list)/assistant/features/List/TokenTag';
-import Title from '../../../../../../features/Title';
-import MarkdownRender from '../../../../../features/MakedownRender';
-import { useDetailContext } from '../../DetailProvider';
-import TagList from './TagList';
+import TokenTag from '../../../../../../(list)/assistant/features/List/TokenTag'
+import Title from '../../../../../../features/Title'
+import MarkdownRender from '../../../../../features/MakedownRender'
+import { useDetailContext } from '../../DetailProvider'
+import TagList from './TagList'
 
 const Overview = memo(() => {
-  const { t } = useTranslation('discover');
-  const { tokenUsage, tags = [], config } = useDetailContext();
-  const theme = useTheme();
+  const { t } = useTranslation('discover')
+  const { tokenUsage, tags = [], config } = useDetailContext()
+  const theme = useTheme()
   return (
     <Flexbox gap={16}>
       <Title tag={tokenUsage && <TokenTag tokenUsage={tokenUsage} />}>
@@ -48,7 +48,7 @@ const Overview = memo(() => {
         ))}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Overview;
+export default Overview

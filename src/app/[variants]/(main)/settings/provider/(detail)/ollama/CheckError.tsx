@@ -1,46 +1,46 @@
-import { Skeleton } from 'antd';
-import dynamic from 'next/dynamic';
-import { ReactNode } from 'react';
+import { Skeleton }
+import dynamic from 'next/dynamic'
+import { ReactNode }
 
-import { ChatMessageError } from '@/types/message';
+import { ChatMessageError }
 
-import Container from './Container';
+import Container from './Container'
 
-const loading = () => <Skeleton active style={{ width: 400 }} />;
+const loading = () => <skeleton active style= {{ width: 400 }}
 
 const OllamaSetupGuide = dynamic(() => import('@/features/OllamaSetupGuide'), {
   loading,
   ssr: false,
-});
+})
 
 const InvalidModel = dynamic(() => import('@/features/OllamaModelDownloader'), {
   loading,
   ssr: false,
-});
+})
 
-interface OllamaError {
+interface ollamaerror {
   code: string | null;
   message: string;
   param?: any;
   type: string;
 }
 
-interface OllamaErrorResponse {
-  error: OllamaError;
+interface ollamaerrorresponse {
+  error: ollamaerror;
 }
 
 const UNRESOLVED_MODEL_REGEXP = /model "([\w+,-_]+)" not found/;
 
 const CheckError = ({
-  defaultError,
-  error,
-  setError,
+defaultError,
+error,
+setError,
 }: {
-  defaultError: ReactNode;
-  error?: ChatMessageError;
-  setError: (error?: ChatMessageError) => void;
+defaultError: ReactNode;
+error?: ChatMessageError;
+setError: (error?: ChatMessageError) => void;
 }) => {
-  const errorBody: OllamaErrorResponse = error?.body;
+  const errorBody: ollamaerrorresponse = error?.body;errorBody
 
   const errorMessage = errorBody.error?.message;
 
@@ -69,4 +69,4 @@ const CheckError = ({
   return defaultError;
 };
 
-export default CheckError;
+export default CheckError

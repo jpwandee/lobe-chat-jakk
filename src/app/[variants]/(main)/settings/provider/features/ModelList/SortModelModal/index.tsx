@@ -1,44 +1,44 @@
-import { Button, Modal, SortableList } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Modal, SortableList }
+import { App }
+import { createStyles }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra';
-import { AiProviderModelListItem } from '@/types/aiModel';
+import { useAiInfraStore }
+import { AiProviderModelListItem }
 
-import ListItem from './ListItem';
+import ListItem from './ListItem'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    height: 36px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
-    transition: background 0.2s ease-in-out;
+    height: 36px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
+    transition: background 0.2s ease-in-out
 
     &:hover {
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
   `,
-}));
+}))
 
-interface SortModelModalProps {
-  defaultItems: AiProviderModelListItem[];
+interface sortmodelmodalprops {
+  defaultItems: aiprovidermodellistitem[];
   onCancel: () => void;
   open: boolean;
 }
 const SortModelModal = memo<SortModelModalProps>(({ open, onCancel, defaultItems }) => {
-  const { t } = useTranslation('modelProvider');
-  const { styles } = useStyles();
+  const { t } = useTranslation('modelProvider')
+  const { styles } = useStyles()
   const [providerId, updateAiModelsSort] = useAiInfraStore((s) => [
     s.activeAiProvider,
     s.updateAiModelsSort,
-  ]);
-  const [loading, setLoading] = useState(false);
-  const { message } = App.useApp();
+  ])
+  const [loading, setLoading] = useState(false)
+  const { message } = App.useApp()
 
-  const [items, setItems] = useState(defaultItems);
+  const [items, setItems] = useState(defaultItems)
   return (
     <Modal
       allowFullscreen
@@ -52,7 +52,7 @@ const SortModelModal = memo<SortModelModalProps>(({ open, onCancel, defaultItems
         <SortableList
           items={items}
           onChange={async (items: AiProviderModelListItem[]) => {
-            setItems(items);
+            setItems(items)
           }}
           renderItem={(item: AiProviderModelListItem) => (
             <SortableList.Item
@@ -71,18 +71,18 @@ const SortModelModal = memo<SortModelModalProps>(({ open, onCancel, defaultItems
           block
           loading={loading}
           onClick={async () => {
-            if (!providerId) return;
+            if (!providerId) return
 
             const sortMap = items.map((item, index) => ({
               id: item.id,
               sort: index,
-            }));
+            }))
 
-            setLoading(true);
-            await updateAiModelsSort(providerId, sortMap);
-            setLoading(false);
-            message.success(t('sortModal.success'));
-            onCancel();
+            setLoading(true)
+            await updateAiModelsSort(providerId, sortMap)
+            setLoading(false)
+            message.success(t('sortModal.success'))
+            onCancel()
           }}
           type={'primary'}
         >
@@ -90,7 +90,7 @@ const SortModelModal = memo<SortModelModalProps>(({ open, onCancel, defaultItems
         </Button>
       </Flexbox>
     </Modal>
-  );
-});
+  )
+})
 
-export default SortModelModal;
+export default SortModelModal

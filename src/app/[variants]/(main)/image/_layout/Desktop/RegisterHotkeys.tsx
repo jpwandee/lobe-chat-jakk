@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { useRegisterImageHotkeys } from '@/hooks/useHotkeys/imageScope';
+import { useRegisterImageHotkeys }
 
-const RegisterHotkeys = () => {
-  useRegisterImageHotkeys();
-  return null;
-};
+const registerhotkeys = () => {
+  useRegisterImageHotkeys()
+  return null
+}
 
-export default RegisterHotkeys;
+export default RegisterHotkeys

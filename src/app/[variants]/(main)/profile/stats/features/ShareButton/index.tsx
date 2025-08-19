@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { Share2Icon } from 'lucide-react';
-import { memo, useState } from 'react';
+import { ActionIcon }
+import { Share2Icon }
+import { memo, useState }
 
-import { DESKTOP_HEADER_ICON_SIZE, MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
+import { DESKTOP_HEADER_ICON_SIZE, MOBILE_HEADER_ICON_SIZE }
 
-import ShareModal from './ShareModal';
+import ShareModal from './ShareModal'
 
-const ShareButton = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const [open, setOpen] = useState(false);
+const sharebutton = memo< { mobile?: boolean }>(({ mobile }) => {
+  const [open, setOpen] = useState(false)
 
   return (
     <>
@@ -20,7 +20,7 @@ const ShareButton = memo<{ mobile?: boolean }>(({ mobile }) => {
       />
       <ShareModal mobile={mobile} onCancel={() => setOpen(false)} open={open} />
     </>
-  );
-});
+  )
+})
 
-export default ShareButton;
+export default ShareButton

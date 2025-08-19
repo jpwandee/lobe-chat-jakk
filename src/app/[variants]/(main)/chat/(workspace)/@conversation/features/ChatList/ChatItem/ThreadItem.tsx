@@ -1,47 +1,47 @@
-import { Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import dayjs from 'dayjs';
-import { ChevronRight } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { createStyles }
+import dayjs from 'dayjs'
+import { ChevronRight }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
-import { ThreadItem } from '@/types/topic';
+import { useIsMobile }
+import { useChatStore }
+import { chatSelectors }
+import { ThreadItem } from '@/types/topic'
 
 const useStyles = createStyles(({ css, token }) => ({
   active: css`
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
   `,
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    padding-block: 4px;
-    padding-inline: 6px;
-    border-radius: 6px;
+    padding-block: 4px
+    padding-inline: 6px
+    border-radius: 6px
 
-    font-size: 12px;
+    font-size: 12px
 
     &:hover {
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
   `,
   extra: css`
-    color: ${token.colorTextSecondary};
+    color: ${token.colorTextSecondary}
   `,
-}));
+}))
 
 const Item = memo<ThreadItem>(({ id, title, lastActiveAt, sourceMessageId }) => {
-  const { t } = useTranslation('chat');
-  const openThreadInPortal = useChatStore((s) => s.openThreadInPortal);
-  const { styles, cx } = useStyles();
+  const { t } = useTranslation('chat')
+  const openThreadInPortal = useChatStore((s) => s.openThreadInPortal)
+  const { styles, cx } = useStyles()
   const [isActive, messageCount] = useChatStore((s) => [
     s.activeThreadId === id,
     chatSelectors.countMessagesByThreadId(id)(s),
-  ]);
-  const mobile = useIsMobile();
+  ])
+  const mobile = useIsMobile()
   return (
     <Flexbox
       align={'baseline'}
@@ -49,9 +49,9 @@ const Item = memo<ThreadItem>(({ id, title, lastActiveAt, sourceMessageId }) => 
       gap={8}
       horizontal
       onClick={() => {
-        if (isActive) return;
+        if (isActive) return
 
-        openThreadInPortal(id, sourceMessageId);
+        openThreadInPortal(id, sourceMessageId)
       }}
     >
       {title}
@@ -61,7 +61,7 @@ const Item = memo<ThreadItem>(({ id, title, lastActiveAt, sourceMessageId }) => 
         <Icon icon={ChevronRight} />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Item;
+export default Item

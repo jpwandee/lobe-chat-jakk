@@ -1,75 +1,76 @@
-import { ActionIcon, Select } from '@lobehub/ui';
-import { css, cx } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { RotateCwIcon } from 'lucide-react';
-import { ReactNode, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Select }
+import { css, cx }
+import isEqual from 'fast-deep-equal'
+import { RotateCwIcon }
+import { ReactNode, memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useUserStore } from '@/store/user';
-import { modelProviderSelectors } from '@/store/user/selectors';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { useUserStore }
+import { modelProviderSelectors }
+import { GlobalLLMProviderKey }
 
-import ModelConfigModal from './ModelConfigModal';
-import ModelFetcher from './ModelFetcher';
-import OptionRender from './Option';
+import ModelConfigModal from './ModelConfigModal'
+import ModelFetcher from './ModelFetcher'
+import OptionRender from './Option'
 
 const styles = {
-  divStyle: css`
-    position: relative;
+  position: relative;
+  position: absolute;
+  z-index: 20;
+  transform: translateY(-50%);
+  `,
+  reset: css`;
+  divStyle: css`;
+  inset-block-start: 50%;
+  inset-inline-end: 28px;
 
-    .ant-select-selector {
-      padding-inline-end: 50px !important;
-    }
+  .ant-select-selector {
+    padding-inline-end: 50px !important;
+  }
+
   `,
   popup: css`
-    &.ant-select-dropdown {
-      .ant-select-item-option-selected {
-        font-weight: normal;
-      }
+  &.ant-select-dropdown {
+    .ant-select-item-option-selected {
+      font-weight: normal;
     }
+  }
   `,
-  reset: css`
-    position: absolute;
-    z-index: 20;
-    inset-block-start: 50%;
-    inset-inline-end: 28px;
-    transform: translateY(-50%);
-  `,
-};
+}
 
-interface CustomModelSelectProps {
-  notFoundContent?: ReactNode;
+interface custommodelselectprops {
+  notFoundContent?: reactnode;
   placeholder?: string;
-  provider: GlobalLLMProviderKey;
+  provider: globalllmproviderkey;
   showAzureDeployName?: boolean;
   showModelFetcher?: boolean;
 }
 
 const ProviderModelListSelect = memo<CustomModelSelectProps>(
   ({ showModelFetcher = false, provider, showAzureDeployName, notFoundContent, placeholder }) => {
-    const { t } = useTranslation('common');
-    const { t: transSetting } = useTranslation('setting');
+    const { t } = useTranslation('common')
+    const { t: transSetting } = useTranslation('setting')
     const [setModelProviderConfig, updateEnabledModels] = useUserStore((s) => [
       s.setModelProviderConfig,
       s.updateEnabledModels,
-    ]);
+    ])
 
     const chatModelCards = useUserStore(
       modelProviderSelectors.getModelCardsById(provider),
       isEqual,
-    );
+    )
 
     const defaultEnableModel = useUserStore(
       modelProviderSelectors.getDefaultEnabledModelsById(provider),
       isEqual,
-    );
+    )
     const enabledModels = useUserStore(
       modelProviderSelectors.getEnableModelsById(provider),
       isEqual,
-    );
+    )
 
-    const showReset = !!enabledModels && !isEqual(defaultEnableModel, enabledModels);
+    const showReset = !!enabledModels && !isEqual(defaultEnableModel, enabledModels)
 
     return (
       <>
@@ -80,7 +81,7 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
                 <ActionIcon
                   icon={RotateCwIcon}
                   onClick={() => {
-                    setModelProviderConfig(provider, { enabledModels: null });
+                    setModelProviderConfig(provider, { enabledModels: null })
                   }}
                   size={'small'}
                   title={t('reset')}
@@ -92,7 +93,7 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
               mode="tags"
               notFoundContent={notFoundContent}
               onChange={(value, options) => {
-                updateEnabledModels(provider, value, options as any[]);
+                updateEnabledModels(provider, value, options as any[])
               }}
               optionFilterProp="label"
               optionRender={({ label, value }) => {
@@ -105,7 +106,7 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
                       isAzure={showAzureDeployName}
                       provider={provider}
                     />
-                  );
+                  )
 
                 if (enabledModels?.some((m) => value === m)) {
                   return (
@@ -116,7 +117,7 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
                       provider={provider}
                       removed
                     />
-                  );
+                  )
                 }
 
                 // model is defined by user in client
@@ -124,7 +125,7 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
                   <Flexbox align={'center'} gap={8} horizontal>
                     {transSetting('llm.customModelCards.addNew', { id: value })}
                   </Flexbox>
-                );
+                )
               }}
               options={chatModelCards.map((model) => ({
                 label: model.displayName || model.id,
@@ -139,8 +140,8 @@ const ProviderModelListSelect = memo<CustomModelSelectProps>(
         </Flexbox>
         <ModelConfigModal provider={provider} showAzureDeployName={showAzureDeployName} />
       </>
-    );
+    )
   },
-);
+)
 
-export default ProviderModelListSelect;
+export default ProviderModelListSelect

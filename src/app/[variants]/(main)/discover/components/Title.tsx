@@ -1,53 +1,53 @@
-'use client';
+'use client'
 
-import { Button, Icon, Tag } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode, memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { Button, Icon, Tag }
+import { createStyles }
+import { ChevronRight }
+import Link from 'next/link'
+import { ReactNode, memo }
+import { Flexbox, FlexboxProps }
 
 const useStyles = createStyles(({ css, responsive, token }) => ({
   more: css`
-    display: flex;
-    align-items: center;
-    color: ${token.colorTextSecondary};
+    display: flex
+    align-items: center
+    color: ${token.colorTextSecondary}
   `,
   tag: css`
-    flex: none;
+    flex: none
 
-    padding-block: 0.1em;
-    padding-inline: 0.3em;
-    border-radius: ${token.borderRadius}px;
+    padding-block: 0.1em
+    padding-inline: 0.3em
+    border-radius: ${token.borderRadius}px
 
-    font-size: 18px;
-    font-weight: 500;
-    color: ${token.colorTextSecondary};
+    font-size: 18px
+    font-weight: 500
+    color: ${token.colorTextSecondary}
 
-    background: ${token.colorFillSecondary};
+    background: ${token.colorFillSecondary}
     ${responsive.mobile} {
-      font-size: 14px;
+      font-size: 14px
     }
   `,
   title: css`
-    margin-block-start: 0.5em;
-    font-size: 24px;
-    font-weight: 600;
+    margin-block-start: 0.5em
+    font-size: 24px
+    font-weight: 600
     ${responsive.mobile} {
-      font-size: 18px;
+      font-size: 18px
     }
   `,
-}));
+}))
 
-interface TitleProps extends FlexboxProps {
-  more?: ReactNode;
+interface titleprops extends flexboxprops {
+  more?: reactnode;
   moreLink?: string;
-  tag?: ReactNode;
+  tag?: reactnode;
 }
 
 const Title = memo<TitleProps>(({ tag, children, moreLink, more }) => {
-  const { styles } = useStyles();
-  const title = <h2 className={styles.title}>{children}</h2>;
+  const { styles } = useStyles()
+  const title = <h2 className={styles.title}>{children}</h2>
   return (
     <Flexbox align={'center'} gap={16} horizontal justify={'space-between'} width={'100%'}>
       {tag ? (
@@ -67,7 +67,7 @@ const Title = memo<TitleProps>(({ tag, children, moreLink, more }) => {
         </Link>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Title;
+export default Title

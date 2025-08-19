@@ -1,41 +1,41 @@
-import { Button, Modal, SortableList } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Modal, SortableList }
+import { App }
+import { createStyles }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra';
-import { AiProviderListItem } from '@/types/aiProvider';
+import { useAiInfraStore }
+import { AiProviderListItem }
 
-import GroupItem from './GroupItem';
+import GroupItem from './GroupItem'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    height: 36px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
-    transition: background 0.2s ease-in-out;
+    height: 36px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
+    transition: background 0.2s ease-in-out
 
     &:hover {
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
   `,
-}));
+}))
 
-interface ConfigGroupModalProps {
-  defaultItems: AiProviderListItem[];
+interface configgroupmodalprops {
+  defaultItems: aiproviderlistitem[];
   onCancel: () => void;
   open: boolean;
 }
 const ConfigGroupModal = memo<ConfigGroupModalProps>(({ open, onCancel, defaultItems }) => {
-  const { t } = useTranslation('modelProvider');
-  const { styles } = useStyles();
-  const updateAiProviderSort = useAiInfraStore((s) => s.updateAiProviderSort);
-  const [loading, setLoading] = useState(false);
-  const { message } = App.useApp();
+  const { t } = useTranslation('modelProvider')
+  const { styles } = useStyles()
+  const updateAiProviderSort = useAiInfraStore((s) => s.updateAiProviderSort)
+  const [loading, setLoading] = useState(false)
+  const { message } = App.useApp()
 
-  const [items, setItems] = useState(defaultItems);
+  const [items, setItems] = useState(defaultItems)
   return (
     <Modal
       allowFullscreen
@@ -49,7 +49,7 @@ const ConfigGroupModal = memo<ConfigGroupModalProps>(({ open, onCancel, defaultI
         <SortableList
           items={items}
           onChange={async (items: AiProviderListItem[]) => {
-            setItems(items);
+            setItems(items)
           }}
           renderItem={(item: AiProviderListItem) => (
             <SortableList.Item
@@ -71,12 +71,12 @@ const ConfigGroupModal = memo<ConfigGroupModalProps>(({ open, onCancel, defaultI
             const sortMap = items.map((item, index) => ({
               id: item.id,
               sort: index,
-            }));
-            setLoading(true);
-            await updateAiProviderSort(sortMap);
-            setLoading(false);
-            message.success(t('sortModal.success'));
-            onCancel();
+            }))
+            setLoading(true)
+            await updateAiProviderSort(sortMap)
+            setLoading(false)
+            message.success(t('sortModal.success'))
+            onCancel()
           }}
           type={'primary'}
         >
@@ -84,7 +84,7 @@ const ConfigGroupModal = memo<ConfigGroupModalProps>(({ open, onCancel, defaultI
         </Button>
       </Flexbox>
     </Modal>
-  );
-});
+  )
+})
 
-export default ConfigGroupModal;
+export default ConfigGroupModal

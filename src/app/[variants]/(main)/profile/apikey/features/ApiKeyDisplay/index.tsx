@@ -1,32 +1,33 @@
-import { CopyOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button } from '@lobehub/ui';
-import { App, Flex } from 'antd';
-import { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { CopyOutlined, EyeInvisibleOutlined, EyeOutlined }
+import { Button }
+import { App, Flex }
+import { FC, useState }
+import { useTranslation }
 
-interface ApiKeyDisplayProps {
+interface apikeydisplayprops {
   apiKey?: string;
 }
 
 const ApiKeyDisplay: FC<ApiKeyDisplayProps> = ({ apiKey }) => {
-  const { t } = useTranslation('auth');
-  const [isVisible, setIsVisible] = useState(false);
-  const { message } = App.useApp();
+  const { t }
+  const [isVisible, setIsVisible] = useState(false)
+  const { message }
 
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
+  const togglevisibility = () => {
+    setIsVisible(!isVisible)
+  }
 
-  const handleCopy = async () => {
-    if (!apiKey) return;
-
+  const handlecopy = async () => {
+    if (!apiKey) return
     try {
-      await navigator.clipboard.writeText(apiKey);
-      message.success(t('apikey.display.copySuccess'));
-    } catch {
-      message.error(t('apikey.display.copyError'));
+      await navigator.clipboard.writeText(apiKey)
+      message.success(t('apikey.display.copySuccess'))
     }
-  };
+
+    catch {
+      message.error(t('apikey.display.copyError'))
+    }
+  }
 
   const displayValue = apiKey && (isVisible ? apiKey : `lb-${'*'.repeat(apiKey.length - 2)}`);
 
@@ -57,4 +58,4 @@ const ApiKeyDisplay: FC<ApiKeyDisplayProps> = ({ apiKey }) => {
   );
 };
 
-export default ApiKeyDisplay;
+export default ApiKeyDisplay

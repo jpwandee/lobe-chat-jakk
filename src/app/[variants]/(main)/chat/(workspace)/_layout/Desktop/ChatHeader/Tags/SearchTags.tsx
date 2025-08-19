@@ -1,11 +1,11 @@
-import { Icon, Tag } from '@lobehub/ui';
-import { Globe } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon, Tag }
+import { Globe }
+import { memo }
+import { useTranslation }
+import { Flexbox } from 'react-layout-kit'
 
 const SearchTag = memo(() => {
-  const { t } = useTranslation('chat');
+  const { t } = useTranslation('chat')
 
   return (
     <Flexbox height={22}>
@@ -14,7 +14,7 @@ const SearchTag = memo(() => {
         <div>{t('search.title')}</div>
       </Tag>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default SearchTag;
+export default SearchTag

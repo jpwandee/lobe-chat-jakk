@@ -1,6 +1,6 @@
-import { DatabaseLoadingState } from '@/types/clientDB';
+import { DatabaseLoadingState }
 
-export enum AppLoadingStage {
+export enum apploadingstage {
   GoToChat = 'goToChat',
   Idle = 'appIdle',
   InitAuth = 'initAuth',
@@ -14,7 +14,7 @@ export const SERVER_LOADING_STAGES = [
   AppLoadingStage.InitAuth,
   AppLoadingStage.InitUser,
   AppLoadingStage.GoToChat,
-];
+]
 
 export const CLIENT_LOADING_STAGES = [
   AppLoadingStage.Idle,
@@ -27,4 +27,4 @@ export const CLIENT_LOADING_STAGES = [
   DatabaseLoadingState.Ready,
   AppLoadingStage.InitUser,
   AppLoadingStage.GoToChat,
-] as string[];
+] as string[]

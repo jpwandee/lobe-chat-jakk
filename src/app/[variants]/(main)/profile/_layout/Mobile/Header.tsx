@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ChatHeader }
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useActiveProfileKey } from '@/hooks/useActiveTabKey';
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { useActiveProfileKey }
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
-import ShareButton from '../../stats/features/ShareButton';
+import ShareButton from '../../stats/features/ShareButton'
 
 const Header = memo(() => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation('auth')
 
-  const router = useRouter();
-  const activeSettingsKey = useActiveProfileKey();
-  const isStats = activeSettingsKey === 'stats';
+  const router = useRouter()
+  const activeSettingsKey = useActiveProfileKey()
+  const isStats = activeSettingsKey === 'stats'
 
   const handleBackClick = () => {
-    router.push('/me/profile');
-  };
+    router.push('/me/profile')
+  }
 
   return (
     <ChatHeader
@@ -38,7 +38,7 @@ const Header = memo(() => {
       showBackButton
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

@@ -1,28 +1,28 @@
-import { Block, Button, Tag } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Block, Button, Tag }
+import { createStyles }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { ProductLogo } from '@/components/Branding';
-import { BRANDING_NAME } from '@/const/branding';
-import { CHANGELOG_URL, MANUAL_UPGRADE_URL, OFFICIAL_SITE } from '@/const/url';
-import { CURRENT_VERSION } from '@/const/version';
-import { useNewVersion } from '@/features/User/UserPanel/useNewVersion';
-import { useGlobalStore } from '@/store/global';
+import { ProductLogo }
+import { BRANDING_NAME }
+import { CHANGELOG_URL, MANUAL_UPGRADE_URL, OFFICIAL_SITE }
+import { CURRENT_VERSION }
+import { useNewVersion }
+import { useGlobalStore }
 
 const useStyles = createStyles(({ css, token }) => ({
   logo: css`
-    border-radius: ${token.borderRadiusLG * 2}px;
+    border-radius: ${token.borderRadiusLG * 2}px
   `,
-}));
+}))
 
-const Version = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const hasNewVersion = useNewVersion();
-  const [latestVersion] = useGlobalStore((s) => [s.latestVersion]);
-  const { t } = useTranslation('common');
-  const { styles } = useStyles();
+const version = memo< { mobile?: boolean }>(({ mobile }) => {
+  const hasNewVersion = useNewVersion()
+  const [latestVersion] = useGlobalStore((s) => [s.latestVersion])
+  const { t } = useTranslation('common')
+  const { styles } = useStyles()
 
   return (
     <Flexbox
@@ -70,7 +70,7 @@ const Version = memo<{ mobile?: boolean }>(({ mobile }) => {
         )}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Version;
+export default Version

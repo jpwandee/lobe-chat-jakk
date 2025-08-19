@@ -1,82 +1,82 @@
-import { Avatar, Tooltip } from '@lobehub/ui';
-import { Divider } from 'antd';
-import { createStyles } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { Flexbox } from 'react-layout-kit';
+import { Avatar, Tooltip }
+import { Divider }
+import { createStyles }
+import isEqual from 'fast-deep-equal'
+import { Flexbox }
 
-import { usePinnedAgentState } from '@/hooks/usePinnedAgentState';
-import { useSwitchSession } from '@/hooks/useSwitchSession';
-import { useSessionStore } from '@/store/session';
-import { sessionHelpers } from '@/store/session/helpers';
-import { sessionSelectors } from '@/store/session/selectors';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
-import { HotkeyEnum, KeyEnum } from '@/types/hotkey';
+import { usePinnedAgentState }
+import { useSwitchSession }
+import { useSessionStore }
+import { sessionHelpers }
+import { sessionSelectors }
+import { useUserStore }
+import { settingsSelectors }
+import { HotkeyEnum, KeyEnum }
 
-const HANDLER_WIDTH = 4;
+const HANDLER_WIDTH = 4
 
 const useStyles = createStyles(({ css, token }) => ({
   ink: css`
     &::before {
-      content: '';
+      content: ''
 
-      position: absolute;
-      inset-block-start: 50%;
-      inset-inline: -9px;
-      transform: translateY(-50%);
+      position: absolute
+      inset-block-start: 50%
+      inset-inline: -9px
+      transform: translateY(-50%)
 
-      width: 0;
-      height: 8px;
-      border-start-end-radius: ${HANDLER_WIDTH}px;
-      border-end-end-radius: ${HANDLER_WIDTH}px;
+      width: 0
+      height: 8px
+      border-start-end-radius: ${HANDLER_WIDTH}px
+      border-end-end-radius: ${HANDLER_WIDTH}px
 
-      opacity: 0;
-      background: ${token.colorPrimary};
+      opacity: 0
+      background: ${token.colorPrimary}
 
       transition:
         height 150ms ${token.motionEaseInOut},
         width 150ms ${token.motionEaseInOut},
-        opacity 200ms ${token.motionEaseInOut};
+        opacity 200ms ${token.motionEaseInOut}
     }
 
     &:hover {
       &::before {
-        width: ${HANDLER_WIDTH}px;
-        height: 24px;
-        opacity: 1;
+        width: ${HANDLER_WIDTH}px
+        height: 24px
+        opacity: 1
       }
     }
   `,
   inkActive: css`
     &::before {
-      width: ${HANDLER_WIDTH}px;
-      height: 40px;
-      opacity: 1;
+      width: ${HANDLER_WIDTH}px
+      height: 40px
+      opacity: 1
     }
 
     &:hover {
       &::before {
-        width: ${HANDLER_WIDTH}px;
-        height: 40px;
-        opacity: 1;
+        width: ${HANDLER_WIDTH}px
+        height: 40px
+        opacity: 1
       }
     }
   `,
-}));
+}))
 
-const PinList = () => {
-  const { styles, cx } = useStyles();
-  const list = useSessionStore(sessionSelectors.pinnedSessions, isEqual);
-  const [activeId] = useSessionStore((s) => [s.activeId]);
-  const switchSession = useSwitchSession();
-  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.SwitchAgent));
-  const hasList = list.length > 0;
-  const [isPinned, { pinAgent }] = usePinnedAgentState();
+const pinlist = () => {
+  const { styles, cx }
+  const list = useSessionStore(sessionSelectors.pinnedSessions, isEqual)
+  const [activeId] = useSessionStore((s) => [s.activeId])
+  const switchSession = useSwitchSession()
+  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.SwitchAgent))
+  const hasList = list.length > 0
+  const [isPinned, { pinAgent }] = usePinnedAgentState()
 
-  const switchAgent = (id: string) => {
-    switchSession(id);
-    pinAgent();
-  };
+  const switchagent = (id: string) => {
+    switchSession(id)
+    pinAgent()
+  }
 
   return (
     hasList && (
@@ -100,7 +100,7 @@ const PinList = () => {
                     avatar={sessionHelpers.getAvatar(item.meta)}
                     background={item.meta.backgroundColor}
                     onClick={() => {
-                      switchAgent(item.id);
+                      switchAgent(item.id)
                     }}
                     size={40}
                   />
@@ -111,7 +111,7 @@ const PinList = () => {
         </Flexbox>
       </>
     )
-  );
-};
+  )
+}
 
-export default PinList;
+export default PinList

@@ -1,24 +1,24 @@
-import { Block, HighlighterProps } from '@lobehub/ui';
-import { ChatItem } from '@lobehub/ui/chat';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
+import { Block, HighlighterProps }
+import { ChatItem }
+import { useTheme }
+import { memo }
 
-import { DEFAULT_INBOX_AVATAR } from '@/const/meta';
+import { DEFAULT_INBOX_AVATAR }
 
 const code = `
 \`\`\`ts
-const person = { name: "Alice", age: 30 };
-type PersonType = typeof person;  // { name: string; age: number }
+const person = { age: 30; name: 'Alice', }
+type PersonType = typeof person;  // { age: number; name: string }
 
 // 'satisfies' to ensure a type matches but allows more specific types
 type Animal = { name: string };
-const dog = { name: "Buddy", breed: "Golden Retriever" } satisfies Animal;
+const dog = { breed: 'Golden Retriever'; name: 'Buddy', }
 \`\`\`
-`;
+`
 
-const HighlighterPreview = memo<{ theme?: HighlighterProps['theme'] }>(
+const highlighterpreview = memo< { theme?: highlighterprops['theme'] }>(
   ({ theme }) => {
-    const token = useTheme();
+    const token = useTheme()
 
     return (
       <Block
@@ -45,11 +45,11 @@ const HighlighterPreview = memo<{ theme?: HighlighterProps['theme'] }>(
           message={code}
         />
       </Block>
-    );
+    )
   },
   (prevProps, nextProps) => {
-    return prevProps.theme === nextProps.theme;
+    return prevProps.theme === nextProps.theme
   },
-);
+)
 
-export default HighlighterPreview;
+export default HighlighterPreview

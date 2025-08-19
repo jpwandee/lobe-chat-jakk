@@ -1,34 +1,34 @@
-import { Button, Modal } from '@lobehub/ui';
-import { FormInstance } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { memo, use, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Modal }
+import { FormInstance }
+import isEqual from 'fast-deep-equal'
+import { memo, use, useState }
+import { useTranslation }
 
-import { aiModelSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { aiModelSelectors, useAiInfraStore }
 
-import ModelConfigForm from '../CreateNewModelModal/Form';
-import { ProviderSettingsContext } from '../ProviderSettingsContext';
+import ModelConfigForm from '../CreateNewModelModal/Form'
+import { ProviderSettingsContext }
 
-interface ModelConfigModalProps {
+interface modelconfigmodalprops {
   id: string;
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
 const ModelConfigModal = memo<ModelConfigModalProps>(({ id, open, setOpen }) => {
-  const { t } = useTranslation(['common', 'setting']);
-  const [formInstance, setFormInstance] = useState<FormInstance>();
-  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(['common', 'setting'])
+  const [formInstance, setFormInstance] = useState<FormInstance>()
+  const [loading, setLoading] = useState(false)
   const [editingProvider, updateAiModelsConfig] = useAiInfraStore((s) => [
     s.activeAiProvider!,
     s.updateAiModelsConfig,
-  ]);
-  const model = useAiInfraStore(aiModelSelectors.getAiModelById(id), isEqual);
+  ])
+  const model = useAiInfraStore(aiModelSelectors.getAiModelById(id), isEqual)
 
   const closeModal = () => {
-    setOpen(false);
-  };
-  const { showDeployName } = use(ProviderSettingsContext);
+    setOpen(false)
+  }
+  const { showDeployName } = use(ProviderSettingsContext)
 
   return (
     <Modal
@@ -41,14 +41,14 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ id, open, setOpen }) => 
           key="ok"
           loading={loading}
           onClick={async () => {
-            if (!editingProvider || !id || !formInstance) return;
-            const data = formInstance.getFieldsValue();
+            if (!editingProvider || !id || !formInstance) return
+            const data = formInstance.getFieldsValue()
 
-            setLoading(true);
-            await updateAiModelsConfig(id, editingProvider, data);
-            setLoading(false);
+            setLoading(true)
+            await updateAiModelsConfig(id, editingProvider, data)
+            setLoading(false)
 
-            closeModal();
+            closeModal()
           }}
           style={{ marginInlineStart: '16px' }}
           type="primary"
@@ -70,6 +70,6 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ id, open, setOpen }) => 
         type={model?.type}
       />
     </Modal>
-  );
-});
-export default ModelConfigModal;
+  )
+})
+export default ModelConfigModal

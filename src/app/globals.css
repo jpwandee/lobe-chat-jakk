@@ -1,0 +1,15 @@
+/* src/app/globals.css */
+:root {
+  --app-bg: #fff;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--app-bg);
+}
+
+* {
+  box-sizing: border-box;
+}

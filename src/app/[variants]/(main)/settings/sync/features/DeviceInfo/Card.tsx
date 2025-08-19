@@ -1,27 +1,27 @@
-import { createStyles } from 'antd-style';
-import { ReactNode, memo } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { ReactNode, memo }
+import { Center, Flexbox }
 
 const useStyles = createStyles(({ css, token, responsive }) => ({
   container: css`
-    border-radius: ${token.borderRadius}px;
-    background: ${token.colorFillTertiary};
+    border-radius: ${token.borderRadius}px
+    background: ${token.colorFillTertiary}
 
     .${responsive.mobile} {
-      width: 100%;
+      width: 100%
     }
   `,
   icon: css`
-    width: 24px;
-    height: 24px;
+    width: 24px
+    height: 24px
   `,
   title: css`
-    font-size: 16px;
+    font-size: 16px
   `,
-}));
+}))
 
-const Card = memo<{ icon: ReactNode; title: string }>(({ title, icon }) => {
-  const { styles } = useStyles();
+const card = memo< { icon: reactnode; title: string }>(({ title, icon }) => {
+  const { styles } = useStyles()
 
   return (
     <Flexbox
@@ -36,7 +36,7 @@ const Card = memo<{ icon: ReactNode; title: string }>(({ title, icon }) => {
       <Center className={styles.icon}>{icon}</Center>
       <div className={styles.title}>{title}</div>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Card;
+export default Card

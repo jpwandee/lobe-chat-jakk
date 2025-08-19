@@ -1,38 +1,38 @@
-import { Suspense } from 'react';
+import { Suspense }
 
-import StructuredData from '@/components/StructuredData';
-import { serverFeatureFlags } from '@/config/featureFlags';
-import { BRANDING_NAME } from '@/const/branding';
-import { isDesktop } from '@/const/version';
-import { ldModule } from '@/server/ld';
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import StructuredData from '@/components/StructuredData'
+import { serverFeatureFlags }
+import { BRANDING_NAME }
+import { isDesktop }
+import { ldModule }
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import PageTitle from '../features/PageTitle';
-import Changelog from './features/ChangelogModal';
-import TelemetryNotification from './features/TelemetryNotification';
+import PageTitle from '../features/PageTitle'
+import Changelog from './features/ChangelogModal'
+import TelemetryNotification from './features/TelemetryNotification'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('metadata', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('metadata', locale)
   return metadataModule.generate({
     description: t('chat.description', { appName: BRANDING_NAME }),
     title: t('chat.title', { appName: BRANDING_NAME }),
     url: '/chat',
-  });
-};
+  })
+}
 
-const Page = async (props: DynamicLayoutProps) => {
-  const { hideDocs, showChangelog } = serverFeatureFlags();
-  const { isMobile, locale } = await RouteVariants.getVariantsFromProps(props);
-  const { t } = await translation('metadata', locale);
+const page = async (props: DynamicLayoutProps) => {
+  const { hideDocs, showChangelog }
+  const { isMobile, locale }
+  const { t } = await translation('metadata', locale)
   const ld = ldModule.generate({
     description: t('chat.description', { appName: BRANDING_NAME }),
     title: t('chat.title', { appName: BRANDING_NAME }),
     url: '/chat',
-  });
+  })
 
   return (
     <>
@@ -45,9 +45,9 @@ const Page = async (props: DynamicLayoutProps) => {
         </Suspense>
       )}
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'Chat';
+Page.displayName = 'Chat'
 
-export default Page;
+export default Page

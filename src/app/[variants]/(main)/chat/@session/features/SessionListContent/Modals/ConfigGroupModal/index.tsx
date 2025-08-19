@@ -1,39 +1,39 @@
-import { Button, Modal, type ModalProps, SortableList } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { Plus } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Modal, type ModalProps, SortableList }
+import { createStyles }
+import isEqual from 'fast-deep-equal'
+import { Plus }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useSessionStore } from '@/store/session';
-import { sessionGroupSelectors } from '@/store/session/selectors';
-import { SessionGroupItem } from '@/types/session';
+import { useSessionStore }
+import { sessionGroupSelectors }
+import { SessionGroupItem } from '@/types/session'
 
-import GroupItem from './GroupItem';
+import GroupItem from './GroupItem'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    height: 36px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
-    transition: background 0.2s ease-in-out;
+    height: 36px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
+    transition: background 0.2s ease-in-out
 
     &:hover {
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     }
   `,
-}));
+}))
 
 const ConfigGroupModal = memo<ModalProps>(({ open, onCancel }) => {
-  const { t } = useTranslation('chat');
-  const { styles } = useStyles();
-  const sessionGroupItems = useSessionStore(sessionGroupSelectors.sessionGroupItems, isEqual);
+  const { t } = useTranslation('chat')
+  const { styles } = useStyles()
+  const sessionGroupItems = useSessionStore(sessionGroupSelectors.sessionGroupItems, isEqual)
   const [addSessionGroup, updateSessionGroupSort] = useSessionStore((s) => [
     s.addSessionGroup,
     s.updateSessionGroupSort,
-  ]);
-  const [loading, setLoading] = useState(false);
+  ])
+  const [loading, setLoading] = useState(false)
 
   return (
     <Modal
@@ -48,7 +48,7 @@ const ConfigGroupModal = memo<ModalProps>(({ open, onCancel }) => {
         <SortableList
           items={sessionGroupItems}
           onChange={(items: SessionGroupItem[]) => {
-            updateSessionGroupSort(items);
+            updateSessionGroupSort(items)
           }}
           renderItem={(item: SessionGroupItem) => (
             <SortableList.Item
@@ -68,16 +68,16 @@ const ConfigGroupModal = memo<ModalProps>(({ open, onCancel }) => {
           icon={Plus}
           loading={loading}
           onClick={async () => {
-            setLoading(true);
-            await addSessionGroup(t('sessionGroup.newGroup'));
-            setLoading(false);
+            setLoading(true)
+            await addSessionGroup(t('sessionGroup.newGroup'))
+            setLoading(false)
           }}
         >
           {t('sessionGroup.createGroup')}
         </Button>
       </Flexbox>
     </Modal>
-  );
-});
+  )
+})
 
-export default ConfigGroupModal;
+export default ConfigGroupModal

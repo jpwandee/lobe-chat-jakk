@@ -1,37 +1,37 @@
-import dynamic from 'next/dynamic';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import dynamic from 'next/dynamic'
+import react, { memo }
+import { useTranslation }
 
-import FullscreenLoading from '@/components/Loading/FullscreenLoading';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { DatabaseLoadingState } from '@/types/clientDB';
+import FullscreenLoading from '@/components/Loading/FullscreenLoading'
+import { useGlobalStore }
+import { systemStatusSelectors }
+import { DatabaseLoadingState }
 
-import { CLIENT_LOADING_STAGES } from '../stage';
+import { CLIENT_LOADING_STAGES }
 
-const InitError = dynamic(() => import('./Error'), { ssr: false });
+const InitError = dynamic(() => import('./Error'), { ssr: false })
 
-interface InitProps {
+interface initprops {
   setActiveStage: (value: string) => void;
 }
 
 const Init = memo<InitProps>(({ setActiveStage }) => {
-  const useInitClientDB = useGlobalStore((s) => s.useInitClientDB);
+  const useInitClientDB = useGlobalStore((s) => s.useInitClientDB)
 
-  useInitClientDB({ onStateChange: setActiveStage });
+  useInitClientDB({ onStateChange: setActiveStage })
 
-  return null;
-});
+  return null
+})
 
-interface ContentProps {
+interface contentprops {
   loadingStage: string;
   setActiveStage: (value: string) => void;
 }
 
 const Content = memo<ContentProps>(({ loadingStage, setActiveStage }) => {
-  const { t } = useTranslation('common');
-  const isPgliteNotInited = useGlobalStore(systemStatusSelectors.isPgliteNotInited);
-  const isError = useGlobalStore((s) => s.initClientDBStage === DatabaseLoadingState.Error);
+  const { t } = useTranslation('common')
+  const isPgliteNotInited = useGlobalStore(systemStatusSelectors.isPgliteNotInited)
+  const isError = useGlobalStore((s) => s.initClientDBStage === DatabaseLoadingState.Error)
 
   return (
     <>
@@ -42,7 +42,7 @@ const Content = memo<ContentProps>(({ loadingStage, setActiveStage }) => {
         stages={CLIENT_LOADING_STAGES.map((key) => t(`appLoading.${key}` as any))}
       />
     </>
-  );
-});
+  )
+})
 
-export default Content;
+export default Content

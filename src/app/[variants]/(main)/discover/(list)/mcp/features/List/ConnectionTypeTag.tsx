@@ -1,17 +1,17 @@
-import { Icon, Tooltip } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { Blend, Cloud, LaptopMinimalIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon, Tooltip }
+import { useTheme }
+import { Blend, Cloud, LaptopMinimalIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-interface ConnectionTypeTagProps {
+interface connectiontypetagprops {
   type?: 'hybrid' | 'local' | 'remote';
 }
 
 const ConnectionTypeTag = memo<ConnectionTypeTagProps>(({ type }) => {
-  const { t } = useTranslation('discover');
-  const theme = useTheme();
+  const { t } = useTranslation('discover')
+  const theme = useTheme()
 
   const icons = {
     hybrid: {
@@ -26,9 +26,9 @@ const ConnectionTypeTag = memo<ConnectionTypeTagProps>(({ type }) => {
       color: theme.colorInfo,
       icon: Cloud,
     },
-  };
+  }
 
-  if (!type || !icons[type]) return null;
+  if (!type || !icons[type]) return null
 
   return (
     <Tooltip title={t(`mcp.details.connectionType.${type}.desc`)}>
@@ -45,7 +45,7 @@ const ConnectionTypeTag = memo<ConnectionTypeTagProps>(({ type }) => {
         {t(`mcp.details.connectionType.${type}.title`)}
       </Flexbox>
     </Tooltip>
-  );
-});
+  )
+})
 
-export default ConnectionTypeTag;
+export default ConnectionTypeTag

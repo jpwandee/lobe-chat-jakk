@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { Button, TextArea } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { Sparkles } from 'lucide-react';
-import type { KeyboardEvent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, TextArea }
+import { createStyles }
+import { Sparkles }
+import type { KeyboardEvent }
+import { useTranslation }
+import { Flexbox }
 
-import { loginRequired } from '@/components/Error/loginRequiredNotification';
-import { useImageStore } from '@/store/image';
-import { createImageSelectors } from '@/store/image/selectors';
-import { useGenerationConfigParam } from '@/store/image/slices/generationConfig/hooks';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/slices/auth/selectors';
+import { loginRequired }
+import { useImageStore }
+import { createImageSelectors }
+import { useGenerationConfigParam }
+import { useUserStore }
+import { authSelectors }
 
-import PromptTitle from './Title';
+import PromptTitle from './Title'
 
-interface PromptInputProps {
+interface promptinputprops {
   disableAnimation?: boolean;
   showTitle?: boolean;
 }
@@ -44,30 +44,30 @@ const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 }));
 
 const PromptInput = ({ showTitle = false }: PromptInputProps) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('image');
-  const { value, setValue } = useGenerationConfigParam('prompt');
-  const isCreating = useImageStore(createImageSelectors.isCreating);
-  const createImage = useImageStore((s) => s.createImage);
-  const isLogin = useUserStore(authSelectors.isLogin);
+  const { styles }
+  const { t }
+  const { value, setValue }
+  const isCreating = useImageStore(createImageSelectors.isCreating)
+  const createImage = useImageStore((s) => s.createImage)
+  const isLogin = useUserStore(authSelectors.isLogin)
 
-  const handleGenerate = async () => {
+  const handlegenerate = async () => {
     if (!isLogin) {
       loginRequired.redirect({ timeout: 2000 });
       return;
     }
 
-    await createImage();
-  };
+    await createImage()
+  }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const handlekeydown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       if (!isCreating && value.trim()) {
         handleGenerate();
       }
     }
-  };
+  }
 
   return (
     <Flexbox
@@ -120,4 +120,4 @@ const PromptInput = ({ showTitle = false }: PromptInputProps) => {
   );
 };
 
-export default PromptInput;
+export default PromptInput

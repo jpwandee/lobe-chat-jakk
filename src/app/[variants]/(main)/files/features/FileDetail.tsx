@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { Icon, Tag } from '@lobehub/ui';
-import { Descriptions, Divider } from 'antd';
-import { useTheme } from 'antd-style';
-import dayjs from 'dayjs';
-import { BoltIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon, Tag }
+import { Descriptions, Divider }
+import { useTheme }
+import dayjs from 'dayjs'
+import { BoltIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { FileListItem } from '@/types/files';
-import { formatSize } from '@/utils/format';
+import { FileListItem }
+import { formatSize } from '@/utils/format'
 
-export const DETAIL_PANEL_WIDTH = 300;
+export const DETAIL_PANEL_WIDTH = 300
 
 const FileDetail = memo<FileListItem>((props) => {
-  const { name, embeddingStatus, size, createdAt, updatedAt, chunkCount } = props || {};
-  const { t } = useTranslation('file');
-  const theme = useTheme();
+  const { name, embeddingStatus, size, createdAt, updatedAt, chunkCount } = props || {}
+  const { t } = useTranslation('file')
+  const theme = useTheme()
 
-  if (!props) return null;
+  if (!props) return null
 
   const items = [
     { children: name, key: 'name', label: t('detail.basic.filename') },
@@ -40,7 +40,7 @@ const FileDetail = memo<FileListItem>((props) => {
       key: 'updatedAt',
       label: t('detail.basic.updatedAt'),
     },
-  ];
+  ]
 
   const dataItems = [
     {
@@ -62,7 +62,7 @@ const FileDetail = memo<FileListItem>((props) => {
       key: 'embeddingStatus',
       label: t('detail.data.embeddingStatus'),
     },
-  ];
+  ]
 
   return (
     <Flexbox
@@ -87,7 +87,7 @@ const FileDetail = memo<FileListItem>((props) => {
         size={'small'}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default FileDetail;
+export default FileDetail

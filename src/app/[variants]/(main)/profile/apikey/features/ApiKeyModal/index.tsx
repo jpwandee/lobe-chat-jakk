@@ -1,22 +1,22 @@
-import { FormModal, Input } from '@lobehub/ui';
-import { Dayjs } from 'dayjs';
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FormModal, Input }
+import { Dayjs }
+import { FC }
+import { useTranslation }
 
-import { CreateApiKeyParams } from '@/types/apiKey';
+import { CreateApiKeyParams }
 
-import ApiKeyDatePicker from '../ApiKeyDatePicker';
+import ApiKeyDatePicker from '../ApiKeyDatePicker'
 
-interface ApiKeyModalProps {
+interface apikeymodalprops {
   onCancel: () => void;
-  onOk: (values: CreateApiKeyParams) => void;
+  onOk: (values: createapikeyparams) => void;
   open: boolean;
   submitLoading?: boolean;
 }
 
-type FormValues = Omit<CreateApiKeyParams, 'expiresAt'> & {
-  expiresAt: Dayjs | null;
-};
+type formvalues = omit<createapikeyparams, 'expiresAt'> & {
+  expiresAt: dayjs | null;
+}
 
 const ApiKeyModal: FC<ApiKeyModalProps> = ({ open, onCancel, onOk, submitLoading }) => {
   const { t } = useTranslation('auth');
@@ -55,4 +55,4 @@ const ApiKeyModal: FC<ApiKeyModalProps> = ({ open, onCancel, onOk, submitLoading
   );
 };
 
-export default ApiKeyModal;
+export default ApiKeyModal

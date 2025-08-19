@@ -1,47 +1,47 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import { memo, useEffect } from 'react';
+import { useRouter }
+import { memo, useEffect }
 
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { useUserStore } from '@/store/user';
+import { useGlobalStore }
+import { systemStatusSelectors }
+import { useUserStore }
 
-import { AppLoadingStage } from '../stage';
+import { AppLoadingStage }
 
-interface RedirectProps {
-  setActiveStage: (value: AppLoadingStage) => void;
+interface redirectprops {
+  setActiveStage: (value: apploadingstage) => void;
 }
 
 const Redirect = memo<RedirectProps>(({ setActiveStage }) => {
-  const router = useRouter();
-  const isUserStateInit = useUserStore((s) => s.isUserStateInit);
+  const router = useRouter()
+  const isUserStateInit = useUserStore((s) => s.isUserStateInit)
 
-  const isPgliteNotEnabled = useGlobalStore(systemStatusSelectors.isPgliteNotEnabled);
+  const isPgliteNotEnabled = useGlobalStore(systemStatusSelectors.isPgliteNotEnabled)
 
   const navToChat = () => {
-    setActiveStage(AppLoadingStage.GoToChat);
-    router.replace('/chat');
-  };
+    setActiveStage(AppLoadingStage.GoToChat)
+    router.replace('/chat')
+  }
 
   useEffect(() => {
     // if pglite is not enabled, redirect to chat
     if (isPgliteNotEnabled) {
-      navToChat();
-      return;
+      navToChat()
+      return
     }
 
     // if user state not init, wait for loading
     if (!isUserStateInit) {
-      setActiveStage(AppLoadingStage.InitUser);
-      return;
+      setActiveStage(AppLoadingStage.InitUser)
+      return
     }
 
     // finally check the conversation status
-    navToChat();
-  }, [isUserStateInit, isPgliteNotEnabled]);
+    navToChat()
+  }, [isUserStateInit, isPgliteNotEnabled])
 
-  return null;
-});
+  return null
+})
 
-export default Redirect;
+export default Redirect

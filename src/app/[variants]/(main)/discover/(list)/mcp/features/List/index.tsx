@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { Grid } from '@lobehub/ui';
-import { Empty } from 'antd';
-import { memo } from 'react';
-import { Center } from 'react-layout-kit';
+import { Grid }
+import { Empty }
+import { memo }
+import { Center }
 
-import { DiscoverMcpItem } from '@/types/discover';
+import { DiscoverMcpItem }
 
-import Item from './Item';
+import Item from './Item'
 
-interface McpListProps {
-  data?: DiscoverMcpItem[];
+interface mcplistprops {
+  data?: discovermcpitem[];
   rows?: number;
 }
 
@@ -20,14 +20,14 @@ const McpList = memo<McpListProps>(({ data = [], rows = 3 }) => {
       <Center height={640}>
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </Center>
-    );
+    )
   return (
     <Grid rows={rows} width={'100%'}>
       {data.map((item, index) => (
         <Item key={index} {...item} />
       ))}
     </Grid>
-  );
-});
+  )
+})
 
-export default McpList;
+export default McpList

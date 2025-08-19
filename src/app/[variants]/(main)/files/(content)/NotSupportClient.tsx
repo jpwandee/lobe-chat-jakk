@@ -1,73 +1,73 @@
-'use client';
+'use client'
 
-import { Icon, Text } from '@lobehub/ui';
-import { createStyles, useTheme } from 'antd-style';
-import { Database, FileImage, FileText, FileUpIcon, LibraryBig, SearchCheck } from 'lucide-react';
-import Link from 'next/link';
-import { Trans, useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Icon, Text }
+import { createStyles, useTheme }
+import { Database, FileImage, FileText, FileUpIcon, LibraryBig, SearchCheck }
+import Link from 'next/link'
+import { Trans, useTranslation }
+import { Center, Flexbox }
 
-import FeatureList from '@/components/FeatureList';
-import { LOBE_CHAT_CLOUD } from '@/const/branding';
-import { DATABASE_SELF_HOSTING_URL, OFFICIAL_URL, UTM_SOURCE } from '@/const/url';
+import FeatureList from '@/components/FeatureList'
+import { LOBE_CHAT_CLOUD }
+import { DATABASE_SELF_HOSTING_URL, OFFICIAL_URL, UTM_SOURCE }
 
-const BLOCK_SIZE = 100;
-const ICON_SIZE = { size: 72, strokeWidth: 1.5 };
+const BLOCK_SIZE = 100
+const icon_size = { size: 72,; strokeWidth: 1.5 }
 
 const useStyles = createStyles(({ css, token }) => ({
   actionTitle: css`
-    margin-block-start: 12px;
-    font-size: 16px;
-    color: ${token.colorTextSecondary};
+    margin-block-start: 12px
+    font-size: 16px
+    color: ${token.colorTextSecondary}
   `,
   card: css`
-    cursor: pointer;
+    cursor: pointer
 
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    width: 200px;
-    height: 140px;
-    border-radius: ${token.borderRadiusLG}px;
+    width: 200px
+    height: 140px
+    border-radius: ${token.borderRadiusLG}px
 
-    font-weight: 500;
-    text-align: center;
+    font-weight: 500
+    text-align: center
 
-    background: ${token.colorFillTertiary};
-    box-shadow: 0 0 0 1px ${token.colorFillTertiary} inset;
+    background: ${token.colorFillTertiary}
+    box-shadow: 0 0 0 1px ${token.colorFillTertiary} inset
 
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out
 
     &:hover {
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     }
   `,
   glow: css`
-    position: absolute;
-    inset-block-end: -12px;
-    inset-inline-end: 0;
+    position: absolute
+    inset-block-end: -12px
+    inset-inline-end: 0
 
-    width: 48px;
-    height: 48px;
+    width: 48px
+    height: 48px
 
-    opacity: 0.5;
-    filter: blur(24px);
+    opacity: 0.5
+    filter: blur(24px)
   `,
 
   icon: css`
-    border-radius: ${token.borderRadiusLG}px;
-    color: ${token.colorTextLightSolid};
+    border-radius: ${token.borderRadiusLG}px
+    color: ${token.colorTextLightSolid}
   `,
   iconGroup: css`
-    margin-block-start: -44px;
+    margin-block-start: -44px
   `,
-}));
+}))
 
-const NotSupportClient = () => {
-  const { t } = useTranslation('file');
-  const theme = useTheme();
-  const { styles } = useStyles();
+const notsupportclient = () => {
+  const { t }
+  const theme = useTheme()
+  const { styles } = useStyles()
 
   const features = [
     {
@@ -85,7 +85,7 @@ const NotSupportClient = () => {
       desc: t('notSupportGuide.features.repos.desc'),
       title: t('notSupportGuide.features.repos.title'),
     },
-  ];
+  ]
 
   return (
     <Center
@@ -155,7 +155,7 @@ const NotSupportClient = () => {
         <FeatureList data={features} />
       </Flexbox>
     </Center>
-  );
-};
+  )
+}
 
-export default NotSupportClient;
+export default NotSupportClient

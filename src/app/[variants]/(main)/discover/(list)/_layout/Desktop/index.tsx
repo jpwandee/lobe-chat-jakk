@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Flexbox }
 
-import Footer from '@/features/Setting/Footer';
+import Footer from '@/features/Setting/Footer'
 
-import { MAX_WIDTH, SCROLL_PARENT_ID } from '../../../features/const';
+import { MAX_WIDTH, SCROLL_PARENT_ID }
 import Nav from './Nav';
 
 const Layout = ({ children }: PropsWithChildren) => {
@@ -32,6 +32,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'DesktopDiscoverStoreLayout';
+Layout.displayName = 'DesktopDiscoverStoreLayout'
 
-export default Layout;
+export default Layout

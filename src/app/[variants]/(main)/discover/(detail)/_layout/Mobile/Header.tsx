@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'nextjs-toploader/app';
-import { memo } from 'react';
-import urlJoin from 'url-join';
+import { ChatHeader }
+import { usePathname }
+import { useRouter }
+import { memo }
+import urlJoin from 'url-join'
 
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
 const Header = memo(() => {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const path = pathname.split('/').filter(Boolean)[1];
+  const path = pathname.split('/').filter(Boolean)[1]
 
   return (
     <ChatHeader
@@ -20,7 +20,7 @@ const Header = memo(() => {
       showBackButton
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

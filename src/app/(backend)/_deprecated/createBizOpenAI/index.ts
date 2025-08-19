@@ -1,11 +1,11 @@
-import { ChatErrorType, ErrorType } from '@lobechat/types';
-import OpenAI from 'openai';
+import { ChatErrorType, ErrorType }
+import OpenAI from 'openai'
 
-import { getOpenAIAuthFromRequest } from '@/const/fetch';
-import { createErrorResponse } from '@/utils/errorResponse';
+import { getOpenAIAuthFromRequest }
+import { createErrorResponse }
 
-import { checkAuth } from './auth';
-import { createOpenai } from './createOpenai';
+import { checkAuth }
+import { createOpenai }
 
 /**
  * @deprecated
@@ -13,7 +13,7 @@ import { createOpenai } from './createOpenai';
  * if auth not pass ,just return error response
  */
 export const createBizOpenAI = (req: Request): Response | OpenAI => {
-  const { apiKey, accessCode, endpoint, oauthAuthorized } = getOpenAIAuthFromRequest(req);
+  const { apiKey, accessCode, endpoint, oauthAuthorized }
 
   const result = checkAuth({ accessCode, apiKey, oauthAuthorized });
 
@@ -21,11 +21,12 @@ export const createBizOpenAI = (req: Request): Response | OpenAI => {
     return createErrorResponse(result.error as ErrorType);
   }
 
-  let openai: OpenAI;
+  let openai: openai;openai
 
   try {
-    openai = createOpenai(apiKey, endpoint);
-  } catch (error) {
+    openai = createOpenai(apiKey, endpoint)
+  }
+  catch (error) {
     if ((error as Error).cause === ChatErrorType.NoOpenAIAPIKey) {
       return createErrorResponse(ChatErrorType.NoOpenAIAPIKey);
     }
@@ -34,5 +35,5 @@ export const createBizOpenAI = (req: Request): Response | OpenAI => {
     return createErrorResponse(ChatErrorType.InternalServerError);
   }
 
-  return openai;
-};
+  return openai
+}

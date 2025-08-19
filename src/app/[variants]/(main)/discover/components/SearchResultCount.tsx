@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Trans } from 'react-i18next';
+import { createStyles }
+import { memo }
+import { Trans }
 
-import Title from './Title';
+import Title from './Title'
 
 const useStyles = createStyles(({ css, token }) => ({
   highlight: css`
-    color: ${token.colorInfo};
+    color: ${token.colorInfo}
 
     &::before,
     &::after {
-      content: '\`';
+      content: '\`'
     }
   `,
-}));
+}))
 
-const SearchResultCount = memo<{ count: number; keyword: string }>(({ keyword, count }) => {
-  const { styles } = useStyles();
+const searchresultcount = memo< { count: number; keyword: string }>(({ keyword, count }) => {
+  const { styles } = useStyles()
   return (
     <Title>
       <Trans
@@ -31,7 +31,7 @@ const SearchResultCount = memo<{ count: number; keyword: string }>(({ keyword, c
         }}
       />
     </Title>
-  );
-});
+  )
+})
 
-export default SearchResultCount;
+export default SearchResultCount

@@ -1,13 +1,14 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 import MobileContentLayout from '@/components/server/MobileNavLayout';
 
 import Header from './features/Header';
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return <MobileContentLayout header={<Header />}>{children}</MobileContentLayout>;
+  return <mobilecontentlayout header={<Header />}
+  >{children}</MobileContentLayout>;
 };
 
-Layout.displayName = 'MeDataLayout';
+Layout.displayName = 'MeDataLayout'
 
-export default Layout;
+export default Layout

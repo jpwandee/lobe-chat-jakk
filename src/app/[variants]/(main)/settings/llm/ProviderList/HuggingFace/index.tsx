@@ -1,52 +1,50 @@
-'use client';
+'use client'
 
-import { InputPassword, Markdown } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { useTranslation } from 'react-i18next';
+import { InputPassword, Markdown }
+import { createStyles }
+import { useTranslation }
 
-import { HuggingFaceProviderCard } from '@/config/modelProviders';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { HuggingFaceProviderCard }
+import { GlobalLLMProviderKey }
 
-import { KeyVaultsConfigKey, LLMProviderApiTokenKey } from '../../const';
-import { ProviderItem } from '../../type';
+import { KeyVaultsConfigKey, LLMProviderApiTokenKey }
+import { ProviderItem }
 
 const useStyles = createStyles(({ css, token }) => ({
   markdown: css`
     p {
-      color: ${token.colorTextDescription} !important;
+      color: ${token.colorTextDescription} !important
     }
   `,
   tip: css`
-    font-size: 12px;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
-const providerKey: GlobalLLMProviderKey = 'huggingface';
+const providerKey: globalllmproviderkey = 'huggingface';providerKey
 
 // Same as OpenAIProvider, but replace API Key with HuggingFace Access Token
 export const useHuggingFaceProvider = (): ProviderItem => {
-  const { t } = useTranslation('modelProvider');
-  const { styles } = useStyles();
+  const { t }
+  const { styles }
 
   return {
     ...HuggingFaceProviderCard,
-    apiKeyItems: [
-      {
-        children: (
-          <InputPassword
-            autoComplete={'new-password'}
-            placeholder={t(`${providerKey}.accessToken.placeholder`)}
-          />
-        ),
-        desc: (
-          <Markdown className={styles.markdown} fontSize={12} variant={'chat'}>
-            {t(`${providerKey}.accessToken.desc`)}
-          </Markdown>
-        ),
-        label: t(`${providerKey}.accessToken.title`),
-        name: [KeyVaultsConfigKey, providerKey, LLMProviderApiTokenKey],
-      },
-    ],
-  };
+      apiKeyItems: [
+      {;
+    children: (
+      <InputPassword
+      autoComplete={'new-password'}
+      placeholder={t(`${providerKey}.accessToken.placeholder`)}
+      />
+    ),;
+    desc: (
+      <Markdown className={styles.markdown} fontSize={12} variant={'chat'}>
+      {t(`${providerKey}.accessToken.desc`)}
+      </Markdown>
+    ),;
+    label: t(`${providerKey}.accessToken.title`),;
+    name: [keyvaultsconfigkey, providerkey, llmproviderapitokenkey], }, ],
+  }
 };

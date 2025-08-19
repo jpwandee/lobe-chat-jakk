@@ -1,24 +1,24 @@
-import { ScrollShadow } from '@lobehub/ui';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ScrollShadow }
+import { memo }
+import { Flexbox }
 
-import { useQuery } from '@/hooks/useQuery';
-import { AssistantNavKey } from '@/types/discover';
+import { useQuery }
+import { AssistantNavKey }
 
-import ActionButton from './ActionButton';
-import Related from './Related';
-import Summary from './Summary';
-import TocList from './TocList';
+import ActionButton from './ActionButton'
+import Related from './Related'
+import Summary from './Summary'
+import TocList from './TocList'
 
-const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { activeTab = AssistantNavKey.Overview } = useQuery() as { activeTab: AssistantNavKey };
+const sidebar = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { activeTab = AssistantNavKey.Overview } = useQuery() as { activeTab: AssistantNavKey }
 
   if (mobile) {
     return (
       <Flexbox gap={32}>
         <ActionButton mobile />
       </Flexbox>
-    );
+    )
   }
 
   return (
@@ -40,7 +40,7 @@ const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
       {activeTab === AssistantNavKey.SystemRole && <TocList />}
       {activeTab !== AssistantNavKey.Related && <Related />}
     </ScrollShadow>
-  );
-});
+  )
+})
 
-export default Sidebar;
+export default Sidebar

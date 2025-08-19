@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { FormGroup, Grid } from '@lobehub/ui';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { FormGroup, Grid }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
+import { FORM_STYLE }
 
-import AiHeatmaps from './features/AiHeatmaps';
-import AssistantsRank from './features/AssistantsRank';
-import ModelsRank from './features/ModelsRank';
-import ShareButton from './features/ShareButton';
-import TopicsRank from './features/TopicsRank';
-import TotalAssistants from './features/TotalAssistants';
-import TotalMessages from './features/TotalMessages';
-import TotalTopics from './features/TotalTopics';
-import TotalWords from './features/TotalWords';
-import Welcome from './features/Welcome';
+import AiHeatmaps from './features/AiHeatmaps'
+import AssistantsRank from './features/AssistantsRank'
+import ModelsRank from './features/ModelsRank'
+import ShareButton from './features/ShareButton'
+import TopicsRank from './features/TopicsRank'
+import TotalAssistants from './features/TotalAssistants'
+import TotalMessages from './features/TotalMessages'
+import TotalTopics from './features/TotalTopics'
+import TotalWords from './features/TotalWords'
+import Welcome from './features/Welcome'
 
-const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { t } = useTranslation('auth');
+const client = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { t } = useTranslation('auth')
 
   return (
     <Flexbox gap={mobile ? 0 : 24}>
@@ -46,7 +46,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
         <TopicsRank mobile={mobile} />
       </Grid>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Client;
+export default Client

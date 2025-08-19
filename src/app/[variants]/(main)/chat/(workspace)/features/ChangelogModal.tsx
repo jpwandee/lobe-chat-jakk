@@ -1,11 +1,11 @@
-import ChangelogModal from '@/features/ChangelogModal';
-import { ChangelogService } from '@/server/services/changelog';
+import ChangelogModal from '@/features/ChangelogModal'
+import { ChangelogService }
 
-const Changelog = async () => {
-  const service = new ChangelogService();
-  const id = await service.getLatestChangelogId();
+const changelog = async () => {
+  const service = new ChangelogService()
+  const id = await service.getLatestChangelogId()
 
-  return <ChangelogModal currentId={id} />;
-};
+  return <changelogmodal currentid={id} />
+}
 
-export default Changelog;
+export default Changelog

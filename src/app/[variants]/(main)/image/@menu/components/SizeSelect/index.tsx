@@ -1,31 +1,32 @@
-'use client';
+'use client'
 
-import { Block, Grid, GridProps, Text } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { ReactNode, memo } from 'react';
-import { Center } from 'react-layout-kit';
-import useMergeState from 'use-merge-value';
+import { Block, Grid, GridProps, Text }
+import { useTheme }
+import { ReactNode, memo }
+import { Center }
+import useMergeState from 'use-merge-value'
 
-export interface SizeSelectProps extends Omit<GridProps, 'children' | 'onChange'> {
+export interface sizeselectprops extends omit<gridprops, 'children' | 'onChange'> {
   defaultValue?: 'auto' | string;
   onChange?: (value: string) => void;
-  options?: { label?: string; value: 'auto' | string }[];
+  options?: { label?: string; value: 'auto' | string }
+
   value?: 'auto' | string;
 }
 
 const SizeSelect = memo<SizeSelectProps>(({ options, onChange, value, defaultValue, ...rest }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   const [active, setActive] = useMergeState('auto', {
     defaultValue,
     onChange,
     value,
-  });
+  })
   return (
     <Block padding={4} variant={'filled'} {...rest}>
       <Grid gap={4} maxItemWidth={72} rows={16}>
         {options?.map((item) => {
-          const isActive = active === item.value;
-          let content: ReactNode;
+          const isActive = active === item.value
+          let content: ReactNode
 
           if (item.value === 'auto') {
             content = (
@@ -37,10 +38,10 @@ const SizeSelect = memo<SizeSelectProps>(({ options, onChange, value, defaultVal
                   width: 16,
                 }}
               />
-            );
+            )
           } else {
-            const [width, height] = item.value.split('x').map(Number);
-            const isWidthGreater = width > height;
+            const [width, height] = item.value.split('x').map(Number)
+            const isWidthGreater = width > height
             content = (
               <div
                 style={{
@@ -51,7 +52,7 @@ const SizeSelect = memo<SizeSelectProps>(({ options, onChange, value, defaultVal
                   width: isWidthGreater ? 16 : undefined,
                 }}
               />
-            );
+            )
           }
 
           return (
@@ -62,8 +63,8 @@ const SizeSelect = memo<SizeSelectProps>(({ options, onChange, value, defaultVal
               justify={'center'}
               key={item.value}
               onClick={() => {
-                setActive(item.value);
-                onChange?.(item.value);
+                setActive(item.value)
+                onChange?.(item.value)
               }}
               padding={8}
               shadow={isActive && !theme.isDarkMode}
@@ -79,11 +80,11 @@ const SizeSelect = memo<SizeSelectProps>(({ options, onChange, value, defaultVal
                 {item.label || item.value}
               </Text>
             </Block>
-          );
+          )
         })}
       </Grid>
     </Block>
-  );
-});
+  )
+})
 
-export default SizeSelect;
+export default SizeSelect

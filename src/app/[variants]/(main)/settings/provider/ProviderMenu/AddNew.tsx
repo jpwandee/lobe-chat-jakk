@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { PlusIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon }
+import { PlusIcon }
+import { useState }
+import { useTranslation }
 
-import CreateNewProvider from '../features/CreateNewProvider';
+import CreateNewProvider from '../features/CreateNewProvider'
 
-const AddNewProvider = () => {
-  const { t } = useTranslation('modelProvider');
-  const [open, setOpen] = useState(false);
+const addnewprovider = () => {
+  const { t } = useTranslation('modelProvider')
+  const [open, setOpen] = useState(false)
 
   return (
     <>
@@ -25,7 +25,7 @@ const AddNewProvider = () => {
       />
       <CreateNewProvider onClose={() => setOpen(false)} open={open} />
     </>
-  );
-};
+  )
+}
 
-export default AddNewProvider;
+export default AddNewProvider

@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
-import NewTopicButton from './NewTopicButton';
+import NewTopicButton from './NewTopicButton'
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const SkeletonList = memo(() => {
   return (
@@ -26,9 +26,9 @@ const SkeletonList = memo(() => {
         </div>
       ))}
     </Flexbox>
-  );
-});
+  )
+})
 
-SkeletonList.displayName = 'SkeletonList';
+SkeletonList.displayName = 'SkeletonList'
 
-export default SkeletonList;
+export default SkeletonList

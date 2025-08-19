@@ -1,34 +1,34 @@
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ThemeAppearance } from 'antd-style';
-import { ResolvingViewport } from 'next';
-import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactNode } from 'react';
-import { isRtlLang } from 'rtl-detect';
+import { SpeedInsights }
+import { ThemeAppearance }
+import { ResolvingViewport }
+import { NuqsAdapter }
+import { ReactNode }
+import { isRtlLang }
 
-import Analytics from '@/components/Analytics';
-import { DEFAULT_LANG } from '@/const/locale';
-import { isDesktop } from '@/const/version';
-import PWAInstall from '@/features/PWAInstall';
-import AuthProvider from '@/layout/AuthProvider';
-import GlobalProvider from '@/layout/GlobalProvider';
-import { Locales } from '@/locales/resources';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import Analytics from '@/components/Analytics'
+import { DEFAULT_LANG }
+import { isDesktop }
+import PWAInstall from '@/features/PWAInstall'
+import AuthProvider from '@/layout/AuthProvider'
+import GlobalProvider from '@/layout/GlobalProvider'
+import { Locales }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-const inVercel = process.env.VERCEL === '1';
+const inVercel = process.env.VERCEL === '1'
 
-interface RootLayoutProps extends DynamicLayoutProps {
-  children: ReactNode;
-  modal: ReactNode;
+interface rootlayoutprops extends dynamiclayoutprops {
+  children: reactnode;
+  modal: reactnode;
 }
 
 const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
-  const { variants } = await params;
+  const { variants }
 
-  const { locale, isMobile, theme, primaryColor, neutralColor } =
-    RouteVariants.deserializeVariants(variants);
+  const { locale, isMobile, theme, primaryColor, neutralColor }
+    RouteVariants.deserializeVariants(variants)
 
-  const direction = isRtlLang(locale) ? 'rtl' : 'ltr';
+  const direction = isRtlLang(locale) ? 'rtl' : 'ltr';directionisRtlLang
 
   return (
     <html dir={direction} lang={locale}>
@@ -62,35 +62,34 @@ const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
   );
 };
 
-export default RootLayout;
+export default RootLayout
 
-export { generateMetadata } from './metadata';
+export { generateMetadata }
 
 export const generateViewport = async (props: DynamicLayoutProps): ResolvingViewport => {
-  const isMobile = await RouteVariants.getIsMobile(props);
+  const isMobile = await RouteVariants.getIsMobile(props)
 
-  const dynamicScale = isMobile ? { maximumScale: 1, userScalable: false } : {};
+  const dynamicscale = ismobile ? { maximumScale: 1,; userScalable: false }
+  : {};
 
   return {
+    width: 'device-width',; color: '#000',;
     ...dynamicScale,
-    initialScale: 1,
-    minimumScale: 1,
+    initialScale: 1,; media: '(prefers-color-scheme: light)' }, {; media: '(prefers-color-scheme: dark)' }, ],;
+    minimumScale: 1,;
     themeColor: [
-      { color: '#f8f8f8', media: '(prefers-color-scheme: light)' },
-      { color: '#000', media: '(prefers-color-scheme: dark)' },
-    ],
+      {;
     viewportFit: 'cover',
-    width: 'device-width',
-  };
-};
+  }
+}
 
-export const generateStaticParams = () => {
-  const themes: ThemeAppearance[] = ['dark', 'light'];
-  const mobileOptions = isDesktop ? [false] : [true, false];
+export const generatestaticparams = () => {mobileOptionsisDesktopfalse
   // only static for serveral page, other go to dynamtic
-  const staticLocales: Locales[] = [DEFAULT_LANG, 'zh-CN'];
+  const staticLocales: locales[] = [default_lang, 'zh-CN'];
+  const themes: themeappearance[] = ['dark', 'light'];themes
+  const mobileOptions = isDesktop ? [false] : [true, false];onlystaticforserveralpage,othergotodynamticconststaticLocales
 
-  const variants: { variants: string }[] = [];
+  const variants: { variants: string }
 
   for (const locale of staticLocales) {
     for (const theme of themes) {
@@ -102,5 +101,5 @@ export const generateStaticParams = () => {
     }
   }
 
-  return variants;
-};
+  return variants
+}

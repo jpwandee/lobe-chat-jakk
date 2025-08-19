@@ -1,21 +1,21 @@
-import { ActionIcon, Button, Modal } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useResponsive } from 'antd-style';
-import { Brush } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, Button, Modal }
+import { Skeleton }
+import { useResponsive }
+import { Brush }
+import dynamic from 'next/dynamic'
+import { memo, useState }
+import { useTranslation }
 
-import { MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
+import { MOBILE_HEADER_ICON_SIZE }
 
 const Inner = dynamic(() => import('./Inner'), {
   loading: () => <Skeleton paragraph={{ rows: 8 }} title={false} />,
-});
+})
 
-const CreateButton = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { mobile: resMobile } = useResponsive();
-  const { t } = useTranslation('discover');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const createbutton = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { mobile: resMobile } = useResponsive()
+  const { t } = useTranslation('discover')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const buttonContent =
     mobile || resMobile ? (
@@ -29,7 +29,7 @@ const CreateButton = memo<{ mobile?: boolean }>(({ mobile }) => {
       <Button icon={Brush} onClick={() => setIsModalOpen(true)}>
         {t('create')}
       </Button>
-    );
+    )
 
   return (
     <>
@@ -44,7 +44,7 @@ const CreateButton = memo<{ mobile?: boolean }>(({ mobile }) => {
         <Inner />
       </Modal>
     </>
-  );
-});
+  )
+})
 
-export default CreateButton;
+export default CreateButton

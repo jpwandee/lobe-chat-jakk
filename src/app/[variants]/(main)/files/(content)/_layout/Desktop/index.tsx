@@ -1,8 +1,8 @@
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox }
 
-import FilePanel from '@/features/FileSidePanel';
+import FilePanel from '@/features/FileSidePanel'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import Container from './Container';
 import RegisterHotkeys from './RegisterHotkeys';
 
@@ -24,6 +24,6 @@ const Layout = ({ children, menu, modal }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'DesktopFileLayout';
+Layout.displayName = 'DesktopFileLayout'
 
-export default Layout;
+export default Layout

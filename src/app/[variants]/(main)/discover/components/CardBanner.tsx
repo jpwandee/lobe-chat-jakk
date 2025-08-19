@@ -1,27 +1,27 @@
-import { Avatar, DivProps } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { ReactNode, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Avatar, DivProps }
+import { createStyles }
+import { ReactNode, memo }
+import { Flexbox }
 
 export const useStyles = createStyles(({ css, token }) => ({
   banner: css`
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    height: 64px;
-    margin-block-end: -56px;
+    height: 64px
+    margin-block-end: -56px
 
-    background: ${token.colorFillSecondary};
+    background: ${token.colorFillSecondary}
   `,
   bannerImg: css`
-    position: absolute;
-    filter: blur(40px) saturate(1.5);
+    position: absolute
+    filter: blur(40px) saturate(1.5)
   `,
-}));
+}))
 
-interface CardBannerProps extends DivProps {
-  avatar?: string | ReactNode;
+interface cardbannerprops extends divprops {
+  avatar?: string | reactnode;
   loading?: boolean;
   mask?: boolean;
   maskColor?: string;
@@ -30,7 +30,7 @@ interface CardBannerProps extends DivProps {
 
 const CardBanner = memo<CardBannerProps>(
   ({ avatar, className, size = 600, children, ...props }) => {
-    const { styles, theme, cx } = useStyles();
+    const { styles, theme, cx } = useStyles()
 
     return (
       <Flexbox
@@ -52,8 +52,8 @@ const CardBanner = memo<CardBannerProps>(
         )}
         {children}
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default CardBanner;
+export default CardBanner

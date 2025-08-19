@@ -1,59 +1,59 @@
-'use client';
+'use client'
 
-import { Github } from '@lobehub/icons';
-import { ActionIcon, Avatar, Block, Icon, Tag, Text, Tooltip } from '@lobehub/ui';
-import { Spotlight } from '@lobehub/ui/awesome';
-import { createStyles } from 'antd-style';
-import { ClockIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'nextjs-toploader/app';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Github }
+import { ActionIcon, Avatar, Block, Icon, Tag, Text, Tooltip }
+import { Spotlight }
+import { createStyles }
+import { ClockIcon }
+import Link from 'next/link'
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import InstallationIcon from '@/components/MCPDepsIcon';
-import OfficialIcon from '@/components/OfficialIcon';
-import PublishedTime from '@/components/PublishedTime';
-import Scores from '@/features/MCP/Scores';
-import { DiscoverMcpItem } from '@/types/discover';
+import InstallationIcon from '@/components/MCPDepsIcon'
+import OfficialIcon from '@/components/OfficialIcon'
+import PublishedTime from '@/components/PublishedTime'
+import Scores from '@/features/MCP/Scores'
+import { DiscoverMcpItem } from '@/types/discover'
 
-import ConnectionTypeTag from './ConnectionTypeTag';
-import MetaInfo from './MetaInfo';
+import ConnectionTypeTag from './ConnectionTypeTag'
+import MetaInfo from './MetaInfo'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     author: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
     `,
     code: css`
-      font-family: ${token.fontFamilyCode};
+      font-family: ${token.fontFamilyCode}
     `,
     desc: css`
-      flex: 1;
-      margin: 0 !important;
-      color: ${token.colorTextSecondary};
+      flex: 1
+      margin: 0 !important
+      color: ${token.colorTextSecondary}
     `,
     footer: css`
-      margin-block-start: 16px;
-      border-block-start: 1px dashed ${token.colorBorder};
-      background: ${token.colorBgContainerSecondary};
+      margin-block-start: 16px
+      border-block-start: 1px dashed ${token.colorBorder}
+      background: ${token.colorBgContainerSecondary}
     `,
     secondaryDesc: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 16px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 16px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
 const McpItem = memo<DiscoverMcpItem>(
   ({
@@ -76,16 +76,16 @@ const McpItem = memo<DiscoverMcpItem>(
     installCount,
     github,
   }) => {
-    const { t } = useTranslation('discover');
-    const { styles, theme } = useStyles();
-    const router = useRouter();
-    const link = urlJoin('/discover/mcp', identifier);
+    const { t } = useTranslation('discover')
+    const { styles, theme } = useStyles()
+    const router = useRouter()
+    const link = urlJoin('/discover/mcp', identifier)
     return (
       <Block
         clickable
         height={'100%'}
         onClick={() => {
-          router.push(link);
+          router.push(link)
         }}
         style={{
           overflow: 'hidden',
@@ -218,8 +218,8 @@ const McpItem = memo<DiscoverMcpItem>(
           />
         </Flexbox>
       </Block>
-    );
+    )
   },
-);
+)
 
-export default McpItem;
+export default McpItem

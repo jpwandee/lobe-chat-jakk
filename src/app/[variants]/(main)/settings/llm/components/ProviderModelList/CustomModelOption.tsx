@@ -1,43 +1,43 @@
-import { ModelIcon } from '@lobehub/icons';
-import { ActionIcon, Icon, Text } from '@lobehub/ui';
-import { App } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { LucideArrowRight, LucideSettings, LucideTrash2 } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ModelIcon }
+import { ActionIcon, Icon, Text }
+import { App }
+import isEqual from 'fast-deep-equal'
+import { LucideArrowRight, LucideSettings, LucideTrash2 }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { useUserStore } from '@/store/user';
-import { modelConfigSelectors, modelProviderSelectors } from '@/store/user/selectors';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { ModelInfoTags }
+import { useUserStore }
+import { modelConfigSelectors, modelProviderSelectors }
+import { GlobalLLMProviderKey }
 
-interface CustomModelOptionProps {
+interface custommodeloptionprops {
   id: string;
-  provider: GlobalLLMProviderKey;
+  provider: globalllmproviderkey;
 }
 
 const CustomModelOption = memo<CustomModelOptionProps>(({ id, provider }) => {
-  const { t } = useTranslation('common');
-  const { t: s } = useTranslation('setting');
-  const { modal } = App.useApp();
+  const { t } = useTranslation('common')
+  const { t: s } = useTranslation('setting')
+  const { modal } = App.useApp()
 
   const [dispatchCustomModelCards, toggleEditingCustomModelCard, removeEnabledModels] =
     useUserStore((s) => [
       s.dispatchCustomModelCards,
       s.toggleEditingCustomModelCard,
       s.removeEnabledModels,
-    ]);
+    ])
 
   const modelCard = useUserStore(
     modelConfigSelectors.getCustomModelCard({ id, provider }),
     isEqual,
-  );
+  )
 
   const isEnabled = useUserStore(
     (s) => modelProviderSelectors.getEnableModelsById(provider)(s)?.includes(id),
     isEqual,
-  );
+  )
 
   return (
     <Flexbox align={'center'} distribution={'space-between'} gap={8} horizontal>
@@ -64,16 +64,16 @@ const CustomModelOption = memo<CustomModelOptionProps>(({ id, provider }) => {
         <ActionIcon
           icon={LucideSettings}
           onClick={async (e) => {
-            e.stopPropagation();
-            toggleEditingCustomModelCard({ id, provider });
+            e.stopPropagation()
+            toggleEditingCustomModelCard({ id, provider })
           }}
           title={s('llm.customModelCards.config')}
         />
         <ActionIcon
           icon={LucideTrash2}
           onClick={async (e) => {
-            e.stopPropagation();
-            e.preventDefault();
+            e.stopPropagation()
+            e.preventDefault()
 
             await modal.confirm({
               centered: true,
@@ -81,18 +81,18 @@ const CustomModelOption = memo<CustomModelOptionProps>(({ id, provider }) => {
               okButtonProps: { danger: true },
               onOk: async () => {
                 // delete model and deactivate id
-                await dispatchCustomModelCards(provider, { id, type: 'delete' });
-                await removeEnabledModels(provider, id);
+                await dispatchCustomModelCards(provider, { id, type: 'delete' })
+                await removeEnabledModels(provider, id)
               },
               type: 'warning',
-            });
+            })
           }}
           style={isEnabled ? { marginRight: '10px' } : {}}
           title={t('delete')}
         />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default CustomModelOption;
+export default CustomModelOption

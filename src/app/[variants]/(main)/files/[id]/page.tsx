@@ -1,27 +1,27 @@
-import { notFound } from 'next/navigation';
-import { Flexbox } from 'react-layout-kit';
+import { notFound }
+import { Flexbox }
 
-import FileViewer from '@/features/FileViewer';
-import { createCallerFactory } from '@/libs/trpc/lambda';
-import { lambdaRouter } from '@/server/routers/lambda';
-import { PagePropsWithId } from '@/types/next';
-import { getUserAuth } from '@/utils/server/auth';
+import FileViewer from '@/features/FileViewer'
+import { createCallerFactory }
+import { lambdaRouter }
+import { PagePropsWithId }
+import { getUserAuth }
 
-import FileDetail from '../features/FileDetail';
-import Header from './Header';
+import FileDetail from '../features/FileDetail'
+import Header from './Header'
 
-const createCaller = createCallerFactory(lambdaRouter);
+const createCaller = createCallerFactory(lambdaRouter)
 
-const FilePage = async (props: PagePropsWithId) => {
-  const params = await props.params;
+const filepage = async (props: PagePropsWithId) => {
+  const params = await props.params
 
-  const { userId } = await getUserAuth();
+  const { userId } = await getUserAuth()
 
-  const caller = createCaller({ userId });
+  const caller = createCaller({ userId })
 
-  const file = await caller.file.getFileItemById({ id: params.id });
+  const file = await caller.file.getFileItemById({ id: params.id })
 
-  if (!file) return notFound();
+  if (!file) return notFound()
 
   return (
     <Flexbox horizontal width={'100%'}>
@@ -35,9 +35,9 @@ const FilePage = async (props: PagePropsWithId) => {
       </Flexbox>
       <FileDetail {...file} />
     </Flexbox>
-  );
-};
+  )
+}
 
-export default FilePage;
+export default FilePage
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-static'

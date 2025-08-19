@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Block } from '@lobehub/ui';
-import { memo } from 'react';
+import { Block }
+import { memo }
 
-import ImageItem from '@/components/ImageItem';
+import ImageItem from '@/components/ImageItem'
 
-import { ActionButtons } from './ActionButtons';
-import { useStyles } from './styles';
-import { SuccessStateProps } from './types';
-import { getThumbnailMaxWidth } from './utils';
+import { ActionButtons }
+import { useStyles }
+import { SuccessStateProps }
+import { getThumbnailMaxWidth } from './utils'
 
 // 成功状态组件
 export const SuccessState = memo<SuccessStateProps>(
@@ -22,7 +22,7 @@ export const SuccessState = memo<SuccessStateProps>(
     onCopySeed,
     seedTooltip,
   }) => {
-    const { styles } = useStyles();
+    const { styles } = useStyles()
 
     return (
       <Block
@@ -53,8 +53,8 @@ export const SuccessState = memo<SuccessStateProps>(
           showDownload
         />
       </Block>
-    );
+    )
   },
-);
+)
 
-SuccessState.displayName = 'SuccessState';
+SuccessState.displayName = 'SuccessState'

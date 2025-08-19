@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { Alert, Button } from '@lobehub/ui';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Alert, Button }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { MANUAL_UPGRADE_URL } from '@/const/url';
-import { useGlobalStore } from '@/store/global';
+import { MANUAL_UPGRADE_URL }
+import { useGlobalStore } from '@/store/global'
 
 const UpgradeAlert = memo(() => {
-  const [hasNewVersion, latestVersion] = useGlobalStore((s) => [s.hasNewVersion, s.latestVersion]);
-  const { t } = useTranslation('common');
+  const [hasNewVersion, latestVersion] = useGlobalStore((s) => [s.hasNewVersion, s.latestVersion])
+  const { t } = useTranslation('common')
 
-  if (!hasNewVersion) return;
+  if (!hasNewVersion) return
 
   return (
     <Alert
@@ -35,7 +35,7 @@ const UpgradeAlert = memo(() => {
       }
       type={'info'}
     />
-  );
-});
+  )
+})
 
-export default UpgradeAlert;
+export default UpgradeAlert

@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState }
 
-import { isOnServerSide } from '@/utils/env';
+import { isOnServerSide }
 
-import { SCROLL_PARENT_ID } from '../../features/const';
+import { SCROLL_PARENT_ID }
 
-export const useScrollParent = () => {
-  const [parent, setParent] = useState<HTMLDivElement>();
+export const usescrollparent = () => {
+  const [parent, setParent] = useState<HTMLDivElement>()
 
   useEffect(() => {
-    if (isOnServerSide) return;
-    const scrollParent = document.querySelector(`#${SCROLL_PARENT_ID}`);
+    if (isOnServerSide) return
+    const scrollParent = document.querySelector(`#${SCROLL_PARENT_ID}`)
     if (scrollParent) {
-      setParent(scrollParent as HTMLDivElement);
+      setParent(scrollParent as HTMLDivElement)
     }
-  }, []);
+  }, [])
 
-  return parent;
-};
+  return parent
+}

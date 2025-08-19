@@ -1,23 +1,23 @@
-import { Button, Modal } from '@lobehub/ui';
-import { FormInstance } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Modal }
+import { FormInstance }
+import isEqual from 'fast-deep-equal'
+import { memo, useState }
+import { useTranslation }
 
-import { useUserStore } from '@/store/user';
-import { modelConfigSelectors } from '@/store/user/selectors';
+import { useUserStore }
+import { modelConfigSelectors }
 
-import ModelConfigForm from './Form';
+import ModelConfigForm from './Form'
 
-interface ModelConfigModalProps {
+interface modelconfigmodalprops {
   provider?: string;
   showAzureDeployName?: boolean;
 }
 
 const ModelConfigModal = memo<ModelConfigModalProps>(({ showAzureDeployName, provider }) => {
-  const { t } = useTranslation('setting');
-  const { t: tc } = useTranslation('common');
-  const [formInstance, setFormInstance] = useState<FormInstance>();
+  const { t } = useTranslation('setting')
+  const { t: tc } = useTranslation('common')
+  const [formInstance, setFormInstance] = useState<FormInstance>()
 
   const [open, id, editingProvider, dispatchCustomModelCards, toggleEditingCustomModelCard] =
     useUserStore((s) => [
@@ -26,16 +26,16 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ showAzureDeployName, pro
       s.editingCustomCardModel?.provider,
       s.dispatchCustomModelCards,
       s.toggleEditingCustomModelCard,
-    ]);
+    ])
 
   const modelCard = useUserStore(
     modelConfigSelectors.getCustomModelCard({ id, provider: editingProvider }),
     isEqual,
-  );
+  )
 
   const closeModal = () => {
-    toggleEditingCustomModelCard(undefined);
-  };
+    toggleEditingCustomModelCard(undefined)
+  }
 
   return (
     <Modal
@@ -47,12 +47,12 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ showAzureDeployName, pro
         <Button
           key="ok"
           onClick={() => {
-            if (!editingProvider || !id || !formInstance) return;
-            const data = formInstance.getFieldsValue();
+            if (!editingProvider || !id || !formInstance) return
+            const data = formInstance.getFieldsValue()
 
-            dispatchCustomModelCards(editingProvider as any, { id, type: 'update', value: data });
+            dispatchCustomModelCards(editingProvider as any, { id, type: 'update', value: data })
 
-            closeModal();
+            closeModal()
           }}
           style={{ marginInlineStart: '16px' }}
           type="primary"
@@ -72,6 +72,6 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ showAzureDeployName, pro
         showAzureDeployName={showAzureDeployName}
       />
     </Modal>
-  );
-});
-export default ModelConfigModal;
+  )
+})
+export default ModelConfigModal

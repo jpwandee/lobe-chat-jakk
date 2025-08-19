@@ -1,13 +1,13 @@
-import { ProviderIcon } from '@lobehub/icons';
-import { uniqBy } from 'lodash-es';
-import { LayoutPanelTopIcon } from 'lucide-react';
-import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ProviderIcon }
+import { uniqBy }
+import { LayoutPanelTopIcon }
+import { useMemo }
+import { useTranslation }
 
-import { DEFAULT_MODEL_PROVIDER_LIST } from '@/config/modelProviders';
+import { DEFAULT_MODEL_PROVIDER_LIST }
 
-export const useCategory = () => {
-  const { t } = useTranslation('discover');
+export const usecategory = () => {
+  const { t } = useTranslation('discover')
 
   const items = useMemo(
     () =>
@@ -16,10 +16,10 @@ export const useCategory = () => {
           icon: <ProviderIcon provider={item.id} size={18} type={'mono'} />,
           key: item.id,
           label: item.name,
-        };
+        }
       }),
     [],
-  );
+  )
 
   return useMemo(
     () => [
@@ -31,11 +31,11 @@ export const useCategory = () => {
       ...items,
     ],
     [t, items],
-  );
-};
+  )
+}
 
-export const useCategoryItem = (key?: string) => {
-  const items = useCategory();
-  if (!key) return;
-  return items.find((item) => item.key === key);
-};
+export const usecategoryitem = (key?: string) => {
+  const items = useCategory()
+  if (!key) return
+  return items.find((item) => item.key === key)
+}

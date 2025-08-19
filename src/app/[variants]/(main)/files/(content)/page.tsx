@@ -1,14 +1,15 @@
-'use client';
+'use client'
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation }
 
-import { useFileCategory } from '@/app/[variants]/(main)/files/hooks/useFileCategory';
-import FileManager from '@/features/FileManager';
-import { FilesTabs } from '@/types/files';
+import { useFileCategory }
+import FileManager from '@/features/FileManager'
+import { FilesTabs }
 
 export default () => {
-  const { t } = useTranslation('file');
-  const [category] = useFileCategory();
+  const { t }
+  const [category] = useFileCategory()
 
-  return <FileManager category={category} title={t(`tab.${category as FilesTabs}`)} />;
-};
+  return <filemanager category={category}
+  title={t(`tab.${category as FilesTabs}`)} />
+}

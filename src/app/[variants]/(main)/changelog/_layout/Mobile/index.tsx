@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactNode }
 
-import MobileContentLayout from '@/components/server/MobileNavLayout';
+import MobileContentLayout from '@/components/server/MobileNavLayout'
 
-import Hero from '../../features/Hero';
-import Header from './Header';
+import Hero from '../../features/Hero'
+import Header from './Header'
 
-type Props = { children: ReactNode };
+type props = { children: reactnode }
 
 const Layout = ({ children }: Props) => {
   return (
@@ -16,6 +16,6 @@ const Layout = ({ children }: Props) => {
   );
 };
 
-Layout.displayName = 'MobileChangelogLayout';
+Layout.displayName = 'MobileChangelogLayout'
 
-export default Layout;
+export default Layout

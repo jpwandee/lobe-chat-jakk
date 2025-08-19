@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { useQueryState } from 'nuqs';
+import { useQueryState }
 
-import { useImageStore } from '@/store/image';
+import { useImageStore }
 
-import Content from './Content';
-import EmptyState from './EmptyState';
+import Content from './Content'
+import EmptyState from './EmptyState'
 
-const ImageWorkspace = () => {
+const imageworkspace = () => {
   const [topic] = useQueryState('topic');
   const isCreatingWithNewTopic = useImageStore((s) => s.isCreatingWithNewTopic);
 
@@ -17,7 +17,7 @@ const ImageWorkspace = () => {
   }
 
   // 有 topic 参数且不在创建新 topic 状态时显示主要内容
-  return <Content />;
-};
+  return <Content />
+}
 
-export default ImageWorkspace;
+export default ImageWorkspace

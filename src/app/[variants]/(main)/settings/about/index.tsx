@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { SiDiscord, SiGithub, SiMedium, SiRss, SiX } from '@icons-pack/react-simple-icons';
-import { Form } from '@lobehub/ui';
-import { Divider } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { SiDiscord, SiGithub, SiMedium, SiRss, SiX }
+import { Form }
+import { Divider }
+import { createStyles }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { BRANDING_EMAIL, BRANDING_NAME, SOCIAL_URL } from '@/const/branding';
-import { BLOG, OFFICIAL_SITE, PRIVACY_URL, TERMS_URL, mailTo } from '@/const/url';
+import { BRANDING_EMAIL, BRANDING_NAME, SOCIAL_URL }
+import { BLOG, OFFICIAL_SITE, PRIVACY_URL, TERMS_URL, mailTo }
 
-import AboutList from './features/AboutList';
-import Analytics from './features/Analytics';
-import ItemCard from './features/ItemCard';
-import ItemLink from './features/ItemLink';
-import Version from './features/Version';
+import AboutList from './features/AboutList'
+import Analytics from './features/Analytics'
+import ItemCard from './features/ItemCard'
+import ItemLink from './features/ItemLink'
+import Version from './features/Version'
 
 const useStyles = createStyles(({ css, token }) => ({
   title: css`
-    font-size: 14px;
-    font-weight: bold;
-    color: ${token.colorTextSecondary};
+    font-size: 14px
+    font-weight: bold
+    color: ${token.colorTextSecondary}
   `,
-}));
+}))
 
-const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { t } = useTranslation('common');
-  const { styles } = useStyles();
+const page = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { t } = useTranslation('common')
+  const { styles } = useStyles()
 
   return (
     <>
@@ -121,9 +121,9 @@ const Page = memo<{ mobile?: boolean }>(({ mobile }) => {
       </Form.Group>
       <Analytics />
     </>
-  );
-});
+  )
+})
 
-Page.displayName = 'AboutSetting';
+Page.displayName = 'AboutSetting'
 
-export default Page;
+export default Page

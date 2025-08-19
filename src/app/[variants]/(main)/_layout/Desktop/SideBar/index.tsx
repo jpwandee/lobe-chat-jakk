@@ -1,33 +1,34 @@
-'use client';
+'use client'
 
-import { SideNav } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { Suspense, memo } from 'react';
+import { SideNav }
+import { useTheme }
+import { Suspense, memo }
 
-import { isDesktop } from '@/const/version';
-import { useActiveTabKey } from '@/hooks/useActiveTabKey';
-import { usePinnedAgentState } from '@/hooks/usePinnedAgentState';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { electronStylish } from '@/styles/electron';
+import { isDesktop }
+import { useActiveTabKey }
+import { usePinnedAgentState }
+import { useGlobalStore }
+import { systemStatusSelectors }
+import { featureFlagsSelectors, useServerConfigStore }
+import { electronStylish }
 
-import Avatar from './Avatar';
-import BottomActions from './BottomActions';
-import PinList from './PinList';
-import TopActions from './TopActions';
+import Avatar from './Avatar'
+import BottomActions from './BottomActions'
+import PinList from './PinList'
+import TopActions from './TopActions'
 
-const Top = () => {
-  const [isPinned] = usePinnedAgentState();
-  const sidebarKey = useActiveTabKey();
+const top = () => {
+  const [isPinned] = usePinnedAgentState()
+  const sidebarKey = useActiveTabKey()
 
-  return <TopActions isPinned={isPinned} tab={sidebarKey} />;
-};
+  return <topactions ispinned={isPinned}
+  tab={sidebarKey} />
+}
 
 const Nav = memo(() => {
-  const theme = useTheme();
-  const inZenMode = useGlobalStore(systemStatusSelectors.inZenMode);
-  const { showPinList } = useServerConfigStore(featureFlagsSelectors);
+  const theme = useTheme()
+  const inZenMode = useGlobalStore(systemStatusSelectors.inZenMode)
+  const { showPinList } = useServerConfigStore(featureFlagsSelectors)
 
   return (
     !inZenMode && (
@@ -60,9 +61,9 @@ const Nav = memo(() => {
         }
       />
     )
-  );
-});
+  )
+})
 
-Nav.displayName = 'DesktopNav';
+Nav.displayName = 'DesktopNav'
 
-export default Nav;
+export default Nav

@@ -1,120 +1,120 @@
-'use client';
+'use client'
 
-import { NetworkProxySettings } from '@lobechat/electron-client-ipc';
-import { Alert, Block, Text } from '@lobehub/ui';
-import { App, Button, Divider, Form, Input, Radio, Skeleton, Space, Switch } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { NetworkProxySettings }
+import { Alert, Block, Text }
+import { App, Button, Divider, Form, Input, Radio, Skeleton, Space, Switch }
+import isEqual from 'fast-deep-equal'
+import { useCallback, useEffect, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { desktopSettingsService } from '@/services/electron/settings';
-import { useElectronStore } from '@/store/electron';
+import { desktopSettingsService }
+import { useElectronStore }
 
-interface ProxyTestResult {
+interface proxytestresult {
   message?: string;
   responseTime?: number;
   success: boolean;
 }
 
-const ProxyForm = () => {
-  const { t } = useTranslation('electron');
-  const [form] = Form.useForm();
-  const { message } = App.useApp();
-  const [testUrl, setTestUrl] = useState('https://www.google.com');
-  const [isTesting, setIsTesting] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [testResult, setTestResult] = useState<ProxyTestResult | null>(null);
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+const proxyform = () => {
+  const { t }
+  const [form] = Form.useForm()
+  const { message }
+  const [testUrl, setTestUrl] = useState('https://www.google.com')
+  const [isTesting, setIsTesting] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [testResult, setTestResult] = useState<ProxyTestResult | null>(null)
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
 
-  const isEnableProxy = Form.useWatch('enableProxy', form);
-  const proxyRequireAuth = Form.useWatch('proxyRequireAuth', form);
+  const isEnableProxy = Form.useWatch('enableProxy', form)
+  const proxyRequireAuth = Form.useWatch('proxyRequireAuth', form)
 
   const [setProxySettings, useGetProxySettings] = useElectronStore((s) => [
     s.setProxySettings,
     s.useGetProxySettings,
-  ]);
-  const { data: proxySettings, isLoading } = useGetProxySettings();
+  ])
+  const { data: proxysettings, isloading }
 
   useEffect(() => {
     if (proxySettings) {
-      form.setFieldsValue(proxySettings);
-      setHasUnsavedChanges(false);
+      form.setFieldsValue(proxySettings)
+      setHasUnsavedChanges(false)
     }
-  }, [form, proxySettings]);
+  }, [form, proxySettings])
 
   // 监听表单变化
   const handleValuesChange = useCallback(() => {
-    setHasUnsavedChanges(true);
-    setTestResult(null); // 清除之前的测试结果
-  }, []);
+    setHasUnsavedChanges(true)
+    setTestResult(null) // 清除之前的测试结果
+  }, [])
 
-  const updateFormValue = (value: any) => {
-    const preValues = form.getFieldsValue();
-    form.setFieldsValue(value);
-    const newValues = form.getFieldsValue();
-    if (isEqual(newValues, preValues)) return;
+  const updateformvalue = (value: any) => {
+    const preValues = form.getFieldsValue()
+    form.setFieldsValue(value)
+    const newValues = form.getFieldsValue()
+    if (isEqual(newValues, preValues)) return
 
-    handleValuesChange();
-  };
+    handleValuesChange()
+  }
 
   // 保存配置
   const handleSave = useCallback(async () => {
     try {
-      setIsSaving(true);
-      const values = await form.validateFields();
-      await setProxySettings(values);
-      setHasUnsavedChanges(false);
-      message.success(t('proxy.saveSuccess'));
+      setIsSaving(true)
+      const values = await form.validateFields()
+      await setProxySettings(values)
+      setHasUnsavedChanges(false)
+      message.success(t('proxy.saveSuccess'))
     } catch (error) {
       if (error instanceof Error) {
-        message.error(t('proxy.saveFailed', { error: error.message }));
+        message.error(t('proxy.saveFailed', { error: error.message }))
       }
     } finally {
-      setIsSaving(false);
+      setIsSaving(false)
     }
-  }, [form, t, message]);
+  }, [form, t, message])
 
   // 重置配置
   const handleReset = useCallback(() => {
     if (proxySettings) {
-      form.setFieldsValue(proxySettings);
-      setHasUnsavedChanges(false);
-      setTestResult(null);
+      form.setFieldsValue(proxySettings)
+      setHasUnsavedChanges(false)
+      setTestResult(null)
     }
-  }, [form, proxySettings]);
+  }, [form, proxySettings])
 
   // 测试代理配置
   const handleTest = useCallback(async () => {
     try {
-      setIsTesting(true);
-      setTestResult(null);
+      setIsTesting(true)
+      setTestResult(null)
 
       // 验证表单并获取当前配置
-      const values = await form.validateFields();
+      const values = await form.validateFields()
       const config: NetworkProxySettings = {
         ...proxySettings,
         ...values,
-      };
+      }
 
       // 使用新的 testProxyConfig 方法测试用户正在配置的代理
-      const result = await desktopSettingsService.testProxyConfig(config, testUrl);
+      const result = await desktopSettingsService.testProxyConfig(config, testUrl)
 
-      setTestResult(result);
+      setTestResult(result)
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
       const result: ProxyTestResult = {
         message: errorMessage,
         success: false,
-      };
-      setTestResult(result);
-      message.error(t('proxy.testFailed'));
+      }
+      setTestResult(result)
+      message.error(t('proxy.testFailed'))
     } finally {
-      setIsTesting(false);
+      setIsTesting(false)
     }
-  }, [proxySettings, testUrl]);
+  }, [proxySettings, testUrl])
 
-  if (isLoading) return <Skeleton />;
+  if (isLoading) return <Skeleton />
 
   return (
     <Form
@@ -141,7 +141,7 @@ const ProxyForm = () => {
               <Switch
                 checked={isEnableProxy}
                 onChange={(checked) => {
-                  updateFormValue({ enableProxy: checked });
+                  updateFormValue({ enableProxy: checked })
                 }}
               />
             </Flexbox>
@@ -238,7 +238,7 @@ const ProxyForm = () => {
                     checked={proxyRequireAuth}
                     disabled={!isEnableProxy}
                     onChange={(checked) => {
-                      updateFormValue({ proxyRequireAuth: checked });
+                      updateFormValue({ proxyRequireAuth: checked })
                     }}
                   />
                 </Flexbox>
@@ -363,7 +363,7 @@ const ProxyForm = () => {
         </Space>
       </Flexbox>
     </Form>
-  );
-};
+  )
+}
 
-export default ProxyForm;
+export default ProxyForm

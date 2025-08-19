@@ -1,19 +1,19 @@
-import { ActionIcon, Button, Dropdown, Text } from '@lobehub/ui';
-import { App, Skeleton, Space } from 'antd';
-import { useTheme } from 'antd-style';
-import { CircleX, EllipsisVertical, LucideRefreshCcwDot, PlusIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Button, Dropdown, Text }
+import { App, Skeleton, Space }
+import { useTheme }
+import { CircleX, EllipsisVertical, LucideRefreshCcwDot, PlusIcon }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useAiInfraStore } from '@/store/aiInfra';
-import { aiModelSelectors } from '@/store/aiInfra/selectors';
+import { useIsMobile }
+import { useAiInfraStore }
+import { aiModelSelectors }
 
-import CreateNewModelModal from '../CreateNewModelModal';
-import Search from './Search';
+import CreateNewModelModal from '../CreateNewModelModal'
+import Search from './Search'
 
-interface ModelFetcherProps {
+interface modelfetcherprops {
   provider: string;
   showAddNewModel?: boolean;
   showModelFetcher?: boolean;
@@ -21,9 +21,9 @@ interface ModelFetcherProps {
 
 const ModelTitle = memo<ModelFetcherProps>(
   ({ provider, showAddNewModel = true, showModelFetcher = true }) => {
-    const theme = useTheme();
-    const { t } = useTranslation('modelProvider');
-    const { modal, message } = App.useApp();
+    const theme = useTheme()
+    const { t } = useTranslation('modelProvider')
+    const { modal, message } = App.useApp()
     const [
       searchKeyword,
       totalModels,
@@ -42,15 +42,15 @@ const ModelTitle = memo<ModelFetcherProps>(
       s.clearRemoteModels,
       s.clearModelsByProvider,
       s.useFetchAiProviderModels,
-    ]);
+    ])
 
-    const { isLoading } = useFetchAiProviderModels(provider);
+    const { isLoading } = useFetchAiProviderModels(provider)
 
-    const [fetchRemoteModelsLoading, setFetchRemoteModelsLoading] = useState(false);
-    const [clearRemoteModelsLoading, setClearRemoteModelsLoading] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [fetchRemoteModelsLoading, setFetchRemoteModelsLoading] = useState(false)
+    const [clearRemoteModelsLoading, setClearRemoteModelsLoading] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
-    const mobile = useIsMobile();
+    const mobile = useIsMobile()
 
     return (
       <Flexbox
@@ -82,9 +82,9 @@ const ModelTitle = memo<ModelFetcherProps>(
                       icon={CircleX}
                       loading={clearRemoteModelsLoading}
                       onClick={async () => {
-                        setClearRemoteModelsLoading(true);
-                        await clearObtainedModels(provider);
-                        setClearRemoteModelsLoading(false);
+                        setClearRemoteModelsLoading(true)
+                        await clearObtainedModels(provider)
+                        setClearRemoteModelsLoading(false)
                       }}
                       size={'small'}
                       title={t('providerModels.list.fetcher.clear')}
@@ -101,7 +101,7 @@ const ModelTitle = memo<ModelFetcherProps>(
               {!mobile && (
                 <Search
                   onChange={(value) => {
-                    useAiInfraStore.setState({ modelSearchKeyword: value });
+                    useAiInfraStore.setState({ modelSearchKeyword: value })
                   }}
                   value={searchKeyword}
                 />
@@ -112,13 +112,13 @@ const ModelTitle = memo<ModelFetcherProps>(
                     icon={LucideRefreshCcwDot}
                     loading={fetchRemoteModelsLoading}
                     onClick={async () => {
-                      setFetchRemoteModelsLoading(true);
+                      setFetchRemoteModelsLoading(true)
                       try {
-                        await fetchRemoteModelList(provider);
+                        await fetchRemoteModelList(provider)
                       } catch (e) {
-                        console.error(e);
+                        console.error(e)
                       }
-                      setFetchRemoteModelsLoading(false);
+                      setFetchRemoteModelsLoading(false)
                     }}
                     size={'small'}
                   >
@@ -132,7 +132,7 @@ const ModelTitle = memo<ModelFetcherProps>(
                     <Button
                       icon={PlusIcon}
                       onClick={() => {
-                        setShowModal(true);
+                        setShowModal(true)
                       }}
                       size={'small'}
                     />
@@ -149,11 +149,11 @@ const ModelTitle = memo<ModelFetcherProps>(
                           modal.confirm({
                             content: t('providerModels.list.resetAll.conform'),
                             onOk: async () => {
-                              await clearModelsByProvider(provider);
-                              message.success(t('providerModels.list.resetAll.success'));
+                              await clearModelsByProvider(provider)
+                              message.success(t('providerModels.list.resetAll.success'))
                             },
                             title: t('providerModels.list.resetAll.title'),
-                          });
+                          })
                         },
                       },
                     ],
@@ -169,14 +169,14 @@ const ModelTitle = memo<ModelFetcherProps>(
         {mobile && (
           <Search
             onChange={(value) => {
-              useAiInfraStore.setState({ modelSearchKeyword: value });
+              useAiInfraStore.setState({ modelSearchKeyword: value })
             }}
             value={searchKeyword}
             variant={'filled'}
           />
         )}
       </Flexbox>
-    );
+    )
   },
-);
-export default ModelTitle;
+)
+export default ModelTitle

@@ -1,11 +1,11 @@
-import { Suspense } from 'react';
+import { Suspense } from 'react'
 
-import Loading from '@/components/Loading/BrandTextLoading';
+import Loading from '@/components/Loading/BrandTextLoading'
 
-import AuthSignInBox from './AuthSignInBox';
+import AuthSignInBox from './AuthSignInBox'
 
 export default () => (
   <Suspense fallback={<Loading />}>
     <AuthSignInBox />
   </Suspense>
-);
+)

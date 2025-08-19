@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 import NProgress from '@/components/NProgress';
 
@@ -20,6 +20,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'DesktopDiscoverStoreLayout';
+Layout.displayName = 'DesktopDiscoverStoreLayout'
 
-export default Layout;
+export default Layout

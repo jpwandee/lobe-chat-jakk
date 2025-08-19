@@ -1,38 +1,38 @@
-'use client';
+'use client'
 
-import { Github, ProviderCombine } from '@lobehub/icons';
-import { ActionIcon } from '@lobehub/ui';
-import { createStyles, useResponsive } from 'antd-style';
-import { GlobeIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Github, ProviderCombine }
+import { ActionIcon }
+import { createStyles, useResponsive }
+import { GlobeIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { useDetailContext } from './DetailProvider';
+import { useDetailContext }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      color: ${token.colorTextSecondary};
+      color: ${token.colorTextSecondary}
     `,
     time: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     version: css`
-      font-family: ${token.fontFamilyCode};
-      font-size: 13px;
+      font-family: ${token.fontFamilyCode}
+      font-size: 13px
     `,
-  };
-});
+  }
+})
 
-const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
-  const { t } = useTranslation('providers');
-  const { identifier, url, modelsUrl, name } = useDetailContext();
-  const { theme } = useStyles();
-  const { mobile = isMobile } = useResponsive();
+const header = memo< { mobile?: boolean }>(({ mobile: isMobile }) => {
+  const { t } = useTranslation('providers')
+  const { identifier, url, modelsUrl, name } = useDetailContext()
+  const { theme } = useStyles()
+  const { mobile = isMobile } = useResponsive()
 
   return (
     <Flexbox gap={12}>
@@ -93,7 +93,7 @@ const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
         {t(`${identifier}.description`)}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

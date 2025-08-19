@@ -1,17 +1,17 @@
-import { Suspense } from 'react';
+import { Suspense }
 
-import SkeletonLoading from '@/components/Loading/SkeletonLoading';
+import SkeletonLoading from '@/components/Loading/SkeletonLoading'
 
-import CategoryContent from './features/CategoryContent';
+import CategoryContent from './features/CategoryContent'
 
-const Category = () => {
+const category = () => {
   return (
     <Suspense fallback={<SkeletonLoading paragraph={{ rows: 7 }} title={false} />}>
       <CategoryContent />
     </Suspense>
-  );
-};
+  )
+}
 
-Category.displayName = 'SettingCategory';
+Category.displayName = 'SettingCategory'
 
-export default Category;
+export default Category

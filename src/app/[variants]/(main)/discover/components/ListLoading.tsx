@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { Block, Grid } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useResponsive, useTheme } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Block, Grid }
+import { Skeleton }
+import { useResponsive, useTheme }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
 const ListLoading = memo(() => {
   return (
@@ -21,12 +21,12 @@ const ListLoading = memo(() => {
         ))}
       </Grid>
     </Flexbox>
-  );
-});
+  )
+})
 
 export const DetailsLoading = memo(() => {
-  const { mobile } = useResponsive();
-  const theme = useTheme();
+  const { mobile } = useResponsive()
+  const theme = useTheme()
   return (
     <Flexbox gap={24}>
       <Flexbox gap={12}>
@@ -71,6 +71,6 @@ export const DetailsLoading = memo(() => {
         </Flexbox>
       </Flexbox>
     </Flexbox>
-  );
-});
-export default ListLoading;
+  )
+})
+export default ListLoading

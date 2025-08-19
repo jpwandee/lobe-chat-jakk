@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import { CheckCircleFilled } from '@ant-design/icons';
-import { TraceNameMap } from '@lobechat/types';
-import { ModelIcon } from '@lobehub/icons';
-import { Alert, Button, Highlighter, Icon, Select } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { Loader2Icon } from 'lucide-react';
-import { ReactNode, memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { CheckCircleFilled }
+import { TraceNameMap }
+import { ModelIcon }
+import { Alert, Button, Highlighter, Icon, Select }
+import { useTheme }
+import { Loader2Icon }
+import { ReactNode, memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useProviderName } from '@/hooks/useProviderName';
-import { chatService } from '@/services/chat';
-import { aiModelSelectors, aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
-import { ChatMessageError } from '@/types/message';
+import { useProviderName }
+import { chatService }
+import { aiModelSelectors, aiProviderSelectors, useAiInfraStore }
+import { ChatMessageError }
 
-const Error = memo<{ error: ChatMessageError }>(({ error }) => {
-  const { t } = useTranslation('error');
-  const providerName = useProviderName(error.body?.provider);
+const error = memo< { error: chatmessageerror }
+  const { t } = useTranslation('error')
+  const providerName = useProviderName(error.body?.provider)
 
   return (
     <Flexbox gap={8} style={{ width: '100%' }}>
@@ -34,70 +34,70 @@ const Error = memo<{ error: ChatMessageError }>(({ error }) => {
         type={'error'}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
 export type CheckErrorRender = (props: {
-  defaultError: ReactNode;
-  error?: ChatMessageError;
-  setError: (error?: ChatMessageError) => void;
-}) => ReactNode;
+  defaultError: ReactNode
+  error?: ChatMessageError
+  setError: (error?: ChatMessageError) => void
+}) => ReactNode
 
-interface ConnectionCheckerProps {
-  checkErrorRender?: CheckErrorRender;
+interface connectioncheckerprops {
+  checkErrorRender?: checkerrorrender;
   model: string;
-  onAfterCheck: () => Promise<void>;
-  onBeforeCheck: () => Promise<void>;
+  onAfterCheck: () => promise<void>;
+  onBeforeCheck: () => promise<void>;
   provider: string;
 }
 
 const Checker = memo<ConnectionCheckerProps>(
   ({ model, provider, checkErrorRender: CheckErrorRender, onBeforeCheck, onAfterCheck }) => {
-    const { t } = useTranslation('setting');
+    const { t } = useTranslation('setting')
 
     const isProviderConfigUpdating = useAiInfraStore(
       aiProviderSelectors.isProviderConfigUpdating(provider),
-    );
-    const totalModels = useAiInfraStore(aiModelSelectors.aiProviderChatModelListIds);
-    const updateAiProviderConfig = useAiInfraStore((s) => s.updateAiProviderConfig);
-    const currentConfig = useAiInfraStore(aiProviderSelectors.providerConfigById(provider));
+    )
+    const totalModels = useAiInfraStore(aiModelSelectors.aiProviderChatModelListIds)
+    const updateAiProviderConfig = useAiInfraStore((s) => s.updateAiProviderConfig)
+    const currentConfig = useAiInfraStore(aiProviderSelectors.providerConfigById(provider))
 
-    const [loading, setLoading] = useState(false);
-    const [pass, setPass] = useState(false);
-    const [checkModel, setCheckModel] = useState(model);
+    const [loading, setLoading] = useState(false)
+    const [pass, setPass] = useState(false)
+    const [checkModel, setCheckModel] = useState(model)
 
-    const theme = useTheme();
-    const [error, setError] = useState<ChatMessageError | undefined>();
+    const theme = useTheme()
+    const [error, setError] = useState<ChatMessageError | undefined>()
 
     const checkConnection = async () => {
       // Clear previous check results immediately
-      setPass(false);
-      setError(undefined);
+      setPass(false)
+      setError(undefined)
 
-      let isError = false;
+      let isError = false
 
       await chatService.fetchPresetTaskResult({
         onError: (_, rawError) => {
-          setError(rawError);
-          setPass(false);
-          isError = true;
+          setError(rawError)
+          setPass(false)
+          isError = true
         },
 
         onFinish: async (value) => {
           if (!isError && value) {
-            setError(undefined);
-            setPass(true);
+            setError(undefined)
+            setPass(true)
           } else {
-            setPass(false);
+            setPass(false)
             setError({
               body: value,
               message: t('response.ConnectionCheckFailed', { ns: 'error' }),
               type: 'ConnectionCheckFailed',
-            });
+            })
           }
         },
         onLoadingChange: (loading) => {
-          setLoading(loading);
+          setLoading(loading)
         },
         params: {
           messages: [
@@ -114,16 +114,16 @@ const Checker = memo<ConnectionCheckerProps>(
           topicId: model,
           traceName: TraceNameMap.ConnectivityChecker,
         },
-      });
-    };
+      })
+    }
 
-    const defaultError = error ? <Error error={error as ChatMessageError} /> : null;
+    const defaultError = error ? <Error error={error as ChatMessageError} /> : null
 
     const errorContent = CheckErrorRender ? (
       <CheckErrorRender defaultError={defaultError} error={error} setError={setError} />
     ) : (
       defaultError
-    );
+    )
 
     return (
       <Flexbox gap={8}>
@@ -131,11 +131,11 @@ const Checker = memo<ConnectionCheckerProps>(
           <Select
             listItemHeight={36}
             onSelect={async (value) => {
-              setCheckModel(value);
+              setCheckModel(value)
               await updateAiProviderConfig(provider, {
                 ...currentConfig,
                 checkModel: value,
-              });
+              })
             }}
             optionRender={({ value }) => {
               return (
@@ -143,7 +143,7 @@ const Checker = memo<ConnectionCheckerProps>(
                   <ModelIcon model={value as string} size={20} />
                   {value}
                 </Flexbox>
-              );
+              )
             }}
             options={totalModels.map((id) => ({ label: id, value: id }))}
             style={{
@@ -158,11 +158,11 @@ const Checker = memo<ConnectionCheckerProps>(
             disabled={isProviderConfigUpdating}
             loading={loading}
             onClick={async () => {
-              await onBeforeCheck();
+              await onBeforeCheck()
               try {
-                await checkConnection();
+                await checkConnection()
               } finally {
-                await onAfterCheck();
+                await onAfterCheck()
               }
             }}
           >
@@ -182,8 +182,8 @@ const Checker = memo<ConnectionCheckerProps>(
         )}
         {error && errorContent}
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default Checker;
+export default Checker

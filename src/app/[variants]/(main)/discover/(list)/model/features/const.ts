@@ -1,9 +1,10 @@
-import { DEFAULT_MODEL_PROVIDER_LIST } from '@/config/modelProviders';
+import { DEFAULT_MODEL_PROVIDER_LIST }
 
-const providerMap: { [key: string]: string } = {};
+const providerMap: { [key: string]: string }
+= {}
 
 DEFAULT_MODEL_PROVIDER_LIST.filter((item) => item.chatModels.length > 0).forEach((item) => {
-  providerMap[item.id] = item.name;
-});
+  providerMap[item.id] = item.name
+})
 
-export { providerMap };
+export { providerMap }

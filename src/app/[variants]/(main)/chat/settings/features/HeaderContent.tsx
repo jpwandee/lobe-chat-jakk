@@ -1,21 +1,21 @@
-import { ActionIcon, Button, Dropdown, type MenuProps } from '@lobehub/ui';
-import { HardDriveDownload } from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, Button, Dropdown, type MenuProps }
+import { HardDriveDownload }
+import { memo, useMemo }
+import { useTranslation }
 
-import { HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import { isServerMode } from '@/const/version';
-import { configService } from '@/services/config';
-import { useServerConfigStore } from '@/store/serverConfig';
-import { useSessionStore } from '@/store/session';
+import { HEADER_ICON_SIZE }
+import { isServerMode }
+import { configService }
+import { useServerConfigStore }
+import { useSessionStore }
 
-import SubmitAgentButton from './SubmitAgentButton';
+import SubmitAgentButton from './SubmitAgentButton'
 
-export const HeaderContent = memo<{ mobile?: boolean; modal?: boolean }>(({ modal }) => {
-  const { t } = useTranslation('setting');
-  const id = useSessionStore((s) => s.activeId);
+export const headercontent = memo< { mobile?: boolean; modal?: boolean }>(({ modal }) => {
+  const { t } = useTranslation('setting')
+  const id = useSessionStore((s) => s.activeId)
 
-  const mobile = useServerConfigStore((s) => s.isMobile);
+  const mobile = useServerConfigStore((s) => s.isMobile)
 
   const items = useMemo<MenuProps['items']>(
     () =>
@@ -26,23 +26,23 @@ export const HeaderContent = memo<{ mobile?: boolean; modal?: boolean }>(({ moda
               key: 'agent',
               label: <div>{t('exportType.agent', { ns: 'common' })}</div>,
               onClick: () => {
-                if (!id) return;
+                if (!id) return
 
-                configService.exportSingleAgent(id);
+                configService.exportSingleAgent(id)
               },
             },
             {
               key: 'agentWithMessage',
               label: <div>{t('exportType.agentWithMessage', { ns: 'common' })}</div>,
               onClick: () => {
-                if (!id) return;
+                if (!id) return
 
-                configService.exportSingleSession(id);
+                configService.exportSingleSession(id)
               },
             },
           ],
     [],
-  );
+  )
 
   return (
     <>
@@ -63,7 +63,7 @@ export const HeaderContent = memo<{ mobile?: boolean; modal?: boolean }>(({ moda
         </Dropdown>
       )}
     </>
-  );
-});
+  )
+})
 
-export default HeaderContent;
+export default HeaderContent

@@ -1,67 +1,68 @@
-'use client';
+'use client'
 
-import { Avatar, Button, Text } from '@lobehub/ui';
-import { Card, Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Avatar, Button, Text }
+import { Card, Skeleton }
+import { createStyles }
+import react, { memo }
+import { useTranslation }
+import { Center, Flexbox }
 
-import { useUserStore } from '@/store/user';
-import { userProfileSelectors } from '@/store/user/selectors';
+import { useUserStore }
+import { userProfileSelectors }
 
-import OAuthApplicationLogo from './components/OAuthApplicationLogo';
+import OAuthApplicationLogo from './components/OAuthApplicationLogo'
 
-interface LoginConfirmProps {
+interface loginconfirmprops {
   clientMetadata: {
     clientName?: string;
     isFirstParty?: boolean;
     logo?: string;
   };
+
   uid: string;
 }
 
 const useStyles = createStyles(({ css, token }) => ({
   authButton: css`
-    width: 100%;
-    height: 40px;
-    border-radius: ${token.borderRadius}px;
-    font-weight: 500;
+    width: 100%
+    height: 40px
+    border-radius: ${token.borderRadius}px
+    font-weight: 500
   `,
   card: css`
-    width: 100%;
-    max-width: 500px;
-    border-color: ${token.colorBorderSecondary};
-    border-radius: 12px;
+    width: 100%
+    max-width: 500px
+    border-color: ${token.colorBorderSecondary}
+    border-radius: 12px
 
-    background: ${token.colorBgContainer};
+    background: ${token.colorBgContainer}
   `,
   container: css`
-    width: 100%;
-    min-height: 100vh;
-    color: ${token.colorTextBase};
-    background-color: ${token.colorBgLayout};
+    width: 100%
+    min-height: 100vh
+    color: ${token.colorTextBase}
+    background-color: ${token.colorBgLayout}
   `,
   title: css`
-    margin-block-end: ${token.marginLG}px;
-    color: ${token.colorTextBase};
-    text-align: center;
+    margin-block-end: ${token.marginLG}px
+    color: ${token.colorTextBase}
+    text-align: center
   `,
-}));
+}))
 
 const LoginConfirmClient = memo<LoginConfirmProps>(({ uid, clientMetadata }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('oauth'); // Assuming translations are in 'oauth'
+  const { styles } = useStyles()
+  const { t } = useTranslation('oauth') // Assuming translations are in 'oauth'
 
-  const clientDisplayName = clientMetadata?.clientName || 'the application';
+  const clientDisplayName = clientMetadata?.clientName || 'the application'
 
-  const isUserStateInit = useUserStore((s) => s.isUserStateInit);
-  const avatar = useUserStore(userProfileSelectors.userAvatar);
-  const nickName = useUserStore(userProfileSelectors.nickName);
+  const isUserStateInit = useUserStore((s) => s.isUserStateInit)
+  const avatar = useUserStore(userProfileSelectors.userAvatar)
+  const nickName = useUserStore(userProfileSelectors.nickName)
 
-  const titleText = t('login.title', { clientName: clientDisplayName });
-  const descriptionText = t('login.description', { clientName: clientDisplayName });
-  const buttonText = t('login.button'); // Or "Continue"
+  const titleText = t('login.title', { clientName: clientDisplayName })
+  const descriptionText = t('login.description', { clientName: clientDisplayName })
+  const buttonText = t('login.button') // Or "Continue"
 
   return (
     <Center className={styles.container} gap={16}>
@@ -120,9 +121,9 @@ const LoginConfirmClient = memo<LoginConfirmProps>(({ uid, clientMetadata }) => 
         </Flexbox>
       </Card>
     </Center>
-  );
-});
+  )
+})
 
-LoginConfirmClient.displayName = 'LoginConfirmClient';
+LoginConfirmClient.displayName = 'LoginConfirmClient'
 
-export default LoginConfirmClient;
+export default LoginConfirmClient

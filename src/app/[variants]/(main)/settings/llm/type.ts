@@ -1,5 +1,5 @@
-import { ProviderConfigProps } from './components/ProviderConfig';
+import { ProviderConfigProps }
 
-export interface ProviderItem extends Omit<ProviderConfigProps, 'id'> {
+export interface provideritem extends omit<providerconfigprops, 'id'> {
   id: string;
 }

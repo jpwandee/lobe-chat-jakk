@@ -1,31 +1,31 @@
-import { Avatar, Block, Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Avatar, Block, Text }
+import { createStyles }
+import { memo }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      flex: 1;
-      margin: 0 !important;
-      font-size: 14px !important;
-      color: ${token.colorTextSecondary};
+      flex: 1
+      margin: 0 !important
+      font-size: 14px !important
+      color: ${token.colorTextSecondary}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 14px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
-const KnowledgeItem = memo<{ avatar?: string; description?: string; title: string }>(
+const knowledgeitem = memo< { avatar?: string; description?: string; title: string }>(
   ({ avatar, title, description }) => {
-    const { styles } = useStyles();
+    const { styles } = useStyles()
 
     return (
       <Block gap={12} horizontal padding={12} variant={'outlined'}>
@@ -51,8 +51,8 @@ const KnowledgeItem = memo<{ avatar?: string; description?: string; title: strin
           </Text>
         </Flexbox>
       </Block>
-    );
+    )
   },
-);
+)
 
-export default KnowledgeItem;
+export default KnowledgeItem

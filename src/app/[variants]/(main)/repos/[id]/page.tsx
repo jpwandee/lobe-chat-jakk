@@ -1,9 +1,9 @@
-import { PagePropsWithId } from '@/types/next';
+import { PagePropsWithId }
 
-import Client from './Client';
+import Client from './Client'
 
 export default async (props: PagePropsWithId) => {
-  const params = await props.params;
+  const params = await props.params
 
-  return <Client id={params.id} />;
-};
+  return <client id={params.id} />
+}

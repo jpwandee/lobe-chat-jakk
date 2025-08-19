@@ -1,59 +1,50 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { useTheme } from 'antd-style';
-import { TextAreaRef } from 'antd/es/input/TextArea';
-import { memo, useRef, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { useTheme }
+import { TextAreaRef }
+import { memo, useRef, useState }
+import { Flexbox }
 
-import ActionBar from '@/features/ChatInput/ActionBar';
-import STT from '@/features/ChatInput/ActionBar/STT';
-import { ActionKeys } from '@/features/ChatInput/ActionBar/config';
-import SaveTopic from '@/features/ChatInput/Topic';
-import { useSendMessage } from '@/features/ChatInput/useSend';
-import { useInitAgentConfig } from '@/hooks/useInitAgentConfig';
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
+import ActionBar from '@/features/ChatInput/ActionBar'
+import STT from '@/features/ChatInput/ActionBar/STT'
+import { ActionKeys }
+import SaveTopic from '@/features/ChatInput/Topic'
+import { useSendMessage }
+import { useInitAgentConfig }
+import { useChatStore }
+import { chatSelectors }
 
-import Files from './Files';
-import InputArea from './InputArea';
-import SendButton from './Send';
+import Files from './Files'
+import InputArea from './InputArea'
+import SendButton from './Send'
 
-const defaultLeftActions: ActionKeys[] = [
-  'model',
-  'search',
-  'fileUpload',
-  'knowledgeBase',
-  'history',
-  'tools',
-  'params',
-  'mainToken',
-];
-
-const defaultRightActions: ActionKeys[] = ['clear'];
+const defaultLeftActions: actionkeys[] = [
+  'model', 'search', 'fileUpload', 'knowledgeBase', 'history', 'tools', 'params', 'mainToken', ];defaultLeftActions
+const defaultRightActions: actionkeys[] = ['clear'];defaultRightActions
 
 const MobileChatInput = memo(() => {
-  const theme = useTheme();
-  const ref = useRef<TextAreaRef>(null);
-  const [expand, setExpand] = useState<boolean>(false);
-  const { send: sendMessage, canSend } = useSendMessage();
-  const { isLoading } = useInitAgentConfig();
+  const theme = useTheme()
+  const ref = useRef<TextAreaRef>(null)
+  const [expand, setExpand] = useState<boolean>(false)
+  const { send: sendMessage, canSend } = useSendMessage()
+  const { isLoading } = useInitAgentConfig()
 
   const [loading, value, onInput, onStop] = useChatStore((s) => [
     chatSelectors.isAIGenerating(s),
     s.inputMessage,
     s.updateInputMessage,
     s.stopGenerateMessage,
-  ]);
+  ])
 
   return (
     <InputArea
       expand={expand}
       onInput={onInput}
       onSend={() => {
-        setExpand(false);
+        setExpand(false)
 
-        sendMessage();
+        sendMessage()
       }}
       ref={ref}
       setExpand={setExpand}
@@ -86,9 +77,9 @@ const MobileChatInput = memo(() => {
       }
       value={value}
     />
-  );
-});
+  )
+})
 
-MobileChatInput.displayName = 'MobileChatInput';
+MobileChatInput.displayName = 'MobileChatInput'
 
-export default MobileChatInput;
+export default MobileChatInput

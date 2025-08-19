@@ -1,6 +1,6 @@
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox }
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 
 const Layout = ({ children }: LayoutProps) => {
   return (
@@ -15,6 +15,6 @@ const Layout = ({ children }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'DesktopRepoLayout';
+Layout.displayName = 'DesktopRepoLayout'
 
-export default Layout;
+export default Layout

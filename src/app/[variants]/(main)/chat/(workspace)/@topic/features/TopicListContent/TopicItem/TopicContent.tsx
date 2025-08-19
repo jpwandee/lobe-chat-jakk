@@ -1,6 +1,7 @@
-import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
+import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text }
+import { App }
+import { createStyles }
+
 import {
   LucideCopy,
   LucideLoader2,
@@ -9,31 +10,31 @@ import {
   Star,
   Trash,
   Wand2,
-} from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+}
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import BubblesLoading from '@/components/BubblesLoading';
-import { LOADING_FLAT } from '@/const/message';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useChatStore } from '@/store/chat';
+import BubblesLoading from '@/components/BubblesLoading'
+import { LOADING_FLAT }
+import { useIsMobile }
+import { useChatStore }
 
 const useStyles = createStyles(({ css }) => ({
   content: css`
-    position: relative;
-    overflow: hidden;
-    flex: 1;
+    position: relative
+    overflow: hidden
+    flex: 1
   `,
   title: css`
-    flex: 1;
-    height: 28px;
-    line-height: 28px;
-    text-align: start;
+    flex: 1
+    height: 28px
+    line-height: 28px
+    text-align: start
   `,
-}));
+}))
 
-interface TopicContentProps {
+interface topiccontentprops {
   fav?: boolean;
   id: string;
   showMore?: boolean;
@@ -41,9 +42,9 @@ interface TopicContentProps {
 }
 
 const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
-  const { t } = useTranslation(['topic', 'common']);
+  const { t } = useTranslation(['topic', 'common'])
 
-  const mobile = useIsMobile();
+  const mobile = useIsMobile()
 
   const [
     editing,
@@ -61,14 +62,14 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
     s.autoRenameTopicTitle,
     s.duplicateTopic,
     s.topicLoadingIds.includes(id),
-  ]);
-  const { styles, theme } = useStyles();
+  ])
+  const { styles, theme } = useStyles()
 
   const toggleEditing = (visible?: boolean) => {
-    useChatStore.setState({ topicRenamingId: visible ? id : '' });
-  };
+    useChatStore.setState({ topicRenamingId: visible ? id : '' })
+  }
 
-  const { modal } = App.useApp();
+  const { modal } = App.useApp()
 
   const items = useMemo<MenuProps['items']>(
     () => [
@@ -77,7 +78,7 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         key: 'autoRename',
         label: t('actions.autoRename'),
         onClick: () => {
-          autoRenameTopicTitle(id);
+          autoRenameTopicTitle(id)
         },
       },
       {
@@ -85,7 +86,7 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         key: 'rename',
         label: t('rename', { ns: 'common' }),
         onClick: () => {
-          toggleEditing(true);
+          toggleEditing(true)
         },
       },
       {
@@ -96,7 +97,7 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         key: 'duplicate',
         label: t('actions.duplicate'),
         onClick: () => {
-          duplicateTopic(id);
+          duplicateTopic(id)
         },
       },
       // {
@@ -121,21 +122,21 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         key: 'delete',
         label: t('delete', { ns: 'common' }),
         onClick: () => {
-          if (!id) return;
+          if (!id) return
 
           modal.confirm({
             centered: true,
             okButtonProps: { danger: true },
             onOk: async () => {
-              await removeTopic(id);
+              await removeTopic(id)
             },
             title: t('actions.confirmRemoveTopic'),
-          });
+          })
         },
       },
     ],
     [],
-  );
+  )
 
   return (
     <Flexbox
@@ -144,8 +145,8 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
       horizontal
       justify={'space-between'}
       onDoubleClick={(e) => {
-        if (!id) return;
-        if (e.altKey) toggleEditing(true);
+        if (!id) return
+        if (e.altKey) toggleEditing(true)
       }}
     >
       <ActionIcon
@@ -153,9 +154,9 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         fill={fav && !isLoading ? theme.colorWarning : 'transparent'}
         icon={isLoading ? LucideLoader2 : Star}
         onClick={(e) => {
-          e.stopPropagation();
-          if (!id) return;
-          favoriteTopic(id, !fav);
+          e.stopPropagation()
+          if (!id) return
+          favoriteTopic(id, !fav)
         }}
         size={'small'}
         spin={isLoading}
@@ -179,9 +180,9 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
           editing={editing}
           onChangeEnd={(v) => {
             if (title !== v) {
-              updateTopicTitle(id, v);
+              updateTopicTitle(id, v)
             }
-            toggleEditing(false);
+            toggleEditing(false)
           }}
           onEditingChange={toggleEditing}
           showEditIcon={false}
@@ -195,7 +196,7 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
           menu={{
             items: items,
             onClick: ({ domEvent }) => {
-              domEvent.stopPropagation();
+              domEvent.stopPropagation()
             },
           }}
           trigger={['click']}
@@ -204,14 +205,14 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
             className="topic-more"
             icon={MoreVertical}
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
             size={'small'}
           />
         </Dropdown>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TopicContent;
+export default TopicContent

@@ -1,13 +1,13 @@
-import { ChatCompletionErrorPayload } from '@lobechat/model-runtime';
-import { ChatErrorType } from '@lobechat/types';
-import { NextResponse } from 'next/server';
+import { ChatCompletionErrorPayload }
+import { ChatErrorType }
+import { NextResponse }
 
-import { checkAuth } from '@/app/(backend)/middleware/auth';
-import { TextToImagePayload } from '@/libs/model-runtime/types';
-import { initModelRuntimeWithUserPayload } from '@/server/modules/ModelRuntime';
-import { createErrorResponse } from '@/utils/errorResponse';
+import { checkAuth }
+import { TextToImagePayload }
+import { initModelRuntimeWithUserPayload }
+import { createErrorResponse } from '@/utils/errorResponse'
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 export const preferredRegion = [
   'arn1',
@@ -27,7 +27,7 @@ export const preferredRegion = [
   'sfo1',
   'sin1',
   'syd1',
-];
+]
 
 // return NextResponse.json(
 //   {
@@ -48,30 +48,30 @@ export const preferredRegion = [
 // );
 
 export const POST = checkAuth(async (req: Request, { params, jwtPayload }) => {
-  const { provider } = await params;
+  const { provider } = await params
 
   try {
     // ============  1. init chat model   ============ //
-    const agentRuntime = await initModelRuntimeWithUserPayload(provider, jwtPayload);
+    const agentRuntime = await initModelRuntimeWithUserPayload(provider, jwtPayload)
 
     // ============  2. create chat completion   ============ //
 
-    const data = (await req.json()) as TextToImagePayload;
+    const data = (await req.json()) as TextToImagePayload
 
-    const images = await agentRuntime.textToImage(data);
+    const images = await agentRuntime.textToImage(data)
 
-    return NextResponse.json(images);
+    return NextResponse.json(images)
   } catch (e) {
     const {
       errorType = ChatErrorType.InternalServerError,
       error: errorContent,
       ...res
-    } = e as ChatCompletionErrorPayload;
+    } = e as ChatCompletionErrorPayload
 
-    const error = errorContent || e;
+    const error = errorContent || e
     // track the error at server side
-    console.error(`Route: [${provider}] ${errorType}:`, error);
+    console.error(`Route: [${provider}] ${errorType}:`, error)
 
-    return createErrorResponse(errorType, { error, ...res, provider });
+    return createErrorResponse(errorType, { error, ...res, provider })
   }
-});
+})

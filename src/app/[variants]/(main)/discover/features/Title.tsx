@@ -1,48 +1,48 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode, memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { Icon }
+import { createStyles }
+import { ChevronRight }
+import Link from 'next/link'
+import { ReactNode, memo }
+import { Flexbox, FlexboxProps }
 
 const useStyles = createStyles(({ css, token }) => ({
   more: css`
-    display: flex;
-    align-items: center;
-    color: ${token.colorTextSecondary};
+    display: flex
+    align-items: center
+    color: ${token.colorTextSecondary}
   `,
   title: css`
-    margin-block: 0.2em;
-    font-weight: bold;
-    line-height: 1.5;
+    margin-block: 0.2em
+    font-weight: bold
+    line-height: 1.5
   `,
   title2: css`
-    font-size: 18px;
+    font-size: 18px
   `,
   title3: css`
-    font-size: 16px;
+    font-size: 16px
   `,
-}));
+}))
 
-export interface TitleProps extends FlexboxProps {
-  icon?: ReactNode;
+export interface titleprops extends flexboxprops {
+  icon?: reactnode;
   id?: string;
   level?: 2 | 3;
-  more?: ReactNode;
+  more?: reactnode;
   moreLink?: string;
-  tag?: ReactNode;
+  tag?: reactnode;
 }
 
 const Title = memo<TitleProps>(
   ({ id, tag, children, moreLink, more, level = 2, icon, ...rest }) => {
-    const { cx, styles } = useStyles();
+    const { cx, styles } = useStyles()
     const title = (
       <h2 className={cx(styles.title, styles[`title${level}`])} id={id}>
         {children}
       </h2>
-    );
+    )
     return (
       <Flexbox
         align={'center'}
@@ -76,8 +76,8 @@ const Title = memo<TitleProps>(
           </Link>
         )}
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default Title;
+export default Title

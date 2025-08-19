@@ -1,80 +1,80 @@
-'use client';
+'use client'
 
-import { Anchor, AnchorProps } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo, useMemo } from 'react';
+import { Anchor, AnchorProps }
+import { createStyles }
+import { memo, useMemo }
 
-import { SCROLL_PARENT_ID } from '@/app/[variants]/(main)/discover/features/const';
-import { isOnServerSide } from '@/utils/env';
+import { SCROLL_PARENT_ID }
+import { isOnServerSide }
 
-import { createTOCTree } from './useToc';
+import { createTOCTree } from './useToc'
 
 const useStyles = createStyles(({ css, token, responsive, prefixCls }) => {
   return {
     toc: css`
       a {
-        line-height: 1.4 !important;
-        white-space: normal !important;
+        line-height: 1.4 !important
+        white-space: normal !important
       }
 
       .${prefixCls}-anchor {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+        display: flex
+        flex-direction: column
+        gap: 8px
 
         &::before {
-          display: none;
+          display: none
         }
 
         .${prefixCls}-anchor-ink {
-          display: none !important;
+          display: none !important
         }
 
         .${prefixCls}-anchor-link-title {
-          overflow: hidden;
-          display: box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
+          overflow: hidden
+          display: box
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 2
 
-          word-break: break-word;
+          word-break: break-word
         }
 
         .${prefixCls}-anchor-link-title,.${prefixCls}-anchor-link {
-          margin: 0 !important;
-          padding-block: 0 !important;
+          margin: 0 !important
+          padding-block: 0 !important
         }
 
         > .${prefixCls}-anchor-link {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          padding-inline-start: 0 !important;
+          display: flex
+          flex-direction: column
+          gap: 8px
+          padding-inline-start: 0 !important
         }
 
         .${prefixCls}-anchor-link-title-active {
-          color: ${token.colorText} !important;
+          color: ${token.colorText} !important
         }
 
         .${prefixCls}-anchor-link-title:not(.${prefixCls}-anchor-link-title-active) {
-          color: ${token.colorTextSecondary};
+          color: ${token.colorTextSecondary}
 
           &:hover {
-            color: ${token.colorText};
+            color: ${token.colorText}
           }
         }
       }
 
       ${responsive.lg} {
-        display: none;
+        display: none
       }
     `,
-  };
-});
+  }
+})
 
 const Toc = memo<AnchorProps>(({ items, className, ...rest }) => {
-  const { cx, styles } = useStyles();
+  const { cx, styles } = useStyles()
 
-  const toc = useMemo(() => createTOCTree(items as any), [items]);
+  const toc = useMemo(() => createTOCTree(items as any), [items])
 
   return (
     <Anchor
@@ -86,7 +86,7 @@ const Toc = memo<AnchorProps>(({ items, className, ...rest }) => {
       items={toc}
       {...rest}
     />
-  );
-});
+  )
+})
 
-export default Toc;
+export default Toc

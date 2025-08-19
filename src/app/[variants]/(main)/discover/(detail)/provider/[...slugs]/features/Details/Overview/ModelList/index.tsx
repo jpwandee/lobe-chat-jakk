@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { ModelIcon } from '@lobehub/icons';
-import { ActionIcon, Block, Tooltip } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { ChevronRightIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ModelIcon }
+import { ActionIcon, Block, Tooltip }
+import { useTheme }
+import { ChevronRightIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import InlineTable from '@/components/InlineTable';
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { formatPriceByCurrency, formatTokenNumber } from '@/utils/format';
-import { getTextInputUnitRate, getTextOutputUnitRate } from '@/utils/pricing';
+import InlineTable from '@/components/InlineTable'
+import { ModelInfoTags }
+import { formatPriceByCurrency, formatTokenNumber }
+import { getTextInputUnitRate, getTextOutputUnitRate }
 
-import { useDetailContext } from '../../../DetailProvider';
+import { useDetailContext } from '../../../DetailProvider'
 
 const ModelList = memo(() => {
-  const { models = [] } = useDetailContext();
-  const { t } = useTranslation('discover');
-  const theme = useTheme();
+  const { models = [] } = useDetailContext()
+  const { t } = useTranslation('discover')
+  const theme = useTheme()
 
   return (
     <Block variant={'outlined'}>
@@ -42,7 +42,7 @@ const ModelList = memo(() => {
                     </Flexbox>
                   </Flexbox>
                 </Link>
-              );
+              )
             },
             sorter: (a, b) => a.displayName.localeCompare(b.displayName),
             title: t('providers.modelName'),
@@ -53,8 +53,8 @@ const ModelList = memo(() => {
             key: 'abilities',
             render: (_, record) => {
               if (!record?.abilities || !Object.values(record?.abilities).includes(true))
-                return '--';
-              return <ModelInfoTags {...record?.abilities} />;
+                return '--'
+              return <ModelInfoTags {...record?.abilities} />
             },
             title: t('models.abilities'),
             width: 120,
@@ -84,15 +84,15 @@ const ModelList = memo(() => {
             dataIndex: 'inputPrice',
             key: 'inputPrice',
             render: (_, record) => {
-              const inputRate = getTextInputUnitRate(record.pricing);
+              const inputRate = getTextInputUnitRate(record.pricing)
               return inputRate
                 ? '$' + formatPriceByCurrency(inputRate, record.pricing?.currency)
-                : '--';
+                : '--'
             },
             sorter: (a, b) => {
-              const aRate = getTextInputUnitRate(a.pricing) || 0;
-              const bRate = getTextInputUnitRate(b.pricing) || 0;
-              return aRate - bRate;
+              const aRate = getTextInputUnitRate(a.pricing) || 0
+              const bRate = getTextInputUnitRate(b.pricing) || 0
+              return aRate - bRate
             },
             title: (
               <Tooltip title={t('models.providerInfo.inputTooltip')}>
@@ -105,15 +105,15 @@ const ModelList = memo(() => {
             dataIndex: 'outputPrice',
             key: 'outputPrice',
             render: (_, record) => {
-              const outputRate = getTextOutputUnitRate(record.pricing);
+              const outputRate = getTextOutputUnitRate(record.pricing)
               return outputRate
                 ? '$' + formatPriceByCurrency(outputRate, record.pricing?.currency)
-                : '--';
+                : '--'
             },
             sorter: (a, b) => {
-              const aRate = getTextOutputUnitRate(a.pricing) || 0;
-              const bRate = getTextOutputUnitRate(b.pricing) || 0;
-              return aRate - bRate;
+              const aRate = getTextOutputUnitRate(a.pricing) || 0
+              const bRate = getTextOutputUnitRate(b.pricing) || 0
+              return aRate - bRate
             },
             title: (
               <Tooltip title={t('models.providerInfo.outputTooltip')}>
@@ -138,7 +138,7 @@ const ModelList = memo(() => {
                     />
                   </Link>
                 </Flexbox>
-              );
+              )
             },
             title: '',
             width: 60,
@@ -149,7 +149,7 @@ const ModelList = memo(() => {
         scroll={{ x: 900 }}
       />
     </Block>
-  );
-});
+  )
+})
 
-export default ModelList;
+export default ModelList

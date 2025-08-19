@@ -1,9 +1,9 @@
-import { EdgeSpeechPayload, EdgeSpeechTTS } from '@lobehub/tts';
+import { EdgeSpeechPayload, EdgeSpeechTTS }
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
-export const POST = async (req: Request) => {
-  const payload = (await req.json()) as EdgeSpeechPayload;
+export const post = async (req: Request) => {
+  const payload = (await req.json()) as EdgeSpeechPayload
 
-  return await EdgeSpeechTTS.createRequest({ payload });
-};
+  return await EdgeSpeechTTS.createRequest({ payload })
+}

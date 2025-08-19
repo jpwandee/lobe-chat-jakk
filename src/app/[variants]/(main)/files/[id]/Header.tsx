@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { ActionIcon, Button, Text } from '@lobehub/ui';
-import { Divider } from 'antd';
-import { useTheme } from 'antd-style';
-import { ArrowLeftIcon, DownloadIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Button, Text }
+import { Divider }
+import { useTheme }
+import { ArrowLeftIcon, DownloadIcon }
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { downloadFile } from '@/utils/client/downloadFile';
+import { downloadFile }
 
-interface HeaderProps {
+interface headerprops {
   filename: string;
   id: string;
   url: string;
 }
 const Header = memo<HeaderProps>(({ filename, url }) => {
-  const { t } = useTranslation('common');
-  const router = useRouter();
+  const { t } = useTranslation('common')
+  const router = useRouter()
 
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Flexbox
       align={'center'}
@@ -34,7 +34,7 @@ const Header = memo<HeaderProps>(({ filename, url }) => {
         <Button
           icon={ArrowLeftIcon}
           onClick={() => {
-            router.push('/files');
+            router.push('/files')
           }}
           size={'small'}
           type={'text'}
@@ -53,11 +53,11 @@ const Header = memo<HeaderProps>(({ filename, url }) => {
         <ActionIcon
           icon={DownloadIcon}
           onClick={() => {
-            downloadFile(url, filename);
+            downloadFile(url, filename)
           }}
         />
       </Flexbox>
     </Flexbox>
-  );
-});
-export default Header;
+  )
+})
+export default Header

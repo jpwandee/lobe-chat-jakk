@@ -1,14 +1,14 @@
-import { Button } from '@lobehub/ui';
-import { memo } from 'react';
+import { Button }
+import { memo }
 
-import { useActionSWR } from '@/libs/swr';
-import { useSessionStore } from '@/store/session';
+import { useActionSWR }
+import { useSessionStore } from '@/store/session'
 
 const AddButton = memo(() => {
-  const createSession = useSessionStore((s) => s.createSession);
+  const createSession = useSessionStore((s) => s.createSession)
   const { mutate, isValidating } = useActionSWR(['session.createSession', undefined], () => {
-    return createSession({ group: undefined });
-  });
+    return createSession({ group: undefined })
+  })
 
   return (
     <Button
@@ -26,7 +26,7 @@ const AddButton = memo(() => {
     >
       +
     </Button>
-  );
-});
+  )
+})
 
-export default AddButton;
+export default AddButton

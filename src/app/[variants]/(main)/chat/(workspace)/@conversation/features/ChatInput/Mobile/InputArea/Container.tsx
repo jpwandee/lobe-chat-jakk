@@ -1,41 +1,39 @@
-import { css, cx } from 'antd-style';
-import { FC, ReactNode, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { css, cx }
+import { FC, ReactNode, memo }
+import { Flexbox }containercss`height
 
-const container = css`
-  height: inherit;
-  padding-block: 0;
-  padding-inline: 8px;
-`;
+padding-block: 0;
+padding-inline: 8px;
+`
 
-interface InnerContainerProps {
-  bottomAddons?: ReactNode;
-  children: ReactNode;
+interface innercontainerprops {
+  bottomAddons?: reactnode;
+  children: reactnode;
   expand?: boolean;
-  textAreaLeftAddons?: ReactNode;
-  textAreaRightAddons?: ReactNode;
-  topAddons?: ReactNode;
+  textAreaLeftAddons?: reactnode;
+  textAreaRightAddons?: reactnode;
+  topAddons?: reactnode;
 }
 
 const InnerContainer: FC<InnerContainerProps> = memo(
   ({ children, expand, textAreaRightAddons, textAreaLeftAddons, bottomAddons, topAddons }) =>
-    expand ? (
-      <Flexbox className={cx(container)} gap={8}>
-        <Flexbox gap={8} horizontal justify={'flex-end'}>
-          {textAreaLeftAddons}
-          {textAreaRightAddons}
-        </Flexbox>
-        {children}
-        {topAddons}
-        {bottomAddons}
-      </Flexbox>
-    ) : (
-      <Flexbox align={'flex-end'} className={cx(container)} gap={8} horizontal>
-        {textAreaLeftAddons}
-        {children}
-        {textAreaRightAddons}
-      </Flexbox>
-    ),
-);
+  expand ? (
+    <Flexbox className={cx(container)} gap={8}>
+    <Flexbox gap={8} horizontal justify={'flex-end'}>
+    {textAreaLeftAddons}
+    {textAreaRightAddons}
+    </Flexbox>
+    {children}
+    {topAddons}
+    {bottomAddons}
+    </Flexbox>
+  ) : (
+    <Flexbox align={'flex-end'} className={cx(container)} gap={8} horizontal>
+    {textAreaLeftAddons}
+    {children}
+    {textAreaRightAddons}
+    </Flexbox>
+  ),
+);InnerContainer
 
-export default InnerContainer;
+export default InnerContainer

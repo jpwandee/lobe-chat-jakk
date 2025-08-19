@@ -1,19 +1,19 @@
-import { ColorSwatches, NeutralColors, findCustomThemeName, neutralColors } from '@lobehub/ui';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ColorSwatches, NeutralColors, findCustomThemeName, neutralColors }
+import { memo }
+import { useTranslation }
 
-interface IProps {
-  onChange?: (v: NeutralColors) => void;
-  value?: NeutralColors;
+interface iprops {
+  onChange?: (v: neutralcolors) => void;
+  value?: neutralcolors;
 }
 
 const ThemeSwatchesNeutral = memo<IProps>(({ value, onChange }) => {
-  const { t } = useTranslation('color');
+  const { t } = useTranslation('color')
 
   const handleSelect = (v: any) => {
-    const name = findCustomThemeName('neutral', v) as NeutralColors;
-    onChange?.(name || '');
-  };
+    const name = findCustomThemeName('neutral', v) as NeutralColors
+    onChange?.(name || '')
+  }
 
   return (
     <ColorSwatches
@@ -46,7 +46,7 @@ const ThemeSwatchesNeutral = memo<IProps>(({ value, onChange }) => {
       onChange={handleSelect}
       value={value ? neutralColors[value] : undefined}
     />
-  );
-});
+  )
+})
 
-export default ThemeSwatchesNeutral;
+export default ThemeSwatchesNeutral

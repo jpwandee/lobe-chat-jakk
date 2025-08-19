@@ -1,45 +1,45 @@
-'use client';
+'use client'
 
-import { Icon, Tabs, Tag } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BookOpenIcon, LayersIcon, ListIcon, SquareUserIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Icon, Tabs, Tag }
+import { createStyles }
+import { BookOpenIcon, LayersIcon, ListIcon, SquareUserIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { SOCIAL_URL } from '@/const/branding';
-import { AssistantNavKey, McpNavKey } from '@/types/discover';
+import { SOCIAL_URL }
+import { AssistantNavKey, McpNavKey }
 
-import { useDetailContext } from '../DetailProvider';
+import { useDetailContext }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     link: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
 
       &:hover {
-        color: ${token.colorInfo};
+        color: ${token.colorInfo}
       }
     `,
     nav: css`
-      border-block-end: 1px solid ${token.colorBorder};
+      border-block-end: 1px solid ${token.colorBorder}
     `,
-  };
-});
-interface NavProps {
-  activeTab?: AssistantNavKey;
+  }
+})
+interface navprops {
+  activeTab?: assistantnavkey;
   mobile?: boolean;
-  setActiveTab?: (tab: AssistantNavKey) => void;
+  setActiveTab?: (tab: assistantnavkey) => void;
 }
 
 const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = AssistantNavKey.Overview }) => {
-  const { t } = useTranslation('discover');
-  const { pluginCount, knowledgeCount, identifier } = useDetailContext();
-  const { styles } = useStyles();
+  const { t } = useTranslation('discover')
+  const { pluginCount, knowledgeCount, identifier } = useDetailContext()
+  const { styles } = useStyles()
 
-  const capabilitiesCount = Number(pluginCount) + Number(knowledgeCount);
+  const capabilitiesCount = Number(pluginCount) + Number(knowledgeCount)
 
   const nav = (
     <Tabs
@@ -84,7 +84,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = AssistantNavKey.
       ]}
       onChange={(key) => setActiveTab?.(key as AssistantNavKey)}
     />
-  );
+  )
 
   return mobile ? (
     nav
@@ -116,7 +116,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = AssistantNavKey.
         </Link>
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Nav;
+export default Nav

@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
-import { SCROLL_PARENT_ID } from '@/app/[variants]/(main)/discover/features/const';
+import { SCROLL_PARENT_ID }
 import MobileContentLayout from '@/components/server/MobileNavLayout';
 import Footer from '@/features/Setting/Footer';
 
@@ -16,6 +16,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'MobileDiscoverDetailLayout';
+Layout.displayName = 'MobileDiscoverDetailLayout'
 
-export default Layout;
+export default Layout

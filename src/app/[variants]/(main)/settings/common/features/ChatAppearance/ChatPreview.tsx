@@ -1,15 +1,15 @@
-import { Block, MarkdownProps } from '@lobehub/ui';
-import { ChatItem } from '@lobehub/ui/chat';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Block, MarkdownProps }
+import { ChatItem }
+import { useTheme }
+import { memo }
+import { useTranslation }
 
-import { BRANDING_NAME } from '@/const/branding';
-import { DEFAULT_INBOX_AVATAR } from '@/const/meta';
+import { BRANDING_NAME }
+import { DEFAULT_INBOX_AVATAR } from '@/const/meta'
 
 const ChatPreview = memo<Pick<MarkdownProps, 'fontSize'>>(({ fontSize }) => {
-  const theme = useTheme();
-  const { t } = useTranslation('welcome');
+  const theme = useTheme()
+  const { t } = useTranslation('welcome')
   return (
     <Block
       style={{
@@ -29,7 +29,7 @@ const ChatPreview = memo<Pick<MarkdownProps, 'fontSize'>>(({ fontSize }) => {
         })}
       />
     </Block>
-  );
-});
+  )
+})
 
-export default ChatPreview;
+export default ChatPreview

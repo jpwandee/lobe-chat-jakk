@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { useRegisterFilesHotkeys } from '@/hooks/useHotkeys';
+import { useRegisterFilesHotkeys }
 
-const RegisterHotkeys = () => {
-  useRegisterFilesHotkeys();
-  return null;
-};
+const registerhotkeys = () => {
+  useRegisterFilesHotkeys()
+  return null
+}
 
-export default RegisterHotkeys;
+export default RegisterHotkeys

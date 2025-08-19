@@ -1,30 +1,30 @@
-import { ProviderCombine, ProviderIcon } from '@lobehub/icons';
-import { Avatar, Text } from '@lobehub/ui';
-import { Divider, Skeleton } from 'antd';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ProviderCombine, ProviderIcon }
+import { Avatar, Text }
+import { Divider, Skeleton }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { AiProviderListItem } from '@/types/aiProvider';
+import { AiProviderListItem }
 
-import EnableSwitch from './EnableSwitch';
-import { useStyles } from './style';
+import EnableSwitch from './EnableSwitch'
+import { useStyles }
 
-interface ProviderCardProps extends AiProviderListItem {
+interface providercardprops extends aiproviderlistitem {
   loading?: boolean;
 }
 const ProviderCard = memo<ProviderCardProps>(
   ({ id, description, name, enabled, source, logo, loading }) => {
-    const { t } = useTranslation('providers');
-    const { cx, styles, theme } = useStyles();
+    const { t } = useTranslation('providers')
+    const { cx, styles, theme } = useStyles()
 
     if (loading)
       return (
         <Flexbox className={cx(styles.container)} gap={24} padding={16}>
           <Skeleton active />
         </Flexbox>
-      );
+      )
 
     /* ↓ cloud slot ↓ */
 
@@ -76,8 +76,8 @@ const ProviderCard = memo<ProviderCardProps>(
           </Flexbox>
         </Flexbox>
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default ProviderCard;
+export default ProviderCard

@@ -1,28 +1,28 @@
-import { ScrollShadow } from '@lobehub/ui';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ScrollShadow }
+import { memo }
+import { Flexbox }
 
-import { isDesktop } from '@/const/version';
-import { useQuery } from '@/hooks/useQuery';
-import { McpNavKey } from '@/types/discover';
+import { isDesktop }
+import { useQuery }
+import { McpNavKey }
 
-import ActionButton from './ActionButton';
-import ConnectionTypeAlert from './ConnectionTypeAlert';
-import Related from './Related';
-import ServerConfig from './ServerConfig';
-import TocList from './TocList';
+import ActionButton from './ActionButton'
+import ConnectionTypeAlert from './ConnectionTypeAlert'
+import Related from './Related'
+import ServerConfig from './ServerConfig'
+import TocList from './TocList'
 
-const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { activeTab = McpNavKey.Overview } = useQuery() as { activeTab: McpNavKey };
+const sidebar = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { activeTab = McpNavKey.Overview } = useQuery() as { activeTab: McpNavKey }
 
   if (mobile) {
-    if (activeTab !== McpNavKey.Overview) return;
+    if (activeTab !== McpNavKey.Overview) return
     return (
       <Flexbox gap={32}>
         <ConnectionTypeAlert />
         <ServerConfig />
       </Flexbox>
-    );
+    )
   }
 
   return (
@@ -52,7 +52,7 @@ const Sidebar = memo<{ mobile?: boolean }>(({ mobile }) => {
         <Related />
       )}
     </ScrollShadow>
-  );
-});
+  )
+})
 
-export default Sidebar;
+export default Sidebar

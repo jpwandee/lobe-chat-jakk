@@ -1,27 +1,27 @@
-import { Markdown } from '@lobehub/ui';
-import { Empty } from 'antd';
-import Link from 'next/link';
-import { ReactNode, memo } from 'react';
-import { Center } from 'react-layout-kit';
+import { Markdown }
+import { Empty }
+import Link from 'next/link'
+import { ReactNode, memo }
+import { Center }
 
-import { H1, H2, H3, H4, H5 } from './Toc/Heading';
+import { H1, H2, H3, H4, H5 }
 
-const MarkdownRender = memo<{ children?: string }>(({ children }) => {
+const markdownrender = memo< { children?: string }>(({ children }) => {
   if (!children)
     return (
       <Center paddingBlock={32} width={'100%'}>
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </Center>
-    );
+    )
 
   return (
     <Markdown
       allowHtml
       components={{
-        a: ({ href, ...rest }: { children: ReactNode; href: string }) => {
+        a: ({ href, ...rest }: { children: ReactNode href: string }) => {
           if (href && href.startsWith('http'))
-            return <Link {...rest} href={href} target={'_blank'} />;
-          return rest?.children;
+            return <Link {...rest} href={href} target={'_blank'} />
+          return rest?.children
         },
         h1: H1,
         h2: H2,
@@ -29,11 +29,11 @@ const MarkdownRender = memo<{ children?: string }>(({ children }) => {
         h4: H4,
         h5: H5,
         img: ({ src, ...rest }: { src: string }) => {
-          if (src.includes('glama.ai')) return;
+          if (src.includes('glama.ai')) return
 
           // eslint-disable-next-line @next/next/no-img-element
-          if (src && src.startsWith('http')) return <img src={src} {...rest} />;
-          return;
+          if (src && src.startsWith('http')) return <img src={src} {...rest} />
+          return
         },
       }}
       enableImageGallery={false}
@@ -41,7 +41,7 @@ const MarkdownRender = memo<{ children?: string }>(({ children }) => {
     >
       {children}
     </Markdown>
-  );
-});
+  )
+})
 
-export default MarkdownRender;
+export default MarkdownRender

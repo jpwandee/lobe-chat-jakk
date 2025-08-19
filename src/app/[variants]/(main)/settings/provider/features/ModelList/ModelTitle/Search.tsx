@@ -1,15 +1,15 @@
-import { InputProps, SearchBar } from '@lobehub/ui';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { InputProps, SearchBar }
+import { memo }
+import { useTranslation }
 
-interface SearchProps {
+interface searchprops {
   onChange: (value: string) => void;
   value: string;
-  variant?: InputProps['variant'];
+  variant?: inputprops['variant'];
 }
 
 const Search = memo<SearchProps>(({ value, onChange, variant }) => {
-  const { t } = useTranslation('modelProvider');
+  const { t } = useTranslation('modelProvider')
 
   return (
     <SearchBar
@@ -20,6 +20,6 @@ const Search = memo<SearchProps>(({ value, onChange, variant }) => {
       size={'small'}
       variant={variant}
     />
-  );
-});
-export default Search;
+  )
+})
+export default Search

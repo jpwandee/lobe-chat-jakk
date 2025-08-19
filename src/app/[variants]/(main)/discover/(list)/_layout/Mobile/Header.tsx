@@ -1,32 +1,32 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { createStyles } from 'antd-style';
-import { SearchIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { ChatHeader }
+import { createStyles }
+import { SearchIcon }
+import { memo, useState }
+import { Flexbox }
 
-import { MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { MOBILE_HEADER_ICON_SIZE }
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
-import StoreSearchBar from '../../../features/Search';
-import Nav from './Nav';
+import StoreSearchBar from '../../../features/Search'
+import Nav from './Nav'
 
 const useStyles = createStyles(({ css, token }) => ({
   search: css`
-    position: absolute;
-    z-index: 10;
-    inset-block-start: 0;
-    inset-inline: 0 0;
+    position: absolute
+    z-index: 10
+    inset-block-start: 0
+    inset-inline: 0
 
-    background: ${token.colorBgLayout};
+    background: ${token.colorBgLayout}
   `,
-}));
+}))
 
 const Header = memo(() => {
-  const { styles } = useStyles();
-  const [showSearch, setShowSearch] = useState(false);
+  const { styles } = useStyles()
+  const [showSearch, setShowSearch] = useState(false)
 
   return (
     <ChatHeader
@@ -57,7 +57,7 @@ const Header = memo(() => {
       }}
       styles={{ center: { display: 'none' } }}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

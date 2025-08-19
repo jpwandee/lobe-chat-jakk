@@ -1,58 +1,58 @@
-import { Button, Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BrainIcon, LucideRefreshCcwDot, PlusIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Button, Icon }
+import { createStyles }
+import { BrainIcon, LucideRefreshCcwDot, PlusIcon }
+import { memo, useState }
+import { useTranslation }
+import { Center, Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra';
+import { useAiInfraStore }
 
-import CreateNewModelModal from './CreateNewModelModal';
+import CreateNewModelModal from './CreateNewModelModal'
 
 const useStyles = createStyles(({ css, token }) => ({
   circle: css`
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: ${token.colorFillSecondary};
+    width: 80px
+    height: 80px
+    border-radius: 50%
+    background: ${token.colorFillSecondary}
   `,
   container: css`
-    width: 100%;
-    border: 1px dashed ${token.colorBorder};
-    border-radius: 12px;
-    background: ${token.colorBgContainer};
+    width: 100%
+    border: 1px dashed ${token.colorBorder}
+    border-radius: 12px
+    background: ${token.colorBgContainer}
   `,
   description: css`
-    max-width: 280px;
+    max-width: 280px
 
-    font-size: ${token.fontSize}px;
-    color: ${token.colorTextDescription};
-    text-align: center;
-    text-wrap: balance;
+    font-size: ${token.fontSize}px
+    color: ${token.colorTextDescription}
+    text-align: center
+    text-wrap: balance
   `,
   iconWrapper: css`
-    position: relative;
-    width: 64px;
-    height: 64px;
+    position: relative
+    width: 64px
+    height: 64px
   `,
   sparklesIcon: css`
-    font-size: 40px;
-    color: ${token.colorText};
+    font-size: 40px
+    color: ${token.colorText}
   `,
   title: css`
-    font-size: ${token.fontSizeLG}px;
-    font-weight: 500;
+    font-size: ${token.fontSizeLG}px
+    font-weight: 500
   `,
-}));
+}))
 
-const EmptyState = memo<{ provider: string }>(({ provider }) => {
-  const { t } = useTranslation('modelProvider');
-  const { styles } = useStyles();
+const emptystate = memo< { provider: string }>(({ provider }) => {
+  const { t } = useTranslation('modelProvider')
+  const { styles } = useStyles()
 
-  const [fetchRemoteModelList] = useAiInfraStore((s) => [s.fetchRemoteModelList]);
+  const [fetchRemoteModelList] = useAiInfraStore((s) => [s.fetchRemoteModelList])
 
-  const [fetchRemoteModelsLoading, setFetchRemoteModelsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [fetchRemoteModelsLoading, setFetchRemoteModelsLoading] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <Center className={styles.container} gap={24} paddingBlock={40}>
@@ -68,7 +68,7 @@ const EmptyState = memo<{ provider: string }>(({ provider }) => {
         <Button
           icon={PlusIcon}
           onClick={() => {
-            setShowModal(true);
+            setShowModal(true)
           }}
         >
           {t('providerModels.list.addNew')}
@@ -78,13 +78,13 @@ const EmptyState = memo<{ provider: string }>(({ provider }) => {
           icon={<Icon icon={LucideRefreshCcwDot} />}
           loading={fetchRemoteModelsLoading}
           onClick={async () => {
-            setFetchRemoteModelsLoading(true);
+            setFetchRemoteModelsLoading(true)
             try {
-              await fetchRemoteModelList(provider);
+              await fetchRemoteModelList(provider)
             } catch (e) {
-              console.error(e);
+              console.error(e)
             }
-            setFetchRemoteModelsLoading(false);
+            setFetchRemoteModelsLoading(false)
           }}
           type={'primary'}
         >
@@ -94,7 +94,7 @@ const EmptyState = memo<{ provider: string }>(({ provider }) => {
         </Button>
       </Flexbox>
     </Center>
-  );
-});
+  )
+})
 
-export default EmptyState;
+export default EmptyState

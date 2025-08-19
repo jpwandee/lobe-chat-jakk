@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { Text } from '@lobehub/ui';
-import { ReactNode, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Text }
+import { ReactNode, memo }
+import { useTranslation }
+import { Flexbox }
 
-import { imageGenerationConfigSelectors } from '@/store/image/selectors';
-import { useDimensionControl } from '@/store/image/slices/generationConfig/hooks';
-import { useImageStore } from '@/store/image/store';
+import { imageGenerationConfigSelectors }
+import { useDimensionControl }
+import { useImageStore }
 
-import DimensionControlGroup from './components/DimensionControlGroup';
-import ImageNum from './components/ImageNum';
-import ImageUrl from './components/ImageUrl';
-import ImageUrlsUpload from './components/ImageUrlsUpload';
-import ModelSelect from './components/ModelSelect';
-import SeedNumberInput from './components/SeedNumberInput';
-import SizeSelect from './components/SizeSelect';
-import StepsSliderInput from './components/StepsSliderInput';
+import DimensionControlGroup from './components/DimensionControlGroup'
+import ImageNum from './components/ImageNum'
+import ImageUrl from './components/ImageUrl'
+import ImageUrlsUpload from './components/ImageUrlsUpload'
+import ModelSelect from './components/ModelSelect'
+import SeedNumberInput from './components/SeedNumberInput'
+import SizeSelect from './components/SizeSelect'
+import StepsSliderInput from './components/StepsSliderInput'
 
-interface ConfigItemLayoutProps {
-  children: ReactNode;
+interface configitemlayoutprops {
+  children: reactnode;
   label?: string;
 }
 
@@ -29,21 +29,21 @@ const ConfigItemLayout = memo<ConfigItemLayoutProps>(({ label, children }) => {
       {label && <Text weight={500}>{label}</Text>}
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-const isSupportedParamSelector = imageGenerationConfigSelectors.isSupportedParam;
+const isSupportedParamSelector = imageGenerationConfigSelectors.isSupportedParam
 
 const ConfigPanel = memo(() => {
-  const { t } = useTranslation('image');
+  const { t } = useTranslation('image')
 
-  const isSupportImageUrl = useImageStore(isSupportedParamSelector('imageUrl'));
-  const isSupportSize = useImageStore(isSupportedParamSelector('size'));
-  const isSupportSeed = useImageStore(isSupportedParamSelector('seed'));
-  const isSupportSteps = useImageStore(isSupportedParamSelector('steps'));
-  const isSupportImageUrls = useImageStore(isSupportedParamSelector('imageUrls'));
+  const isSupportImageUrl = useImageStore(isSupportedParamSelector('imageUrl'))
+  const isSupportSize = useImageStore(isSupportedParamSelector('size'))
+  const isSupportSeed = useImageStore(isSupportedParamSelector('seed'))
+  const isSupportSteps = useImageStore(isSupportedParamSelector('steps'))
+  const isSupportImageUrls = useImageStore(isSupportedParamSelector('imageUrls'))
 
-  const { showDimensionControl } = useDimensionControl();
+  const { showDimensionControl } = useDimensionControl()
 
   return (
     <Flexbox gap={32} padding={12} style={{ overflow: 'auto' }}>
@@ -87,7 +87,7 @@ const ConfigPanel = memo(() => {
         <ImageNum />
       </ConfigItemLayout>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ConfigPanel;
+export default ConfigPanel

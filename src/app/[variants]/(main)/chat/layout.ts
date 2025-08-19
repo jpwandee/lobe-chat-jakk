@@ -1,11 +1,11 @@
-import ServerLayout from '@/components/server/ServerLayout';
+import ServerLayout from '@/components/server/ServerLayout'
 
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
-import { LayoutProps } from './_layout/type';
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
+import { LayoutProps } from './_layout/type'
 
-const Layout = ServerLayout<LayoutProps>({ Desktop, Mobile });
+const Layout = ServerLayout<LayoutProps>({ Desktop, Mobile })
 
-Layout.displayName = 'ChatLayout';
+Layout.displayName = 'ChatLayout'
 
-export default Layout;
+export default Layout

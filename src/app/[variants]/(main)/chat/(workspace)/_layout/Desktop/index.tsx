@@ -1,10 +1,10 @@
-import { Suspense } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Suspense }
+import { Flexbox }
 
-import MainInterfaceTracker from '@/components/Analytics/MainInterfaceTracker';
-import BrandTextLoading from '@/components/Loading/BrandTextLoading';
+import MainInterfaceTracker from '@/components/Analytics/MainInterfaceTracker'
+import BrandTextLoading from '@/components/Loading/BrandTextLoading'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import ChatHeader from './ChatHeader';
 import Portal from './Portal';
 import TopicPanel from './TopicPanel';
@@ -37,6 +37,6 @@ const Layout = ({ children, topic, conversation, portal }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'DesktopConversationLayout';
+Layout.displayName = 'DesktopConversationLayout'
 
-export default Layout;
+export default Layout

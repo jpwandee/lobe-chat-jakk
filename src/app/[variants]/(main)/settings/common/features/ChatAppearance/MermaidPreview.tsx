@@ -1,21 +1,21 @@
-import { Block, MermaidProps } from '@lobehub/ui';
-import { ChatItem } from '@lobehub/ui/chat';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
+import { Block, MermaidProps }
+import { ChatItem }
+import { useTheme }
+import { memo }
 
-import { DEFAULT_INBOX_AVATAR } from '@/const/meta';
+import { DEFAULT_INBOX_AVATAR }
 
 const code = `\`\`\`mermaid
 sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
-\`\`\`
-`;
+    Alice->>John: hello john, how are you?;
+John-->>Alice: great!
+  alice-)john: see you later!
+  \`\`\`
+  `;
 
-const MermaidPreview = memo<{ theme?: MermaidProps['theme'] }>(
+const mermaidpreview = memo< { theme?: mermaidprops['theme'] }>(
   ({ theme }) => {
-    const token = useTheme();
+    const token = useTheme()
     return (
       <Block
         style={{
@@ -41,11 +41,11 @@ const MermaidPreview = memo<{ theme?: MermaidProps['theme'] }>(
           message={code}
         />
       </Block>
-    );
+    )
   },
   (prevProps, nextProps) => {
-    return prevProps.theme === nextProps.theme;
+    return prevProps.theme === nextProps.theme
   },
-);
+)
 
-export default MermaidPreview;
+export default MermaidPreview

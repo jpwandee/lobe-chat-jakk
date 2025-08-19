@@ -1,36 +1,36 @@
-'use client';
+'use client'
 
-import { Tag } from '@lobehub/ui';
-import { useResponsive, useTheme } from 'antd-style';
-import { usePathname } from 'next/navigation';
-import { memo, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Tag }
+import { useResponsive, useTheme }
+import { usePathname }
+import { memo, useRef }
+import { useTranslation }
+import { Flexbox }
 
-import InitClientDB from '@/features/InitClientDB';
-import Footer from '@/features/Setting/Footer';
-import SettingContainer from '@/features/Setting/SettingContainer';
-import { useActiveSettingsKey } from '@/hooks/useActiveTabKey';
-import { useProviderName } from '@/hooks/useProviderName';
-import { SettingsTabs } from '@/store/global/initialState';
+import InitClientDB from '@/features/InitClientDB'
+import Footer from '@/features/Setting/Footer'
+import SettingContainer from '@/features/Setting/SettingContainer'
+import { useActiveSettingsKey }
+import { useProviderName }
+import { SettingsTabs }
 
-import { LayoutProps } from '../type';
-import Header from './Header';
-import SideBar from './SideBar';
+import { LayoutProps } from '../type'
+import Header from './Header'
+import SideBar from './SideBar'
 
-const SKIP_PATHS = ['/settings/provider', '/settings/agent'];
+const SKIP_PATHS = ['/settings/provider', '/settings/agent']
 
 const Layout = memo<LayoutProps>(({ children, category }) => {
-  const ref = useRef<any>(null);
-  const { md = true } = useResponsive();
-  const { t } = useTranslation('setting');
-  const activeKey = useActiveSettingsKey();
-  const theme = useTheme();
-  const pathname = usePathname();
+  const ref = useRef<any>(null)
+  const { md = true } = useResponsive()
+  const { t } = useTranslation('setting')
+  const activeKey = useActiveSettingsKey()
+  const theme = useTheme()
+  const pathname = usePathname()
 
-  const isSkip = SKIP_PATHS.some((path) => pathname.includes(path));
-  const isProvider = pathname.includes('/settings/provider/');
-  const providerName = useProviderName(activeKey);
+  const isSkip = SKIP_PATHS.some((path) => pathname.includes(path))
+  const isProvider = pathname.includes('/settings/provider/')
+  const providerName = useProviderName(activeKey)
 
   return (
     <Flexbox
@@ -57,9 +57,9 @@ const Layout = memo<LayoutProps>(({ children, category }) => {
       {isSkip ? children : <SettingContainer addonAfter={<Footer />}>{children}</SettingContainer>}
       <InitClientDB />
     </Flexbox>
-  );
-});
+  )
+})
 
-Layout.displayName = 'DesktopSettingsLayout';
+Layout.displayName = 'DesktopSettingsLayout'
 
-export default Layout;
+export default Layout

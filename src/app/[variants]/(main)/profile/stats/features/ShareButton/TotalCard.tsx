@@ -1,14 +1,14 @@
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useTheme }
+import { memo }
+import { Flexbox }
 
-interface TotalCardProps {
+interface totalcardprops {
   count: string | number;
   title: string;
 }
 
 const TotalCard = memo<TotalCardProps>(({ title, count }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Flexbox
       padding={12}
@@ -33,7 +33,7 @@ const TotalCard = memo<TotalCardProps>(({ title, count }) => {
         {count}
       </div>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TotalCard;
+export default TotalCard

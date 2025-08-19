@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { createStyles }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   avatar: css`
-    width: 32px !important;
-    height: 32px !important;
+    width: 32px !important
+    height: 32px !important
   `,
   container: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex
+    align-items: center
+    justify-content: center
 
-    height: 56px;
-    padding: 12px;
+    height: 56px
+    padding: 12px
 
     .${prefixCls}-skeleton-content {
-      display: flex;
-      flex-direction: column;
+      display: flex
+      flex-direction: column
     }
   `,
   paragraph: css`
     > li {
-      height: 22px !important;
+      height: 22px !important
     }
   `,
-}));
+}))
 
 export const Placeholder = memo(() => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <Flexbox align={'center'} horizontal justify={'space-between'}>
@@ -49,8 +49,8 @@ export const Placeholder = memo(() => {
       />
       <Skeleton.Button active size={'small'} />
     </Flexbox>
-  );
-});
+  )
+})
 
 export const SkeletonList = memo(() => (
   <Flexbox gap={4} style={{ paddingTop: 26 }}>
@@ -58,6 +58,6 @@ export const SkeletonList = memo(() => (
       <Placeholder key={i} />
     ))}
   </Flexbox>
-));
+))
 
-export default SkeletonList;
+export default SkeletonList

@@ -1,35 +1,35 @@
-import { ProviderIcon } from '@lobehub/icons';
-import { Block, Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ProviderIcon }
+import { Block, Text }
+import { createStyles }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { DiscoverProviderItem } from '@/types/discover';
+import { DiscoverProviderItem } from '@/types/discover'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      flex: 1;
-      margin: 0 !important;
-      font-size: 14px !important;
-      color: ${token.colorTextSecondary};
+      flex: 1
+      margin: 0 !important
+      font-size: 14px !important
+      color: ${token.colorTextSecondary}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 14px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
 const RelatedItem = memo<DiscoverProviderItem>(({ identifier, name }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('providers');
+  const { styles } = useStyles()
+  const { t } = useTranslation('providers')
   return (
     <Block gap={12} horizontal key={identifier} padding={12} variant={'outlined'}>
       <ProviderIcon provider={identifier} size={40} style={{ flex: 'none' }} type={'avatar'} />
@@ -54,7 +54,7 @@ const RelatedItem = memo<DiscoverProviderItem>(({ identifier, name }) => {
         </Text>
       </Flexbox>
     </Block>
-  );
-});
+  )
+})
 
-export default RelatedItem;
+export default RelatedItem

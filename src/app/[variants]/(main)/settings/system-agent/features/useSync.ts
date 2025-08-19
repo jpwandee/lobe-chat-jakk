@@ -1,23 +1,23 @@
-import { FormInstance } from 'antd';
-import { useLayoutEffect } from 'react';
+import { FormInstance }
+import { useLayoutEffect }
 
-import { useUserStore } from '@/store/user';
+import { useUserStore }
 
-export const useSyncSystemAgent = (form: FormInstance, settings: any) => {
+export const usesyncsystemagent = (form: FormInstance, settings: any) => {
   useLayoutEffect(() => {
     // Set initial form values
-    form.setFieldsValue(settings);
+    form.setFieldsValue(settings)
 
     // Sync form values with updated settings
     const unsubscribe = useUserStore.subscribe(
       (s) => s.settings.systemAgent,
       (newSettings) => {
-        form.setFieldsValue(newSettings);
+        form.setFieldsValue(newSettings)
       },
-    );
+    )
 
     return () => {
-      unsubscribe();
-    };
-  }, [form, settings]);
-};
+      unsubscribe()
+    }
+  }, [form, settings])
+}

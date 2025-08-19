@@ -1,67 +1,65 @@
-'use client';
+'use client'
 
-import { Markdown } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { useTranslation } from 'react-i18next';
+import { Markdown }
+import { createStyles }
+import { useTranslation }
 
-import { FormPassword } from '@/components/FormInput';
-import { VertexAIProviderCard } from '@/config/modelProviders';
-import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { FormPassword }
+import { VertexAIProviderCard }
+import { aiProviderSelectors, useAiInfraStore }
+import { GlobalLLMProviderKey }
 
-import { KeyVaultsConfigKey, LLMProviderApiTokenKey } from '../../const';
-import { SkeletonInput } from '../../features/ProviderConfig';
-import { ProviderItem } from '../../type';
-import ProviderDetail from '../[id]';
+import { KeyVaultsConfigKey, LLMProviderApiTokenKey }
+import { SkeletonInput }
+import { ProviderItem }
+import ProviderDetail from '../[id]'
 
 const useStyles = createStyles(({ css, token }) => ({
   markdown: css`
     p {
-      color: ${token.colorTextDescription} !important;
+      color: ${token.colorTextDescription} !important
     }
   `,
   tip: css`
-    font-size: 12px;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
-const providerKey: GlobalLLMProviderKey = 'vertexai';
+const providerKey: globalllmproviderkey = 'vertexai';providerKey
 
 // Same as OpenAIProvider, but replace API Key with HuggingFace Access Token
 const useProviderCard = (): ProviderItem => {
-  const { t } = useTranslation('modelProvider');
-  const { styles } = useStyles();
-  const isLoading = useAiInfraStore(aiProviderSelectors.isAiProviderConfigLoading(providerKey));
+  const { t }
+  const { styles }
+  const isLoading = useAiInfraStore(aiProviderSelectors.isAiProviderConfigLoading(providerKey))
 
   return {
     ...VertexAIProviderCard,
-    apiKeyItems: [
-      {
-        children: isLoading ? (
-          <SkeletonInput />
-        ) : (
-          <FormPassword
-            autoComplete={'new-password'}
-            placeholder={t('vertexai.apiKey.placeholder')}
-          />
-        ),
-        desc: (
-          <Markdown className={styles.markdown} fontSize={12} variant={'chat'}>
-            {t('vertexai.apiKey.desc')}
-          </Markdown>
-        ),
-        label: t('vertexai.apiKey.title'),
-        name: [KeyVaultsConfigKey, LLMProviderApiTokenKey],
-      },
-    ],
-  };
+      apiKeyItems: [
+      {; />
+      ) : (
+        <FormPassword
+        autoComplete={'new-password'}
+        placeholder={t('vertexai.apiKey.placeholder')}
+        />
+      ),;
+    children: isloading ? (
+      <skeletoninput;
+    desc: (
+      <Markdown className={styles.markdown} fontSize={12} variant={'chat'}>
+      {t('vertexai.apiKey.desc')}
+      </Markdown>
+    ),;
+    label: t('vertexai.apiKey.title'),;
+    name: [keyvaultsconfigkey, llmproviderapitokenkey], }, ],
+  }
 };
 
-const Page = () => {
-  const card = useProviderCard();
+const page = () => {
+  const card = useProviderCard()
 
-  return <ProviderDetail {...card} />;
-};
+  return <providerdetail {...card} />
+}
 
-export default Page;
+export default Page

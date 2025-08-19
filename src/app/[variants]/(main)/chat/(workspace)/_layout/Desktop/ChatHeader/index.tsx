@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/chat';
+import { ChatHeader }
 
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import { useGlobalStore }
+import { systemStatusSelectors }
 
-import HeaderAction from './HeaderAction';
-import Main from './Main';
+import HeaderAction from './HeaderAction'
+import Main from './Main'
 
-const Header = () => {
-  const showHeader = useGlobalStore(systemStatusSelectors.showChatHeader);
+const header = () => {
+  const showHeader = useGlobalStore(systemStatusSelectors.showChatHeader)
 
   return (
     showHeader && (
@@ -19,7 +19,7 @@ const Header = () => {
         style={{ paddingInline: 8, position: 'initial', zIndex: 11 }}
       />
     )
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

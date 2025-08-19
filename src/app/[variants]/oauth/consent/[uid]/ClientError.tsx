@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import React, { memo } from 'react';
-import { Center } from 'react-layout-kit';
+import { Text }
+import { createStyles }
+import react, { memo }
+import { Center }
 
-interface ClientProps {
+interface clientprops {
   error: {
     message: string;
     title: string;
@@ -14,18 +14,18 @@ interface ClientProps {
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    width: 100%;
-    min-height: 100vh;
-    color: ${token.colorTextBase};
-    background-color: ${token.colorBgLayout};
+    width: 100%
+    min-height: 100vh
+    color: ${token.colorTextBase}
+    background-color: ${token.colorBgLayout}
   `,
   error: css`
-    text-align: center;
+    text-align: center
   `,
-}));
+}))
 
 const ConsentClientError = memo<ClientProps>(({ error }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <Center className={styles.container}>
@@ -36,9 +36,9 @@ const ConsentClientError = memo<ClientProps>(({ error }) => {
         <Text style={{ color: 'inherit' }}>{error.message}</Text>
       </div>
     </Center>
-  );
-});
+  )
+})
 
-ConsentClientError.displayName = 'ConsentClientError';
+ConsentClientError.displayName = 'ConsentClientError'
 
-export default ConsentClientError;
+export default ConsentClientError

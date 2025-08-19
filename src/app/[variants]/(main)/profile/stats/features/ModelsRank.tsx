@@ -1,24 +1,24 @@
-import { BarList } from '@lobehub/charts';
-import { ModelIcon } from '@lobehub/icons';
-import { ActionIcon, FormGroup, Modal } from '@lobehub/ui';
-import { MaximizeIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { BarList }
+import { ModelIcon }
+import { ActionIcon, FormGroup, Modal }
+import { MaximizeIcon }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { useClientDataSWR } from '@/libs/swr';
-import { messageService } from '@/services/message';
-import { ModelRankItem } from '@/types/message';
+import { FORM_STYLE }
+import { useClientDataSWR }
+import { messageService }
+import { ModelRankItem } from '@/types/message'
 
 export const TopicsRank = memo(() => {
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation('auth');
+  const [open, setOpen] = useState(false)
+  const { t } = useTranslation('auth')
   const { data, isLoading } = useClientDataSWR('rank-models', async () =>
     messageService.rankModels(),
-  );
+  )
 
-  const showExtra = Boolean(data && data?.length > 5);
+  const showExtra = Boolean(data && data?.length > 5)
 
   const mapData = (item: ModelRankItem) => {
     return {
@@ -27,8 +27,8 @@ export const TopicsRank = memo(() => {
 
       name: item.id,
       value: item.count,
-    };
-  };
+    }
+  }
 
   return (
     <>
@@ -78,7 +78,7 @@ export const TopicsRank = memo(() => {
         </Modal>
       )}
     </>
-  );
-});
+  )
+})
 
-export default TopicsRank;
+export default TopicsRank

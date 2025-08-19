@@ -1,6 +1,6 @@
-import { useQueryState } from 'nuqs';
+import { useQueryState }
 
-import { FilesTabs } from '@/types/files';
+import { FilesTabs } from '@/types/files'
 
 export const useFileCategory = () =>
-  useQueryState('category', { clearOnDefault: true, defaultValue: FilesTabs.All });
+  useQueryState('category', { clearOnDefault: true, defaultValue: FilesTabs.All })

@@ -1,10 +1,10 @@
-import ServerLayout from '@/components/server/ServerLayout';
+import ServerLayout from '@/components/server/ServerLayout'
 
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
 
-const MainLayout = ServerLayout({ Desktop, Mobile });
+const MainLayout = ServerLayout({ Desktop, Mobile })
 
-MainLayout.displayName = 'ChangelogLayout';
+MainLayout.displayName = 'ChangelogLayout'
 
-export default MainLayout;
+export default MainLayout

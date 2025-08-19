@@ -1,11 +1,11 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
-import SafeSpacing from '@/components/SafeSpacing';
-import { HEADER_HEIGHT } from '@/const/layoutTokens';
-import Footer from '@/features/Setting/Footer';
-import SettingContainer from '@/features/Setting/SettingContainer';
+import SafeSpacing from '@/components/SafeSpacing'
+import { HEADER_HEIGHT } from '@/const/layoutTokens'
+import Footer from '@/features/Setting/Footer'
+import SettingContainer from '@/features/Setting/SettingContainer'
 
-import Header from './Header';
+import Header from './Header'
 
 const Layout = ({ children }: PropsWithChildren) => (
   <>
@@ -14,8 +14,8 @@ const Layout = ({ children }: PropsWithChildren) => (
       {children}
     </SettingContainer>
   </>
-);
+)
 
-Layout.displayName = 'DesktopSessionSettingsLayout';
+Layout.displayName = 'DesktopSessionSettingsLayout'
 
-export default Layout;
+export default Layout

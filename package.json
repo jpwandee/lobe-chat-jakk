@@ -86,10 +86,7 @@
     "workflow:i18n": "tsx ./scripts/i18nWorkflow/index.ts",
     "workflow:mdx": "tsx ./scripts/mdxWorkflow/index.ts",
     "workflow:readme": "tsx ./scripts/readmeWorkflow/index.ts",
-    "workflow:set-desktop-version": "tsx ./scripts/electronWorkflow/setDesktopVersion.ts",
-
-    "vercel:install": "pnpm install --no-frozen-lockfile || bun install",
-    "vercel:build": "pnpm -w build || bun run -w build"
+    "workflow:set-desktop-version": "tsx ./scripts/electronWorkflow/setDesktopVersion.ts"
   },
   "lint-staged": {
     "*.md": [
@@ -297,6 +294,7 @@
     "@peculiar/webcrypto": "^1.5.0",
     "@prettier/sync": "^0.6.1",
     "@semantic-release/exec": "^7.1.0",
+    "@stylistic/stylelint-plugin": "^4.0.0",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -360,6 +358,9 @@
     "semantic-release": "^24.2.7",
     "serwist": "^9.1.1",
     "stylelint": "^16.23.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^7.0.0",
     "tsx": "^4.20.4",
     "type-fest": "^4.41.0",
     "typescript": "^5.9.2",
@@ -372,8 +373,7 @@
   },
   "packageManager": "pnpm@8.15.8",
   "engines": {
-    "node": "20.x",
-    "bun": ">=1.1.0"
+    "node": "20.x"
   },
   "publishConfig": {
     "access": "public",

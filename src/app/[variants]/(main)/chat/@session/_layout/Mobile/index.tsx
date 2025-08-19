@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 import MobileContentLayout from '@/components/server/MobileNavLayout';
 
@@ -19,4 +19,4 @@ const MobileLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default MobileLayout;
+export default MobileLayout

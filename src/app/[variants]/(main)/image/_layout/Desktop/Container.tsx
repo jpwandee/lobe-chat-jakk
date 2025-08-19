@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { useTheme } from 'antd-style';
-import { PropsWithChildren, memo } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { useTheme }
+import { PropsWithChildren, memo }
+import { Center, Flexbox } from 'react-layout-kit'
 
 const Container = memo<PropsWithChildren>(({ children }) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Center
@@ -29,7 +29,7 @@ const Container = memo<PropsWithChildren>(({ children }) => {
         {children}
       </Flexbox>
     </Center>
-  );
-});
+  )
+})
 
-export default Container;
+export default Container

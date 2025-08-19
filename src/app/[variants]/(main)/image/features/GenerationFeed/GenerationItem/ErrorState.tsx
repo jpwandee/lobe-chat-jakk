@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { Block, Icon, Text } from '@lobehub/ui';
-import { ImageOffIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { Block, Icon, Text }
+import { ImageOffIcon }
+import { memo }
+import { useTranslation }
+import { Center }
 
-import { ActionButtons } from './ActionButtons';
-import { useStyles } from './styles';
-import { ErrorStateProps } from './types';
-import { getThumbnailMaxWidth } from './utils';
+import { ActionButtons }
+import { useStyles }
+import { ErrorStateProps }
+import { getThumbnailMaxWidth } from './utils'
 
 // 错误状态组件
 export const ErrorState = memo<ErrorStateProps>(
   ({ generation, generationBatch, aspectRatio, onDelete, onCopyError }) => {
-    const { styles, theme } = useStyles();
-    const { t } = useTranslation('image');
+    const { styles, theme } = useStyles()
+    const { t } = useTranslation('image')
 
     const errorMessage = generation.task.error
       ? typeof generation.task.error.body === 'string'
         ? generation.task.error.body
         : generation.task.error.body?.detail || generation.task.error.name || 'Unknown error'
-      : '';
+      : ''
 
     return (
       <Block
@@ -59,8 +59,8 @@ export const ErrorState = memo<ErrorStateProps>(
         </Center>
         <ActionButtons onDelete={onDelete} />
       </Block>
-    );
+    )
   },
-);
+)
 
-ErrorState.displayName = 'ErrorState';
+ErrorState.displayName = 'ErrorState'

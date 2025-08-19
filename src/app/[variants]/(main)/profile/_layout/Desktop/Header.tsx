@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { ChatHeader } from '@lobehub/ui/chat';
-import { Drawer, type DrawerProps } from 'antd';
-import { createStyles } from 'antd-style';
-import { Menu } from 'lucide-react';
-import { ReactNode, memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { ChatHeader }
+import { Drawer, type DrawerProps }
+import { createStyles }
+import { Menu }
+import { ReactNode, memo, useState }
+import { Flexbox }
 
-import BrandWatermark from '@/components/BrandWatermark';
+import BrandWatermark from '@/components/BrandWatermark'
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    position: relative;
-    flex: none;
-    height: 54px;
-    background: ${token.colorBgContainer};
+    position: relative
+    flex: none
+    height: 54px
+    background: ${token.colorBgContainer}
   `,
   title: css`
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 18px
+    font-weight: 700
+    line-height: 1.2
   `,
-}));
+}))
 
-interface HeaderProps extends Pick<DrawerProps, 'getContainer'> {
-  children: ReactNode;
-  title: ReactNode;
+interface headerprops extends pick<drawerprops, 'getContainer'> {
+  children: reactnode;
+  title: reactnode;
 }
 
 const Header = memo<HeaderProps>(({ children, getContainer, title }) => {
-  const [open, setOpen] = useState(false);
-  const { styles, theme } = useStyles();
+  const [open, setOpen] = useState(false)
+  const { styles, theme } = useStyles()
 
   return (
     <>
@@ -80,7 +80,7 @@ const Header = memo<HeaderProps>(({ children, getContainer, title }) => {
         <BrandWatermark paddingInline={12} />
       </Drawer>
     </>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

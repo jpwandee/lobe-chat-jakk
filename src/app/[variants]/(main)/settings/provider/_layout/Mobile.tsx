@@ -1,14 +1,13 @@
-'use client';
+'use client'
 
-import { usePathname } from 'next/navigation';
-import { PropsWithChildren } from 'react';
+import { usePathname }
+import { PropsWithChildren }
 
 import ProviderMenu from '../ProviderMenu';
 
 const Layout = ({ children }: PropsWithChildren) => {
-  const pathname = usePathname();
-
-  return pathname === '/settings/provider' ? <ProviderMenu mobile /> : children;
+  const pathname = usePathname()
+  return pathname === '/settings/provider' ? <ProviderMenu mobile /> : children;pathname<ProviderMenumobile
 };
 
-export default Layout;
+export default Layout

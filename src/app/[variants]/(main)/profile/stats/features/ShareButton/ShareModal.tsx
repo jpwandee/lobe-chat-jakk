@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { type FormItemProps, FormModal, FormModalProps, Segmented } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import dynamic from 'next/dynamic';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { type FormItemProps, FormModal, FormModalProps, Segmented }
+import { Skeleton }
+import { createStyles }
+import dynamic from 'next/dynamic'
+import { memo, useState }
+import { useTranslation }
 
-import { ImageType, imageTypeOptions, useScreenshot } from '@/hooks/useScreenshot';
+import { ImageType, imageTypeOptions, useScreenshot }
 
 const Preview = dynamic(() => import('./Preview'), {
   loading: () => (
@@ -21,33 +21,33 @@ const Preview = dynamic(() => import('./Preview'), {
       }}
     />
   ),
-});
+})
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   preview: css`
     .${prefixCls}-form-item-label {
-      display: none;
+      display: none
     }
   `,
-}));
+}))
 
-type FieldType = {
-  imageType: ImageType;
-};
+type fieldtype = {
+  imageType: imagetype;
+}
 
 const DEFAULT_FIELD_VALUE: FieldType = {
-  imageType: ImageType.JPG,
-};
+  imageType: imagetype.jpg,
+}
 
-const ShareModal = memo<FormModalProps & { mobile?: boolean }>(({ open, onCancel, mobile }) => {
-  const { t } = useTranslation(['chat', 'common']);
-  const [fieldValue, setFieldValue] = useState<FieldType>(DEFAULT_FIELD_VALUE);
-  const { styles } = useStyles();
+const sharemodal = memo<formmodalprops & { mobile?: boolean }>(({ open, onCancel, mobile }) => {
+  const { t } = useTranslation(['chat', 'common'])
+  const [fieldValue, setFieldValue] = useState<FieldType>(DEFAULT_FIELD_VALUE)
+  const { styles } = useStyles()
   const { loading, onDownload } = useScreenshot({
     imageType: fieldValue.imageType,
     title: 'stats',
     width: mobile ? 440 : undefined,
-  });
+  })
 
   const items: FormItemProps[] = [
     {
@@ -63,7 +63,7 @@ const ShareModal = memo<FormModalProps & { mobile?: boolean }>(({ open, onCancel
       minWidth: undefined,
       name: 'imageType',
     },
-  ];
+  ]
 
   return (
     <FormModal
@@ -81,7 +81,7 @@ const ShareModal = memo<FormModalProps & { mobile?: boolean }>(({ open, onCancel
       title={t('share', { ns: 'common' })}
       width={480}
     />
-  );
-});
+  )
+})
 
-export default ShareModal;
+export default ShareModal

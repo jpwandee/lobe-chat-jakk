@@ -1,213 +1,46 @@
-'use client';
+'use client'
 
-import { App } from 'antd';
-import { createStyles, useTheme } from 'antd-style';
-import { Image as ImageIcon, X } from 'lucide-react';
-import Image from 'next/image';
-import React, { type FC, memo, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { App }
+import { createStyles, useTheme }
+import { Image as ImageIcon, X }
+import Image from 'next/image'
+import react, { type FC, memo, useEffect, useRef, useState }
+import { useTranslation }
+import { Center }
 
-import { useFileStore } from '@/store/file';
-import { FileUploadStatus } from '@/types/files/upload';
+import { useFileStore }
+import { FileUploadStatus }
 
-import { useDragAndDrop } from '../hooks/useDragAndDrop';
-import { useConfigPanelStyles } from '../style';
+import { useDragAndDrop }
+import { useConfigPanelStyles }
 
 // ======== Business Types ======== //
 
 export interface ImageUploadProps {
   // Callback when URL changes
-  className?: string; // Image URL
-  onChange?: (url?: string) => void;
-  style?: React.CSSProperties;
+  className?: string;CallbackwhenURLchangesclassName? // Image URL
+  onChange?: (url?: string) => void;ImageURLonChange?
+  style?: react.cssproperties;
   value?: string | null;
 }
 
 /**
  * Internal type for managing upload state
  */
-interface UploadState {
-  error?: string; // Upload progress (0-100)
+interface uploadstate { // Upload progress (0-100)
   previewUrl: string;
-  progress: number;
   // Local blob URL for preview
-  status: FileUploadStatus;
-}
-
-// ======== Styles ======== //
-
-const useStyles = createStyles(({ css, token }) => {
-  return {
-    changeButton: css`
-      cursor: pointer;
-
-      padding-block: 8px;
-      padding-inline: 16px;
-      border: 1px solid ${token.colorBorder};
-      border-radius: ${token.borderRadius}px;
-
-      font-size: 12px;
-      font-weight: 500;
-      color: ${token.colorText};
-
-      background: ${token.colorBgContainer};
-      box-shadow: ${token.boxShadowSecondary};
-
-      &:hover {
-        border-color: ${token.colorPrimary};
-        color: ${token.colorPrimary};
-        background: ${token.colorBgElevated};
-      }
-    `,
-    changeOverlay: css`
-      position: absolute;
-      z-index: 5;
-      inset: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      opacity: 0;
-      background: ${token.colorBgMask};
-
-      transition: opacity ${token.motionDurationMid} ease;
-    `,
-    container: css`
-      width: 100%;
-    `,
-    deleteIcon: css`
-      cursor: pointer;
-
-      position: absolute;
-      z-index: 10;
-      inset-block-start: 8px;
-      inset-inline-end: 8px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-
-      color: ${token.colorTextLightSolid};
-
-      opacity: 0;
-      background: ${token.colorBgMask};
-
-      transition: opacity ${token.motionDurationMid} ease;
-
-      &:hover {
-        color: ${token.colorError};
-        background: ${token.colorErrorBg};
-      }
-    `,
-    placeholder: css`
-      cursor: pointer;
-
-      width: 100%;
-      height: 160px;
-      border: 2px dashed ${token.colorBorder};
-      border-radius: ${token.borderRadiusLG}px;
-
-      background: ${token.colorFillAlter};
-
-      transition: all ${token.motionDurationMid} ease;
-
-      &:hover {
-        border-color: ${token.colorPrimary};
-        background: ${token.colorFillSecondary};
-      }
-
-      &.drag-over {
-        transform: scale(1.02);
-        border-color: ${token.colorPrimary};
-        background: ${token.colorPrimaryBg};
-      }
-    `,
-    placeholderIcon: css`
-      color: ${token.colorTextTertiary};
-    `,
-    placeholderText: css`
-      font-size: 12px;
-      line-height: 1.4;
-      color: ${token.colorTextSecondary};
-      text-align: center;
-    `,
-    successDisplay: css`
-      cursor: pointer;
-
-      position: relative;
-
-      overflow: hidden;
-
-      width: 100%;
-      height: 160px;
-      border: 2px solid transparent;
-      border-radius: ${token.borderRadiusLG}px;
-
-      background: ${token.colorBgContainer};
-
-      transition: all ${token.motionDurationMid} ease;
-
-      &:hover .change-overlay {
-        opacity: 1;
-      }
-
-      &:hover .delete-icon {
-        opacity: 1;
-      }
-
-      &.drag-over {
-        transform: scale(1.02);
-        border-color: ${token.colorPrimary};
-        background: ${token.colorPrimaryBg};
-      }
-    `,
-    uploadingDisplay: css`
-      position: relative;
-
-      overflow: hidden;
-
-      width: 100%;
-      height: 160px;
-      border: 2px solid ${token.colorPrimary};
-      border-radius: ${token.borderRadiusLG}px;
-
-      background: ${token.colorFillSecondary};
-    `,
-    uploadingOverlay: css`
-      position: absolute;
-      z-index: 5;
-      inset: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: ${token.colorBgMask};
-    `,
-  };
-});
-
-// ======== Utils ======== //
-
-/**
- * Check if a URL is a local blob URL
- */
-const isLocalBlobUrl = (url: string): boolean => url.startsWith('blob:');
+  status: fileuploadstatus;
+  error?: string;UploadprogresspreviewUrl
+  progress: number;LocalblobURLforpreviewstatus
+}UtilsconstisLocalBlobUrl
 
 // ======== Sub-Components ======== //
 
-/**
- * 圆形进度条组件 (复用自 MultiImagesUpload)
- */
-interface CircularProgressProps {
-  showText?: boolean; // 0-100
+
+interface CircularProgressProps { // 0-100
   size?: number;
+  showText?: boolean;0-100size?
   strokeWidth?: number;
   value: number;
 }
@@ -226,78 +59,78 @@ const CircularProgress: FC<CircularProgressProps> = memo(
 
     return (
       <div
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          height: size,
-          justifyContent: 'center',
-          position: 'relative',
-          width: size,
-        }}
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        height: size,
+        justifyContent: 'center',
+        position: 'relative',
+        width: size,
+      }}
       >
-        {/* Background circle */}
-        <svg
-          height={size}
-          style={{ position: 'absolute', transform: 'rotate(-90deg)' }}
-          width={size}
-        >
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            fill="none"
-            r={radius}
-            stroke={theme.colorBorder}
-            strokeWidth={strokeWidth}
-          />
-        </svg>
+      {/* Background circle */}
+      <svg
+      height={size}
+      style={{ position: 'absolute', transform: 'rotate(-90deg)' }}
+      width={size}
+      >
+      <circle
+      cx={size / 2}
+      cy={size / 2}
+      fill='none'
+      r={radius}
+      stroke={theme.colorBorder}
+      strokeWidth={strokeWidth}
+      />
+      </svg>
 
-        {/* Progress circle */}
-        <svg
-          height={size}
-          style={{ position: 'absolute', transform: 'rotate(-90deg)' }}
-          width={size}
-        >
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            fill="none"
-            r={radius}
-            stroke={theme.colorPrimary}
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            strokeLinecap="round"
-            strokeWidth={strokeWidth}
-            style={{
-              transition: 'stroke-dashoffset 0.2s ease-in-out',
-            }}
-          />
-        </svg>
+      {/* Progress circle */}
+      <svg
+      height={size}
+      style={{ position: 'absolute', transform: 'rotate(-90deg)' }}
+      width={size}
+      >
+      <circle
+      cx={size / 2}
+      cy={size / 2}
+      fill='none'
+      r={radius}
+      stroke={theme.colorPrimary}
+      strokeDasharray={circumference}
+      strokeDashoffset={offset}
+      strokeLinecap='round'
+      strokeWidth={strokeWidth}
+      style={{
+        transition: 'stroke-dashoffset 0.2s ease-in-out',
+      }}
+      />
+      </svg>
 
-        {/* Progress text */}
-        {showText && (
-          <span
-            style={{
-              color: theme.colorPrimary,
-              fontSize: '12px',
-              fontWeight: 600,
-              position: 'relative',
-              zIndex: 1,
-            }}
-          >
-            {Math.round(progress)}%
-          </span>
-        )}
+      {/* Progress text */}
+      {showText && (
+        <span
+        style={{
+          color: theme.colorPrimary,
+          fontSize: '12px',
+          fontWeight: 600,
+          position: 'relative',
+          zIndex: 1,
+        }}
+        >
+        {Math.round(progress)}%
+        </span>
+      )}
       </div>
     );
   },
-);
+);CircularProgress
 
-CircularProgress.displayName = 'CircularProgress';
+CircularProgress.displayName = 'CircularProgress'
 
 /**
  * 占位视图组件
  */
-interface PlaceholderProps {
+interface placeholderprops {
   isDragOver?: boolean;
   onClick?: () => void;
 }
@@ -309,27 +142,27 @@ const Placeholder: FC<PlaceholderProps> = memo(({ isDragOver, onClick }) => {
 
   return (
     <Center
-      className={`${styles.placeholder} ${configStyles.dragTransition} ${isDragOver ? configStyles.dragOver : ''}`}
-      gap={16}
-      horizontal={false}
-      onClick={onClick}
+    className={`${styles.placeholder} ${configStyles.dragTransition} ${isDragOver ? configStyles.dragOver : ''}`}
+    gap={16}
+    horizontal={false}
+    onClick={onClick}
     >
-      <ImageIcon className={styles.placeholderIcon} size={48} strokeWidth={1.5} />
-      <div className={styles.placeholderText}>
-        {t('ImageUpload.placeholder.primary')}
-        <br />
-        {t('ImageUpload.placeholder.secondary')}
-      </div>
+    <ImageIcon className={styles.placeholderIcon} size={48} strokeWidth={1.5} />
+    <div className={styles.placeholderText}>
+    {t('ImageUpload.placeholder.primary')}
+    <br />
+    {t('ImageUpload.placeholder.secondary')}
+    </div>
     </Center>
   );
-});
+});Placeholder
 
-Placeholder.displayName = 'Placeholder';
+Placeholder.displayName = 'Placeholder'
 
 /**
  * 上传中视图组件
  */
-interface UploadingDisplayProps {
+interface uploadingdisplayprops {
   previewUrl: string;
   progress: number;
 }
@@ -339,26 +172,26 @@ const UploadingDisplay: FC<UploadingDisplayProps> = memo(({ previewUrl, progress
 
   return (
     <div className={styles.uploadingDisplay}>
-      <Image
-        alt="Uploading preview"
-        fill
-        src={previewUrl}
-        style={{ objectFit: 'cover' }}
-        unoptimized
-      />
-      <div className={styles.uploadingOverlay}>
-        <CircularProgress value={progress} />
-      </div>
+    <Image
+    alt='Uploading preview'
+    fill
+    src={previewUrl}
+    style={{ objectFit: 'cover' }}
+    unoptimized
+    />
+    <div className={styles.uploadingOverlay}>
+    <CircularProgress value={progress} />
+    </div>
     </div>
   );
-});
+});UploadingDisplay
 
-UploadingDisplay.displayName = 'UploadingDisplay';
+UploadingDisplay.displayName = 'UploadingDisplay'
 
 /**
  * 成功视图组件
  */
-interface SuccessDisplayProps {
+interface successdisplayprops {
   imageUrl: string;
   isDragOver?: boolean;
   onChangeImage?: () => void;
@@ -383,112 +216,110 @@ const SuccessDisplay: FC<SuccessDisplayProps> = memo(
 
     return (
       <div
-        className={`${styles.successDisplay} ${configStyles.dragTransition} ${isDragOver ? configStyles.dragOver : ''}`}
-        onClick={onChangeImage}
+      className={`${styles.successDisplay} ${configStyles.dragTransition} ${isDragOver ? configStyles.dragOver : ''}`}
+      onClick={onChangeImage}
       >
-        <Image
-          alt="Uploaded image"
-          fill
-          src={imageUrl}
-          style={{ objectFit: 'cover' }}
-          unoptimized
-        />
+      <Image
+      alt='Uploaded image'
+      fill
+      src={imageUrl}
+      style={{ objectFit: 'cover' }}
+      unoptimized
+      />
 
-        {/* Delete button */}
-        <div className={`${styles.deleteIcon} delete-icon`} onClick={handleDelete}>
-          <X size={14} />
-        </div>
+      {/* Delete button */}
+      <div className={`${styles.deleteIcon} delete-icon`} onClick={handleDelete}>
+      <X size={14} />
+      </div>
 
-        {/* Change image overlay */}
-        <div className={`${styles.changeOverlay} change-overlay`} onClick={handleChangeImage}>
-          <button className={styles.changeButton} type="button">
-            {t('ImageUpload.actions.changeImage')}
-          </button>
-        </div>
+      {/* Change image overlay */}
+      <div className={`${styles.changeOverlay} change-overlay`} onClick={handleChangeImage}>
+      <button className={styles.changeButton} type='button'>
+      {t('ImageUpload.actions.changeImage')}
+      </button>
+      </div>
       </div>
     );
   },
-);
-
-SuccessDisplay.displayName = 'SuccessDisplay';
-
+);SuccessDisplay
+SuccessDisplay.displayName = 'SuccessDisplay'
 // ======== Main Component ======== //
 
-const ImageUpload: FC<ImageUploadProps> = memo(({ value, onChange, style, className }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const uploadWithProgress = useFileStore((s) => s.uploadWithProgress);
-  const [uploadState, setUploadState] = useState<UploadState | null>(null);
-  const { t } = useTranslation('components');
-  const { message } = App.useApp();
+  const ImageUpload: FC<ImageUploadProps> = memo(({ value, onChange, style, className }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const uploadWithProgress = useFileStore((s) => s.uploadWithProgress);
+    const [uploadState, setUploadState] = useState<UploadState | null>(null);
+    const { t } = useTranslation('components');
+    const { message } = App.useApp();
 
-  // Cleanup blob URLs to prevent memory leaks
+    // Cleanup blob URLs to prevent memory leaks
   useEffect(() => {
-    return () => {
-      if (uploadState?.previewUrl && isLocalBlobUrl(uploadState.previewUrl)) {
-        URL.revokeObjectURL(uploadState.previewUrl);
-      }
+      return () => {
+        if (uploadState?.previewUrl && isLocalBlobUrl(uploadState.previewUrl)) {
+          URL.revokeObjectURL(uploadState.previewUrl);
+        }
+      };
+    }, [uploadState?.previewUrl]);
+
+    const handleFileSelect = () => {
+      inputRef.current?.click();
     };
-  }, [uploadState?.previewUrl]);
 
-  const handleFileSelect = () => {
-    inputRef.current?.click();
-  };
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Create preview URL
+      // Create preview URL
     const previewUrl = URL.createObjectURL(file);
 
-    // Set initial upload state
+      // Set initial upload state
     setUploadState({
-      previewUrl,
-      progress: 0,
-      status: 'pending',
-    });
-
-    try {
-      // Start upload
-      const result = await uploadWithProgress({
-        file,
-        onStatusUpdate: (updateData) => {
-          if (updateData.type === 'updateFile') {
-            setUploadState((prev) => {
-              if (!prev) return null;
-
-              const fileStatus = updateData.value.status;
-              if (!fileStatus) return prev;
-
-              return {
-                ...prev,
-                error: fileStatus === 'error' ? 'Upload failed' : undefined,
-                progress: updateData.value.uploadState?.progress || 0,
-                status: fileStatus,
-              };
-            });
-          } else if (updateData.type === 'removeFile') {
-            // Handle file removal
-            setUploadState(null);
-          }
-        },
-        skipCheckFileType: true,
+        previewUrl,
+        progress: 0,
+        status: 'pending',
       });
 
-      if (result?.url) {
-        // Upload successful
+      try {
+        // Start upload
+      const result = await uploadWithProgress({
+          file,
+          onStatusUpdate: (updateData) => {
+            if (updateData.type === 'updateFile') {
+              setUploadState((prev) => {
+                if (!prev) return null;
+
+                const fileStatus = updateData.value.status;
+                if (!fileStatus) return prev;
+
+                return {
+                  ...prev,
+                  error: fileStatus === 'error' ? 'Upload failed' : undefined,
+                  progress: updateData.value.uploadState?.progress || 0,
+                  status: fileStatus,
+                };
+              });
+            } else if (updateData.type === 'removeFile') {
+              // Handle file removal
+            setUploadState(null);
+            }
+          },
+          skipCheckFileType: true,
+        });
+
+        if (result?.url) {
+          // Upload successful
         onChange?.(result.url);
-      }
-    } catch {
-      // Upload failed
+        }
+      } catch {
+        // Upload failed
       setUploadState((prev) =>
         prev
-          ? {
-              ...prev,
-              error: 'Upload failed',
-              status: 'error',
-            }
-          : null,
+        ? {
+          ...prev,
+          error: 'Upload failed',
+          status: 'error',
+        }
+        : null,
       );
     } finally {
       // Cleanup
@@ -559,68 +390,68 @@ const ImageUpload: FC<ImageUploadProps> = memo(({ value, onChange, style, classN
     } catch {
       // Upload failed
       setUploadState((prev) =>
-        prev
-          ? {
-              ...prev,
-              error: 'Upload failed',
-              status: 'error',
-            }
-          : null,
-      );
-    } finally {
-      // Cleanup
-      if (isLocalBlobUrl(previewUrl)) {
-        URL.revokeObjectURL(previewUrl);
+      prev
+      ? {
+        ...prev,
+        error: 'Upload failed',
+        status: 'error',
       }
-
-      // Clear upload state after a delay to show completion
-      setTimeout(() => {
-        setUploadState(null);
-      }, 1000);
+      : null,
+    );
+  } finally {
+    // Cleanup
+      if (isLocalBlobUrl(previewUrl)) {
+      URL.revokeObjectURL(previewUrl);
     }
-  };
 
-  const { isDragOver, dragHandlers } = useDragAndDrop({
-    accept: 'image/*',
-    onDrop: handleDrop,
-  });
+    // Clear upload state after a delay to show completion
+      setTimeout(() => {
+      setUploadState(null);
+    }, 1000);
+  }
+};
 
-  // Determine which view to render
-  const hasImage = Boolean(value);
-  const isUploading = Boolean(uploadState);
-
-  return (
-    <div className={className} {...dragHandlers} style={style}>
-      {/* Hidden file input */}
-      <input
-        accept="image/*"
-        onChange={handleFileChange}
-        onClick={(e) => {
-          // Reset value to allow re-selecting the same file
-          e.currentTarget.value = '';
-        }}
-        ref={inputRef}
-        style={{ display: 'none' }}
-        type="file"
-      />
-
-      {/* Conditional rendering based on state */}
-      {isUploading && uploadState ? (
-        <UploadingDisplay previewUrl={uploadState.previewUrl} progress={uploadState.progress} />
-      ) : hasImage ? (
-        <SuccessDisplay
-          imageUrl={value!}
-          isDragOver={isDragOver}
-          onChangeImage={handleFileSelect}
-          onDelete={handleDelete}
-        />
-      ) : (
-        <Placeholder isDragOver={isDragOver} onClick={handleFileSelect} />
-      )}
-    </div>
-  );
+const { isDragOver, dragHandlers } = useDragAndDrop({
+  accept: 'image/*',
+  onDrop: handleDrop,
 });
 
-ImageUpload.displayName = 'ImageUpload';
+// Determine which view to render
+  const hasImage = Boolean(value);
+const isUploading = Boolean(uploadState);
 
-export default ImageUpload;
+return (
+  <div className={className} {...dragHandlers} style={style}>
+  {/* Hidden file input */}
+  <input
+  accept='image/*'
+  onChange={handleFileChange}
+  onClick={(e) => {
+    // Reset value to allow re-selecting the same file
+          e.currentTarget.value = '';
+  }}
+  ref={inputRef}
+  style={{ display: 'none' }}
+  type='file'
+  />
+
+  {/* Conditional rendering based on state */}
+  {isUploading && uploadState ? (
+    <UploadingDisplay previewUrl={uploadState.previewUrl} progress={uploadState.progress} />
+  ) : hasImage ? (
+    <SuccessDisplay
+    imageUrl={value!}
+    isDragOver={isDragOver}
+    onChangeImage={handleFileSelect}
+    onDelete={handleDelete}
+    />
+  ) : (
+    <Placeholder isDragOver={isDragOver} onClick={handleFileSelect} />
+  )}
+  </div>
+);
+});MainComponentconstImageUpload
+
+ImageUpload.displayName = 'ImageUpload'
+
+export default ImageUpload

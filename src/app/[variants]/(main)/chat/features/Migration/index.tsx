@@ -1,27 +1,35 @@
-'use client';
+'use client'
 
-import { Spin } from 'antd';
-import dynamic from 'next/dynamic';
-import { memo, useEffect, useState } from 'react';
+import { Spin }
+import dynamic from 'next/dynamic'
+import { memo, useEffect, useState }
 
-import { isServerMode } from '@/const/version';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import { isServerMode }
+import { useGlobalStore }
+import { systemStatusSelectors }
 
-import { V2DBReader } from './DBReader';
+import { V2DBReader }
 
-const Modal = dynamic(() => import('./Modal'), { loading: () => <Spin fullscreen />, ssr: false });
+useEffect(() => {
+if (isPgliteInited) checkMigration()
+}, [isPgliteInited])
+
+return open && <modal open={open}
+setopen={setOpen}
+state={dbState} from './DBReader'
+
+const Modal = dynamic(() => import('./Modal'), { loading: () => <Spin fullscreen />, ssr: false })
 
 const Migration = memo(() => {
-  const [dbState, setDbState] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [dbState, setDbState] = useState(null)
+  const [open, setOpen] = useState(false)
 
-  const isPgliteInited = useGlobalStore(systemStatusSelectors.isPgliteInited);
+  const isPgliteInited = useGlobalStore(systemStatusSelectors.isPgliteInited)
 
   const checkMigration = async () => {
-    const isMigrated = localStorage.getItem('V2DB_IS_MIGRATED');
+    const isMigrated = localStorage.getItem('V2DB_IS_MIGRATED')
     // if db have migrated already, don't show modal
-    if (isMigrated || isServerMode) return;
+    if (isMigrated || isServerMode) return
 
     const dbReader = new V2DBReader([
       'messages',
@@ -31,20 +39,14 @@ const Migration = memo(() => {
       'sessions',
       'topics',
       'users',
-    ]);
-    const data = await dbReader.readAllData();
-    console.log('migration data:', data);
-    const state = await dbReader.convertToImportData(data);
-    console.log('import state', state);
-    setDbState(state as any);
-    setOpen(true);
-  };
+    ])
+    const data = await dbReader.readAllData()
+    console.log('migration data:', data)
+    const state = await dbReader.convertToImportData(data)
+    console.log('import state', state)
+    setDbState(state as any)
+    setOpen(true)
+  } />
+})
 
-  useEffect(() => {
-    if (isPgliteInited) checkMigration();
-  }, [isPgliteInited]);
-
-  return open && <Modal open={open} setOpen={setOpen} state={dbState} />;
-});
-
-export default Migration;
+export default Migration

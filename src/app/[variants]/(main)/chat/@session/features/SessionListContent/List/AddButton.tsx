@@ -1,20 +1,20 @@
-import { Button } from '@lobehub/ui';
-import { Plus } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button }
+import { Plus }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useActionSWR } from '@/libs/swr';
-import { useServerConfigStore } from '@/store/serverConfig';
-import { useSessionStore } from '@/store/session';
+import { useActionSWR }
+import { useServerConfigStore }
+import { useSessionStore }
 
-const AddButton = memo<{ groupId?: string }>(({ groupId }) => {
-  const { t } = useTranslation('chat');
-  const createSession = useSessionStore((s) => s.createSession);
-  const mobile = useServerConfigStore((s) => s.isMobile);
+const addbutton = memo< { groupId?: string }>(({ groupId }) => {
+  const { t } = useTranslation('chat')
+  const createSession = useSessionStore((s) => s.createSession)
+  const mobile = useServerConfigStore((s) => s.isMobile)
   const { mutate, isValidating } = useActionSWR(['session.createSession', groupId], () => {
-    return createSession({ group: groupId });
-  });
+    return createSession({ group: groupId })
+  })
 
   return (
     <Flexbox flex={1} padding={mobile ? 16 : 0}>
@@ -31,7 +31,7 @@ const AddButton = memo<{ groupId?: string }>(({ groupId }) => {
         {t('newAgent')}
       </Button>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default AddButton;
+export default AddButton

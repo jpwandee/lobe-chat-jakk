@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ChatHeader }
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
 const Header = memo(() => {
-  const { t } = useTranslation('changelog');
+  const { t } = useTranslation('changelog')
 
-  const router = useRouter();
+  const router = useRouter()
   return (
     <ChatHeader
       center={
@@ -27,7 +27,7 @@ const Header = memo(() => {
       showBackButton
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

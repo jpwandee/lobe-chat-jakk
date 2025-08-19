@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { type ReactNode, createContext, memo, use } from 'react';
+import { type ReactNode, createContext, memo, use }
 
-import { DiscoverModelDetail } from '@/types/discover';
+import { DiscoverModelDetail }
 
-export type DetailContextConfig = Partial<DiscoverModelDetail>;
+export type DetailContextConfig = Partial<DiscoverModelDetail>
 
-export const DetailContext = createContext<DetailContextConfig>({});
+export const DetailContext = createContext<DetailContextConfig>({})
 
-export const DetailProvider = memo<{ children: ReactNode; config?: DetailContextConfig }>(
+export const detailprovider = memo< { children: reactnode; config?: detailcontextconfig }
   ({ children, config = {} }) => {
-    return <DetailContext value={config}>{children}</DetailContext>;
+    return <DetailContext value={config}>{children}</DetailContext>
   },
-);
+)
 
-export const useDetailContext = () => {
-  return use(DetailContext);
-};
+export const usedetailcontext = () => {
+  return use(DetailContext)
+}

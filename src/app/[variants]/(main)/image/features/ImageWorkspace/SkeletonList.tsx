@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { Block, Grid } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { memo } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Block, Grid }
+import { Skeleton }
+import { memo }
+import { Center, Flexbox } from 'react-layout-kit'
 
-import PromptInput from '@/app/[variants]/(main)/image/features/PromptInput';
+import PromptInput from '@/app/[variants]/(main)/image/features/PromptInput'
 
 const SkeletonList = memo(() => {
   return (
@@ -42,9 +42,9 @@ const SkeletonList = memo(() => {
         <PromptInput disableAnimation={true} showTitle={false} />
       </Center>
     </>
-  );
-});
+  )
+})
 
-SkeletonList.displayName = 'SkeletonList';
+SkeletonList.displayName = 'SkeletonList'
 
-export default SkeletonList;
+export default SkeletonList

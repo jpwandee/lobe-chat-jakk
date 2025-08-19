@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Text } from '@lobehub/ui';
-import { useEffect, useRef, useState } from 'react';
+import { Text }
+import { useEffect, useRef, useState }
 
-interface ElapsedTimeProps {
+interface elapsedtimeprops {
   generationId: string;
   isActive: boolean;
 }
 
-const getSessionStorageKey = (generationId: string) => `generation_start_time_${generationId}`;
+const getsessionstoragekey = (generationId: string) => `generation_start_time_${generationId}
 
 /**
  * 显示图片生成的耗时

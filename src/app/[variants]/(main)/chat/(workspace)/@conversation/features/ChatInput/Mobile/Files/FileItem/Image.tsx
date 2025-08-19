@@ -1,31 +1,31 @@
-import { ActionIcon, Image } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { Trash } from 'lucide-react';
-import { memo } from 'react';
+import { ActionIcon, Image }
+import { createStyles }
+import { Trash }
+import { memo }
 
-import { MIN_IMAGE_SIZE } from './style';
+import { MIN_IMAGE_SIZE }
 
 const useStyles = createStyles(({ css, token }) => ({
   deleteButton: css`
-    color: #fff;
-    background: ${token.colorBgMask};
+    color: #fff
+    background: ${token.colorBgMask}
 
     &:hover {
-      background: ${token.colorError};
+      background: ${token.colorError}
     }
   `,
   editableImage: css`
-    background: ${token.colorBgContainer};
-    box-shadow: 0 0 0 1px ${token.colorFill} inset;
+    background: ${token.colorBgContainer}
+    box-shadow: 0 0 0 1px ${token.colorFill} inset
   `,
   image: css`
-    width: 64px !important;
-    height: 64px !important;
-    margin-block: 0 !important;
+    width: 64px !important
+    height: 64px !important
+    margin-block: 0 !important
   `,
-}));
+}))
 
-interface FileItemProps {
+interface fileitemprops {
   alt?: string;
   loading?: boolean;
   onRemove?: () => void;
@@ -33,8 +33,8 @@ interface FileItemProps {
 }
 
 const FileItem = memo<FileItemProps>(({ alt, onRemove, src, loading }) => {
-  const IMAGE_SIZE = MIN_IMAGE_SIZE;
-  const { styles, cx } = useStyles();
+  const IMAGE_SIZE = MIN_IMAGE_SIZE
+  const { styles, cx } = useStyles()
 
   return (
     <Image
@@ -44,8 +44,8 @@ const FileItem = memo<FileItemProps>(({ alt, onRemove, src, loading }) => {
           glass
           icon={Trash}
           onClick={(e) => {
-            e.stopPropagation();
-            onRemove?.();
+            e.stopPropagation()
+            onRemove?.()
           }}
           size={'small'}
         />
@@ -60,7 +60,7 @@ const FileItem = memo<FileItemProps>(({ alt, onRemove, src, loading }) => {
       width={64}
       wrapperClassName={cx(styles.image, styles.editableImage)}
     />
-  );
-});
+  )
+})
 
-export default FileItem;
+export default FileItem

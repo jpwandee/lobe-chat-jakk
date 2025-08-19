@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { Grid, Tag, Text } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Grid, Tag, Text }
+import isEqual from 'fast-deep-equal'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra'
 
-import Card from './Card';
+import Card from './Card'
 
 const loadingArr = Array.from({ length: 12 })
   .fill('-')
-  .map((item, index) => `${index}x${item}`);
+  .map((item, index) => `${index}x${item}`)
 
 const List = memo(() => {
-  const { t } = useTranslation('modelProvider');
-  const enabledList = useAiInfraStore(aiProviderSelectors.enabledAiProviderList, isEqual);
-  const disabledList = useAiInfraStore(aiProviderSelectors.disabledAiProviderList, isEqual);
-  const [initAiProviderList] = useAiInfraStore((s) => [s.initAiProviderList]);
+  const { t } = useTranslation('modelProvider')
+  const enabledList = useAiInfraStore(aiProviderSelectors.enabledAiProviderList, isEqual)
+  const disabledList = useAiInfraStore(aiProviderSelectors.disabledAiProviderList, isEqual)
+  const [initAiProviderList] = useAiInfraStore((s) => [s.initAiProviderList])
 
   if (!initAiProviderList)
     return (
@@ -34,7 +34,7 @@ const List = memo(() => {
           ))}
         </Grid>
       </Flexbox>
-    );
+    )
 
   return (
     <>
@@ -65,7 +65,7 @@ const List = memo(() => {
         </Grid>
       </Flexbox>
     </>
-  );
-});
+  )
+})
 
-export default List;
+export default List

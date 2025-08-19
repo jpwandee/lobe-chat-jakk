@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextResponse }
 
-import { authEnv } from '@/config/auth';
-import { serverDB } from '@/database/server';
-import { pino } from '@/libs/logger';
-import { NextAuthUserService } from '@/server/services/nextAuthUser';
+import { authEnv }
+import { serverDB }
+import { pino }
+import { NextAuthUserService }
 
-import { validateRequest } from './validateRequest';
+import { validateRequest }
 
 export const POST = async (req: Request): Promise<NextResponse> => {
   const payload = await validateRequest(req, authEnv.CASDOOR_WEBHOOK_SECRET);
@@ -17,7 +17,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
     );
   }
 
-  const { action, object } = payload;
+  const { action, object }
 
   const nextAuthUserService = new NextAuthUserService(serverDB);
   switch (action) {
@@ -42,4 +42,4 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       return NextResponse.json({ error: `unrecognised payload type: ${action}` }, { status: 400 });
     }
   }
-};
+}

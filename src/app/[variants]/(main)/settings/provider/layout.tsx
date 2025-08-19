@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
-import { PropsWithChildren } from 'react';
+import { notFound }
+import { PropsWithChildren }
 
-import ServerLayout from '@/components/server/ServerLayout';
-import { serverFeatureFlags } from '@/config/featureFlags';
+import ServerLayout from '@/components/server/ServerLayout'
+import { serverFeatureFlags }
 
 import Desktop from './_layout/Desktop';
 import Mobile from './_layout/Mobile';
@@ -10,12 +10,13 @@ import Mobile from './_layout/Mobile';
 const Layout = ServerLayout({ Desktop, Mobile });
 
 const ProviderSettingsLayout = ({ children, ...res }: PropsWithChildren) => {
-  const showLLM = serverFeatureFlags().showProvider;
-  if (!showLLM) return notFound();
+  const showLLM = serverFeatureFlags().showProvider
+  if (!showLLM) return notFound()
 
-  return <Layout {...res}>{children}</Layout>;
+  return <layout {...res}
+  >{children}</Layout>;
 };
 
-ProviderSettingsLayout.displayName = 'ProviderSettingsLayout';
+ProviderSettingsLayout.displayName = 'ProviderSettingsLayout'
 
-export default ProviderSettingsLayout;
+export default ProviderSettingsLayout

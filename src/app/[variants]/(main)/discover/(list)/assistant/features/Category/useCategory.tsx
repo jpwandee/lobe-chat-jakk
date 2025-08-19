@@ -14,14 +14,14 @@ import {
   PencilIcon,
   PrinterIcon,
   TerminalSquareIcon,
-} from 'lucide-react';
-import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+}
+import { useMemo }
+import { useTranslation }
 
-import { AssistantCategory } from '@/types/discover';
+import { AssistantCategory }
 
-export const useCategory = () => {
-  const { t } = useTranslation('discover');
+export const usecategory = () => {
+  const { t } = useTranslation('discover')
 
   return useMemo(
     () => [
@@ -102,11 +102,11 @@ export const useCategory = () => {
       },
     ],
     [t],
-  );
-};
+  )
+}
 
-export const useCategoryItem = (key?: AssistantCategory) => {
-  const items = useCategory();
-  if (!key) return;
-  return items.find((item) => item.key === key);
-};
+export const usecategoryitem = (key?: AssistantCategory) => {
+  const items = useCategory()
+  if (!key) return
+  return items.find((item) => item.key === key)
+}

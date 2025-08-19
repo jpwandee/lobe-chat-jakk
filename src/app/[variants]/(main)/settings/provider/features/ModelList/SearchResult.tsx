@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { ActionIcon, Text } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { ToggleRightIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Text }
+import isEqual from 'fast-deep-equal'
+import { ToggleRightIcon }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { aiModelSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { aiModelSelectors, useAiInfraStore } from '@/store/aiInfra'
 
-import ModelItem from './ModelItem';
+import ModelItem from './ModelItem'
 
 const SearchResult = memo(() => {
-  const { t } = useTranslation('modelProvider');
+  const { t } = useTranslation('modelProvider')
 
-  const searchKeyword = useAiInfraStore((s) => s.modelSearchKeyword);
-  const batchToggleAiModels = useAiInfraStore((s) => s.batchToggleAiModels);
+  const searchKeyword = useAiInfraStore((s) => s.modelSearchKeyword)
+  const batchToggleAiModels = useAiInfraStore((s) => s.batchToggleAiModels)
 
-  const filteredModels = useAiInfraStore(aiModelSelectors.filteredAiProviderModelList, isEqual);
-  console.log('filteredModels:', filteredModels);
-  const [batchLoading, setBatchLoading] = useState(false);
+  const filteredModels = useAiInfraStore(aiModelSelectors.filteredAiProviderModelList, isEqual)
+  console.log('filteredModels:', filteredModels)
+  const [batchLoading, setBatchLoading] = useState(false)
 
-  const isEmpty = filteredModels.length === 0;
+  const isEmpty = filteredModels.length === 0
   return (
     <>
       <Flexbox horizontal justify={'space-between'}>
@@ -34,12 +34,12 @@ const SearchResult = memo(() => {
               icon={ToggleRightIcon}
               loading={batchLoading}
               onClick={async () => {
-                setBatchLoading(true);
+                setBatchLoading(true)
                 await batchToggleAiModels(
                   filteredModels.map((i) => i.id),
                   true,
-                );
-                setBatchLoading(false);
+                )
+                setBatchLoading(false)
               }}
               size={'small'}
               title={t('providerModels.list.enabledActions.enableAll')}
@@ -60,7 +60,7 @@ const SearchResult = memo(() => {
         </Flexbox>
       )}
     </>
-  );
-});
+  )
+})
 
-export default SearchResult;
+export default SearchResult

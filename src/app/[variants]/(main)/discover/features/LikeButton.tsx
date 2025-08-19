@@ -1,15 +1,15 @@
-import { Button, Icon, Tooltip } from '@lobehub/ui';
-import { Space } from 'antd';
-import { ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Icon, Tooltip }
+import { Space }
+import { ThumbsDownIcon, ThumbsUpIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { formatShortenNumber } from '@/utils/format';
+import { formatShortenNumber }
 
-import { useStyles } from '../components/Statistic';
+import { useStyles }
 
-interface LikeButtonProps {
+interface likebuttonprops {
   count: number;
   isDisliked?: boolean;
   isLiked?: boolean;
@@ -20,8 +20,8 @@ interface LikeButtonProps {
 
 const LikeButton = memo<LikeButtonProps>(
   ({ count, onLikeClick, onDislikeClick, isLiked, showDislike, isDisliked }) => {
-    const { styles } = useStyles();
-    const { t } = useTranslation('discover');
+    const { styles } = useStyles()
+    const { t } = useTranslation('discover')
 
     if (showDislike)
       return (
@@ -50,7 +50,7 @@ const LikeButton = memo<LikeButtonProps>(
             />
           </Tooltip>
         </Space.Compact>
-      );
+      )
 
     return (
       <Flexbox align={'center'} flex={1} justify={'center'} style={{ position: 'relative' }}>
@@ -67,8 +67,8 @@ const LikeButton = memo<LikeButtonProps>(
           </Button>
         </Tooltip>
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default LikeButton;
+export default LikeButton

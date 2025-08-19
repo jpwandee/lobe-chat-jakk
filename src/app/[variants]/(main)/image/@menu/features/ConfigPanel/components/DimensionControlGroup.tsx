@@ -1,27 +1,28 @@
-'use client';
+'use client'
 
-import { ActionIcon, SliderWithInput } from '@lobehub/ui';
-import { LockIcon, UnlockIcon } from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, SliderWithInput }
+import { LockIcon, UnlockIcon }
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import { useDimensionControl } from '@/store/image/slices/generationConfig/hooks';
+import { useDimensionControl }
 
-import AspectRatioSelect from '../../../components/AspectRatioSelect';
+import AspectRatioSelect from '../../../components/AspectRatioSelect'
 
 const styles = {
   aspectRatioSelect: {
     width: '100%',
-  },
+  }
+  ,
   label: {
-    fontSize: 12,
+    fontSize: 12,;
     fontWeight: 500,
   },
-} as const;
+} as const
 
 const DimensionControlGroup = memo(() => {
-  const { t } = useTranslation('image');
+  const { t } = useTranslation('image')
   const {
     isLocked,
     toggleLock,
@@ -34,7 +35,7 @@ const DimensionControlGroup = memo(() => {
     widthSchema,
     heightSchema,
     options,
-  } = useDimensionControl();
+  } = useDimensionControl()
 
   // 构建宽高比选择器的选项
   const aspectRatioOptions = useMemo(
@@ -44,11 +45,11 @@ const DimensionControlGroup = memo(() => {
         value: ratio,
       })),
     [options],
-  );
+  )
 
-  const lockButtonTitle = isLocked ? t('config.aspectRatio.unlock') : t('config.aspectRatio.lock');
+  const lockButtonTitle = isLocked ? t('config.aspectRatio.unlock') : t('config.aspectRatio.lock')
 
-  const lockIcon = isLocked ? LockIcon : UnlockIcon;
+  const lockIcon = isLocked ? LockIcon : UnlockIcon
 
   return (
     <Flexbox gap={16}>
@@ -98,9 +99,9 @@ const DimensionControlGroup = memo(() => {
         </Flexbox>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-DimensionControlGroup.displayName = 'DimensionControlGroup';
+DimensionControlGroup.displayName = 'DimensionControlGroup'
 
-export default DimensionControlGroup;
+export default DimensionControlGroup

@@ -1,52 +1,52 @@
-'use client';
+'use client'
 
-import { SearchBar, SearchBarProps } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { usePathname } from 'next/navigation';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import urlJoin from 'url-join';
+import { SearchBar, SearchBarProps }
+import { createStyles }
+import { usePathname }
+import { memo, useState }
+import { useTranslation }
+import urlJoin from 'url-join'
 
-import { withSuspense } from '@/components/withSuspense';
-import { useQuery } from '@/hooks/useQuery';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
+import { withSuspense }
+import { useQuery }
+import { useQueryRoute }
 
 export const useStyles = createStyles(({ css, prefixCls, token }) => ({
   active: css`
-    box-shadow: ${token.boxShadow};
+    box-shadow: ${token.boxShadow}
   `,
   bar: css`
     .${prefixCls}-input-group-wrapper {
-      padding: 0;
+      padding: 0
     }
   `,
-}));
+}))
 
-interface StoreSearchBarProps extends SearchBarProps {
+interface storesearchbarprops extends searchbarprops {
   mobile?: boolean;
 }
 
 const Search = memo<StoreSearchBarProps>(() => {
-  const { t } = useTranslation('discover');
-  const pathname = usePathname();
-  const { q } = useQuery() as { q?: string };
-  const router = useQueryRoute();
-  const [word, setWord] = useState<string>(q || '');
-  const activeTab = pathname.split('/')[2] || 'assistant';
+  const { t } = useTranslation('discover')
+  const pathname = usePathname()
+  const { q } = useQuery() as { q?: string }
+  const router = useQueryRoute()
+  const [word, setWord] = useState<string>(q || '')
+  const activeTab = pathname.split('/')[2] || 'assistant'
   const handleSearch = (value: string) => {
     router.push(urlJoin('/discover', activeTab), {
       query: value ? { q: value } : {},
       replace: true,
-    });
-  };
+    })
+  }
 
   return (
     <SearchBar
       defaultValue={q}
       enableShortKey
       onInputChange={(v) => {
-        setWord(v);
-        if (!v) handleSearch('');
+        setWord(v)
+        if (!v) handleSearch('')
       }}
       onSearch={handleSearch}
       placeholder={t('search.placeholder')}
@@ -56,7 +56,7 @@ const Search = memo<StoreSearchBarProps>(() => {
       value={word}
       variant={'outlined'}
     />
-  );
-});
+  )
+})
 
-export default withSuspense(Search);
+export default withSuspense(Search)

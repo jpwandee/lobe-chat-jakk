@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { FileText, Globe, ImageIcon, LayoutGrid, Mic2, SquarePlay } from 'lucide-react';
-import Link from 'next/link';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { FileText, Globe, ImageIcon, LayoutGrid, Mic2, SquarePlay }
+import Link from 'next/link'
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import { useFileCategory } from '@/app/[variants]/(main)/files/hooks/useFileCategory';
-import Menu from '@/components/Menu';
-import type { MenuProps } from '@/components/Menu';
-import { FilesTabs } from '@/types/files';
+import { useFileCategory }
+import Menu from '@/components/Menu'
+import type { MenuProps }
+import { FilesTabs } from '@/types/files'
 
 const FileMenu = memo(() => {
-  const { t } = useTranslation('file');
-  const [activeKey, setActiveKey] = useFileCategory();
+  const { t } = useTranslation('file')
+  const [activeKey, setActiveKey] = useFileCategory()
 
   const items: MenuProps['items'] = useMemo(
     () =>
@@ -77,7 +77,7 @@ const FileMenu = memo(() => {
         .filter(Boolean)
         .slice(0, 5) as MenuProps['items'],
     [t],
-  );
+  )
 
   return (
     <Flexbox>
@@ -85,13 +85,13 @@ const FileMenu = memo(() => {
         compact
         items={items}
         onClick={({ key }) => {
-          setActiveKey(key);
+          setActiveKey(key)
         }}
         selectable
         selectedKeys={[activeKey]}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default FileMenu;
+export default FileMenu

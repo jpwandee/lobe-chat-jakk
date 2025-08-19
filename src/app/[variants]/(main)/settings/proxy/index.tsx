@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation }
 
-import PageTitle from '@/components/PageTitle';
+import PageTitle from '@/components/PageTitle'
 
-import ProxyForm from './features/ProxyForm';
+import ProxyForm from './features/ProxyForm'
 
-const ProxySettings = () => {
-  const { t } = useTranslation('setting');
+const proxysettings = () => {
+  const { t } = useTranslation('setting')
 
   return (
     <div>
       <PageTitle title={t('tab.proxy')} />
       <ProxyForm />
     </div>
-  );
-};
+  )
+}
 
-ProxySettings.displayName = 'ProxySettings';
+ProxySettings.displayName = 'ProxySettings'
 
-export default ProxySettings;
+export default ProxySettings

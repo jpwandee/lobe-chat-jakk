@@ -1,80 +1,80 @@
-'use client';
+'use client'
 
-import { ActionIcon, ScrollShadow } from '@lobehub/ui';
-import { EditableMessage } from '@lobehub/ui/chat';
-import { Skeleton } from 'antd';
-import { Edit } from 'lucide-react';
-import { MouseEvent, memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import useMergeState from 'use-merge-value';
+import { ActionIcon, ScrollShadow }
+import { EditableMessage }
+import { Skeleton }
+import { Edit }
+import { MouseEvent, memo, useState }
+import { useTranslation }
+import { Flexbox }
+import useMergeState from 'use-merge-value'
 
-import SidebarHeader from '@/components/SidebarHeader';
-import AgentInfo from '@/features/AgentInfo';
-import { useOpenChatSettings } from '@/hooks/useInterceptingRoutes';
-import { useAgentStore } from '@/store/agent';
-import { agentSelectors } from '@/store/agent/selectors';
-import { useGlobalStore } from '@/store/global';
-import { ChatSettingsTabs } from '@/store/global/initialState';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { useSessionStore } from '@/store/session';
-import { sessionMetaSelectors, sessionSelectors } from '@/store/session/selectors';
+import SidebarHeader from '@/components/SidebarHeader'
+import AgentInfo from '@/features/AgentInfo'
+import { useOpenChatSettings }
+import { useAgentStore }
+import { agentSelectors }
+import { useGlobalStore }
+import { ChatSettingsTabs }
+import { systemStatusSelectors }
+import { useSessionStore }
+import { sessionMetaSelectors, sessionSelectors }
 
-import { useStyles } from './style';
+import { useStyles } from './style'
 
 const SystemRole = memo(() => {
-  const [editing, setEditing] = useState(false);
-  const { styles, cx } = useStyles();
-  const openChatSettings = useOpenChatSettings(ChatSettingsTabs.Prompt);
+  const [editing, setEditing] = useState(false)
+  const { styles, cx } = useStyles()
+  const openChatSettings = useOpenChatSettings(ChatSettingsTabs.Prompt)
   const [init, meta, sessionId] = useSessionStore((s) => [
     sessionSelectors.isSomeSessionActive(s),
     sessionMetaSelectors.currentAgentMeta(s),
     s.activeId,
-  ]);
+  ])
 
   const [isAgentConfigLoading, systemRole, updateAgentConfig] = useAgentStore((s) => [
     agentSelectors.isAgentConfigLoading(s),
     agentSelectors.currentAgentSystemRole(s),
     s.updateAgentConfig,
-  ]);
+  ])
 
   const [showSystemRole, toggleSystemRole] = useGlobalStore((s) => [
     systemStatusSelectors.showSystemRole(s),
     s.toggleSystemRole,
-  ]);
+  ])
 
   const [open, setOpen] = useMergeState(false, {
     defaultValue: showSystemRole,
     onChange: toggleSystemRole,
     value: showSystemRole,
-  });
+  })
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
-  const isLoading = !init || isAgentConfigLoading;
+  const isLoading = !init || isAgentConfigLoading
 
   const handleOpenWithEdit = (e: MouseEvent) => {
-    if (isLoading) return;
+    if (isLoading) return
 
-    e.stopPropagation();
-    setEditing(true);
-    setOpen(true);
-  };
+    e.stopPropagation()
+    setEditing(true)
+    setOpen(true)
+  }
 
   const handleOpen = () => {
-    if (isLoading) return;
+    if (isLoading) return
 
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const [expanded, toggleAgentSystemRoleExpand] = useGlobalStore((s) => [
     systemStatusSelectors.getAgentSystemRoleExpanded(sessionId)(s),
     s.toggleAgentSystemRoleExpand,
-  ]);
+  ])
 
   const toggleExpanded = () => {
-    toggleAgentSystemRoleExpand(sessionId);
-  };
+    toggleAgentSystemRoleExpand(sessionId)
+  }
 
   return (
     <Flexbox height={'fit-content'}>
@@ -91,7 +91,7 @@ const SystemRole = memo(() => {
         height={expanded ? 200 : 0}
         onClick={handleOpen}
         onDoubleClick={(e) => {
-          if (e.altKey) handleOpenWithEdit(e);
+          if (e.altKey) handleOpenWithEdit(e)
         }}
         paddingInline={16}
         size={25}
@@ -113,16 +113,16 @@ const SystemRole = memo(() => {
                 <AgentInfo
                   meta={meta}
                   onAvatarClick={() => {
-                    setOpen(false);
-                    setEditing(false);
-                    openChatSettings();
+                    setOpen(false)
+                    setEditing(false)
+                    openChatSettings()
                   }}
                   style={{ marginBottom: 16 }}
                 />
               ),
             }}
             onChange={(e) => {
-              updateAgentConfig({ systemRole: e });
+              updateAgentConfig({ systemRole: e })
             }}
             onEditingChange={setEditing}
             onOpenChange={setOpen}
@@ -140,7 +140,7 @@ const SystemRole = memo(() => {
         )}
       </ScrollShadow>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default SystemRole;
+export default SystemRole

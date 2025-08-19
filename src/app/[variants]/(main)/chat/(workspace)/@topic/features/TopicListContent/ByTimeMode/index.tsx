@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import isEqual from 'fast-deep-equal';
-import React, { memo, useCallback, useMemo, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { GroupedVirtuoso, VirtuosoHandle } from 'react-virtuoso';
+import isEqual from 'fast-deep-equal'
+import react, { memo, useCallback, useMemo, useRef }
+import { useTranslation }
+import { GroupedVirtuoso, VirtuosoHandle }
 
-import { useChatStore } from '@/store/chat';
-import { topicSelectors } from '@/store/chat/selectors';
-import { ChatTopic } from '@/types/topic';
+import { useChatStore }
+import { topicSelectors }
+import { ChatTopic } from '@/types/topic'
 
-import TopicItem from '../TopicItem';
-import TopicGroupItem from './GroupItem';
+import TopicItem from '../TopicItem'
+import TopicGroupItem from './GroupItem'
 
 const ByTimeMode = memo(() => {
-  const { t } = useTranslation('topic');
-  const virtuosoRef = useRef<VirtuosoHandle>(null);
-  const [activeTopicId, activeThreadId] = useChatStore((s) => [s.activeTopicId, s.activeThreadId]);
-  const groupTopics = useChatStore(topicSelectors.groupedTopicsSelector, isEqual);
+  const { t } = useTranslation('topic')
+  const virtuosoRef = useRef<VirtuosoHandle>(null)
+  const [activeTopicId, activeThreadId] = useChatStore((s) => [s.activeTopicId, s.activeThreadId])
+  const groupTopics = useChatStore(topicSelectors.groupedTopicsSelector, isEqual)
 
   const { groups, groupCounts, topics } = useMemo(() => {
     return {
@@ -29,12 +29,12 @@ const ByTimeMode = memo(() => {
         { favorite: false, id: 'default', title: t('defaultTitle') } as ChatTopic,
         ...groupTopics.flatMap((group) => group.children),
       ],
-    };
-  }, [groupTopics]);
+    }
+  }, [groupTopics])
 
   const itemContent = useCallback(
     (index: number) => {
-      const { id, favorite, title } = topics[index];
+      const { id, favorite, title } = topics[index]
 
       return index === 0 ? (
         <TopicItem active={!activeTopicId} fav={favorite} title={title} />
@@ -47,20 +47,20 @@ const ByTimeMode = memo(() => {
           threadId={activeThreadId}
           title={title}
         />
-      );
+      )
     },
     [activeTopicId, topics, activeThreadId],
-  );
+  )
 
   const groupContent = useCallback(
     (index: number) => {
-      if (index === 0) return <div style={{ height: 1 }} />;
+      if (index === 0) return <div style={{ height: 1 }} />
 
-      const topicGroup = groups[index];
-      return <TopicGroupItem {...topicGroup} />;
+      const topicGroup = groups[index]
+      return <TopicGroupItem {...topicGroup} />
     },
     [groups],
-  );
+  )
 
   // const activeIndex = topics.findIndex((topic) => topic.id === activeTopicId);
 
@@ -71,9 +71,9 @@ const ByTimeMode = memo(() => {
       itemContent={itemContent}
       ref={virtuosoRef}
     />
-  );
-});
+  )
+})
 
-ByTimeMode.displayName = 'ByTimeMode';
+ByTimeMode.displayName = 'ByTimeMode'
 
-export default ByTimeMode;
+export default ByTimeMode

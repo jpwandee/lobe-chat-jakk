@@ -1,26 +1,26 @@
-import { notFound } from 'next/navigation';
+import { notFound }
 
-import { serverFeatureFlags } from '@/config/featureFlags';
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import { serverFeatureFlags }
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Page from './index';
+import Page from './index'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('setting', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('setting', locale)
   return metadataModule.generate({
     description: t('header.desc'),
     title: t('tab.llm'),
     url: '/settings/llm',
-  });
-};
+  })
+}
 
 export default () => {
-  const showLLM = serverFeatureFlags().showLLM;
-  if (!showLLM) return notFound();
+  const showLLM = serverFeatureFlags().showLLM
+  if (!showLLM) return notFound()
 
-  return <Page />;
-};
+  return <Page />
+}

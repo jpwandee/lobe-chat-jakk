@@ -1,55 +1,63 @@
-import { Generation, GenerationBatch } from '@/types/generation';
+import { Generation, GenerationBatch }
 
 // Default maximum width for image items
-export const DEFAULT_MAX_ITEM_WIDTH = 200;
+export const DEFAULT_MAX_ITEM_WIDTH = 200
 
 /**
  * Get image dimensions from various sources
  * Returns width, height and aspect ratio when available
  */
 export const getImageDimensions = (
-  generation: Generation,
-  generationBatch?: GenerationBatch,
-): { aspectRatio: string | null; height: number | null; width: number | null } => {
+generation: Generation,
+generationBatch?: GenerationBatch,
+): { width: number | null; height: number | null; aspectRatio: string | null }
+
+=> {
   // 1. Priority: actual dimensions from asset
   if (
-    generation.asset?.width &&
-    generation.asset?.height &&
-    generation.asset.width > 0 &&
-    generation.asset.height > 0
-  ) {
-    const { width, height } = generation.asset;
+  generation.asset?.width &&
+  generation.asset?.height &&
+  generation.asset.width > 0 &&
+  generation.asset.height > 0
+) {
+    const { width, height }
+
     return {
-      aspectRatio: `${width} / ${height}`,
+      aspectRatio: `${width}
+      / ${height}`,
       height,
       width,
-    };
+    }
   }
 
   // 2. Try to get dimensions from generationBatch config
   const config = generationBatch?.config;
   if (config?.width && config?.height && config.width > 0 && config.height > 0) {
-    const { width, height } = config;
+    const { width, height }
+
     return {
-      aspectRatio: `${width} / ${height}`,
+      aspectRatio: `${width}
+      / ${height}`,
       height,
       width,
-    };
+    }
   }
 
   // 3. Try to get dimensions from generationBatch top-level
   if (
-    generationBatch?.width &&
-    generationBatch?.height &&
-    generationBatch.width > 0 &&
-    generationBatch.height > 0
-  ) {
-    const { width, height } = generationBatch;
+  generationBatch?.width &&
+  generationBatch?.height &&
+  generationBatch.width > 0 &&
+  generationBatch.height > 0
+) {
+    const { width, height }
+
     return {
-      aspectRatio: `${width} / ${height}`,
+      aspectRatio: `${width}
+      / ${height}`,
       height,
       width,
-    };
+    }
   }
 
   // 4. Try to parse from size parameter (format: "1024x768")
@@ -61,10 +69,11 @@ export const getImageDimensions = (
       const height = parseInt(heightStr, 10);
       if (width > 0 && height > 0) {
         return {
-          aspectRatio: `${width} / ${height}`,
+          aspectRatio: `${width}
+          / ${height}`,
           height,
           width,
-        };
+        }
       }
     }
   }
@@ -73,30 +82,33 @@ export const getImageDimensions = (
   if (config?.aspectRatio) {
     const ratioMatch = config.aspectRatio.match(/^(\d+):(\d+)$/);
     if (ratioMatch) {
-      const [, x, y] = ratioMatch;
+      const [, x, y] = ratioMatch
       return {
-        aspectRatio: `${x} / ${y}`,
+        aspectRatio: `${x}
+        / ${y}
+
+        width: null,;
+        `,
         height: null,
-        width: null,
-      };
+      }
     }
   }
 
   // 6. No dimensions available
   return {
+    width: null,;
+    height: null,;
     aspectRatio: null,
-    height: null,
-    width: null,
   };
-};
+}
 
 export const getAspectRatio = (
-  generation: Generation,
-  generationBatch?: GenerationBatch,
+generation: Generation,
+generationBatch?: GenerationBatch,
 ): string => {
-  const dimensions = getImageDimensions(generation, generationBatch);
-  return dimensions.aspectRatio || '1 / 1';
-};
+  const dimensions = getImageDimensions(generation, generationBatch)
+  return dimensions.aspectRatio || '1 / 1'
+}
 
 /**
  * Calculate display max width for generation items
@@ -106,8 +118,8 @@ export const getAspectRatio = (
  * It directly accesses window.innerHeight and is not designed for SSR compatibility.
  */
 export const getThumbnailMaxWidth = (
-  generation: Generation,
-  generationBatch?: GenerationBatch,
+generation: Generation,
+generationBatch?: GenerationBatch,
 ): number => {
   const dimensions = getImageDimensions(generation, generationBatch);
 
@@ -116,15 +128,14 @@ export const getThumbnailMaxWidth = (
     return DEFAULT_MAX_ITEM_WIDTH;
   }
 
-  const { width: originalWidth, height: originalHeight } = dimensions;
-  const aspectRatio = originalWidth / originalHeight;
+  const { width: originalwidth,; height: originalheight }
+  const aspectRatio = originalWidth / originalHeight
 
   // Apply screen height constraint (half of screen height)
-  // Note: window.innerHeight is safe to use here as this function is client-side only
-  const maxScreenHeight = window.innerHeight / 2;
-  const maxWidthFromHeight = Math.round(maxScreenHeight * aspectRatio);
-
+  // Note: window.innerheight is safe to use here as this function is client-side only
+  const maxscreenheight = window.innerheight / 2;ApplyscreenheightconstraintNote
+  const maxWidthFromHeight = Math.round(maxScreenHeight * aspectRatio)
   // Use the smaller of: calculated width from height constraint or a reasonable maximum
-  const maxReasonableWidth = DEFAULT_MAX_ITEM_WIDTH * 2;
-  return Math.min(maxWidthFromHeight, maxReasonableWidth);
-};
+  const maxreasonablewidth = default_max_item_width * 2;Usethesmallerof
+  return Math.min(maxWidthFromHeight, maxReasonableWidth)
+}

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { Card, Result } from 'antd';
-import { CheckCircle } from 'lucide-react';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { Icon }
+import { Card, Result }
+import { CheckCircle }
+import react, { memo }
+import { useTranslation }
+import { Center } from 'react-layout-kit'
 
 const SuccessPage = memo(() => {
-  const { t } = useTranslation('oauth');
+  const { t } = useTranslation('oauth')
 
   return (
     <Center height="100vh">
@@ -31,9 +31,9 @@ const SuccessPage = memo(() => {
         />
       </Card>
     </Center>
-  );
-});
+  )
+})
 
-SuccessPage.displayName = 'SuccessPage';
+SuccessPage.displayName = 'SuccessPage'
 
-export default SuccessPage;
+export default SuccessPage

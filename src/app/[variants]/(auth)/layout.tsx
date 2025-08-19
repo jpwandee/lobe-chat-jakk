@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Center, Flexbox }
 
 const Page = ({ children }: PropsWithChildren) => {
   return (
@@ -11,4 +11,4 @@ const Page = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Page;
+export default Page

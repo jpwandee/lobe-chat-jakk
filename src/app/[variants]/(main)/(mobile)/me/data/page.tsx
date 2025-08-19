@@ -1,29 +1,29 @@
-import { redirect } from 'next/navigation';
+import { redirect }
 
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Category from './features/Category';
+import Category from './features/Category'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('common', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('common', locale)
   return metadataModule.generate({
     title: t('userPanel.data'),
     url: '/me/data',
-  });
-};
+  })
+}
 
-const Page = async (props: DynamicLayoutProps) => {
-  const mobile = await RouteVariants.getIsMobile(props);
+const page = async (props: DynamicLayoutProps) => {
+  const mobile = await RouteVariants.getIsMobile(props)
 
-  if (!mobile) return redirect('/chat');
+  if (!mobile) return redirect('/chat')
 
-  return <Category />;
-};
+  return <Category />
+}
 
-Page.displayName = 'MeData';
+Page.displayName = 'MeData'
 
-export default Page;
+export default Page

@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
-import MobileContentLayout from '@/components/server/MobileNavLayout';
-import Footer from '@/features/Setting/Footer';
+import MobileContentLayout from '@/components/server/MobileNavLayout'
+import Footer from '@/features/Setting/Footer'
 
-import { SCROLL_PARENT_ID } from '../../../features/const';
+import { SCROLL_PARENT_ID }
 import Header from './Header';
 
 const Layout = ({ children }: PropsWithChildren) => {
@@ -22,6 +22,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'MobileDiscoverLayout';
+Layout.displayName = 'MobileDiscoverLayout'
 
-export default Layout;
+export default Layout

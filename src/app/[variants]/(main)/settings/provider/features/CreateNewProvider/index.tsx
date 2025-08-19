@@ -1,4 +1,5 @@
-import { ProviderIcon } from '@lobehub/icons';
+import { ProviderIcon }
+
 import {
   type FormItemProps,
   FormModal,
@@ -7,44 +8,44 @@ import {
   InputPassword,
   Select,
   TextArea,
-} from '@lobehub/ui';
-import { App } from 'antd';
-import { BrainIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+}
+import { App }
+import { BrainIcon }
+import { useRouter }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra/store';
-import { CreateAiProviderParams } from '@/types/aiProvider';
+import { useAiInfraStore }
+import { CreateAiProviderParams }
 
-import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey } from '../../const';
+import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey }
 
-interface CreateNewProviderProps {
+interface createnewproviderprops {
   onClose?: () => void;
   open?: boolean;
 }
 
 const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open }) => {
-  const { t } = useTranslation('modelProvider');
-  const [loading, setLoading] = useState(false);
-  const createNewAiProvider = useAiInfraStore((s) => s.createNewAiProvider);
-  const { message } = App.useApp();
-  const router = useRouter();
+  const { t } = useTranslation('modelProvider')
+  const [loading, setLoading] = useState(false)
+  const createNewAiProvider = useAiInfraStore((s) => s.createNewAiProvider)
+  const { message } = App.useApp()
+  const router = useRouter()
   const onFinish = async (values: CreateAiProviderParams) => {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await createNewAiProvider(values);
-      setLoading(false);
-      router.push(`/settings/provider/${values.id}`);
-      message.success(t('createNewAiProvider.createSuccess'));
-      onClose?.();
+      await createNewAiProvider(values)
+      setLoading(false)
+      router.push(`/settings/provider/${values.id}`)
+      message.success(t('createNewAiProvider.createSuccess'))
+      onClose?.()
     } catch (e) {
-      console.error(e);
-      setLoading(false);
+      console.error(e)
+      setLoading(false)
     }
-  };
+  }
 
   const basicItems: FormItemProps[] = [
     {
@@ -90,7 +91,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open }) => {
       minWidth: 400,
       name: 'logo',
     },
-  ];
+  ]
 
   const configItems: FormItemProps[] = [
     {
@@ -136,7 +137,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open }) => {
       minWidth: 400,
       name: [KeyVaultsConfigKey, LLMProviderApiTokenKey],
     },
-  ];
+  ]
 
   return (
     <FormModal
@@ -165,7 +166,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open }) => {
         </Flexbox>
       }
     />
-  );
-});
+  )
+})
 
-export default CreateNewProvider;
+export default CreateNewProvider

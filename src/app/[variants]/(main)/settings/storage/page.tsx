@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { isServerMode } from '@/const/version';
+import { isServerMode }
 
-import Advanced from './Advanced';
-import IndexedDBStorage from './IndexedDBStorage';
+import Advanced from './Advanced'
+import IndexedDBStorage from './IndexedDBStorage'
 
-const StorageEstimate = () => {
+const storageestimate = () => {
   return (
     <>
       {!isServerMode && <IndexedDBStorage />}
       <Advanced />
     </>
-  );
-};
+  )
+}
 
-export default StorageEstimate;
+export default StorageEstimate

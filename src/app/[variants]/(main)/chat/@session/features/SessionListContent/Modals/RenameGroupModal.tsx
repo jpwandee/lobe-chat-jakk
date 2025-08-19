@@ -1,30 +1,30 @@
-import { Input, Modal, type ModalProps } from '@lobehub/ui';
-import { App } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { memo, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Input, Modal, type ModalProps }
+import { App }
+import isEqual from 'fast-deep-equal'
+import { memo, useEffect, useState }
+import { useTranslation }
 
-import { useSessionStore } from '@/store/session';
-import { sessionGroupSelectors } from '@/store/session/selectors';
+import { useSessionStore }
+import { sessionGroupSelectors }
 
-interface RenameGroupModalProps extends ModalProps {
+interface renamegroupmodalprops extends modalprops {
   id: string;
 }
 
 const RenameGroupModal = memo<RenameGroupModalProps>(({ id, open, onCancel }) => {
-  const { t } = useTranslation('chat');
+  const { t } = useTranslation('chat')
 
-  const updateSessionGroupName = useSessionStore((s) => s.updateSessionGroupName);
-  const group = useSessionStore((s) => sessionGroupSelectors.getGroupById(id)(s), isEqual);
+  const updateSessionGroupName = useSessionStore((s) => s.updateSessionGroupName)
+  const group = useSessionStore((s) => sessionGroupSelectors.getGroupById(id)(s), isEqual)
 
-  const [input, setInput] = useState<string>('');
-  const [loading, setLoading] = useState(false);
+  const [input, setInput] = useState<string>('')
+  const [loading, setLoading] = useState(false)
 
-  const { message } = App.useApp();
+  const { message } = App.useApp()
 
   useEffect(() => {
-    setInput(group?.name ?? '');
-  }, [group]);
+    setInput(group?.name ?? '')
+  }, [group])
 
   return (
     <Modal
@@ -32,18 +32,18 @@ const RenameGroupModal = memo<RenameGroupModalProps>(({ id, open, onCancel }) =>
       destroyOnHidden
       okButtonProps={{ loading }}
       onCancel={(e) => {
-        setInput(group?.name ?? '');
-        onCancel?.(e);
+        setInput(group?.name ?? '')
+        onCancel?.(e)
       }}
       onOk={async (e) => {
         if (input.length === 0 || input.length > 20)
-          return message.warning(t('sessionGroup.tooLong'));
-        setLoading(true);
-        await updateSessionGroupName(id, input);
-        message.success(t('sessionGroup.renameSuccess'));
-        setLoading(false);
+          return message.warning(t('sessionGroup.tooLong'))
+        setLoading(true)
+        await updateSessionGroupName(id, input)
+        message.success(t('sessionGroup.renameSuccess'))
+        setLoading(false)
 
-        onCancel?.(e);
+        onCancel?.(e)
       }}
       open={open}
       title={t('sessionGroup.rename')}
@@ -57,7 +57,7 @@ const RenameGroupModal = memo<RenameGroupModalProps>(({ id, open, onCancel }) =>
         value={input}
       />
     </Modal>
-  );
-});
+  )
+})
 
-export default RenameGroupModal;
+export default RenameGroupModal

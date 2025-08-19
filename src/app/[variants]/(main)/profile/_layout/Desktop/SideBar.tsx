@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { createStyles }
+import { Suspense }
+import { useTranslation }
+import { Flexbox, FlexboxProps }
 
-import BrandWatermark from '@/components/BrandWatermark';
-import CircleLoading from '@/components/Loading/CircleLoading';
-import PanelTitle from '@/components/PanelTitle';
+import BrandWatermark from '@/components/BrandWatermark'
+import CircleLoading from '@/components/Loading/CircleLoading'
+import PanelTitle from '@/components/PanelTitle'
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    padding-block: 0 16px;
-    padding-inline: 12px;
-    border-inline-end: 1px solid ${token.colorBorderSecondary};
-    background: ${token.colorBgLayout};
+    padding-block: 0 16px
+    padding-inline: 12px
+    border-inline-end: 1px solid ${token.colorBorderSecondary}
+    background: ${token.colorBgLayout}
   `,
-}));
+}))
 
-interface SidebarLayoutProps extends FlexboxProps {
+interface sidebarlayoutprops extends flexboxprops {
   desc?: string;
   title?: string;
 }
 
 const SidebarLayout = ({ children, className, title, desc, ...rest }: SidebarLayoutProps) => {
-  const { cx, styles } = useStyles();
+  const { cx, styles }
   const { t } = useTranslation('auth');
   return (
     <Flexbox
@@ -41,4 +41,4 @@ const SidebarLayout = ({ children, className, title, desc, ...rest }: SidebarLay
   );
 };
 
-export default SidebarLayout;
+export default SidebarLayout

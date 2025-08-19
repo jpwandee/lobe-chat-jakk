@@ -1,24 +1,24 @@
-import { Block, Icon, Tag } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { CheckIcon, MinusIcon } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import qs from 'query-string';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Block, Icon, Tag }
+import { useTheme }
+import { CheckIcon, MinusIcon }
+import Link from 'next/link'
+import { usePathname }
+import qs from 'query-string'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import InlineTable from '@/components/InlineTable';
+import InlineTable from '@/components/InlineTable'
 
-import PublishedTime from '../../../../../../../../../../components/PublishedTime';
-import { useDetailContext } from '../../../../../../../../../../features/MCPPluginDetail/DetailProvider';
-import Title from '../../../../../../features/Title';
+import PublishedTime from '../../../../../../../../../../components/PublishedTime'
+import { useDetailContext } from '../../../../../../../../../../features/MCPPluginDetail/DetailProvider'
+import Title from '../../../../../../features/Title'
 
 const Versions = memo(() => {
-  const theme = useTheme();
-  const { t } = useTranslation('discover');
-  const { versions } = useDetailContext();
-  const pathname = usePathname();
+  const theme = useTheme()
+  const { t } = useTranslation('discover')
+  const { versions } = useDetailContext()
+  const pathname = usePathname()
   return (
     <Flexbox gap={16}>
       <Title>{t('mcp.details.versions.title')}</Title>
@@ -70,7 +70,7 @@ const Versions = memo(() => {
         />
       </Block>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Versions;
+export default Versions

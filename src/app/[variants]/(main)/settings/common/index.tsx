@@ -1,17 +1,17 @@
-import Appearance from './features/Appearance';
-import ChatAppearance from './features/ChatAppearance';
-import Common from './features/Common';
+import Appearance from './features/Appearance'
+import ChatAppearance from './features/ChatAppearance'
+import Common from './features/Common'
 
-const Page = () => {
+const page = () => {
   return (
     <>
       <Common />
       <Appearance />
       <ChatAppearance />
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'CommonSetting';
+Page.displayName = 'CommonSetting'
 
-export default Page;
+export default Page

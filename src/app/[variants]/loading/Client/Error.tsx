@@ -1,12 +1,12 @@
-import { Button } from '@lobehub/ui';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { Button }
+import React from 'react'
+import { useTranslation }
+import { Center }
 
-import ErrorResult from '@/features/InitClientDB/ErrorResult';
+import ErrorResult from '@/features/InitClientDB/ErrorResult'
 
-const InitError = () => {
-  const { t } = useTranslation('common');
+const initerror = () => {
+  const { t } = useTranslation('common')
 
   return (
     <ErrorResult>
@@ -21,7 +21,7 @@ const InitError = () => {
         </Center>
       )}
     </ErrorResult>
-  );
-};
+  )
+}
 
-export default InitError;
+export default InitError

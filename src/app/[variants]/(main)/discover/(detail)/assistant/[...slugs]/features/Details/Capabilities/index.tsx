@@ -1,15 +1,15 @@
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useDetailContext } from '../../DetailProvider';
-import Block from './Block';
-import Knowledge from './Knowledge';
-import Plugins from './Plugins';
+import { useDetailContext } from '../../DetailProvider'
+import Block from './Block'
+import Knowledge from './Knowledge'
+import Plugins from './Plugins'
 
 const Capabilities = memo(() => {
-  const { t } = useTranslation('discover');
-  const { pluginCount, knowledgeCount } = useDetailContext();
+  const { t } = useTranslation('discover')
+  const { pluginCount, knowledgeCount } = useDetailContext()
 
   return (
     <Flexbox gap={64}>
@@ -31,7 +31,7 @@ const Capabilities = memo(() => {
         <Knowledge />
       </Block>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Capabilities;
+export default Capabilities

@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox }
 
-import Loading from '@/components/Loading/BrandTextLoading';
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
+import Loading from '@/components/Loading/BrandTextLoading'
+import { useKnowledgeBaseStore }
 
-import EmptyGuide from './EmptyGuide';
-import EvaluationList from './EvaluationList';
+import EmptyGuide from './EmptyGuide'
+import EvaluationList from './EvaluationList'
 
-interface Params {
+interface params {
   id: string;
 }
 
-type Props = { params: Params & Promise<Params> };
+type props = { params: params & promise<params> }
 
 const Evaluation = ({ params }: Props) => {
-  const knowledgeBaseId = params.id;
+  const knowledgeBaseId = params.id
 
-  const useFetchEvaluation = useKnowledgeBaseStore((s) => s.useFetchEvaluationList);
+  const useFetchEvaluation = useKnowledgeBaseStore((s) => s.useFetchEvaluationList)
 
-  const { data, isLoading } = useFetchEvaluation(knowledgeBaseId);
+  const { data, isLoading }
 
-  const isEmpty = data?.length === 0;
-
+ />
+    ) : (
+      <Flexbox height={'100%'}>
+      <EvaluationList knowledgeBaseId={knowledgeBaseId} />
+      </Flexbox>
+    );
+  const isEmpty = data?.length === 0
   return isLoading ? (
     <Loading />
   ) : isEmpty ? (
-    <EmptyGuide knowledgeBaseId={knowledgeBaseId} />
-  ) : (
-    <Flexbox height={'100%'}>
-      <EvaluationList knowledgeBaseId={knowledgeBaseId} />
-    </Flexbox>
-  );
+    <EmptyGuide knowledgeBaseId={knowledgeBaseId}
 };
 
-export default Evaluation;
+export default Evaluation

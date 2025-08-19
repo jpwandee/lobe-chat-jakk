@@ -1,11 +1,11 @@
-import { SliderWithInput } from '@lobehub/ui';
-import { memo } from 'react';
+import { SliderWithInput }
+import { memo }
 
-import { useGenerationConfigParam } from '@/store/image/slices/generationConfig/hooks';
+import { useGenerationConfigParam } from '@/store/image/slices/generationConfig/hooks'
 
 const SizeSliderInput = memo(() => {
-  const { value, setValue, min, max } = useGenerationConfigParam('steps');
-  return <SliderWithInput max={max} min={min} onChange={setValue} value={value} />;
-});
+  const { value, setValue, min, max } = useGenerationConfigParam('steps')
+  return <SliderWithInput max={max} min={min} onChange={setValue} value={value} />
+})
 
-export default SizeSliderInput;
+export default SizeSliderInput

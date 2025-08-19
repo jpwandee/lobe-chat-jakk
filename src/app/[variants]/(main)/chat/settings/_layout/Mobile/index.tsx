@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react'
 
-import MobileContentLayout from '@/components/server/MobileNavLayout';
-import Footer from '@/features/Setting/Footer';
+import MobileContentLayout from '@/components/server/MobileNavLayout'
+import Footer from '@/features/Setting/Footer'
 
-import Header from './Header';
+import Header from './Header'
 
 const Layout = ({ children }: PropsWithChildren) => (
   <MobileContentLayout header={<Header />}>
     {children}
     <Footer />
   </MobileContentLayout>
-);
+)
 
-Layout.displayName = 'MobileSessionSettingsLayout';
+Layout.displayName = 'MobileSessionSettingsLayout'
 
-export default Layout;
+export default Layout

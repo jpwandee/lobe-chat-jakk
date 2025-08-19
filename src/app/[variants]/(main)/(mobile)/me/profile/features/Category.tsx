@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { ChartColumnBigIcon, LogOut, ShieldCheck, UserCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ChartColumnBigIcon, LogOut, ShieldCheck, UserCircle }
+import { useRouter }
+import { memo }
+import { useTranslation }
 
-import Cell, { CellProps } from '@/components/Cell';
-import { enableAuth } from '@/const/auth';
-import { isDeprecatedEdition } from '@/const/version';
-import { ProfileTabs } from '@/store/global/initialState';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/selectors';
+import cell, { CellProps }
+import { enableAuth }
+import { isDeprecatedEdition }
+import { ProfileTabs }
+import { useUserStore }
+import { authSelectors } from '@/store/user/selectors'
 
 const Category = memo(() => {
   const [isLogin, isLoginWithClerk, signOut] = useUserStore((s) => [
     authSelectors.isLogin(s),
     authSelectors.isLoginWithClerk(s),
     s.logout,
-  ]);
-  const router = useRouter();
-  const { t } = useTranslation('auth');
+  ])
+  const router = useRouter()
+  const { t } = useTranslation('auth')
   const items: CellProps[] = [
     {
       icon: UserCircle,
@@ -50,13 +50,13 @@ const Category = memo(() => {
         key: 'logout',
         label: t('signout', { ns: 'auth' }),
         onClick: () => {
-          signOut();
-          router.push('/login');
+          signOut()
+          router.push('/login')
         },
       },
-  ].filter(Boolean) as CellProps[];
+  ].filter(Boolean) as CellProps[]
 
-  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />);
-});
+  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />)
+})
 
-export default Category;
+export default Category

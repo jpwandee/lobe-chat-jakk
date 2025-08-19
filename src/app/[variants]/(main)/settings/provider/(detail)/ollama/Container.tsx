@@ -1,8 +1,8 @@
-import { ActionIcon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { XIcon } from 'lucide-react';
-import { ReactNode, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { createStyles }
+import { XIcon }
+import { ReactNode, useState }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token, responsive }) => ({
   close: css`
@@ -28,11 +28,11 @@ const useStyles = createStyles(({ css, token, responsive }) => ({
 }));
 
 const Container = ({
-  setError,
-  children,
+setError,
+children,
 }: {
-  children: ReactNode;
-  setError: (error?: any) => void;
+children: ReactNode;
+setError: (error?: any) => void;
 }) => {
   const { styles } = useStyles();
   const [show, setShow] = useState(true);
@@ -54,4 +54,4 @@ const Container = ({
   );
 };
 
-export default Container;
+export default Container

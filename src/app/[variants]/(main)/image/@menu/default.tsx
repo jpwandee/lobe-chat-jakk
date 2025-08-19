@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import ConfigPanel from './features/ConfigPanel';
+import ConfigPanel from './features/ConfigPanel'
 
 const page = () => {
-  return <ConfigPanel />;
-};
+  return <ConfigPanel />
+}
 
-page.displayName = 'ImageConfigPanel';
+page.displayName = 'ImageConfigPanel'
 
-export default page;
+export default page

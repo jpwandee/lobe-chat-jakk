@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { DEFAULT_REWRITE_QUERY } from '@/const/settings';
-import { isServerMode } from '@/const/version';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import { DEFAULT_REWRITE_QUERY }
+import { isServerMode }
+import { featureFlagsSelectors, useServerConfigStore }
 
-import SystemAgentForm from './features/SystemAgentForm';
+import SystemAgentForm from './features/SystemAgentForm'
 
-const Page = () => {
-  const { enableKnowledgeBase } = useServerConfigStore(featureFlagsSelectors);
+const page = () => {
+  const { enableKnowledgeBase } = useServerConfigStore(featureFlagsSelectors)
   return (
     <>
       <SystemAgentForm systemAgentKey="topic" />
@@ -24,9 +24,9 @@ const Page = () => {
         />
       )}
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'SystemAgent';
+Page.displayName = 'SystemAgent'
 
-export default Page;
+export default Page

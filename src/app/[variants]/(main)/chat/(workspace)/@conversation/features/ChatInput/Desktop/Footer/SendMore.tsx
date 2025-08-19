@@ -1,43 +1,43 @@
-import { Button, Dropdown, Hotkey, Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BotMessageSquare, LucideCheck, LucideChevronDown, MessageSquarePlus } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Dropdown, Hotkey, Icon }
+import { createStyles }
+import { BotMessageSquare, LucideCheck, LucideChevronDown, MessageSquarePlus }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useSendMessage } from '@/features/ChatInput/useSend';
-import { useChatStore } from '@/store/chat';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors, settingsSelectors } from '@/store/user/selectors';
-import { HotkeyEnum } from '@/types/hotkey';
+import { useSendMessage }
+import { useChatStore }
+import { useUserStore }
+import { preferenceSelectors, settingsSelectors }
+import { HotkeyEnum }
 
 const useStyles = createStyles(({ css, prefixCls }) => {
   return {
     arrow: css`
       &.${prefixCls}-btn.${prefixCls}-btn-icon-only {
-        width: 28px;
+        width: 28px
       }
     `,
-  };
-});
+  }
+})
 
-interface SendMoreProps {
+interface sendmoreprops {
   disabled?: boolean;
   isMac?: boolean;
 }
 
 const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
-  const { t } = useTranslation('chat');
-  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.AddUserMessage));
-  const { styles } = useStyles();
+  const { t } = useTranslation('chat')
+  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.AddUserMessage))
+  const { styles } = useStyles()
 
   const [useCmdEnterToSend, updatePreference] = useUserStore((s) => [
     preferenceSelectors.useCmdEnterToSend(s),
     s.updatePreference,
-  ]);
-  const addAIMessage = useChatStore((s) => s.addAIMessage);
+  ])
+  const addAIMessage = useChatStore((s) => s.addAIMessage)
 
-  const { send: sendMessage } = useSendMessage();
+  const { send: sendMessage } = useSendMessage()
 
   return (
     <Dropdown
@@ -49,7 +49,7 @@ const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
             key: 'sendWithEnter',
             label: t('input.sendWithEnter'),
             onClick: () => {
-              updatePreference({ useCmdEnterToSend: false });
+              updatePreference({ useCmdEnterToSend: false })
             },
           },
           {
@@ -59,7 +59,7 @@ const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
               meta: typeof isMac === 'boolean' ? (isMac ? '⌘' : 'Ctrl') : '…',
             }),
             onClick: () => {
-              updatePreference({ useCmdEnterToSend: true });
+              updatePreference({ useCmdEnterToSend: true })
             },
           },
           { type: 'divider' },
@@ -68,7 +68,7 @@ const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
             key: 'addAi',
             label: t('input.addAi'),
             onClick: () => {
-              addAIMessage();
+              addAIMessage()
             },
           },
           {
@@ -81,7 +81,7 @@ const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
               </Flexbox>
             ),
             onClick: () => {
-              sendMessage({ onlyAddUserMessage: true });
+              sendMessage({ onlyAddUserMessage: true })
             },
           },
         ],
@@ -96,9 +96,9 @@ const SendMore = memo<SendMoreProps>(({ disabled, isMac }) => {
         type={'primary'}
       />
     </Dropdown>
-  );
-});
+  )
+})
 
-SendMore.displayName = 'SendMore';
+SendMore.displayName = 'SendMore'
 
-export default SendMore;
+export default SendMore

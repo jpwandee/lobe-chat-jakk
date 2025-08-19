@@ -1,38 +1,38 @@
-'use client';
+'use client'
 
-import { ActionIcon, Icon } from '@lobehub/ui';
-import { Divider } from 'antd';
-import { createStyles } from 'antd-style';
-import { ChevronRightIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ActionIcon, Icon }
+import { Divider }
+import { createStyles }
+import { ChevronRightIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { OFFICIAL_SITE } from '@/const/url';
-import { useShare } from '@/hooks/useShare';
+import { OFFICIAL_SITE }
+import { useShare }
 
-const ICON_SIZE = { blockSize: 28, size: 16 };
+const icon_size = { blockSize: 28,; size: 16 }
 
 const useStyles = createStyles(
   ({ css, token }) => css`
-    position: relative;
+    position: relative
 
-    margin-block: 16px 32px;
-    padding: 16px;
-    border-radius: ${token.borderRadiusLG}px;
+    margin-block: 16px 32px
+    padding: 16px
+    border-radius: ${token.borderRadiusLG}px
 
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
   `,
-);
+)
 
-const ReadDetail = memo<{ desc: string; postId: string; title: string }>(
+const readdetail = memo< { desc: string; postId: string; title: string }>(
   ({ postId, title, desc }) => {
-    const { t } = useTranslation('changelog');
-    const { styles, theme } = useStyles();
-    const url = urlJoin(OFFICIAL_SITE, `/changelog/${postId}`);
-    const { x, telegram, reddit, mastodon, whatsapp } = useShare({ desc, title, url });
+    const { t } = useTranslation('changelog')
+    const { styles, theme } = useStyles()
+    const url = urlJoin(OFFICIAL_SITE, `/changelog/${postId}`)
+    const { x, telegram, reddit, mastodon, whatsapp } = useShare({ desc, title, url })
 
     return (
       <Flexbox align={'center'} className={styles} gap={4} horizontal>
@@ -65,8 +65,8 @@ const ReadDetail = memo<{ desc: string; postId: string; title: string }>(
           </Flexbox>
         </Link>
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default ReadDetail;
+export default ReadDetail

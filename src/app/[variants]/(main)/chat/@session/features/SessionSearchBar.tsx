@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { SearchBar } from '@lobehub/ui';
-import { type ChangeEvent, memo, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { SearchBar }
+import { type ChangeEvent, memo, useCallback }
+import { useTranslation }
 
-import { useSessionStore } from '@/store/session';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
-import { HotkeyEnum } from '@/types/hotkey';
+import { useSessionStore }
+import { useUserStore }
+import { settingsSelectors }
+import { HotkeyEnum }
 
-const SessionSearchBar = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { t } = useTranslation('chat');
-  const isLoaded = useUserStore((s) => s.isLoaded);
-  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.Search));
+const sessionsearchbar = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { t } = useTranslation('chat')
+  const isLoaded = useUserStore((s) => s.isLoaded)
+  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.Search))
 
   const [keywords, useSearchSessions, updateSearchKeywords] = useSessionStore((s) => [
     s.sessionSearchKeywords,
     s.useSearchSessions,
     s.updateSearchKeywords,
-  ]);
+  ])
 
-  const { isValidating } = useSearchSessions(keywords);
+  const { isValidating } = useSearchSessions(keywords)
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      updateSearchKeywords(e.target.value);
+      updateSearchKeywords(e.target.value)
     },
     [updateSearchKeywords],
-  );
+  )
 
   return (
     <SearchBar
@@ -41,7 +41,7 @@ const SessionSearchBar = memo<{ mobile?: boolean }>(({ mobile }) => {
       value={keywords}
       variant={'filled'}
     />
-  );
-});
+  )
+})
 
-export default SessionSearchBar;
+export default SessionSearchBar

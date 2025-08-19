@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import { notFound } from 'next/navigation';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { notFound }
+import { memo }
+import { Flexbox }
 
-import Breadcrumb from '@/app/[variants]/(main)/discover/(detail)/features/Breadcrumb';
-import { withSuspense } from '@/components/withSuspense';
-import { useDiscoverStore } from '@/store/discover';
-import { DiscoverTab } from '@/types/discover';
+import Breadcrumb from '@/app/[variants]/(main)/discover/(detail)/features/Breadcrumb'
+import { withSuspense }
+import { useDiscoverStore }
+import { DiscoverTab }
 
-import { DetailProvider } from './features/DetailProvider';
-import Details from './features/Details';
-import Header from './features/Header';
-import Loading from './loading';
+import { DetailProvider }
+import Details from './features/Details'
+import Header from './features/Header'
+import Loading from './loading'
 
-interface ClientProps {
+interface clientprops {
   identifier: string;
   mobile?: boolean;
 }
 
 const Client = memo<ClientProps>(({ identifier, mobile }) => {
-  const useProviderDetail = useDiscoverStore((s) => s.useProviderDetail);
-  const { data, isLoading } = useProviderDetail({ identifier, withReadme: true });
+  const useProviderDetail = useDiscoverStore((s) => s.useProviderDetail)
+  const { data, isLoading } = useProviderDetail({ identifier, withReadme: true })
 
-  if (isLoading) return <Loading />;
-  if (!data) return notFound();
+  if (isLoading) return <Loading />
+  if (!data) return notFound()
 
   return (
     <DetailProvider config={data}>
@@ -34,7 +34,7 @@ const Client = memo<ClientProps>(({ identifier, mobile }) => {
         <Details mobile={mobile} />
       </Flexbox>
     </DetailProvider>
-  );
-});
+  )
+})
 
-export default withSuspense(Client);
+export default withSuspense(Client)

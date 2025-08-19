@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { Form, type FormGroupItemType, Input } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Form, type FormGroupItemType, Input }
+import { Skeleton }
+import { memo }
+import { useTranslation }
 
-import { enableAuth } from '@/const/auth';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import AvatarWithUpload from '@/features/AvatarWithUpload';
-import UserAvatar from '@/features/User/UserAvatar';
-import { useUserStore } from '@/store/user';
-import { authSelectors, userProfileSelectors } from '@/store/user/selectors';
+import { enableAuth }
+import { FORM_STYLE }
+import AvatarWithUpload from '@/features/AvatarWithUpload'
+import UserAvatar from '@/features/User/UserAvatar'
+import { useUserStore }
+import { authSelectors, userProfileSelectors }
 
-import SSOProvidersList from './features/SSOProvidersList';
+import SSOProvidersList from './features/SSOProvidersList'
 
-const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
+const client = memo< { mobile?: boolean }>(({ mobile }) => {
   const [isLoginWithNextAuth, isLogin] = useUserStore((s) => [
     authSelectors.isLoginWithNextAuth(s),
     authSelectors.isLogin(s),
-  ]);
+  ])
   const [nickname, username, userProfile, loading] = useUserStore((s) => [
     userProfileSelectors.nickName(s),
     userProfileSelectors.username(s),
     userProfileSelectors.userProfile(s),
     !s.isLoaded,
-  ]);
+  ])
 
-  const [form] = Form.useForm();
-  const { t } = useTranslation('auth');
+  const [form] = Form.useForm()
+  const { t } = useTranslation('auth')
 
   if (loading)
     return (
@@ -37,7 +37,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
         style={{ padding: mobile ? 16 : undefined }}
         title={false}
       />
-    );
+    )
 
   const profile: FormGroupItemType = {
     children: [
@@ -67,7 +67,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
       },
     ],
     title: t('tab.profile'),
-  };
+  }
   return (
     <Form
       form={form}
@@ -80,7 +80,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
       variant={'borderless'}
       {...FORM_STYLE}
     />
-  );
-});
+  )
+})
 
-export default Client;
+export default Client

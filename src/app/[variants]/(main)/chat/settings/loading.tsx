@@ -1,3 +1,3 @@
-import SkeletonLoading from '@/components/Loading/SkeletonLoading';
+import SkeletonLoading from '@/components/Loading/SkeletonLoading'
 
-export default () => <SkeletonLoading paragraph={{ rows: 8 }} />;
+export default () => <skeletonloading paragraph= {{ rows: 8 }} />

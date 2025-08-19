@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Icon, Text } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { Palette } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { Icon, Text }
+import { useTheme }
+import { Palette }
+import { useTranslation }
+import { Center }
 
-const PromptTitle = () => {
-  const { t } = useTranslation('image');
-  const theme = useTheme();
+const prompttitle = () => {
+  const { t } = useTranslation('image')
+  const theme = useTheme()
 
   return (
     <Center gap={16} horizontal style={{ width: '100%' }}>
@@ -32,7 +32,7 @@ const PromptTitle = () => {
         {t('config.header.title')}
       </Text>
     </Center>
-  );
-};
+  )
+}
 
-export default PromptTitle;
+export default PromptTitle

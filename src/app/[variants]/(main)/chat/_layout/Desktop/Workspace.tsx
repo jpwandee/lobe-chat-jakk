@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { useTheme } from 'antd-style';
-import { PropsWithChildren, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useTheme }
+import { PropsWithChildren, memo }
+import { Flexbox } from 'react-layout-kit'
 
 const Workspace = memo<PropsWithChildren>(({ children }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Flexbox
       flex={1}
@@ -17,7 +17,7 @@ const Workspace = memo<PropsWithChildren>(({ children }) => {
     >
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Workspace;
+export default Workspace

@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { useResponsive } from 'antd-style';
-import { useQueryState } from 'nuqs';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useResponsive }
+import { useQueryState }
+import { memo }
+import { Flexbox }
 
-import { AssistantNavKey } from '@/types/discover';
+import { AssistantNavKey }
 
-import Sidebar from '../Sidebar';
-import Capabilities from './Capabilities';
-import Nav from './Nav';
-import Overview from './Overview';
-import Related from './Related';
-import SystemRole from './SystemRole';
+import Sidebar from '../Sidebar'
+import Capabilities from './Capabilities'
+import Nav from './Nav'
+import Overview from './Overview'
+import Related from './Related'
+import SystemRole from './SystemRole'
 
-const Details = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
-  const { mobile = isMobile } = useResponsive();
+const details = memo< { mobile?: boolean }>(({ mobile: isMobile }) => {
+  const { mobile = isMobile } = useResponsive()
   const [activeTab, setActiveTab] = useQueryState('activeTab', {
     clearOnDefault: true,
     defaultValue: AssistantNavKey.Overview,
-  });
+  })
 
   return (
     <Flexbox gap={24}>
@@ -43,7 +43,7 @@ const Details = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
         <Sidebar mobile={mobile} />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Details;
+export default Details

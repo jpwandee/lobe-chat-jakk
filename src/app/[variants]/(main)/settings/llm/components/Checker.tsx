@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { CheckCircleFilled } from '@ant-design/icons';
-import { TraceNameMap } from '@lobechat/types';
-import { Alert, Button, Highlighter } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { CheckCircleFilled }
+import { TraceNameMap }
+import { Alert, Button, Highlighter }
+import { useTheme }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useProviderName } from '@/hooks/useProviderName';
-import { chatService } from '@/services/chat';
-import { ChatMessageError } from '@/types/message';
+import { useIsMobile }
+import { useProviderName }
+import { chatService }
+import { ChatMessageError }
 
-interface ConnectionCheckerProps {
+interface connectioncheckerprops {
   model: string;
   provider: string;
 }
 
-const Error = memo<{ error: ChatMessageError }>(({ error }) => {
-  const { t } = useTranslation('error');
-  const providerName = useProviderName(error.body?.provider);
+const error = memo< { error: chatmessageerror }>(({ error }) => {
+  const { t } = useTranslation('error')
+  const providerName = useProviderName(error.body?.provider)
 
   return (
     <Flexbox gap={8} style={{ maxWidth: '600px', width: '100%' }}>
@@ -38,42 +38,42 @@ const Error = memo<{ error: ChatMessageError }>(({ error }) => {
         type={'error'}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
 const Checker = memo<ConnectionCheckerProps>(({ model, provider }) => {
-  const { t } = useTranslation('setting');
+  const { t } = useTranslation('setting')
 
-  const [loading, setLoading] = useState(false);
-  const [pass, setPass] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [pass, setPass] = useState(false)
 
-  const theme = useTheme();
-  const [error, setError] = useState<ChatMessageError | undefined>();
+  const theme = useTheme()
+  const [error, setError] = useState<ChatMessageError | undefined>()
 
   const checkConnection = async () => {
-    let isError = false;
+    let isError = false
 
     await chatService.fetchPresetTaskResult({
       onError: (_, rawError) => {
-        setError(rawError);
-        setPass(false);
-        isError = true;
+        setError(rawError)
+        setPass(false)
+        isError = true
       },
       onFinish: async (value) => {
         if (!isError && value) {
-          setError(undefined);
-          setPass(true);
+          setError(undefined)
+          setPass(true)
         } else {
-          setPass(false);
+          setPass(false)
           setError({
             body: value,
             message: t('response.ConnectionCheckFailed', { ns: 'error' }),
             type: 'ConnectionCheckFailed',
-          });
+          })
         }
       },
       onLoadingChange: (loading) => {
-        setLoading(loading);
+        setLoading(loading)
       },
       params: {
         messages: [
@@ -90,9 +90,9 @@ const Checker = memo<ConnectionCheckerProps>(({ model, provider }) => {
         topicId: model,
         traceName: TraceNameMap.ConnectivityChecker,
       },
-    });
-  };
-  const isMobile = useIsMobile();
+    })
+  }
+  const isMobile = useIsMobile()
 
   return (
     <Flexbox align={isMobile ? 'flex-start' : 'flex-end'} gap={8}>
@@ -113,7 +113,7 @@ const Checker = memo<ConnectionCheckerProps>(({ model, provider }) => {
       </Flexbox>
       {error && <Error error={error} />}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Checker;
+export default Checker

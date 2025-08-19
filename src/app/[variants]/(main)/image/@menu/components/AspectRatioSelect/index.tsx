@@ -1,33 +1,34 @@
-'use client';
+'use client'
 
-import { Block, Grid, GridProps, Text } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { Center } from 'react-layout-kit';
-import useMergeState from 'use-merge-value';
+import { Block, Grid, GridProps, Text }
+import { useTheme }
+import { memo }
+import { Center }
+import useMergeState from 'use-merge-value'
 
-export interface AspectRatioSelectProps extends Omit<GridProps, 'children' | 'onChange'> {
+export interface aspectratioselectprops extends omit<gridprops, 'children' | 'onChange'> {
   defaultValue?: string;
   onChange?: (value: string) => void;
-  options?: { label?: string; value: string }[];
+  options?: { label?: string; value: string }
+
   value?: string;
 }
 
 const AspectRatioSelect = memo<AspectRatioSelectProps>(
   ({ options, onChange, value, defaultValue, ...rest }) => {
-    const theme = useTheme();
+    const theme = useTheme()
     const [active, setActive] = useMergeState('', {
       defaultValue,
       onChange,
       value,
-    });
+    })
     return (
       <Block padding={4} variant={'filled'} {...rest}>
         <Grid gap={4} maxItemWidth={48} rows={16}>
           {options?.map((item) => {
-            const isActive = active === item.value;
-            const [width, height] = item.value.split(':').map(Number);
-            const isWidthGreater = width > height;
+            const isActive = active === item.value
+            const [width, height] = item.value.split(':').map(Number)
+            const isWidthGreater = width > height
 
             return (
               <Block
@@ -37,8 +38,8 @@ const AspectRatioSelect = memo<AspectRatioSelectProps>(
                 justify={'center'}
                 key={item.value}
                 onClick={() => {
-                  setActive(item.value);
-                  onChange?.(item.value);
+                  setActive(item.value)
+                  onChange?.(item.value)
                 }}
                 padding={8}
                 shadow={isActive && !theme.isDarkMode}
@@ -62,12 +63,12 @@ const AspectRatioSelect = memo<AspectRatioSelectProps>(
                   {item.label || item.value}
                 </Text>
               </Block>
-            );
+            )
           })}
         </Grid>
       </Block>
-    );
+    )
   },
-);
+)
 
-export default AspectRatioSelect;
+export default AspectRatioSelect

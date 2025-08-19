@@ -1,46 +1,46 @@
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { Suspense, memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { createStyles }
+import { Suspense, memo, useState }
+import { Flexbox }
 
-import { useChatStore } from '@/store/chat';
-import { useGlobalStore } from '@/store/global';
+import { useChatStore }
+import { useGlobalStore }
 
-import ThreadList from '../ThreadList';
-import DefaultContent from './DefaultContent';
-import TopicContent from './TopicContent';
+import ThreadList from '../ThreadList'
+import DefaultContent from './DefaultContent'
+import TopicContent from './TopicContent'
 
 const useStyles = createStyles(({ css, token, isDarkMode }) => ({
   active: css`
-    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary};
-    transition: background 200ms ${token.motionEaseOut};
+    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary}
+    transition: background 200ms ${token.motionEaseOut}
 
     &:hover {
-      background: ${token.colorFill};
+      background: ${token.colorFill}
     }
   `,
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    margin-block: 2px;
-    margin-inline: 8px;
-    padding: 8px;
-    border-radius: ${token.borderRadius}px;
+    margin-block: 2px
+    margin-inline: 8px
+    padding: 8px
+    border-radius: ${token.borderRadius}px
 
     &.topic-item {
-      width: calc(100% - 16px);
+      width: calc(100% - 16px)
     }
 
     &:hover {
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     }
   `,
   split: css`
-    border-block-end: 1px solid ${token.colorSplit};
+    border-block-end: 1px solid ${token.colorSplit}
   `,
-}));
+}))
 
-export interface ConfigCellProps {
+export interface configcellprops {
   active?: boolean;
   fav?: boolean;
   id?: string;
@@ -49,10 +49,10 @@ export interface ConfigCellProps {
 }
 
 const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) => {
-  const { styles, cx } = useStyles();
-  const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic);
-  const [toggleTopic] = useChatStore((s) => [s.switchTopic]);
-  const [isHover, setHovering] = useState(false);
+  const { styles, cx } = useStyles()
+  const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic)
+  const [toggleTopic] = useChatStore((s) => [s.switchTopic])
+  const [isHover, setHovering] = useState(false)
 
   return (
     <Flexbox style={{ position: 'relative' }}>
@@ -62,14 +62,14 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
         distribution={'space-between'}
         horizontal
         onClick={() => {
-          toggleTopic(id);
-          toggleConfig(false);
+          toggleTopic(id)
+          toggleConfig(false)
         }}
         onMouseEnter={() => {
-          setHovering(true);
+          setHovering(true)
         }}
         onMouseLeave={() => {
-          setHovering(false);
+          setHovering(false)
         }}
       >
         {!id ? (
@@ -91,7 +91,7 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
         </Suspense>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TopicItem;
+export default TopicItem

@@ -1,40 +1,40 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { TabBar, type TabBarProps } from '@lobehub/ui/mobile';
-import { createStyles } from 'antd-style';
-import { Compass, MessageSquare, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { rgba } from 'polished';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Icon }
+import { TabBar, type TabBarProps }
+import { createStyles }
+import { Compass, MessageSquare, User }
+import { useRouter }
+import { rgba }
+import { memo, useMemo }
+import { useTranslation }
 
-import { MOBILE_TABBAR_HEIGHT } from '@/const/layoutTokens';
-import { useActiveTabKey } from '@/hooks/useActiveTabKey';
-import { SidebarTabKey } from '@/store/global/initialState';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import { MOBILE_TABBAR_HEIGHT }
+import { useActiveTabKey }
+import { SidebarTabKey }
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig'
 
 const useStyles = createStyles(({ css, token }) => ({
   active: css`
     svg {
-      fill: ${rgba(token.colorPrimary, 0.33)};
+      fill: ${rgba(token.colorPrimary, 0.33)}
     }
   `,
   container: css`
-    position: fixed;
-    z-index: 100;
-    inset-block-end: 0;
-    inset-inline: 0 0;
+    position: fixed
+    z-index: 100
+    inset-block-end: 0
+    inset-inline: 0
   `,
-}));
+}))
 
 const NavBar = memo(() => {
-  const { t } = useTranslation('common');
-  const { styles } = useStyles();
-  const activeKey = useActiveTabKey();
-  const router = useRouter();
+  const { t } = useTranslation('common')
+  const { styles } = useStyles()
+  const activeKey = useActiveTabKey()
+  const router = useRouter()
 
-  const { showMarket } = useServerConfigStore(featureFlagsSelectors);
+  const { showMarket } = useServerConfigStore(featureFlagsSelectors)
 
   const items: TabBarProps['items'] = useMemo(
     () =>
@@ -45,7 +45,7 @@ const NavBar = memo(() => {
           ),
           key: SidebarTabKey.Chat,
           onClick: () => {
-            router.push('/chat');
+            router.push('/chat')
           },
           title: t('tab.chat'),
         },
@@ -55,7 +55,7 @@ const NavBar = memo(() => {
           ),
           key: SidebarTabKey.Discover,
           onClick: () => {
-            router.push('/discover');
+            router.push('/discover')
           },
           title: t('tab.discover'),
         },
@@ -65,13 +65,13 @@ const NavBar = memo(() => {
           ),
           key: SidebarTabKey.Me,
           onClick: () => {
-            router.push('/me');
+            router.push('/me')
           },
           title: t('tab.me'),
         },
       ].filter(Boolean) as TabBarProps['items'],
     [t],
-  );
+  )
 
   return (
     <TabBar
@@ -80,9 +80,9 @@ const NavBar = memo(() => {
       height={MOBILE_TABBAR_HEIGHT}
       items={items}
     />
-  );
-});
+  )
+})
 
-NavBar.displayName = 'NavBar';
+NavBar.displayName = 'NavBar'
 
-export default NavBar;
+export default NavBar

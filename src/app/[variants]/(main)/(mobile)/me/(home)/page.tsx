@@ -1,28 +1,28 @@
-import { redirect } from 'next/navigation';
-import { Center } from 'react-layout-kit';
+import { redirect }
+import { Center }
 
-import BrandWatermark from '@/components/BrandWatermark';
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import BrandWatermark from '@/components/BrandWatermark'
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Category from './features/Category';
-import UserBanner from './features/UserBanner';
+import Category from './features/Category'
+import UserBanner from './features/UserBanner'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('common', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('common', locale)
   return metadataModule.generate({
     title: t('tab.me'),
     url: '/me',
-  });
-};
+  })
+}
 
-const Page = async (props: DynamicLayoutProps) => {
-  const isMobile = await RouteVariants.getIsMobile(props);
+const page = async (props: DynamicLayoutProps) => {
+  const isMobile = await RouteVariants.getIsMobile(props)
 
-  if (!isMobile) return redirect('/chat');
+  if (!isMobile) return redirect('/chat')
 
   return (
     <>
@@ -32,9 +32,9 @@ const Page = async (props: DynamicLayoutProps) => {
         <BrandWatermark />
       </Center>
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'Me';
+Page.displayName = 'Me'
 
-export default Page;
+export default Page

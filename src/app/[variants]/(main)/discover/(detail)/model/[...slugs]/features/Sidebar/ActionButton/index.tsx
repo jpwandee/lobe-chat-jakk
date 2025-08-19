@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { ModelIcon } from '@lobehub/icons';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ModelIcon }
+import { memo }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { OFFICIAL_URL } from '@/const/url';
+import { OFFICIAL_URL }
 
-import ShareButton from '../../../../../features/ShareButton';
-import { useDetailContext } from '../../DetailProvider';
-import ChatWithModel from './ChatWithModel';
+import ShareButton from '../../../../../features/ShareButton'
+import { useDetailContext } from '../../DetailProvider'
+import ChatWithModel from './ChatWithModel'
 
 const ActionButton = memo(() => {
-  const { description, providers, displayName, identifier } = useDetailContext();
+  const { description, providers, displayName, identifier } = useDetailContext()
   return (
     <Flexbox align={'center'} gap={8} horizontal>
       <ChatWithModel />
@@ -26,7 +26,7 @@ const ActionButton = memo(() => {
         }}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ActionButton;
+export default ActionButton

@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import { useSessionStore } from '@/store/session';
+import { useSessionStore } from '@/store/session'
 
-import DefaultMode from './DefaultMode';
-import SearchMode from './SearchMode';
+import DefaultMode from './DefaultMode'
+import SearchMode from './SearchMode'
 
 const SessionListContent = memo(() => {
-  const isSearching = useSessionStore((s) => s.isSearching);
+  const isSearching = useSessionStore((s) => s.isSearching)
 
-  return isSearching ? <SearchMode /> : <DefaultMode />;
-});
+  return isSearching ? <SearchMode /> : <DefaultMode />
+})
 
-SessionListContent.displayName = 'SessionListContent';
+SessionListContent.displayName = 'SessionListContent'
 
-export default SessionListContent;
+export default SessionListContent

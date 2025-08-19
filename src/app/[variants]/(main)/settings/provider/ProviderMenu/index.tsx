@@ -1,35 +1,35 @@
-'use client';
+'use client'
 
-import { SearchBar } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { ReactNode, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { SearchBar }
+import { useTheme }
+import { ReactNode, memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra/store';
+import { useAiInfraStore }
 
-import AddNew from './AddNew';
-import ProviderList from './List';
-import SearchResult from './SearchResult';
-import SkeletonList from './SkeletonList';
+import AddNew from './AddNew'
+import ProviderList from './List'
+import SearchResult from './SearchResult'
+import SkeletonList from './SkeletonList'
 
-interface ProviderMenuProps {
-  children: ReactNode;
+interface providermenuprops {
+  children: reactnode;
   mobile?: boolean;
 }
 const Layout = memo(({ children, mobile }: ProviderMenuProps) => {
-  const { t } = useTranslation('modelProvider');
-  const theme = useTheme();
+  const { t } = useTranslation('modelProvider')
+  const theme = useTheme()
 
   const [providerSearchKeyword, useFetchAiProviderList] = useAiInfraStore((s) => [
     s.providerSearchKeyword,
     s.useFetchAiProviderList,
     s.initAiProviderList,
-  ]);
+  ])
 
-  useFetchAiProviderList();
+  useFetchAiProviderList()
 
-  const width = mobile ? undefined : 280;
+  const width = mobile ? undefined : 280
   return (
     <Flexbox
       style={{
@@ -65,29 +65,29 @@ const Layout = memo(({ children, mobile }: ProviderMenuProps) => {
       </Flexbox>
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-const Content = () => {
+const content = () => {
   const [initAiProviderList, providerSearchKeyword] = useAiInfraStore((s) => [
     s.initAiProviderList,
     s.providerSearchKeyword,
-  ]);
+  ])
 
   // loading
-  if (!initAiProviderList) return <SkeletonList />;
+  if (!initAiProviderList) return <SkeletonList />
 
   // search
-  if (!!providerSearchKeyword) return <SearchResult />;
+  if (!!providerSearchKeyword) return <SearchResult />
 
   // default
-  return <ProviderList />;
-};
+  return <ProviderList />
+}
 
 const ProviderMenu = ({ mobile }: { mobile?: boolean }) => (
   <Layout mobile={mobile}>
     <Content />
   </Layout>
-);
+)
 
-export default ProviderMenu;
+export default ProviderMenu

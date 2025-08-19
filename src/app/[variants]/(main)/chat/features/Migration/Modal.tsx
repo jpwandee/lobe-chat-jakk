@@ -1,32 +1,32 @@
-import { Button, Icon } from '@lobehub/ui';
-import { Result } from 'antd';
-import { CheckCircle, CpuIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { Button, Icon }
+import { Result }
+import { CheckCircle, CpuIcon }
+import { memo, useState }
+import { useTranslation }
+import { Center }
 
-import DataStyleModal from '@/components/DataStyleModal';
-import { BRANDING_NAME } from '@/const/branding';
+import DataStyleModal from '@/components/DataStyleModal'
+import { BRANDING_NAME }
 
-import Failed from './Failed';
-import MigrationStart from './Start';
-import { MigrationError, UpgradeStatus } from './const';
+import Failed from './Failed'
+import MigrationStart from './Start'
+import { MigrationError, UpgradeStatus }
 
-interface MigrationModalProps {
+interface migrationmodalprops {
   open: boolean;
   setOpen: (open: boolean) => void;
   state: any;
 }
 
 const MigrationModal = memo<MigrationModalProps>(({ setOpen, open, state: dbState }) => {
-  const { t } = useTranslation('migration');
-  const [upgradeStatus, setUpgradeStatus] = useState<UpgradeStatus>(UpgradeStatus.START);
+  const { t } = useTranslation('migration')
+  const [upgradeStatus, setUpgradeStatus] = useState<UpgradeStatus>(UpgradeStatus.START)
 
-  const [error, setError] = useState<MigrationError>();
+  const [error, setError] = useState<MigrationError>()
 
   const close = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const renderContent = () => {
     switch (upgradeStatus) {
@@ -39,7 +39,7 @@ const MigrationModal = memo<MigrationModalProps>(({ setOpen, open, state: dbStat
             state={dbState}
             upgradeStatus={upgradeStatus}
           />
-        );
+        )
       }
       case UpgradeStatus.UPGRADED: {
         return (
@@ -55,7 +55,7 @@ const MigrationModal = memo<MigrationModalProps>(({ setOpen, open, state: dbStat
             subTitle={t('dbV1.upgrade.success.subTitle', { appName: BRANDING_NAME })}
             title={t('dbV1.upgrade.success.title')}
           />
-        );
+        )
       }
       case UpgradeStatus.UPGRADE_FAILED: {
         return (
@@ -66,16 +66,16 @@ const MigrationModal = memo<MigrationModalProps>(({ setOpen, open, state: dbStat
             state={dbState}
             upgradeStatus={upgradeStatus}
           />
-        );
+        )
       }
     }
-  };
+  }
 
   return (
     <DataStyleModal icon={CpuIcon} open={open} title={t('dbV1.title', { appName: BRANDING_NAME })}>
       <Center gap={48}>{renderContent()}</Center>
     </DataStyleModal>
-  );
-});
+  )
+})
 
-export default MigrationModal;
+export default MigrationModal

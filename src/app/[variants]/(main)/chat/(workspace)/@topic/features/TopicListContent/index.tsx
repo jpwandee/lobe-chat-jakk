@@ -1,48 +1,48 @@
-'use client';
+'use client'
 
-import { GuideCard } from '@lobehub/ui';
-import { useThemeMode } from 'antd-style';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { GuideCard }
+import { useThemeMode }
+import react, { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { imageUrl } from '@/const/url';
-import { useFetchTopics } from '@/hooks/useFetchTopics';
-import { useChatStore } from '@/store/chat';
-import { topicSelectors } from '@/store/chat/selectors';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
-import { TopicDisplayMode } from '@/types/topic';
+import { imageUrl }
+import { useFetchTopics }
+import { useChatStore }
+import { topicSelectors }
+import { useUserStore }
+import { preferenceSelectors }
+import { TopicDisplayMode }
 
-import { SkeletonList } from '../SkeletonList';
-import ByTimeMode from './ByTimeMode';
-import FlatMode from './FlatMode';
-import SearchResult from './SearchResult';
+import { SkeletonList } from '../SkeletonList'
+import ByTimeMode from './ByTimeMode'
+import FlatMode from './FlatMode'
+import SearchResult from './SearchResult'
 
 const TopicListContent = memo(() => {
-  const { t } = useTranslation('topic');
-  const { isDarkMode } = useThemeMode();
+  const { t } = useTranslation('topic')
+  const { isDarkMode } = useThemeMode()
   const [topicsInit, topicLength] = useChatStore((s) => [
     s.topicsInit,
     topicSelectors.currentTopicLength(s),
-  ]);
+  ])
   const [isUndefinedTopics, isInSearchMode] = useChatStore((s) => [
     topicSelectors.isUndefinedTopics(s),
     topicSelectors.isInSearchMode(s),
-  ]);
+  ])
 
   const [visible, updateGuideState, topicDisplayMode] = useUserStore((s) => [
     s.preference.guide?.topic,
     s.updateGuideState,
     preferenceSelectors.topicDisplayMode(s),
-  ]);
+  ])
 
-  useFetchTopics();
+  useFetchTopics()
 
-  if (isInSearchMode) return <SearchResult />;
+  if (isInSearchMode) return <SearchResult />
 
   // first time loading or has no data
-  if (!topicsInit || isUndefinedTopics) return <SkeletonList />;
+  if (!topicsInit || isUndefinedTopics) return <SkeletonList />
 
   return (
     <>
@@ -57,7 +57,7 @@ const TopicListContent = memo(() => {
             desc={t('guide.desc')}
             height={120}
             onClose={() => {
-              updateGuideState({ topic: false });
+              updateGuideState({ topic: false })
             }}
             style={{ flex: 'none', marginBottom: 12 }}
             title={t('guide.title')}
@@ -68,9 +68,9 @@ const TopicListContent = memo(() => {
       )}
       {topicDisplayMode === TopicDisplayMode.ByTime ? <ByTimeMode /> : <FlatMode />}
     </>
-  );
-});
+  )
+})
 
-TopicListContent.displayName = 'TopicListContent';
+TopicListContent.displayName = 'TopicListContent'
 
-export default TopicListContent;
+export default TopicListContent

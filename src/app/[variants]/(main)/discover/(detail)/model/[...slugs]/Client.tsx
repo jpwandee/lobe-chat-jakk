@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import { notFound } from 'next/navigation';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { notFound }
+import { memo }
+import { Flexbox }
 
-import { withSuspense } from '@/components/withSuspense';
-import { useDiscoverStore } from '@/store/discover';
-import { DiscoverTab } from '@/types/discover';
+import { withSuspense }
+import { useDiscoverStore }
+import { DiscoverTab }
 
-import Breadcrumb from '../../features/Breadcrumb';
-import { DetailProvider } from './features/DetailProvider';
-import Details from './features/Details';
-import Header from './features/Header';
-import Loading from './loading';
+import Breadcrumb from '../../features/Breadcrumb'
+import { DetailProvider }
+import Details from './features/Details'
+import Header from './features/Header'
+import Loading from './loading'
 
-interface ClientProps {
+interface clientprops {
   identifier: string;
   mobile?: boolean;
 }
 
 const Client = memo<ClientProps>(({ identifier, mobile }) => {
-  const useModelDetail = useDiscoverStore((s) => s.useModelDetail);
-  const { data, isLoading } = useModelDetail({ identifier });
+  const useModelDetail = useDiscoverStore((s) => s.useModelDetail)
+  const { data, isLoading } = useModelDetail({ identifier })
 
-  if (isLoading) return <Loading />;
-  if (!data) return notFound();
+  if (isLoading) return <Loading />
+  if (!data) return notFound()
 
   return (
     <DetailProvider config={data}>
@@ -34,7 +34,7 @@ const Client = memo<ClientProps>(({ identifier, mobile }) => {
         <Details mobile={mobile} />
       </Flexbox>
     </DetailProvider>
-  );
-});
+  )
+})
 
-export default withSuspense(Client);
+export default withSuspense(Client)

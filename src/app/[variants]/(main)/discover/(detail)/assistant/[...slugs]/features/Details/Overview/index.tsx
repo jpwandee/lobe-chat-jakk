@@ -1,27 +1,27 @@
-import { Block, Collapse } from '@lobehub/ui';
-import { ChatList } from '@lobehub/ui/chat';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Block, Collapse }
+import { ChatList }
+import { useTheme }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { BRANDING_NAME } from '@/const/branding';
-import { DEFAULT_USER_AVATAR_URL } from '@/const/meta';
-import { useUserStore } from '@/store/user';
-import { authSelectors, userProfileSelectors } from '@/store/user/selectors';
+import { BRANDING_NAME }
+import { DEFAULT_USER_AVATAR_URL }
+import { useUserStore }
+import { authSelectors, userProfileSelectors }
 
-import Title from '../../../../../../features/Title';
-import { useDetailContext } from '../../DetailProvider';
+import Title from '../../../../../../features/Title'
+import { useDetailContext } from '../../DetailProvider'
 
 const Overview = memo(() => {
   const [userAvatar, username] = useUserStore((s) => [
     userProfileSelectors.userAvatar(s),
     userProfileSelectors.username(s),
-  ]);
+  ])
 
-  const isSignedIn = useUserStore(authSelectors.isLogin);
-  const { t } = useTranslation('discover');
-  const theme = useTheme();
+  const isSignedIn = useUserStore(authSelectors.isLogin)
+  const { t } = useTranslation('discover')
+  const theme = useTheme()
   const {
     examples = [],
     description,
@@ -30,7 +30,7 @@ const Overview = memo(() => {
     title,
     backgroundColor,
     config,
-  } = useDetailContext();
+  } = useDetailContext()
 
   const data: any = [
     {
@@ -43,13 +43,13 @@ const Overview = memo(() => {
       avatar,
       backgroundColor: backgroundColor || 'transparent',
       title,
-    };
+    }
     if (item.role === 'user') {
       meta = {
         avatar: isSignedIn && !!userAvatar ? userAvatar : DEFAULT_USER_AVATAR_URL,
         backgroundColor: 'transparent',
         title: isSignedIn && !!username ? username : BRANDING_NAME,
-      };
+      }
     }
 
     return {
@@ -57,8 +57,8 @@ const Overview = memo(() => {
       id: index,
       ...item,
       meta,
-    };
-  });
+    }
+  })
 
   return (
     <Flexbox gap={16}>
@@ -90,7 +90,7 @@ const Overview = memo(() => {
         />
       </Block>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Overview;
+export default Overview

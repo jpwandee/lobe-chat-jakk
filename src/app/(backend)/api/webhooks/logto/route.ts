@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextResponse }
 
-import { authEnv } from '@/config/auth';
-import { serverDB } from '@/database/server';
-import { pino } from '@/libs/logger';
-import { NextAuthUserService } from '@/server/services/nextAuthUser';
+import { authEnv }
+import { serverDB }
+import { pino }
+import { NextAuthUserService }
 
-import { validateRequest } from './validateRequest';
+import { validateRequest }
 
 export const POST = async (req: Request): Promise<NextResponse> => {
   const payload = await validateRequest(req, authEnv.LOGTO_WEBHOOK_SIGNING_KEY!);
@@ -17,7 +17,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
     );
   }
 
-  const { event, data } = payload;
+  const { event, data }
 
   pino.trace(`logto webhook payload: ${{ data, event }}`);
 
@@ -44,4 +44,4 @@ export const POST = async (req: Request): Promise<NextResponse> => {
       return NextResponse.json({ error: `unrecognised payload type: ${event}` }, { status: 400 });
     }
   }
-};
+}

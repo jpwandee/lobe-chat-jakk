@@ -1,118 +1,118 @@
-'use client';
+'use client'
 
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { ModelTag } from '@lobehub/icons';
-import { ActionIconGroup, Block, Grid, Markdown, Tag, Text } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { omit } from 'lodash-es';
-import { CopyIcon, RotateCcwSquareIcon, Trash2 } from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { useAutoAnimate }
+import { ModelTag }
+import { ActionIconGroup, Block, Grid, Markdown, Tag, Text }
+import { App }
+import { createStyles }
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import { omit }
+import { CopyIcon, RotateCcwSquareIcon, Trash2 }
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import InvalidAPIKey from '@/components/InvalidAPIKey';
-import { RuntimeImageGenParams } from '@/libs/standard-parameters/index';
-import { useImageStore } from '@/store/image';
-import { AsyncTaskErrorType } from '@/types/asyncTask';
-import { GenerationBatch } from '@/types/generation';
+import InvalidAPIKey from '@/components/InvalidAPIKey'
+import { RuntimeImageGenParams }
+import { useImageStore }
+import { AsyncTaskErrorType }
+import { GenerationBatch }
 
-import { GenerationItem } from './GenerationItem';
-import { DEFAULT_MAX_ITEM_WIDTH } from './GenerationItem/utils';
-import { ReferenceImages } from './ReferenceImages';
+import { GenerationItem }
+import { DEFAULT_MAX_ITEM_WIDTH }
+import { ReferenceImages }
 
 const useStyles = createStyles(({ cx, css, token }) => ({
   batchActions: cx(
     'batch-actions',
     css`
-      opacity: 0;
-      transition: opacity 0.1s ${token.motionEaseInOut};
+      opacity: 0
+      transition: opacity 0.1s ${token.motionEaseInOut}
     `,
   ),
   batchDeleteButton: css`
     &:hover {
-      border-color: ${token.colorError} !important;
-      color: ${token.colorError} !important;
-      background: ${token.colorErrorBg} !important;
+      border-color: ${token.colorError} !important
+      color: ${token.colorError} !important
+      background: ${token.colorErrorBg} !important
     }
   `,
   container: css`
     &:hover {
       .batch-actions {
-        opacity: 1;
+        opacity: 1
       }
     }
   `,
 
   prompt: css`
     pre {
-      overflow: hidden !important;
-      padding-block: 4px;
-      font-size: 13px;
+      overflow: hidden !important
+      padding-block: 4px
+      font-size: 13px
     }
   `,
-}));
+}))
 
 // 扩展 dayjs 插件
-dayjs.extend(relativeTime);
+dayjs.extend(relativeTime)
 
-interface GenerationBatchItemProps {
-  batch: GenerationBatch;
+interface generationbatchitemprops {
+  batch: generationbatch;
 }
 
 export const GenerationBatchItem = memo<GenerationBatchItemProps>(({ batch }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation(['image', 'modelProvider', 'error']);
-  const { message } = App.useApp();
+  const { styles } = useStyles()
+  const { t } = useTranslation(['image', 'modelProvider', 'error'])
+  const { message } = App.useApp()
 
-  const [imageGridRef] = useAutoAnimate();
+  const [imageGridRef] = useAutoAnimate()
 
-  const activeTopicId = useImageStore((s) => s.activeGenerationTopicId);
-  const removeGenerationBatch = useImageStore((s) => s.removeGenerationBatch);
-  const recreateImage = useImageStore((s) => s.recreateImage);
-  const reuseSettings = useImageStore((s) => s.reuseSettings);
+  const activeTopicId = useImageStore((s) => s.activeGenerationTopicId)
+  const removeGenerationBatch = useImageStore((s) => s.removeGenerationBatch)
+  const recreateImage = useImageStore((s) => s.recreateImage)
+  const reuseSettings = useImageStore((s) => s.reuseSettings)
 
   const time = useMemo(() => {
-    return dayjs(batch.createdAt).format('YYYY-MM-DD HH:mm:ss');
-  }, [batch.createdAt]);
+    return dayjs(batch.createdAt).format('YYYY-MM-DD HH:mm:ss')
+  }, [batch.createdAt])
 
   const handleCopyPrompt = async () => {
     try {
-      await navigator.clipboard.writeText(batch.prompt);
-      message.success(t('generation.actions.promptCopied'));
+      await navigator.clipboard.writeText(batch.prompt)
+      message.success(t('generation.actions.promptCopied'))
     } catch (error) {
-      console.error('Failed to copy prompt:', error);
-      message.error(t('generation.actions.promptCopyFailed'));
+      console.error('Failed to copy prompt:', error)
+      message.error(t('generation.actions.promptCopyFailed'))
     }
-  };
+  }
 
   const handleReuseSettings = () => {
     reuseSettings(
       batch.model,
       batch.provider,
       omit(batch.config as RuntimeImageGenParams, ['seed']),
-    );
-  };
+    )
+  }
 
   const handleDeleteBatch = async () => {
-    if (!activeTopicId) return;
+    if (!activeTopicId) return
 
     try {
-      await removeGenerationBatch(batch.id, activeTopicId);
+      await removeGenerationBatch(batch.id, activeTopicId)
     } catch (error) {
-      console.error('Failed to delete batch:', error);
+      console.error('Failed to delete batch:', error)
     }
-  };
+  }
 
   if (batch.generations.length === 0) {
-    return null;
+    return null
   }
 
   const isInvalidApiKey = batch.generations.some(
     (generation) => generation.task.error?.name === AsyncTaskErrorType.InvalidProviderAPIKey,
-  );
+  )
 
   if (isInvalidApiKey) {
     return (
@@ -124,21 +124,21 @@ export const GenerationBatchItem = memo<GenerationBatchItemProps>(({ batch }) =>
         })}
         id={batch.id}
         onClose={() => {
-          removeGenerationBatch(batch.id, activeTopicId!);
+          removeGenerationBatch(batch.id, activeTopicId!)
         }}
         onRecreate={() => {
-          recreateImage(batch.id);
+          recreateImage(batch.id)
         }}
         provider={batch.provider}
       />
-    );
+    )
   }
 
   // Calculate total number of reference images
   const referenceImageCount =
-    (batch.config?.imageUrl ? 1 : 0) + (batch.config?.imageUrls?.length || 0);
+    (batch.config?.imageUrl ? 1 : 0) + (batch.config?.imageUrls?.length || 0)
 
-  const isSingleImageLayout = referenceImageCount === 1;
+  const isSingleImageLayout = referenceImageCount === 1
 
   // Content for prompt and metadata
   const promptAndMetadata = (
@@ -156,7 +156,7 @@ export const GenerationBatchItem = memo<GenerationBatchItemProps>(({ batch }) =>
         </Flexbox>
       </Flexbox>
     </>
-  );
+  )
 
   return (
     <Block className={styles.container} gap={8} variant="borderless">
@@ -231,7 +231,7 @@ export const GenerationBatchItem = memo<GenerationBatchItemProps>(({ batch }) =>
         />
       </Flexbox>
     </Block>
-  );
-});
+  )
+})
 
-GenerationBatchItem.displayName = 'GenerationBatchItem';
+GenerationBatchItem.displayName = 'GenerationBatchItem'

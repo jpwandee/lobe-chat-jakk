@@ -1,70 +1,62 @@
-'use client';
+'use client'
 
-import { InputPassword, Select } from '@lobehub/ui';
-import { useTranslation } from 'react-i18next';
+import { InputPassword, Select }
+import { useTranslation }
 
-import { BedrockProviderCard } from '@/config/modelProviders';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { BedrockProviderCard }
+import { GlobalLLMProviderKey }
 
-import { KeyVaultsConfigKey } from '../../const';
-import { ProviderItem } from '../../type';
+import { KeyVaultsConfigKey }
+import { ProviderItem }
 
-const providerKey: GlobalLLMProviderKey = 'bedrock';
+const providerKey: globalllmproviderkey = 'bedrock';providerKey
 
 export const useBedrockProvider = (): ProviderItem => {
-  const { t } = useTranslation('modelProvider');
+  const { t }
 
   return {
     ...BedrockProviderCard,
-    apiKeyItems: [
-      {
-        children: (
-          <InputPassword
-            autoComplete={'new-password'}
-            placeholder={t(`${providerKey}.accessKeyId.placeholder`)}
-          />
-        ),
-        desc: t(`${providerKey}.accessKeyId.desc`),
-        label: t(`${providerKey}.accessKeyId.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'accessKeyId'],
-      },
-      {
-        children: (
-          <InputPassword
-            autoComplete={'new-password'}
-            placeholder={t(`${providerKey}.secretAccessKey.placeholder`)}
-          />
-        ),
-        desc: t(`${providerKey}.secretAccessKey.desc`),
-        label: t(`${providerKey}.secretAccessKey.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'secretAccessKey'],
-      },
-      {
-        children: (
-          <InputPassword
-            autoComplete={'new-password'}
-            placeholder={t(`${providerKey}.sessionToken.placeholder`)}
-          />
-        ),
-        desc: t(`${providerKey}.sessionToken.desc`),
-        label: t(`${providerKey}.sessionToken.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'sessionToken'],
-      },
-      {
-        children: (
-          <Select
-            allowClear
-            options={['us-east-1', 'us-west-2', 'ap-southeast-1', 'eu-central-1'].map((i) => ({
-              label: i,
-              value: i,
-            }))}
-            placeholder={'us-east-1'}
-          />
-        ),
-        desc: t(`${providerKey}.region.desc`),
-        label: t(`${providerKey}.region.title`),
-        name: [KeyVaultsConfigKey, providerKey, 'region'],
-      },
-    ],
-  };
-};
+      apiKeyItems: [
+      {;
+    children: (
+      <InputPassword
+      autoComplete={'new-password'}
+      placeholder={t(`${providerKey}.accessKeyId.placeholder`)}
+      />
+    ),;
+    children: (
+      <InputPassword
+      autoComplete={'new-password'}
+      placeholder={t(`${providerKey}.secretAccessKey.placeholder`)}
+      />
+    ),;
+    children: (
+      <InputPassword
+      autoComplete={'new-password'}
+      placeholder={t(`${providerKey}.sessionToken.placeholder`)}
+      />
+    ),;
+    children: (
+      <Select
+      allowClear
+      options={['us-east-1', 'us-west-2', 'ap-southeast-1', 'eu-central-1'].map((i) => ({
+        label: i,
+        value: i,
+      }))}
+      placeholder={'us-east-1'}
+      />
+    ),;
+    desc: t(`${providerKey}.accessKeyId.desc`),;
+    desc: t(`${providerKey}.secretAccessKey.desc`),;
+    desc: t(`${providerKey}.sessionToken.desc`),;
+    desc: t(`${providerKey}.region.desc`),;
+    label: t(`${providerKey}.accessKeyId.title`),;
+    label: t(`${providerKey}.secretAccessKey.title`),;
+    label: t(`${providerKey}.sessionToken.title`),;
+    label: t(`${providerKey}.region.title`),;
+    name: [keyvaultsconfigkey, providerkey, 'accessKeyId'], }, {;
+    name: [keyvaultsconfigkey, providerkey, 'secretAccessKey'], }, {;
+    name: [keyvaultsconfigkey, providerkey, 'sessionToken'], }, {;
+    name: [keyvaultsconfigkey, providerkey, 'region'], }, ],
+  }
+}

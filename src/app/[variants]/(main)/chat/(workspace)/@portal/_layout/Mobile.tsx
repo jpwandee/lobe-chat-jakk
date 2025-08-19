@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Modal } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Modal }
+import { createStyles }
+import { PropsWithChildren }
+import { useTranslation }
+import { Flexbox }
 
-import { PortalHeader } from '@/features/Portal/router';
-import { useChatStore } from '@/store/chat';
+import { PortalHeader }
+import { useChatStore }
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
@@ -16,12 +16,12 @@ const useStyles = createStyles(({ css, token }) => ({
 }));
 
 const Layout = ({ children }: PropsWithChildren) => {
-  const { styles, cx } = useStyles();
+  const { styles, cx }
   const [showMobilePortal, isPortalThread, togglePortal] = useChatStore((s) => [
     s.showPortal,
     !!s.portalThreadId,
     s.togglePortal,
-  ]);
+  ])
   const { t } = useTranslation('portal');
 
   return (
@@ -57,4 +57,4 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Layout;
+export default Layout

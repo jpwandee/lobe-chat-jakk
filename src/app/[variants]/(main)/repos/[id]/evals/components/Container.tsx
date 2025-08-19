@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { PropsWithChildren }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
@@ -22,4 +22,4 @@ const Container = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Container;
+export default Container

@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { Alert } from '@lobehub/ui';
-import Link from 'next/link';
-import { memo } from 'react';
-import { Trans } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Alert }
+import Link from 'next/link'
+import { memo }
+import { Trans }
+import { Flexbox }
 
-import { MAX_WIDTH } from '@/const/layoutTokens';
-import { WEBRTC_SYNC_DOCUMENTS } from '@/const/url';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
+import { MAX_WIDTH }
+import { WEBRTC_SYNC_DOCUMENTS }
+import { useUserStore }
+import { preferenceSelectors }
 
-interface ExperimentAlertProps {
+interface experimentalertprops {
   mobile?: boolean;
 }
 const ExperimentAlert = memo<ExperimentAlertProps>(({ mobile }) => {
   const [hideSyncAlert, updatePreference] = useUserStore((s) => [
     preferenceSelectors.hideSyncAlert(s),
     s.updatePreference,
-  ]);
+  ])
 
   return (
     !hideSyncAlert && (
@@ -41,13 +41,13 @@ const ExperimentAlert = memo<ExperimentAlertProps>(({ mobile }) => {
             </Trans>
           }
           onClose={() => {
-            updatePreference({ hideSyncAlert: true });
+            updatePreference({ hideSyncAlert: true })
           }}
           type={'warning'}
         />
       </Flexbox>
     )
-  );
-});
+  )
+})
 
-export default ExperimentAlert;
+export default ExperimentAlert

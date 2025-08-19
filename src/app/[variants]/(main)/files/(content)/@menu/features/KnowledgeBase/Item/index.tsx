@@ -1,49 +1,49 @@
-import { createStyles } from 'antd-style';
-import Link from 'next/link';
-import { memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import Link from 'next/link'
+import { memo, useState }
+import { Flexbox }
 
-import Content, { knowledgeItemClass } from './Content';
+import content, { knowledgeItemClass }
 
 const useStyles = createStyles(({ css, token, isDarkMode }) => ({
   active: css`
-    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary};
-    transition: background 200ms ${token.motionEaseOut};
+    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary}
+    transition: background 200ms ${token.motionEaseOut}
 
     &:hover {
-      background: ${token.colorFill};
+      background: ${token.colorFill}
     }
   `,
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    margin-inline: 8px;
-    padding-block: 4px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
+    margin-inline: 8px
+    padding-block: 4px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
 
     &.${knowledgeItemClass} {
-      width: calc(100% - 16px);
+      width: calc(100% - 16px)
     }
 
     &:hover {
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     }
   `,
   split: css`
-    border-block-end: 1px solid ${token.colorSplit};
+    border-block-end: 1px solid ${token.colorSplit}
   `,
-}));
+}))
 
-export interface KnowledgeBaseItemProps {
+export interface knowledgebaseitemprops {
   active?: boolean;
   id: string;
   name: string;
 }
 
 const KnowledgeBaseItem = memo<KnowledgeBaseItemProps>(({ name, active, id }) => {
-  const { styles, cx } = useStyles();
-  const [isHover, setHovering] = useState(false);
+  const { styles, cx } = useStyles()
+  const [isHover, setHovering] = useState(false)
 
   return (
     <Link href={`/repos/${id}`}>
@@ -53,16 +53,16 @@ const KnowledgeBaseItem = memo<KnowledgeBaseItemProps>(({ name, active, id }) =>
         distribution={'space-between'}
         horizontal
         onMouseEnter={() => {
-          setHovering(true);
+          setHovering(true)
         }}
         onMouseLeave={() => {
-          setHovering(false);
+          setHovering(false)
         }}
       >
         <Content id={id} name={name} showMore={isHover} />
       </Flexbox>
     </Link>
-  );
-});
+  )
+})
 
-export default KnowledgeBaseItem;
+export default KnowledgeBaseItem

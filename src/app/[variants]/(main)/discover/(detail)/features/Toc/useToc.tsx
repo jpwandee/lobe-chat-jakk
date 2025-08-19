@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { AnchorProps } from 'antd';
-import { unionBy } from 'lodash-es';
-import { FC, PropsWithChildren, createContext, useContext, useState } from 'react';
+import { AnchorProps }
+import { unionBy }
+import { FC, PropsWithChildren, createContext, useContext, useState }
 
-interface TocState {
+interface tocstate {
   isLoading: boolean;
   setFinished: () => void;
   setToc: (data: any) => void;
-  toc?: AnchorProps['items'];
+  toc?: anchorprops['items'];
 }
 
 const TocContext = createContext<TocState>({
@@ -16,9 +16,9 @@ const TocContext = createContext<TocState>({
   setFinished: () => {},
   setToc: () => {},
   toc: [],
-});
+})
 
-export interface TOCItem {
+export interface tocitem {
   href: string;
   level: number;
   title: string;
@@ -43,31 +43,35 @@ export const TocProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export const useToc = () => {
-  return useContext(TocContext);
-};
+export const usetoc = () => {
+  return useContext(TocContext)
+}
 
 export function createTOCTree(items: TOCItem[]): AnchorProps['items'] {
-  const tocTree: AnchorProps['items'] = [];
+  const tocTree: anchorprops['items'] = [];tocTree
   let index = 1;
 
   for (const item of unionBy(items, 'href')) {
-    const tocItem = { href: item.href, key: index, title: item.title };
+    const tocitem = { href: item.href,; key: index,; title: item.title }
 
     const preNode = tocTree.at(-1);
 
     if (item.level === 2) {
       tocTree.push({ ...tocItem, children: [] });
-    } else {
+    }
+
+    else {
       // @ts-ignore
       if (preNode && preNode.children) {
         preNode.children.push(tocItem);
-      } else {
-        tocTree.push(tocItem);
+      }
+
+      else {
+        tocTree.push(tocItem)
       }
     }
 
     index++;
   }
-  return tocTree;
+  return tocTree
 }

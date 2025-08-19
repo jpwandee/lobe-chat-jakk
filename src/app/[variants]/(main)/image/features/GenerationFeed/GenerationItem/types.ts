@@ -1,12 +1,12 @@
-import { Generation, GenerationBatch } from '@/types/generation';
+import { Generation, GenerationBatch }
 
-export interface GenerationItemProps {
-  generation: Generation;
-  generationBatch: GenerationBatch;
+export interface generationitemprops {
+  generation: generation;
+  generationBatch: generationbatch;
   prompt: string;
 }
 
-export interface ActionButtonsProps {
+export interface actionbuttonsprops {
   onCopySeed?: () => void;
   onDelete: () => void;
   onDownload?: () => void;
@@ -15,10 +15,10 @@ export interface ActionButtonsProps {
   showDownload?: boolean;
 }
 
-export interface SuccessStateProps {
+export interface successstateprops {
   aspectRatio: string;
-  generation: Generation;
-  generationBatch: GenerationBatch;
+  generation: generation;
+  generationBatch: generationbatch;
   onCopySeed?: () => void;
   onDelete: () => void;
   onDownload: () => void;
@@ -26,17 +26,17 @@ export interface SuccessStateProps {
   seedTooltip?: string;
 }
 
-export interface ErrorStateProps {
+export interface errorstateprops {
   aspectRatio: string;
-  generation: Generation;
-  generationBatch: GenerationBatch;
+  generation: generation;
+  generationBatch: generationbatch;
   onCopyError: () => void;
   onDelete: () => void;
 }
 
-export interface LoadingStateProps {
+export interface loadingstateprops {
   aspectRatio: string;
-  generation: Generation;
-  generationBatch: GenerationBatch;
+  generation: generation;
+  generationBatch: generationbatch;
   onDelete: () => void;
 }

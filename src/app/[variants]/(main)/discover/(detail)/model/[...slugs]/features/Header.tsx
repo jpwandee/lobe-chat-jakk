@@ -1,41 +1,41 @@
-'use client';
+'use client'
 
-import { ModelIcon } from '@lobehub/icons';
-import { Icon, Text } from '@lobehub/ui';
-import { createStyles, useResponsive } from 'antd-style';
-import { DotIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ModelIcon }
+import { Icon, Text }
+import { createStyles, useResponsive }
+import { DotIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import ModelTypeIcon from '@/app/[variants]/(main)/discover/(list)/model/features/List/ModelTypeIcon';
-import { ModelInfoTags } from '@/components/ModelSelect';
+import ModelTypeIcon from '@/app/[variants]/(main)/discover/(list)/model/features/List/ModelTypeIcon'
+import { ModelInfoTags }
 
-import PublishedTime from '../../../../../../../../components/PublishedTime';
-import { useDetailContext } from './DetailProvider';
+import PublishedTime from '../../../../../../../../components/PublishedTime'
+import { useDetailContext }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      color: ${token.colorTextSecondary};
+      color: ${token.colorTextSecondary}
     `,
     time: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     version: css`
-      font-family: ${token.fontFamilyCode};
-      font-size: 13px;
+      font-family: ${token.fontFamilyCode}
+      font-size: 13px
     `,
-  };
-});
+  }
+})
 
-const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
+const header = memo< { mobile?: boolean }>(({ mobile: isMobile }) => {
   const { identifier, releasedAt, displayName, type, abilities, contextWindowTokens } =
-    useDetailContext();
-  const { styles, theme } = useStyles();
-  const { mobile = isMobile } = useResponsive();
-  const { t } = useTranslation('models');
+    useDetailContext()
+  const { styles, theme } = useStyles()
+  const { mobile = isMobile } = useResponsive()
+  const { t } = useTranslation('models')
 
   return (
     <Flexbox gap={12}>
@@ -106,7 +106,7 @@ const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
         {t(`${identifier}.description`)}
       </div>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

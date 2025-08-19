@@ -1,19 +1,19 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy }
 
-import CircleLoading from '@/components/Loading/CircleLoading';
-import ServerLayout from '@/components/server/ServerLayout';
-import { DynamicLayoutProps } from '@/types/next';
+import CircleLoading from '@/components/Loading/CircleLoading'
+import ServerLayout from '@/components/server/ServerLayout'
+import { DynamicLayoutProps }
 
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
-import SessionHydration from './features/SessionHydration';
-import SkeletonList from './features/SkeletonList';
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
+import SessionHydration from './features/SessionHydration'
+import SkeletonList from './features/SkeletonList'
 
-const SessionListContent = lazy(() => import('./features/SessionListContent'));
+const SessionListContent = lazy(() => import('./features/SessionListContent'))
 
-const Layout = ServerLayout({ Desktop, Mobile });
+const Layout = ServerLayout({ Desktop, Mobile })
 
-const Session = (props: DynamicLayoutProps) => {
+const session = (props: DynamicLayoutProps) => {
   return (
     <Suspense fallback={<CircleLoading />}>
       <Layout {...props}>
@@ -23,9 +23,9 @@ const Session = (props: DynamicLayoutProps) => {
       </Layout>
       <SessionHydration />
     </Suspense>
-  );
-};
+  )
+}
 
-Session.displayName = 'Session';
+Session.displayName = 'Session'
 
-export default Session;
+export default Session

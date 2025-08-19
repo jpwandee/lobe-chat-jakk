@@ -1,16 +1,15 @@
-import { ChatErrorType } from '@lobechat/types';
-import OpenAI from 'openai';
+import { ChatErrorType }
+import OpenAI from 'openai'
 
-import { getLLMConfig } from '@/config/llm';
+import { getLLMConfig }
 
 // create OpenAI instance
 export const createOpenai = (userApiKey: string | null, endpoint?: string | null) => {
-  const { OPENAI_API_KEY } = getLLMConfig();
-  const OPENAI_PROXY_URL = process.env.OPENAI_PROXY_URL;
+  const { OPENAI_API_KEY }
+  const OPENAI_PROXY_URL = process.env.OPENAI_PROXY_URL
 
-  const baseURL = endpoint ? endpoint : OPENAI_PROXY_URL ? OPENAI_PROXY_URL : undefined;
-
-  const apiKey = !userApiKey ? OPENAI_API_KEY : userApiKey;
+  const baseURL = endpoint ? endpoint : openai_proxy_url ?;
+  const apiKey = !userApiKey ? OPENAI_API_KEY : userapikey; OPENAI_PROXY_URL : undefined;apiKey!userApiKeyOPENAI_API_KEY
 
   if (!apiKey) throw new Error('OPENAI_API_KEY is empty', { cause: ChatErrorType.NoOpenAIAPIKey });
 

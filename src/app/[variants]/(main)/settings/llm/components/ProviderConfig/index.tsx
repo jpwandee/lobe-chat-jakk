@@ -1,6 +1,7 @@
-'use client';
+'use client'
 
-import { ProviderCombine } from '@lobehub/icons';
+import { ProviderCombine }
+
 import {
   Form,
   type FormGroupItemType,
@@ -9,104 +10,106 @@ import {
   Input,
   InputPassword,
   Tooltip,
-} from '@lobehub/ui';
-import { Switch } from 'antd';
-import { createStyles } from 'antd-style';
-import { debounce } from 'lodash-es';
-import { LockIcon } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode, memo } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+}
+import { Switch }
+import { createStyles }
+import { debounce }
+import { LockIcon }
+import Link from 'next/link'
+import { ReactNode, memo }
+import { Trans, useTranslation }
+import { Center, Flexbox }
+import urlJoin from 'url-join'
 
-import { useSyncSettings } from '@/app/[variants]/(main)/settings/hooks/useSyncSettings';
+import { useSyncSettings }
+
 import {
   KeyVaultsConfigKey,
   LLMProviderApiTokenKey,
   LLMProviderBaseUrlKey,
   LLMProviderConfigKey,
   LLMProviderModelListKey,
-} from '@/app/[variants]/(main)/settings/llm/const';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { AES_GCM_URL, BASE_PROVIDER_DOC_URL } from '@/const/url';
-import { isServerMode } from '@/const/version';
-import { useUserStore } from '@/store/user';
-import { keyVaultsConfigSelectors, modelConfigSelectors } from '@/store/user/selectors';
-import { ModelProviderCard } from '@/types/llm';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+}
+import { FORM_STYLE }
+import { AES_GCM_URL, BASE_PROVIDER_DOC_URL }
+import { isServerMode }
+import { useUserStore }
+import { keyVaultsConfigSelectors, modelConfigSelectors }
+import { ModelProviderCard }
+import { GlobalLLMProviderKey }
 
-import Checker from '../Checker';
-import ProviderModelListSelect from '../ProviderModelList';
+import Checker from '../Checker'
+import ProviderModelListSelect from '../ProviderModelList'
 
 const useStyles = createStyles(({ css, prefixCls, responsive, token }) => ({
   aceGcm: css`
-    padding-block: 0 !important;
+    padding-block: 0 !important
     .${prefixCls}-form-item-label {
-      display: none;
+      display: none
     }
     .${prefixCls}-form-item-control {
-      width: 100%;
+      width: 100%
 
-      font-size: 12px;
-      color: ${token.colorTextSecondary};
-      text-align: center;
+      font-size: 12px
+      color: ${token.colorTextSecondary}
+      text-align: center
 
-      opacity: 0.66;
+      opacity: 0.66
 
-      transition: opacity 0.2s ${token.motionEaseInOut};
+      transition: opacity 0.2s ${token.motionEaseInOut}
 
       &:hover {
-        opacity: 1;
+        opacity: 1
       }
     }
   `,
   form: css`
     .${prefixCls}-form-item-control:has(.${prefixCls}-input,.${prefixCls}-select) {
-      flex: none;
-      width: min(70%, 800px);
-      min-width: min(70%, 800px) !important;
+      flex: none
+      width: min(70%, 800px)
+      min-width: min(70%, 800px) !important
     }
     ${responsive.mobile} {
-      width: 100%;
-      min-width: unset !important;
+      width: 100%
+      min-width: unset !important
     }
     .${prefixCls}-select-selection-overflow-item {
-      font-size: 12px;
+      font-size: 12px
     }
   `,
   help: css`
-    border-radius: 50%;
+    border-radius: 50%
 
-    font-size: 12px;
-    font-weight: 500;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    font-weight: 500
+    color: ${token.colorTextDescription}
 
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
 
     &:hover {
-      color: ${token.colorText};
-      background: ${token.colorFill};
+      color: ${token.colorText}
+      background: ${token.colorFill}
     }
   `,
-}));
+}))
 
-export interface ProviderConfigProps extends Omit<ModelProviderCard, 'id' | 'chatModels'> {
-  apiKeyItems?: FormItemProps[];
+export interface providerconfigprops extends omit<modelprovidercard, 'id' | 'chatModels'> {
+  apiKeyItems?: formitemprops[];
   canDeactivate?: boolean;
-  checkerItem?: FormItemProps;
+  checkerItem?: formitemprops;
   className?: string;
-  extra?: ReactNode;
+  extra?: reactnode;
   hideSwitch?: boolean;
-  id: GlobalLLMProviderKey;
+  id: globalllmproviderkey;
   modelList?: {
     azureDeployName?: boolean;
-    notFoundContent?: ReactNode;
+    notFoundContent?: reactnode;
     placeholder?: string;
     showModelFetcher?: boolean;
   };
+
   showAceGcm?: boolean;
-  title?: ReactNode;
+  title?: reactnode;
 }
 
 const ProviderConfig = memo<ProviderConfigProps>(
@@ -128,9 +131,9 @@ const ProviderConfig = memo<ProviderConfigProps>(
     showChecker = true,
     extra,
   }) => {
-    const { t } = useTranslation('setting');
-    const [form] = Form.useForm();
-    const { cx, styles } = useStyles();
+    const { t } = useTranslation('setting')
+    const [form] = Form.useForm()
+    const { cx, styles } = useStyles()
     const [
       toggleProviderEnabled,
       setSettings,
@@ -145,9 +148,9 @@ const ProviderConfig = memo<ProviderConfigProps>(
       modelConfigSelectors.isProviderFetchOnClient(id)(s),
       keyVaultsConfigSelectors.isProviderEndpointNotEmpty(id)(s),
       keyVaultsConfigSelectors.isProviderApiKeyNotEmpty(id)(s),
-    ]);
+    ])
 
-    useSyncSettings(form);
+    useSyncSettings(form)
 
     const apiKeyItem: FormItemProps[] = !showApiKey
       ? []
@@ -163,7 +166,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
             label: t(`llm.apiKey.title`),
             name: [KeyVaultsConfigKey, id, LLMProviderApiTokenKey],
           },
-        ]);
+        ])
 
     const aceGcmItem: FormItemProps = {
       children: (
@@ -180,9 +183,9 @@ const ProviderConfig = memo<ProviderConfigProps>(
       ),
       className: styles.aceGcm,
       minWidth: undefined,
-    };
+    }
 
-    const showEndpoint = !!proxyUrl;
+    const showEndpoint = !!proxyUrl
 
     const formItems = [
       ...apiKeyItem,
@@ -206,7 +209,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
           children: (
             <Switch
               onChange={(enabled) => {
-                setSettings({ [LLMProviderConfigKey]: { [id]: { fetchOnClient: enabled } } });
+                setSettings({ [LLMProviderConfigKey]: { [id]: { fetchOnClient: enabled } } })
               }}
               value={isFetchOnClient}
             />
@@ -238,7 +241,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
           })
         : undefined,
       showAceGcm && isServerMode && aceGcmItem,
-    ].filter(Boolean) as FormItemProps[];
+    ].filter(Boolean) as FormItemProps[]
 
     /* ↓ cloud slot ↓ */
 
@@ -266,7 +269,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
           {canDeactivate ? (
             <Switch
               onChange={(enabled) => {
-                toggleProviderEnabled(id, enabled);
+                toggleProviderEnabled(id, enabled)
               }}
               value={enabled}
             />
@@ -286,7 +289,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
           {title ?? <ProviderCombine provider={id} size={24} />}
         </Flexbox>
       ),
-    };
+    }
 
     return (
       <Form
@@ -296,8 +299,8 @@ const ProviderConfig = memo<ProviderConfigProps>(
         onValuesChange={debounce(setSettings, 100)}
         {...FORM_STYLE}
       />
-    );
+    )
   },
-);
+)
 
-export default ProviderConfig;
+export default ProviderConfig

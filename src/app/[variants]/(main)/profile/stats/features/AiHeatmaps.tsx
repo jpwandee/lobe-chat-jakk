@@ -1,26 +1,26 @@
-import { Heatmaps, HeatmapsProps } from '@lobehub/charts';
-import { FormGroup, Icon, Tag } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { FlameIcon } from 'lucide-react';
-import { readableColor } from 'polished';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Heatmaps, HeatmapsProps }
+import { FormGroup, Icon, Tag }
+import { useTheme }
+import { FlameIcon }
+import { readableColor }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { useClientDataSWR } from '@/libs/swr';
-import { messageService } from '@/services/message';
+import { FORM_STYLE }
+import { useClientDataSWR }
+import { messageService }
 
-const AiHeatmaps = memo<Omit<HeatmapsProps, 'data'> & { inShare?: boolean; mobile?: boolean }>(
+const aiheatmaps = memo<omit<heatmapsprops, 'data'> & { inShare?: boolean; mobile?: boolean }>(
   ({ inShare, mobile, ...rest }) => {
-    const { t } = useTranslation('auth');
-    const theme = useTheme();
+    const { t } = useTranslation('auth')
+    const theme = useTheme()
     const { data, isLoading } = useClientDataSWR('stats-heatmaps', async () =>
       messageService.getHeatmaps(),
-    );
+    )
 
-    const days = data?.filter((item) => item.level > 0).length || '--';
-    const hotDays = data?.filter((item) => item.level >= 3).length || '--';
+    const days = data?.filter((item) => item.level > 0).length || '--'
+    const hotDays = data?.filter((item) => item.level >= 3).length || '--'
 
     const content = (
       <Heatmaps
@@ -54,9 +54,9 @@ const AiHeatmaps = memo<Omit<HeatmapsProps, 'data'> & { inShare?: boolean; mobil
         maxLevel={4}
         {...rest}
       />
-    );
+    )
 
-    const fillColor = readableColor(theme.gold);
+    const fillColor = readableColor(theme.gold)
     const tags = (
       <Flexbox
         gap={4}
@@ -92,7 +92,7 @@ const AiHeatmaps = memo<Omit<HeatmapsProps, 'data'> & { inShare?: boolean; mobil
           {[hotDays, t('stats.days')].join(' ')}
         </Tag>
       </Flexbox>
-    );
+    )
 
     if (inShare) {
       return (
@@ -110,7 +110,7 @@ const AiHeatmaps = memo<Omit<HeatmapsProps, 'data'> & { inShare?: boolean; mobil
           </Flexbox>
           {content}
         </Flexbox>
-      );
+      )
     }
 
     return (
@@ -122,8 +122,8 @@ const AiHeatmaps = memo<Omit<HeatmapsProps, 'data'> & { inShare?: boolean; mobil
       >
         <Flexbox paddingBlock={24}>{content}</Flexbox>
       </FormGroup>
-    );
+    )
   },
-);
+)
 
-export default AiHeatmaps;
+export default AiHeatmaps

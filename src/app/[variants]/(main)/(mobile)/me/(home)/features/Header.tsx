@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { useTheme } from 'antd-style';
-import { Moon, Sun } from 'lucide-react';
-import { memo } from 'react';
+import { ActionIcon }
+import { ChatHeader }
+import { useTheme }
+import { Moon, Sun }
+import { memo }
 
-import { MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import { useGlobalStore } from '@/store/global';
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { MOBILE_HEADER_ICON_SIZE }
+import { useGlobalStore }
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
 const Header = memo(() => {
-  const theme = useTheme();
-  const switchThemeMode = useGlobalStore((s) => s.switchThemeMode);
+  const theme = useTheme()
+  const switchThemeMode = useGlobalStore((s) => s.switchThemeMode)
 
   return (
     <ChatHeader
@@ -25,7 +25,7 @@ const Header = memo(() => {
       }
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

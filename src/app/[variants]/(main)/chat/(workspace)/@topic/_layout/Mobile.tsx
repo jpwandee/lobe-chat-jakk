@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Flexbox }
 
 import TopicSearchBar from '../features/TopicSearchBar';
 
@@ -18,4 +18,4 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Layout;
+export default Layout

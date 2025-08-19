@@ -1,32 +1,32 @@
-import { Button, Text } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { ChevronDown } from 'lucide-react';
-import { memo, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Button, Text }
+import isEqual from 'fast-deep-equal'
+import { ChevronDown }
+import { memo, useMemo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra';
-import { aiModelSelectors } from '@/store/aiInfra/selectors';
+import { useAiInfraStore }
+import { aiModelSelectors }
 
-import ModelItem from './ModelItem';
+import ModelItem from './ModelItem'
 
-interface DisabledModelsProps {
+interface disabledmodelsprops {
   activeTab: string;
 }
 
 const DisabledModels = memo<DisabledModelsProps>(({ activeTab }) => {
-  const { t } = useTranslation('modelProvider');
+  const { t } = useTranslation('modelProvider')
 
-  const [showMore, setShowMore] = useState(false);
-  const disabledModels = useAiInfraStore(aiModelSelectors.disabledAiProviderModelList, isEqual);
+  const [showMore, setShowMore] = useState(false)
+  const disabledModels = useAiInfraStore(aiModelSelectors.disabledAiProviderModelList, isEqual)
 
   // Filter models based on active tab
   const filteredDisabledModels = useMemo(() => {
-    if (activeTab === 'all') return disabledModels;
-    return disabledModels.filter((model) => model.type === activeTab);
-  }, [disabledModels, activeTab]);
+    if (activeTab === 'all') return disabledModels
+    return disabledModels.filter((model) => model.type === activeTab)
+  }, [disabledModels, activeTab])
 
-  const displayModels = showMore ? filteredDisabledModels : filteredDisabledModels.slice(0, 10);
+  const displayModels = showMore ? filteredDisabledModels : filteredDisabledModels.slice(0, 10)
 
   return (
     filteredDisabledModels.length > 0 && (
@@ -42,7 +42,7 @@ const DisabledModels = memo<DisabledModelsProps>(({ activeTab }) => {
             block
             icon={ChevronDown}
             onClick={() => {
-              setShowMore(true);
+              setShowMore(true)
             }}
             size={'small'}
           >
@@ -51,7 +51,7 @@ const DisabledModels = memo<DisabledModelsProps>(({ activeTab }) => {
         )}
       </Flexbox>
     )
-  );
-});
+  )
+})
 
-export default DisabledModels;
+export default DisabledModels

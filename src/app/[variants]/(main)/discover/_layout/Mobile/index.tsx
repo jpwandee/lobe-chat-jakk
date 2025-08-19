@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 import NProgress from '@/components/NProgress';
 
@@ -11,6 +11,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'MobileDiscoverStoreLayout';
+Layout.displayName = 'MobileDiscoverStoreLayout'
 
-export default Layout;
+export default Layout

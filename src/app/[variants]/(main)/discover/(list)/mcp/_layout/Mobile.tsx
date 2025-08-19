@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 const Layout = ({ children }: PropsWithChildren) => {
   return children;
 };
 
-Layout.displayName = 'MobileDiscoverToolsLayout';
+Layout.displayName = 'MobileDiscoverToolsLayout'
 
-export default Layout;
+export default Layout

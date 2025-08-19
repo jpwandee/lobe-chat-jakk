@@ -1,40 +1,40 @@
-import { Input } from '@lobehub/ui';
-import { Checkbox, Form, FormInstance } from 'antd';
-import { memo, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Input }
+import { Checkbox, Form, FormInstance }
+import { memo, useEffect }
+import { useTranslation }
 
-import MaxTokenSlider from '@/components/MaxTokenSlider';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { AiModelType } from '@/types/aiModel';
-import { ChatModelCard } from '@/types/llm';
+import MaxTokenSlider from '@/components/MaxTokenSlider'
+import { useIsMobile }
+import { AiModelType }
+import { ChatModelCard }
 
-interface ModelConfigFormProps {
+interface modelconfigformprops {
   idEditable?: boolean;
-  initialValues?: ChatModelCard;
-  onFormInstanceReady: (instance: FormInstance) => void;
+  initialValues?: chatmodelcard;
+  onFormInstanceReady: (instance: forminstance) => void;
   showDeployName?: boolean;
-  type?: AiModelType;
+  type?: aimodeltype;
 }
 
 const ModelConfigForm = memo<ModelConfigFormProps>(
   ({ showDeployName, idEditable = true, onFormInstanceReady, initialValues }) => {
-    const { t } = useTranslation('modelProvider');
+    const { t } = useTranslation('modelProvider')
 
-    const [formInstance] = Form.useForm();
+    const [formInstance] = Form.useForm()
 
-    const isMobile = useIsMobile();
+    const isMobile = useIsMobile()
 
     useEffect(() => {
-      onFormInstanceReady(formInstance);
-    }, []);
+      onFormInstanceReady(formInstance)
+    }, [])
 
     return (
       <div
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
         onKeyDown={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
       >
         <Form
@@ -112,7 +112,7 @@ const ModelConfigForm = memo<ModelConfigFormProps>(
           {/*</Form.Item>*/}
         </Form>
       </div>
-    );
+    )
   },
-);
-export default ModelConfigForm;
+)
+export default ModelConfigForm

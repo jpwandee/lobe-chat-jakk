@@ -1,77 +1,77 @@
-'use client';
+'use client'
 
-import { ActionIcon, Avatar, Block, Grid, Text } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { RefreshCw } from 'lucide-react';
-import Link from 'next/link';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ActionIcon, Avatar, Block, Grid, Text }
+import { Skeleton }
+import { createStyles }
+import { RefreshCw }
+import Link from 'next/link'
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { useDiscoverStore } from '@/store/discover';
-import { DiscoverAssistantItem } from '@/types/discover';
+import { useDiscoverStore }
+import { DiscoverAssistantItem }
 
 const useStyles = createStyles(({ css, token, responsive }) => ({
   card: css`
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    height: 100%;
-    min-height: 110px;
-    padding: 16px;
-    border-radius: ${token.borderRadiusLG}px;
+    height: 100%
+    min-height: 110px
+    padding: 16px
+    border-radius: ${token.borderRadiusLG}px
 
-    background: ${token.colorBgContainer};
+    background: ${token.colorBgContainer}
 
     ${responsive.mobile} {
-      min-height: 72px;
+      min-height: 72px
     }
   `,
   cardDesc: css`
-    margin-block: 0 !important;
-    color: ${token.colorTextDescription};
+    margin-block: 0 !important
+    color: ${token.colorTextDescription}
   `,
   cardTitle: css`
-    margin-block: 0 !important;
-    font-size: 16px;
-    font-weight: bold;
+    margin-block: 0 !important
+    font-size: 16px
+    font-weight: bold
   `,
   icon: css`
-    color: ${token.colorTextSecondary};
+    color: ${token.colorTextSecondary}
   `,
   title: css`
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
-const AgentsSuggest = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { t } = useTranslation('welcome');
-  const [page, setPage] = useState(1);
-  const useAssistantList = useDiscoverStore((s) => s.useAssistantList);
+const agentssuggest = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { t } = useTranslation('welcome')
+  const [page, setPage] = useState(1)
+  const useAssistantList = useDiscoverStore((s) => s.useAssistantList)
 
   const { data: assistantList, isLoading } = useAssistantList({
     page,
     pageSize: mobile ? 2 : 4,
-  });
+  })
 
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   const loadingCards = Array.from({ length: mobile ? 2 : 4 }).map((_, index) => (
     <Block className={styles.card} key={index}>
       <Skeleton active avatar paragraph={{ rows: 2 }} title={false} />
     </Block>
-  ));
+  ))
 
   const handleRefresh = () => {
-    if (!assistantList) return;
-    setPage(page + 1);
-  };
+    if (!assistantList) return
+    setPage(page + 1)
+  }
 
   // if no assistant data, just hide the component
-  if (!isLoading && !assistantList?.items?.length) return null;
+  if (!isLoading && !assistantList?.items?.length) return null
 
   return (
     <Flexbox gap={8} width={'100%'}>
@@ -108,7 +108,7 @@ const AgentsSuggest = memo<{ mobile?: boolean }>(({ mobile }) => {
             ))}
       </Grid>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default AgentsSuggest;
+export default AgentsSuggest

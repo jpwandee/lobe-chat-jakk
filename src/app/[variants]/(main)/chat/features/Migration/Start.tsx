@@ -1,56 +1,56 @@
-import { Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { Database, SearchCheck, Zap } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
-import Balancer from 'react-wrap-balancer';
+import { Icon }
+import { createStyles }
+import { Database, SearchCheck, Zap }
+import { memo }
+import { useTranslation }
+import { Center, Flexbox }
+import Balancer from 'react-wrap-balancer'
 
-import { BRANDING_NAME } from '@/const/branding';
+import { BRANDING_NAME }
 
-import ExportConfigButton from './ExportConfigButton';
-import UpgradeButton, { UpgradeButtonProps } from './UpgradeButton';
+import ExportConfigButton from './ExportConfigButton'
+import upgradebutton, { UpgradeButtonProps } from './UpgradeButton'
 
 const useStyles = createStyles(({ css, token, isDarkMode, responsive }) => ({
   desc: css`
-    width: 280px;
-    color: ${token.colorTextSecondary};
+    width: 280px
+    color: ${token.colorTextSecondary}
 
     ${responsive.mobile} {
-      line-height: ${token.lineHeight};
+      line-height: ${token.lineHeight}
     }
   `,
   hint: css`
-    font-size: ${token.fontSizeSM}px;
-    color: ${token.colorTextTertiary};
-    text-align: center;
+    font-size: ${token.fontSizeSM}px
+    color: ${token.colorTextTertiary}
+    text-align: center
   `,
   icon: css`
-    color: ${isDarkMode ? token.blue : token.geekblue};
+    color: ${isDarkMode ? token.blue : token.geekblue}
   `,
   iconCtn: css`
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: ${isDarkMode ? token.blue1 : token.geekblue1};
+    width: 72px
+    height: 72px
+    border-radius: 50%
+    background: ${isDarkMode ? token.blue1 : token.geekblue1}
   `,
   intro: css`
     ${responsive.mobile} {
-      width: 350px;
-      margin-block-start: 24px;
-      line-height: ${token.lineHeight};
+      width: 350px
+      margin-block-start: 24px
+      line-height: ${token.lineHeight}
     }
   `,
 
   title: css`
-    font-size: ${token.fontSizeLG}px;
-    font-weight: bold;
+    font-size: ${token.fontSizeLG}px
+    font-weight: bold
   `,
-}));
+}))
 
 const MigrationStart = memo<UpgradeButtonProps>((props) => {
-  const { t } = useTranslation('migration');
-  const { styles } = useStyles();
+  const { t } = useTranslation('migration')
+  const { styles } = useStyles()
 
   const features = [
     {
@@ -68,7 +68,7 @@ const MigrationStart = memo<UpgradeButtonProps>((props) => {
       desc: t('dbV1.features.use.desc'),
       title: t('dbV1.features.use.title'),
     },
-  ];
+  ]
 
   return (
     <>
@@ -89,7 +89,7 @@ const MigrationStart = memo<UpgradeButtonProps>((props) => {
                 <p className={styles.desc}>{item.desc}</p>
               </Flexbox>
             </Flexbox>
-          );
+          )
         })}
       </Flexbox>
       <Flexbox align={'center'} gap={16} style={{ paddingBottom: 16 }}>
@@ -102,7 +102,7 @@ const MigrationStart = memo<UpgradeButtonProps>((props) => {
         </Flexbox>
       </Flexbox>
     </>
-  );
-});
+  )
+})
 
-export default MigrationStart;
+export default MigrationStart

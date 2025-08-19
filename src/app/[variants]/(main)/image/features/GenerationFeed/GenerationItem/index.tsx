@@ -1,59 +1,59 @@
-'use client';
+'use client'
 
-import { App } from 'antd';
-import dayjs from 'dayjs';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { App }
+import dayjs from 'dayjs'
+import { memo }
+import { useTranslation }
 
-import { useDownloadImage } from '@/hooks/useDownloadImage';
-import { useImageStore } from '@/store/image';
-import { imageGenerationConfigSelectors } from '@/store/image/selectors';
-import { AsyncTaskStatus } from '@/types/asyncTask';
-import { inferFileExtensionFromImageUrl } from '@/utils/url';
+import { useDownloadImage }
+import { useImageStore }
+import { imageGenerationConfigSelectors }
+import { AsyncTaskStatus }
+import { inferFileExtensionFromImageUrl }
 
-import { ErrorState } from './ErrorState';
-import { LoadingState } from './LoadingState';
-import { SuccessState } from './SuccessState';
-import { GenerationItemProps } from './types';
-import { getAspectRatio } from './utils';
+import { ErrorState }
+import { LoadingState }
+import { SuccessState }
+import { GenerationItemProps }
+import { getAspectRatio } from './utils'
 
-const isSupportedParamSelector = imageGenerationConfigSelectors.isSupportedParam;
+const isSupportedParamSelector = imageGenerationConfigSelectors.isSupportedParam
 
 export const GenerationItem = memo<GenerationItemProps>(
   ({ generationBatch, generation, prompt }) => {
-    const { message } = App.useApp();
-    const { t } = useTranslation('image');
-    const useCheckGenerationStatus = useImageStore((s) => s.useCheckGenerationStatus);
-    const deleteGeneration = useImageStore((s) => s.removeGeneration);
-    const reuseSeed = useImageStore((s) => s.reuseSeed);
-    const activeTopicId = useImageStore((s) => s.activeGenerationTopicId);
-    const isSupportSeed = useImageStore(isSupportedParamSelector('seed'));
-    const { downloadImage } = useDownloadImage();
+    const { message } = App.useApp()
+    const { t } = useTranslation('image')
+    const useCheckGenerationStatus = useImageStore((s) => s.useCheckGenerationStatus)
+    const deleteGeneration = useImageStore((s) => s.removeGeneration)
+    const reuseSeed = useImageStore((s) => s.reuseSeed)
+    const activeTopicId = useImageStore((s) => s.activeGenerationTopicId)
+    const isSupportSeed = useImageStore(isSupportedParamSelector('seed'))
+    const { downloadImage } = useDownloadImage()
 
     const isFinalized =
       generation.task.status === AsyncTaskStatus.Success ||
-      generation.task.status === AsyncTaskStatus.Error;
+      generation.task.status === AsyncTaskStatus.Error
 
-    const shouldPoll = !isFinalized;
-    useCheckGenerationStatus(generation.id, generation.task.id, activeTopicId!, shouldPoll);
+    const shouldPoll = !isFinalized
+    useCheckGenerationStatus(generation.id, generation.task.id, activeTopicId!, shouldPoll)
 
-    const aspectRatio = getAspectRatio(generation, generationBatch);
+    const aspectRatio = getAspectRatio(generation, generationBatch)
 
     // 事件处理函数
     const handleDeleteGeneration = async () => {
       try {
-        await deleteGeneration(generation.id);
+        await deleteGeneration(generation.id)
       } catch (error) {
-        console.error('Failed to delete generation:', error);
+        console.error('Failed to delete generation:', error)
       }
-    };
+    }
 
     const handleDownloadImage = async () => {
-      if (!generation.asset?.url) return;
+      if (!generation.asset?.url) return
 
       // Generate filename with prompt and timestamp
-      const timestamp = dayjs(generation.createdAt).format('YYYY-MM-DD_HH-mm-ss');
-      const baseName = prompt.slice(0, 30).trim();
+      const timestamp = dayjs(generation.createdAt).format('YYYY-MM-DD_HH-mm-ss')
+      const baseName = prompt.slice(0, 30).trim()
       const sanitizedBaseName = baseName.replaceAll(/["%*/:<>?\\|]/g, '').replaceAll(/\s+/g, '_');
       const safePrompt = sanitizedBaseName || 'Untitled';
 

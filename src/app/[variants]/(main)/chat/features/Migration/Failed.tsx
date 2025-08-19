@@ -1,41 +1,41 @@
-import { Alert, Button, Highlighter, Icon } from '@lobehub/ui';
-import { Popconfirm, Result } from 'antd';
-import { useTheme } from 'antd-style';
-import { createStore, del, get, set } from 'idb-keyval';
-import { ShieldAlert } from 'lucide-react';
-import Link from 'next/link';
-import { lighten } from 'polished';
-import { memo } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import Balancer from 'react-wrap-balancer';
+import { Alert, Button, Highlighter, Icon }
+import { Popconfirm, Result }
+import { useTheme }
+import { createStore, del, get, set }
+import { ShieldAlert }
+import Link from 'next/link'
+import { lighten }
+import { memo }
+import { Trans, useTranslation }
+import { Flexbox }
+import Balancer from 'react-wrap-balancer'
 
-import { GITHUB_ISSUES } from '@/const/url';
-import { githubService } from '@/services/github';
+import { GITHUB_ISSUES }
+import { githubService }
 
-import ExportConfigButton from './ExportConfigButton';
-import UpgradeButton from './UpgradeButton';
-import { MigrationError, UpgradeStatus, V1DB_NAME, V1DB_TABLE_NAME } from './const';
+import ExportConfigButton from './ExportConfigButton'
+import UpgradeButton from './UpgradeButton'
+import { MigrationError, UpgradeStatus, V1DB_NAME, V1DB_TABLE_NAME }
 
-const clearLocal = async () => {
-  const store = createStore(V1DB_NAME, V1DB_TABLE_NAME);
+const clearlocal = async () => {
+  const store = createStore(V1DB_NAME, V1DB_TABLE_NAME)
   // delete the state key and back it up to state_backup for reproduce
-  const state = await get('state', store);
-  await del('state');
-  await set('state_backup', state, store);
-  location.reload();
-};
+  const state = await get('state', store)
+  await del('state')
+  await set('state_backup', state, store)
+  location.reload()
+}
 
-interface FailedProps {
-  error?: MigrationError;
-  setError: (error: MigrationError) => void;
-  setUpgradeStatus: (status: UpgradeStatus) => void;
+interface failedprops {
+  error?: migrationerror;
+  setError: (error: migrationerror) => void;
+  setUpgradeStatus: (status: upgradestatus) => void;
   state: any;
-  upgradeStatus: UpgradeStatus;
+  upgradeStatus: upgradestatus;
 }
 const Failed = memo<FailedProps>(({ error, state, setUpgradeStatus, setError, upgradeStatus }) => {
-  const { t } = useTranslation('migration');
-  const theme = useTheme();
+  const { t } = useTranslation('migration')
+  const theme = useTheme()
 
   return (
     <Result
@@ -101,8 +101,8 @@ const Failed = memo<FailedProps>(({ error, state, setUpgradeStatus, setError, up
               aria-label={'issue'}
               href={GITHUB_ISSUES}
               onClick={(e) => {
-                e.preventDefault();
-                githubService.submitDBV1UpgradeError(1, error!);
+                e.preventDefault()
+                githubService.submitDBV1UpgradeError(1, error!)
               }}
               target="_blank"
             >
@@ -114,7 +114,7 @@ const Failed = memo<FailedProps>(({ error, state, setUpgradeStatus, setError, up
       }
       title={t('dbV1.upgrade.error.title')}
     />
-  );
-});
+  )
+})
 
-export default Failed;
+export default Failed

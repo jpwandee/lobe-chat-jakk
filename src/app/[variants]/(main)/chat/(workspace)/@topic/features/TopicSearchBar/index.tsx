@@ -1,48 +1,48 @@
-'use client';
+'use client'
 
-import { SearchBar } from '@lobehub/ui';
-import { useUnmount } from 'ahooks';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { SearchBar }
+import { useUnmount }
+import { memo, useState }
+import { useTranslation }
 
-import { useChatStore } from '@/store/chat';
-import { useServerConfigStore } from '@/store/serverConfig';
+import { useChatStore }
+import { useServerConfigStore }
 
-const TopicSearchBar = memo<{ onClear?: () => void }>(({ onClear }) => {
-  const { t } = useTranslation('topic');
+const topicsearchbar = memo< { onClear?: () => void }>(({ onClear }) => {
+  const { t } = useTranslation('topic')
 
-  const [tempValue, setTempValue] = useState('');
-  const [searchKeyword, setSearchKeywords] = useState('');
-  const mobile = useServerConfigStore((s) => s.isMobile);
-  const [activeSessionId, useSearchTopics] = useChatStore((s) => [s.activeId, s.useSearchTopics]);
+  const [tempValue, setTempValue] = useState('')
+  const [searchKeyword, setSearchKeywords] = useState('')
+  const mobile = useServerConfigStore((s) => s.isMobile)
+  const [activeSessionId, useSearchTopics] = useChatStore((s) => [s.activeId, s.useSearchTopics])
 
-  useSearchTopics(searchKeyword, activeSessionId);
+  useSearchTopics(searchKeyword, activeSessionId)
 
   useUnmount(() => {
-    useChatStore.setState({ inSearchingMode: false, isSearchingTopic: false });
-  });
+    useChatStore.setState({ inSearchingMode: false, isSearchingTopic: false })
+  })
 
   const startSearchTopic = () => {
-    if (tempValue === searchKeyword) return;
+    if (tempValue === searchKeyword) return
 
-    setSearchKeywords(tempValue);
-    useChatStore.setState({ inSearchingMode: !!tempValue, isSearchingTopic: !!tempValue });
-  };
+    setSearchKeywords(tempValue)
+    useChatStore.setState({ inSearchingMode: !!tempValue, isSearchingTopic: !!tempValue })
+  }
 
   return (
     <SearchBar
       autoFocus
       onBlur={() => {
         if (tempValue === '') {
-          onClear?.();
+          onClear?.()
 
-          return;
+          return
         }
 
-        startSearchTopic();
+        startSearchTopic()
       }}
       onChange={(e) => {
-        setTempValue(e.target.value);
+        setTempValue(e.target.value)
       }}
       onPressEnter={startSearchTopic}
       placeholder={t('searchPlaceholder')}
@@ -50,7 +50,7 @@ const TopicSearchBar = memo<{ onClear?: () => void }>(({ onClear }) => {
       value={tempValue}
       variant={'filled'}
     />
-  );
-});
+  )
+})
 
-export default TopicSearchBar;
+export default TopicSearchBar

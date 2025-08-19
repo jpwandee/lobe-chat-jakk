@@ -1,4 +1,4 @@
-import { PropsWithChildren, Suspense } from 'react';
+import { PropsWithChildren, Suspense }
 
 import Loading from '@/components/Loading/BrandTextLoading';
 import MobileContentLayout from '@/components/server/MobileNavLayout';
@@ -15,6 +15,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   );
 };
 
-Layout.displayName = 'MeLayout';
+Layout.displayName = 'MeLayout'
 
-export default Layout;
+export default Layout

@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useSize } from 'ahooks';
-import { memo, useRef } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useAutoAnimate }
+import { useSize }
+import { memo, useRef }
+import { Flexbox }
 
-import { useImageStore } from '@/store/image';
-import { generationTopicSelectors } from '@/store/image/selectors';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/slices/auth/selectors';
+import { useImageStore }
+import { generationTopicSelectors }
+import { useUserStore }
+import { authSelectors } from '@/store/user/slices/auth/selectors'
 
-import NewTopicButton from './NewTopicButton';
-import TopicItem from './TopicItem';
+import NewTopicButton from './NewTopicButton'
+import TopicItem from './TopicItem'
 
 const TopicsList = memo(() => {
-  const isLogin = useUserStore(authSelectors.isLogin);
-  const useFetchGenerationTopics = useImageStore((s) => s.useFetchGenerationTopics);
-  useFetchGenerationTopics(!!isLogin);
-  const ref = useRef(null);
-  const { width = 80 } = useSize(ref) || {};
-  const [parent] = useAutoAnimate();
-  const generationTopics = useImageStore(generationTopicSelectors.generationTopics);
-  const openNewGenerationTopic = useImageStore((s) => s.openNewGenerationTopic);
+  const isLogin = useUserStore(authSelectors.isLogin)
+  const useFetchGenerationTopics = useImageStore((s) => s.useFetchGenerationTopics)
+  useFetchGenerationTopics(!!isLogin)
+  const ref = useRef(null)
+  const { width = 80 } = useSize(ref) || {}
+  const [parent] = useAutoAnimate()
+  const generationTopics = useImageStore(generationTopicSelectors.generationTopics)
+  const openNewGenerationTopic = useImageStore((s) => s.openNewGenerationTopic)
 
-  const showMoreInfo = Boolean(width > 120);
+  const showMoreInfo = Boolean(width > 120)
 
-  const isEmpty = !generationTopics || generationTopics.length === 0;
+  const isEmpty = !generationTopics || generationTopics.length === 0
   if (isEmpty) {
-    return null;
+    return null
   }
 
   return (
@@ -52,9 +52,9 @@ const TopicsList = memo(() => {
         ))}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-TopicsList.displayName = 'TopicsList';
+TopicsList.displayName = 'TopicsList'
 
-export default TopicsList;
+export default TopicsList

@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import { Modal } from '@lobehub/ui';
-import { PropsWithChildren, memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Modal }
+import { PropsWithChildren, memo }
+import { useTranslation }
 
-import { useFetchTopics } from '@/hooks/useFetchTopics';
-import { useWorkspaceModal } from '@/hooks/useWorkspaceModal';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import { useFetchTopics }
+import { useWorkspaceModal }
+import { useGlobalStore }
+import { systemStatusSelectors } from '@/store/global/selectors'
 
 const Topics = memo(({ children }: PropsWithChildren) => {
   const [showAgentSettings, toggleConfig] = useGlobalStore((s) => [
     systemStatusSelectors.mobileShowTopic(s),
     s.toggleMobileTopic,
-  ]);
-  const [open, setOpen] = useWorkspaceModal(showAgentSettings, toggleConfig);
-  const { t } = useTranslation('topic');
+  ])
+  const [open, setOpen] = useWorkspaceModal(showAgentSettings, toggleConfig)
+  const { t } = useTranslation('topic')
 
-  useFetchTopics();
+  useFetchTopics()
 
   return (
     <Modal
@@ -32,7 +32,7 @@ const Topics = memo(({ children }: PropsWithChildren) => {
     >
       {children}
     </Modal>
-  );
-});
+  )
+})
 
-export default Topics;
+export default Topics

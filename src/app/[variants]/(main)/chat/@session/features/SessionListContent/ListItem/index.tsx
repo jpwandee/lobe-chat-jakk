@@ -1,37 +1,37 @@
-import { Avatar, List, type ListItemProps } from '@lobehub/ui';
-import { useHover } from 'ahooks';
-import { createStyles } from 'antd-style';
-import { memo, useMemo, useRef } from 'react';
+import { Avatar, List, type ListItemProps }
+import { useHover }
+import { createStyles }
+import { memo, useMemo, useRef }
 
-import { useServerConfigStore } from '@/store/serverConfig';
+import { useServerConfigStore }
 
-const { Item } = List;
+const { Item }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     container: css`
-      position: relative;
-      margin-block: 2px;
-      padding-inline: 8px 16px;
-      border-radius: ${token.borderRadius}px;
+      position: relative
+      margin-block: 2px
+      padding-inline: 8px 16px
+      border-radius: ${token.borderRadius}px
     `,
     mobile: css`
-      margin-block: 0;
-      padding-inline-start: 12px;
-      border-radius: 0;
+      margin-block: 0
+      padding-inline-start: 12px
+      border-radius: 0
     `,
     title: css`
-      line-height: 1.2;
+      line-height: 1.2
     `,
-  };
-});
+  }
+})
 
-const ListItem = memo<ListItemProps & { avatar: string; avatarBackground?: string }>(
+const listitem = memo<listitemprops & { avatar: string; avatarBackground?: string }>(
   ({ avatar, avatarBackground, active, showAction, actions, title, ...props }) => {
-    const ref = useRef(null);
-    const isHovering = useHover(ref);
-    const mobile = useServerConfigStore((s) => s.isMobile);
-    const { cx, styles } = useStyles();
+    const ref = useRef(null)
+    const isHovering = useHover(ref)
+    const mobile = useServerConfigStore((s) => s.isMobile)
+    const { cx, styles } = useStyles()
 
     const avatarRender = useMemo(
       () => (
@@ -44,7 +44,7 @@ const ListItem = memo<ListItemProps & { avatar: string; avatarBackground?: strin
         />
       ),
       [isHovering, avatar, avatarBackground],
-    );
+    )
 
     return (
       <Item
@@ -57,8 +57,8 @@ const ListItem = memo<ListItemProps & { avatar: string; avatarBackground?: strin
         title={<span className={styles.title}>{title}</span>}
         {...(props as any)}
       />
-    );
+    )
   },
-);
+)
 
-export default ListItem;
+export default ListItem

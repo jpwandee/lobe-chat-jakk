@@ -1,16 +1,16 @@
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import Title from '../../../../../../features/Title';
-import { useDetailContext } from '../../DetailProvider';
-import Item from './Item';
+import Title from '../../../../../../features/Title'
+import { useDetailContext } from '../../DetailProvider'
+import Item from './Item'
 
 const Related = memo(() => {
-  const { t } = useTranslation('discover');
-  const { related } = useDetailContext();
+  const { t } = useTranslation('discover')
+  const { related } = useDetailContext()
 
   return (
     <Flexbox gap={16}>
@@ -19,16 +19,16 @@ const Related = memo(() => {
       </Title>
       <Flexbox gap={8}>
         {related?.map((item, index) => {
-          const link = urlJoin('/discover/provider', item.identifier);
+          const link = urlJoin('/discover/provider', item.identifier)
           return (
             <Link href={link} key={index} style={{ color: 'inherit', overflow: 'hidden' }}>
               <Item {...item} />
             </Link>
-          );
+          )
         })}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Related;
+export default Related

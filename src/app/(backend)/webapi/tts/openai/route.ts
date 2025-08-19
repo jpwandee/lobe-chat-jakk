@@ -1,9 +1,9 @@
-import { OpenAITTSPayload } from '@lobehub/tts';
-import { createOpenaiAudioSpeech } from '@lobehub/tts/server';
+import { OpenAITTSPayload }
+import { createOpenaiAudioSpeech }
 
-import { createBizOpenAI } from '@/app/(backend)/_deprecated/createBizOpenAI';
+import { createBizOpenAI }
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 export const preferredRegion = [
   'arn1',
@@ -23,16 +23,16 @@ export const preferredRegion = [
   'sfo1',
   'sin1',
   'syd1',
-];
+]
 
-export const POST = async (req: Request) => {
-  const payload = (await req.json()) as OpenAITTSPayload;
+export const post = async (req: Request) => {
+  const payload = (await req.json()) as OpenAITTSPayload
 
   // need to be refactored with jwt auth mode
-  const openaiOrErrResponse = createBizOpenAI(req);
+  const openaiOrErrResponse = createBizOpenAI(req)
 
   // if resOrOpenAI is a Response, it means there is an error,just return it
-  if (openaiOrErrResponse instanceof Response) return openaiOrErrResponse;
+  if (openaiOrErrResponse instanceof Response) return openaiOrErrResponse
 
-  return await createOpenaiAudioSpeech({ openai: openaiOrErrResponse, payload });
-};
+  return await createOpenaiAudioSpeech({ openai: openaiOrErrResponse, payload })
+}

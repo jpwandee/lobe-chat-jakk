@@ -1,18 +1,17 @@
-import React, { Suspense, lazy } from 'react';
+import react, { Suspense, lazy }
 
-import Loading from '@/components/Loading/BrandTextLoading';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import Loading from '@/components/Loading/BrandTextLoading'
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
 
-const PortalBody = lazy(() => import('@/features/Portal/router'));
+const PortalBody = lazy(() => import('@/features/Portal/router'))
 
-const Inspector = async (props: DynamicLayoutProps) => {
-  const isMobile = await RouteVariants.getIsMobile(props);
-
-  const Layout = isMobile ? Mobile : Desktop;
+const inspector = async (props: DynamicLayoutProps) => {
+  const isMobile = await RouteVariants.getIsMobile(props)
+  const Layout = isMobile ? Mobile : desktop;LayoutisMobileMobile
 
   return (
     <Suspense fallback={<Loading />}>
@@ -20,9 +19,9 @@ const Inspector = async (props: DynamicLayoutProps) => {
         <PortalBody />
       </Layout>
     </Suspense>
-  );
-};
+  )
+}
 
-Inspector.displayName = 'ChatInspector';
+Inspector.displayName = 'ChatInspector'
 
-export default Inspector;
+export default Inspector

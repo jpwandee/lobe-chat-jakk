@@ -1,37 +1,37 @@
-import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { MoreVertical, PencilLine, Trash } from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text }
+import { App }
+import { createStyles }
+import { MoreVertical, PencilLine, Trash }
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import BubblesLoading from '@/components/BubblesLoading';
-import { LOADING_FLAT } from '@/const/message';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { useChatStore } from '@/store/chat';
+import BubblesLoading from '@/components/BubblesLoading'
+import { LOADING_FLAT }
+import { useIsMobile }
+import { useChatStore }
 
 const useStyles = createStyles(({ css, token }) => ({
   active: css`
-    color: ${token.colorText};
+    color: ${token.colorText}
   `,
   content: css`
-    position: relative;
-    overflow: hidden;
-    flex: 1;
+    position: relative
+    overflow: hidden
+    flex: 1
   `,
   title: css`
-    flex: 1;
+    flex: 1
 
-    height: 28px;
+    height: 28px
 
-    line-height: 28px;
-    color: ${token.colorTextSecondary};
-    text-align: start;
+    line-height: 28px
+    color: ${token.colorTextSecondary}
+    text-align: start
   `,
-}));
+}))
 
-interface TopicContentProps {
+interface topiccontentprops {
   active?: boolean;
   id: string;
   showMore?: boolean;
@@ -39,22 +39,22 @@ interface TopicContentProps {
 }
 
 const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
-  const { t } = useTranslation(['thread', 'common']);
+  const { t } = useTranslation(['thread', 'common'])
 
-  const mobile = useIsMobile();
+  const mobile = useIsMobile()
 
   const [editing, updateThreadTitle, removeThread] = useChatStore((s) => [
     s.threadRenamingId === id,
     s.updateThreadTitle,
     s.removeThread,
-  ]);
-  const { styles, cx } = useStyles();
+  ])
+  const { styles, cx } = useStyles()
 
   const toggleEditing = (visible?: boolean) => {
-    useChatStore.setState({ threadRenamingId: visible ? id : '' });
-  };
+    useChatStore.setState({ threadRenamingId: visible ? id : '' })
+  }
 
-  const { modal } = App.useApp();
+  const { modal } = App.useApp()
 
   const items = useMemo<MenuProps['items']>(
     () => [
@@ -63,7 +63,7 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
         key: 'rename',
         label: t('rename', { ns: 'common' }),
         onClick: () => {
-          toggleEditing(true);
+          toggleEditing(true)
         },
       },
       {
@@ -75,21 +75,21 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
         key: 'delete',
         label: t('delete', { ns: 'common' }),
         onClick: () => {
-          if (!id) return;
+          if (!id) return
 
           modal.confirm({
             centered: true,
             okButtonProps: { danger: true },
             onOk: async () => {
-              await removeThread(id);
+              await removeThread(id)
             },
             title: t('actions.confirmRemoveThread'),
-          });
+          })
         },
       },
     ],
     [],
-  );
+  )
 
   return (
     <Flexbox
@@ -98,8 +98,8 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
       horizontal
       justify={'space-between'}
       onDoubleClick={(e) => {
-        if (!id) return;
-        if (e.altKey) toggleEditing(true);
+        if (!id) return
+        if (e.altKey) toggleEditing(true)
       }}
     >
       {!editing ? (
@@ -122,9 +122,9 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
           editing={editing}
           onChangeEnd={(v) => {
             if (title !== v) {
-              updateThreadTitle(id, v);
+              updateThreadTitle(id, v)
             }
-            toggleEditing(false);
+            toggleEditing(false)
           }}
           onEditingChange={toggleEditing}
           showEditIcon={false}
@@ -138,7 +138,7 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
           menu={{
             items: items,
             onClick: ({ domEvent }) => {
-              domEvent.stopPropagation();
+              domEvent.stopPropagation()
             },
           }}
           trigger={['click']}
@@ -147,14 +147,14 @@ const Content = memo<TopicContentProps>(({ id, title, active, showMore }) => {
             className="topic-more"
             icon={MoreVertical}
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
             size={'small'}
           />
         </Dropdown>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Content;
+export default Content

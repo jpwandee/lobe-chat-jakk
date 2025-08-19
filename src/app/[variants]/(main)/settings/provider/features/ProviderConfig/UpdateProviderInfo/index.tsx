@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { Button, Tooltip } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { SettingsIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Tooltip }
+import isEqual from 'fast-deep-equal'
+import { SettingsIcon }
+import { memo, useState }
+import { useTranslation }
 
-import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra'
 
-import SettingModal from './SettingModal';
+import SettingModal from './SettingModal'
 
 const UpdateProviderInfo = memo(() => {
-  const { t } = useTranslation('modelProvider');
+  const { t } = useTranslation('modelProvider')
 
-  const [open, setOpen] = useState(false);
-  const providerConfig = useAiInfraStore(aiProviderSelectors.activeProviderConfig, isEqual);
+  const [open, setOpen] = useState(false)
+  const providerConfig = useAiInfraStore(aiProviderSelectors.activeProviderConfig, isEqual)
 
   return (
     <>
@@ -22,9 +22,9 @@ const UpdateProviderInfo = memo(() => {
         <Button
           icon={SettingsIcon}
           onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setOpen(true);
+            e.preventDefault()
+            e.stopPropagation()
+            setOpen(true)
           }}
           size={'small'}
           type={'text'}
@@ -35,13 +35,13 @@ const UpdateProviderInfo = memo(() => {
           id={providerConfig.id}
           initialValues={providerConfig}
           onClose={() => {
-            setOpen(false);
+            setOpen(false)
           }}
           open={open}
         />
       )}
     </>
-  );
-});
+  )
+})
 
-export default UpdateProviderInfo;
+export default UpdateProviderInfo

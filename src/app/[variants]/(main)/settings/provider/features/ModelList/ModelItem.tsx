@@ -1,61 +1,62 @@
-import { ModelIcon } from '@lobehub/icons';
-import { ActionIcon, Tag, Text, copyToClipboard } from '@lobehub/ui';
-import { App, Switch } from 'antd';
-import { createStyles, useTheme } from 'antd-style';
-import { LucidePencil, TrashIcon } from 'lucide-react';
-import { memo, use, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ModelIcon }
+import { ActionIcon, Tag, Text, copyToClipboard }
+import { App, Switch }
+import { createStyles, useTheme }
+import { LucidePencil, TrashIcon }
+import { memo, use, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { aiModelSelectors, useAiInfraStore } from '@/store/aiInfra';
-import { AiModelSourceEnum, AiProviderModelListItem } from '@/types/aiModel';
-import { formatPriceByCurrency } from '@/utils/format';
+import { ModelInfoTags }
+import { useIsMobile }
+import { aiModelSelectors, useAiInfraStore }
+import { AiModelSourceEnum, AiProviderModelListItem }
+import { formatPriceByCurrency }
+
 import {
   getAudioInputUnitRate,
   getTextInputUnitRate,
   getTextOutputUnitRate,
-} from '@/utils/pricing';
+}
 
-import ModelConfigModal from './ModelConfigModal';
-import { ProviderSettingsContext } from './ProviderSettingsContext';
+import ModelConfigModal from './ModelConfigModal'
+import { ProviderSettingsContext }
 
 export const useStyles = createStyles(({ css, token, cx }) => {
   const config = css`
-    opacity: 0;
-    transition: all 100ms ease-in-out;
-  `;
+    opacity: 0
+    transition: all 100ms ease-in-out
+  `
 
   return {
     config,
     container: css`
-      position: relative;
-      border-radius: ${token.borderRadiusLG}px;
-      transition: all 200ms ease-in-out;
+      position: relative
+      border-radius: ${token.borderRadiusLG}px
+      transition: all 200ms ease-in-out
 
       &:hover {
-        background-color: ${token.colorFillTertiary};
+        background-color: ${token.colorFillTertiary}
 
         .${cx(config)} {
-          opacity: 1;
+          opacity: 1
         }
       }
     `,
     desc: css`
-      flex: 1;
-      min-width: 0;
+      flex: 1
+      min-width: 0
 
       span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
       }
     `,
-  };
-});
+  }
+})
 
-interface ModelItemProps extends AiProviderModelListItem {
+interface modelitemprops extends aiprovidermodellistitem {
   enabled: boolean;
   id: string;
   isAzure?: boolean;
@@ -76,10 +77,10 @@ const ModelItem = memo<ModelItemProps>(
     abilities,
     type,
   }) => {
-    const { styles } = useStyles();
-    const { t } = useTranslation(['modelProvider', 'components', 'models', 'common']);
-    const theme = useTheme();
-    const { modelEditable } = use(ProviderSettingsContext);
+    const { styles } = useStyles()
+    const { t } = useTranslation(['modelProvider', 'components', 'models', 'common'])
+    const theme = useTheme()
+    const { modelEditable } = use(ProviderSettingsContext)
 
     const [activeAiProvider, isModelLoading, toggleModelEnabled, removeAiModel] = useAiInfraStore(
       (s) => [
@@ -88,18 +89,18 @@ const ModelItem = memo<ModelItemProps>(
         s.toggleModelEnabled,
         s.removeAiModel,
       ],
-    );
+    )
 
-    const [checked, setChecked] = useState(enabled);
-    const [showConfig, setShowConfig] = useState(false);
+    const [checked, setChecked] = useState(enabled)
+    const [showConfig, setShowConfig] = useState(false)
 
     const formatPricing = (): string[] => {
-      if (!pricing) return [];
+      if (!pricing) return []
 
       switch (type) {
         case 'chat': {
-          const inputRate = getTextInputUnitRate(pricing);
-          const outputRate = getTextOutputUnitRate(pricing);
+          const inputRate = getTextInputUnitRate(pricing)
+          const outputRate = getTextOutputUnitRate(pricing)
           return [
             typeof inputRate === 'number' &&
               t('providerModels.item.pricing.inputTokens', {
@@ -109,58 +110,58 @@ const ModelItem = memo<ModelItemProps>(
               t('providerModels.item.pricing.outputTokens', {
                 amount: formatPriceByCurrency(outputRate, pricing?.currency),
               }),
-          ].filter(Boolean) as string[];
+          ].filter(Boolean) as string[]
         }
         case 'embedding': {
-          const inputRate = getTextInputUnitRate(pricing);
+          const inputRate = getTextInputUnitRate(pricing)
           return [
             typeof inputRate === 'number' &&
               t('providerModels.item.pricing.inputTokens', {
                 amount: formatPriceByCurrency(inputRate, pricing?.currency),
               }),
-          ].filter(Boolean) as string[];
+          ].filter(Boolean) as string[]
         }
         case 'tts': {
-          const inputRate = getAudioInputUnitRate(pricing);
+          const inputRate = getAudioInputUnitRate(pricing)
           return [
             typeof inputRate === 'number' &&
               t('providerModels.item.pricing.inputCharts', {
                 amount: formatPriceByCurrency(inputRate, pricing?.currency),
               }),
-          ].filter(Boolean) as string[];
+          ].filter(Boolean) as string[]
         }
         case 'stt': {
-          const inputRate = getAudioInputUnitRate(pricing);
+          const inputRate = getAudioInputUnitRate(pricing)
           return [
             typeof inputRate === 'number' &&
               t('providerModels.item.pricing.inputMinutes', {
                 amount: formatPriceByCurrency(inputRate, pricing?.currency),
               }),
-          ].filter(Boolean) as string[];
+          ].filter(Boolean) as string[]
         }
 
         case 'image': {
-          return [];
+          return []
         }
 
         default: {
-          return [];
+          return []
         }
       }
-    };
+    }
 
     const content = [
       releasedAt && t('providerModels.item.releasedAt', { releasedAt }),
       ...formatPricing(),
-    ].filter(Boolean) as string[];
+    ].filter(Boolean) as string[]
 
-    const { message, modal } = App.useApp();
+    const { message, modal } = App.useApp()
     const copyModelId = async () => {
-      await copyToClipboard(id);
-      message.success({ content: t('copySuccess', { ns: 'common' }) });
-    };
+      await copyToClipboard(id)
+      message.success({ content: t('copySuccess', { ns: 'common' }) })
+    }
 
-    const isMobile = useIsMobile();
+    const isMobile = useIsMobile()
 
     const dom = isMobile ? (
       <Flexbox
@@ -207,8 +208,8 @@ const ModelItem = memo<ModelItemProps>(
               <ActionIcon
                 icon={LucidePencil}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setShowConfig(true);
+                  e.stopPropagation()
+                  setShowConfig(true)
                 }}
                 size={'small'}
                 title={t('providerModels.item.config')}
@@ -224,13 +225,13 @@ const ModelItem = memo<ModelItemProps>(
                         type: 'primary',
                       },
                       onOk: async () => {
-                        await removeAiModel(id, activeAiProvider!);
-                        message.success(t('providerModels.item.delete.success'));
+                        await removeAiModel(id, activeAiProvider!)
+                        message.success(t('providerModels.item.delete.success'))
                       },
                       title: t('providerModels.item.delete.confirm', {
                         displayName: displayName || id,
                       }),
-                    });
+                    })
                   }}
                   size={'small'}
                   title={t('providerModels.item.delete.title')}
@@ -242,8 +243,8 @@ const ModelItem = memo<ModelItemProps>(
             checked={checked}
             loading={isModelLoading}
             onChange={async (e) => {
-              setChecked(e);
-              await toggleModelEnabled({ enabled: e, id, source });
+              setChecked(e)
+              await toggleModelEnabled({ enabled: e, id, source })
             }}
             size={'small'}
           />
@@ -272,8 +273,8 @@ const ModelItem = memo<ModelItemProps>(
                   <ActionIcon
                     icon={LucidePencil}
                     onClick={(e) => {
-                      e.stopPropagation();
-                      setShowConfig(true);
+                      e.stopPropagation()
+                      setShowConfig(true)
                     }}
                     size={'small'}
                     title={t('providerModels.item.config')}
@@ -289,13 +290,13 @@ const ModelItem = memo<ModelItemProps>(
                             type: 'primary',
                           },
                           onOk: async () => {
-                            await removeAiModel(id, activeAiProvider!);
-                            message.success(t('providerModels.item.delete.success'));
+                            await removeAiModel(id, activeAiProvider!)
+                            message.success(t('providerModels.item.delete.success'))
                           },
                           title: t('providerModels.item.delete.confirm', {
                             displayName: displayName || id,
                           }),
-                        });
+                        })
                       }}
                       size={'small'}
                       title={t('providerModels.item.delete.title')}
@@ -333,22 +334,22 @@ const ModelItem = memo<ModelItemProps>(
             checked={checked}
             loading={isModelLoading}
             onChange={async (e) => {
-              setChecked(e);
-              await toggleModelEnabled({ enabled: e, id, source });
+              setChecked(e)
+              await toggleModelEnabled({ enabled: e, id, source })
             }}
             size={'small'}
           />
         </Flexbox>
       </Flexbox>
-    );
+    )
 
     return (
       <>
         {dom}
         {showConfig && <ModelConfigModal id={id} open={showConfig} setOpen={setShowConfig} />}
       </>
-    );
+    )
   },
-);
+)
 
-export default ModelItem;
+export default ModelItem

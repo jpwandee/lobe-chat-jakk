@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { ActionIcon, Tooltip } from '@lobehub/ui';
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, Tooltip }
+import { PanelLeftClose, PanelLeftOpen }
+import { memo }
+import { useTranslation }
 
-import { DESKTOP_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
-import { HotkeyEnum } from '@/types/hotkey';
+import { DESKTOP_HEADER_ICON_SIZE }
+import { useGlobalStore }
+import { systemStatusSelectors }
+import { useUserStore }
+import { settingsSelectors }
+import { HotkeyEnum } from '@/types/hotkey'
 
-export const TOOGLE_PANEL_BUTTON_ID = 'toggle-panel-button';
+export const TOOGLE_PANEL_BUTTON_ID = 'toggle-panel-button'
 
 const TogglePanelButton = memo(() => {
-  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.ToggleLeftPanel));
+  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.ToggleLeftPanel))
 
-  const { t } = useTranslation(['chat', 'hotkey']);
+  const { t } = useTranslation(['chat', 'hotkey'])
 
-  const showSessionPanel = useGlobalStore(systemStatusSelectors.showSessionPanel);
-  const updateSystemStatus = useGlobalStore((s) => s.updateSystemStatus);
+  const showSessionPanel = useGlobalStore(systemStatusSelectors.showSessionPanel)
+  const updateSystemStatus = useGlobalStore((s) => s.updateSystemStatus)
 
   return (
     <Tooltip hotkey={hotkey} title={t('toggleLeftPanel.title', { ns: 'hotkey' })}>
@@ -31,12 +31,12 @@ const TogglePanelButton = memo(() => {
           updateSystemStatus({
             sessionsWidth: showSessionPanel ? 0 : 320,
             showSessionPanel: !showSessionPanel,
-          });
+          })
         }}
         size={DESKTOP_HEADER_ICON_SIZE}
       />
     </Tooltip>
-  );
-});
+  )
+})
 
-export default TogglePanelButton;
+export default TogglePanelButton

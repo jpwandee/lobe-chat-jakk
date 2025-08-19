@@ -1,34 +1,34 @@
-'use client';
+'use client'
 
-import { useTheme } from 'antd-style';
-import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
-import { PropsWithChildren, Suspense, memo } from 'react';
-import { HotkeysProvider } from 'react-hotkeys-hook';
-import { Flexbox } from 'react-layout-kit';
+import { useTheme }
+import dynamic from 'next/dynamic'
+import { usePathname }
+import { PropsWithChildren, Suspense, memo }
+import { HotkeysProvider }
+import { Flexbox }
 
-import { isDesktop } from '@/const/version';
-import { BANNER_HEIGHT } from '@/features/AlertBanner/CloudBanner';
-import TitleBar, { TITLE_BAR_HEIGHT } from '@/features/ElectronTitlebar';
-import HotkeyHelperPanel from '@/features/HotkeyHelperPanel';
-import { usePlatform } from '@/hooks/usePlatform';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { HotkeyScopeEnum } from '@/types/hotkey';
+import { isDesktop }
+import { BANNER_HEIGHT }
+import titlebar, { TITLE_BAR_HEIGHT }
+import HotkeyHelperPanel from '@/features/HotkeyHelperPanel'
+import { usePlatform }
+import { featureFlagsSelectors, useServerConfigStore }
+import { HotkeyScopeEnum } from '@/types/hotkey'
 
-import RegisterHotkeys from './RegisterHotkeys';
-import SideBar from './SideBar';
+import RegisterHotkeys from './RegisterHotkeys'
+import SideBar from './SideBar'
 
-const CloudBanner = dynamic(() => import('@/features/AlertBanner/CloudBanner'));
+const CloudBanner = dynamic(() => import('@/features/AlertBanner/CloudBanner'))
 
 const Layout = memo<PropsWithChildren>(({ children }) => {
-  const { isPWA } = usePlatform();
-  const theme = useTheme();
+  const { isPWA } = usePlatform()
+  const theme = useTheme()
 
-  const pathname = usePathname();
-  const { showCloudPromotion } = useServerConfigStore(featureFlagsSelectors);
+  const pathname = usePathname()
+  const { showCloudPromotion } = useServerConfigStore(featureFlagsSelectors)
 
   // setting page not show sidebar
-  const hideSideBar = isDesktop && pathname.startsWith('/settings');
+  const hideSideBar = isDesktop && pathname.startsWith('/settings')
   return (
     <HotkeysProvider initiallyActiveScopes={[HotkeyScopeEnum.Global]}>
       {isDesktop && <TitleBar />}
@@ -71,9 +71,9 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
         <RegisterHotkeys />
       </Suspense>
     </HotkeysProvider>
-  );
-});
+  )
+})
 
-Layout.displayName = 'DesktopMainLayout';
+Layout.displayName = 'DesktopMainLayout'
 
-export default Layout;
+export default Layout

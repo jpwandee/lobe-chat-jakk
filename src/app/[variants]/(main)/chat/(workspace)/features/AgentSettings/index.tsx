@@ -1,44 +1,44 @@
-'use client';
+'use client'
 
-import { Drawer } from '@lobehub/ui';
-import isEqual from 'fast-deep-equal';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Drawer }
+import isEqual from 'fast-deep-equal'
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import HeaderContent from '@/app/[variants]/(main)/chat/settings/features/HeaderContent';
-import BrandWatermark from '@/components/BrandWatermark';
-import PanelTitle from '@/components/PanelTitle';
-import { INBOX_SESSION_ID } from '@/const/session';
-import { isDesktop } from '@/const/version';
-import { AgentCategory, AgentSettings as Settings } from '@/features/AgentSetting';
-import { AgentSettingsProvider } from '@/features/AgentSetting/AgentSettingsProvider';
-import { TITLE_BAR_HEIGHT } from '@/features/ElectronTitlebar';
-import Footer from '@/features/Setting/Footer';
-import { useInitAgentConfig } from '@/hooks/useInitAgentConfig';
-import { useAgentStore } from '@/store/agent';
-import { agentSelectors } from '@/store/agent/slices/chat';
-import { ChatSettingsTabs } from '@/store/global/initialState';
-import { useSessionStore } from '@/store/session';
-import { sessionMetaSelectors } from '@/store/session/selectors';
+import HeaderContent from '@/app/[variants]/(main)/chat/settings/features/HeaderContent'
+import BrandWatermark from '@/components/BrandWatermark'
+import PanelTitle from '@/components/PanelTitle'
+import { INBOX_SESSION_ID }
+import { isDesktop }
+import { AgentCategory, AgentSettings as Settings }
+import { AgentSettingsProvider }
+import { TITLE_BAR_HEIGHT }
+import Footer from '@/features/Setting/Footer'
+import { useInitAgentConfig }
+import { useAgentStore }
+import { agentSelectors }
+import { ChatSettingsTabs }
+import { useSessionStore }
+import { sessionMetaSelectors } from '@/store/session/selectors'
 
 const AgentSettings = memo(() => {
-  const { t } = useTranslation('setting');
-  const id = useSessionStore((s) => s.activeId);
-  const config = useAgentStore(agentSelectors.currentAgentConfig, isEqual);
-  const meta = useSessionStore(sessionMetaSelectors.currentAgentMeta, isEqual);
-  const { isLoading } = useInitAgentConfig();
+  const { t } = useTranslation('setting')
+  const id = useSessionStore((s) => s.activeId)
+  const config = useAgentStore(agentSelectors.currentAgentConfig, isEqual)
+  const meta = useSessionStore(sessionMetaSelectors.currentAgentMeta, isEqual)
+  const { isLoading } = useInitAgentConfig()
   const [showAgentSetting, updateAgentConfig] = useAgentStore((s) => [
     s.showAgentSetting,
     s.updateAgentConfig,
-  ]);
+  ])
   const [updateAgentMeta] = useSessionStore((s) => [
     s.updateSessionMeta,
     sessionMetaSelectors.currentAgentTitle(s),
-  ]);
-  const isInbox = id === INBOX_SESSION_ID;
+  ])
+  const isInbox = id === INBOX_SESSION_ID
 
-  const [tab, setTab] = useState(isInbox ? ChatSettingsTabs.Prompt : ChatSettingsTabs.Meta);
+  const [tab, setTab] = useState(isInbox ? ChatSettingsTabs.Prompt : ChatSettingsTabs.Meta)
 
   return (
     <AgentSettingsProvider
@@ -94,7 +94,7 @@ const AgentSettings = memo(() => {
         <Footer />
       </Drawer>
     </AgentSettingsProvider>
-  );
-});
+  )
+})
 
-export default AgentSettings;
+export default AgentSettings

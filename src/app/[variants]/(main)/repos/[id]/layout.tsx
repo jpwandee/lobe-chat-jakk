@@ -1,13 +1,13 @@
-import ServerLayout from '@/components/server/ServerLayout';
+import ServerLayout from '@/components/server/ServerLayout'
 
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
-import { LayoutProps } from './_layout/type';
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
+import { LayoutProps }
 
-const Layout = ServerLayout<LayoutProps>({ Desktop, Mobile });
+const Layout = ServerLayout<LayoutProps>({ Desktop, Mobile })
 
-Layout.displayName = 'RepoLayout';
+Layout.displayName = 'RepoLayout'
 
-export default (props: LayoutProps) => <Layout {...props} />;
+export default (props: LayoutProps) => <layout {...props} />
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-static'

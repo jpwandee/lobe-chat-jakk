@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import dynamic from 'next/dynamic';
-import React from 'react';
+import dynamic from 'next/dynamic'
+import React from 'react'
 
-import SkeletonList from './SkeletonList';
+import SkeletonList from './SkeletonList'
 
 const TopicsList = dynamic(() => import('./TopicList'), {
   loading: () => <SkeletonList />,
   ssr: false,
-});
+})
 
-const Topics = () => {
-  return <TopicsList />;
-};
+const topics = () => {
+  return <TopicsList />
+}
 
-Topics.displayName = 'Topics';
+Topics.displayName = 'Topics'
 
-export default Topics;
+export default Topics

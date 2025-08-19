@@ -1,6 +1,6 @@
-import { createContext } from 'react';
+import { createContext }
 
-export interface ProviderSettingsContextValue {
+export interface providersettingscontextvalue {
   modelEditable?: boolean;
   sdkType?: string;
   showAddNewModel?: boolean;
@@ -8,4 +8,4 @@ export interface ProviderSettingsContextValue {
   showModelFetcher?: boolean;
 }
 
-export const ProviderSettingsContext = createContext<ProviderSettingsContextValue>({});
+export const ProviderSettingsContext = createContext<ProviderSettingsContextValue>({})

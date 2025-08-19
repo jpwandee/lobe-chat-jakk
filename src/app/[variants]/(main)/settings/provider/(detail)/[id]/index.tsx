@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { memo }
+import { Flexbox }
 
-import ModelList from '../../features/ModelList';
-import ProviderConfig, { ProviderConfigProps } from '../../features/ProviderConfig';
+import ModelList from '../../features/ModelList'
+import providerconfig, { ProviderConfigProps }
 
-interface ProviderDetailProps extends ProviderConfigProps {
+interface providerdetailprops extends providerconfigprops {
   showConfig?: boolean;
 }
 const ProviderDetail = memo<ProviderDetailProps>(({ showConfig = true, ...card }) => {
@@ -18,7 +18,7 @@ const ProviderDetail = memo<ProviderDetailProps>(({ showConfig = true, ...card }
       {showConfig && <ProviderConfig {...card} />}
       <ModelList id={card.id} {...card.settings} />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ProviderDetail;
+export default ProviderDetail

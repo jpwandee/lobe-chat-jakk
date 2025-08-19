@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import { fileManagerSelectors, useFileStore } from '@/store/file';
+import { fileManagerSelectors, useFileStore }
 
-import Detail from '../../../features/FileDetail';
+import Detail from '../../../features/FileDetail'
 
-const FileDetail = memo<{ id: string }>(({ id }) => {
-  const file = useFileStore(fileManagerSelectors.getFileById(id));
+const filedetail = memo< { id: string }>(({ id }) => {
+  const file = useFileStore(fileManagerSelectors.getFileById(id))
 
-  if (!file) return;
+  if (!file) return
 
-  return <Detail {...file} />;
-});
-export default FileDetail;
+  return <Detail {...file} />
+})
+export default FileDetail

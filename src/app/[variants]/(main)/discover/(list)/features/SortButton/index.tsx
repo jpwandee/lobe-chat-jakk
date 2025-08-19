@@ -1,12 +1,13 @@
-import { Dropdown, DropdownMenuItemType, Icon } from '@lobehub/ui';
-import { Button } from 'antd';
-import { ArrowDownWideNarrow, ChevronDown } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Dropdown, DropdownMenuItemType, Icon }
+import { Button }
+import { ArrowDownWideNarrow, ChevronDown }
+import { usePathname }
+import { memo, useMemo }
+import { useTranslation }
 
-import { useQuery } from '@/hooks/useQuery';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
+import { useQuery }
+import { useQueryRoute }
+
 import {
   AssistantSorts,
   DiscoverTab,
@@ -14,14 +15,14 @@ import {
   ModelSorts,
   PluginSorts,
   ProviderSorts,
-} from '@/types/discover';
+} from '@/types/discover'
 
 const SortButton = memo(() => {
-  const { t } = useTranslation('discover');
-  const pathname = usePathname();
-  const { sort } = useQuery();
-  const router = useQueryRoute();
-  const activeTab = useMemo(() => pathname.split('discover/')[1] as DiscoverTab, [pathname]);
+  const { t } = useTranslation('discover')
+  const pathname = usePathname()
+  const { sort } = useQuery()
+  const router = useQueryRoute()
+  const activeTab = useMemo(() => pathname.split('discover/')[1] as DiscoverTab, [pathname])
   const items = useMemo(() => {
     switch (activeTab) {
       case DiscoverTab.Assistants: {
@@ -50,7 +51,7 @@ const SortButton = memo(() => {
             key: AssistantSorts.KnowledgeCount,
             label: t('assistants.sorts.knowledgeCount'),
           },
-        ];
+        ]
       }
       case DiscoverTab.Plugins: {
         return [
@@ -66,7 +67,7 @@ const SortButton = memo(() => {
             key: PluginSorts.Identifier,
             label: t('plugins.sorts.identifier'),
           },
-        ];
+        ]
       }
       case DiscoverTab.Models: {
         return [
@@ -94,7 +95,7 @@ const SortButton = memo(() => {
             key: ModelSorts.ProviderCount,
             label: t('models.sorts.providerCount'),
           },
-        ];
+        ]
       }
       case DiscoverTab.Providers: {
         return [
@@ -110,7 +111,7 @@ const SortButton = memo(() => {
             key: ProviderSorts.ModelCount,
             label: t('providers.sorts.modelCount'),
           },
-        ];
+        ]
       }
       case DiscoverTab.Mcp: {
         return [
@@ -138,31 +139,31 @@ const SortButton = memo(() => {
             label: t('mcp.sorts.createdAt'),
             value: McpSorts.CreatedAt,
           },
-        ];
+        ]
       }
       default: {
-        return [];
+        return []
       }
     }
-  }, [t, activeTab]);
+  }, [t, activeTab])
 
   const activeItem: any = useMemo(() => {
     if (sort) {
-      const findItem = items?.find((item: any) => item.key === sort);
-      if (findItem) return findItem;
+      const findItem = items?.find((item: any) => item.key === sort)
+      if (findItem) return findItem
     }
-    return items?.[0];
-  }, [items, sort]);
+    return items?.[0]
+  }, [items, sort])
 
   const handleSort = (config: string) => {
     router.push(pathname, {
       query: {
         sort: config,
       },
-    });
-  };
+    })
+  }
 
-  if (items?.length === 0) return null;
+  if (items?.length === 0) return null
 
   return (
     <Dropdown
@@ -179,7 +180,7 @@ const SortButton = memo(() => {
         <Icon icon={ChevronDown} />
       </Button>
     </Dropdown>
-  );
-});
+  )
+})
 
-export default SortButton;
+export default SortButton

@@ -1,42 +1,42 @@
-import { Avatar, Block, Text } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Avatar, Block, Text }
+import { Skeleton }
+import { createStyles }
+import { memo }
+import { Flexbox }
 
-import { useDiscoverStore } from '@/store/discover';
+import { useDiscoverStore }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      flex: 1;
-      margin: 0 !important;
-      font-size: 14px !important;
-      color: ${token.colorTextSecondary};
+      flex: 1
+      margin: 0 !important
+      font-size: 14px !important
+      color: ${token.colorTextSecondary}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 14px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
-const PluginItem = memo<{ identifier: string }>(({ identifier }) => {
-  const usePluginDetail = useDiscoverStore((s) => s.usePluginDetail);
-  const { data, isLoading } = usePluginDetail({ identifier, withManifest: false });
-  const { styles } = useStyles();
+const pluginitem = memo< { identifier: string }>(({ identifier }) => {
+  const usePluginDetail = useDiscoverStore((s) => s.usePluginDetail)
+  const { data, isLoading } = usePluginDetail({ identifier, withManifest: false })
+  const { styles } = useStyles()
 
   if (isLoading || !data)
     return (
       <Block gap={12} horizontal key={identifier} padding={12} variant={'outlined'}>
         <Skeleton paragraph={{ rows: 1 }} title={false} />
       </Block>
-    );
+    )
 
   return (
     <Block gap={12} horizontal key={identifier} padding={12} variant={'outlined'}>
@@ -62,7 +62,7 @@ const PluginItem = memo<{ identifier: string }>(({ identifier }) => {
         </Text>
       </Flexbox>
     </Block>
-  );
-});
+  )
+})
 
-export default PluginItem;
+export default PluginItem

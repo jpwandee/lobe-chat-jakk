@@ -1,50 +1,50 @@
-'use client';
+'use client'
 
-import { Avatar } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { Suspense, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Avatar }
+import { Skeleton }
+import { createStyles }
+import { Suspense, memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useInitAgentConfig } from '@/hooks/useInitAgentConfig';
-import { useOpenChatSettings } from '@/hooks/useInterceptingRoutes';
-import { usePinnedAgentState } from '@/hooks/usePinnedAgentState';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
-import { useSessionStore } from '@/store/session';
-import { sessionMetaSelectors, sessionSelectors } from '@/store/session/selectors';
+import { useInitAgentConfig }
+import { useOpenChatSettings }
+import { usePinnedAgentState }
+import { useGlobalStore }
+import { systemStatusSelectors }
+import { useSessionStore }
+import { sessionMetaSelectors, sessionSelectors }
 
-import TogglePanelButton from '../../../../features/TogglePanelButton';
-import Tags from './Tags';
+import TogglePanelButton from '../../../../features/TogglePanelButton'
+import Tags from './Tags'
 
 const useStyles = createStyles(({ css }) => ({
   container: css`
-    position: relative;
-    overflow: hidden;
-    flex: 1;
-    max-width: 100%;
+    position: relative
+    overflow: hidden
+    flex: 1
+    max-width: 100%
   `,
   tag: css`
-    flex: none;
-    align-items: baseline;
+    flex: none
+    align-items: baseline
   `,
   title: css`
-    overflow: hidden;
+    overflow: hidden
 
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 14px
+    font-weight: bold
+    line-height: 1
+    text-overflow: ellipsis
+    white-space: nowrap
   `,
-}));
+}))
 
-const Main = memo<{ className?: string }>(({ className }) => {
-  const { t } = useTranslation(['chat', 'hotkey']);
-  const { styles } = useStyles();
-  useInitAgentConfig();
-  const [isPinned] = usePinnedAgentState();
+const main = memo< { className?: string }
+  const { t } = useTranslation(['chat', 'hotkey'])
+  const { styles } = useStyles()
+  useInitAgentConfig()
+  const [isPinned] = usePinnedAgentState()
 
   const [init, isInbox, title, avatar, backgroundColor] = useSessionStore((s) => [
     sessionSelectors.isSomeSessionActive(s),
@@ -52,12 +52,12 @@ const Main = memo<{ className?: string }>(({ className }) => {
     sessionMetaSelectors.currentAgentTitle(s),
     sessionMetaSelectors.currentAgentAvatar(s),
     sessionMetaSelectors.currentAgentBackgroundColor(s),
-  ]);
+  ])
 
-  const openChatSettings = useOpenChatSettings();
+  const openChatSettings = useOpenChatSettings()
 
-  const displayTitle = isInbox ? t('inbox.title') : title;
-  const showSessionPanel = useGlobalStore(systemStatusSelectors.showSessionPanel);
+  const displayTitle = isInbox ? t('inbox.title') : title
+  const showSessionPanel = useGlobalStore(systemStatusSelectors.showSessionPanel)
 
   if (!init)
     return (
@@ -70,7 +70,7 @@ const Main = memo<{ className?: string }>(({ className }) => {
           title={{ style: { margin: 0, marginTop: 4 }, width: 200 }}
         />
       </Flexbox>
-    );
+    )
 
   return (
     <Flexbox align={'center'} className={className} gap={12} horizontal>
@@ -87,10 +87,10 @@ const Main = memo<{ className?: string }>(({ className }) => {
         <Tags />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default memo<{ className?: string }>(({ className }) => (
+export default memo< { className?: string }>(({ className }) => (
   <Suspense
     fallback={
       <Skeleton
@@ -103,4 +103,4 @@ export default memo<{ className?: string }>(({ className }) => (
   >
     <Main className={className} />
   </Suspense>
-));
+))

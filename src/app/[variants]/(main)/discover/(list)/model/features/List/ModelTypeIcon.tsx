@@ -1,6 +1,7 @@
-import { Icon, Tooltip } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { startCase } from 'lodash-es';
+import { Icon, Tooltip }
+import { useTheme }
+import { startCase }
+
 import {
   AudioLines,
   BoltIcon,
@@ -11,29 +12,29 @@ import {
   MusicIcon,
   PhoneIcon,
   VideoIcon,
-} from 'lucide-react';
-import { memo } from 'react';
+}
+import { memo }
 
-import { AiModelType } from '@/types/aiModel';
+import { AiModelType }
 
 const icons: Record<AiModelType, LucideIcon> = {
-  chat: MessageSquareTextIcon,
-  embedding: BoltIcon,
-  image: ImageIcon,
-  realtime: PhoneIcon,
-  stt: MicIcon,
-  text2music: MusicIcon,
-  text2video: VideoIcon,
-  tts: AudioLines,
-};
+  chat: messagesquaretexticon,;
+  embedding: bolticon,;
+  image: imageicon,;
+  realtime: phoneicon,;
+  stt: micicon,;
+  text2music: musicicon,;
+  text2video: videoicon,;
+  tts: audiolines,
+}
 
-const ModelTypeIcon = memo<{ size?: number; type: AiModelType }>(({ type, size = 20 }) => {
-  const theme = useTheme();
+const modeltypeicon = memo< { size?: number; type: aimodeltype }>(({ type, size = 20 }) => {
+  const theme = useTheme()
   return (
     <Tooltip title={`${startCase(type)} Model`}>
       <Icon color={theme.colorTextDescription} icon={icons?.[type]} size={size} />
     </Tooltip>
-  );
-});
+  )
+})
 
-export default ModelTypeIcon;
+export default ModelTypeIcon

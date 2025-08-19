@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { Modal, type ModalProps } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { useRouter } from 'next/navigation';
-import { memo, useState } from 'react';
+import { Modal, type ModalProps }
+import { useTheme }
+import { useRouter }
+import { memo, useState } from 'react'
 
 const ModalLayout = memo<ModalProps>(
   ({
@@ -15,23 +15,23 @@ const ModalLayout = memo<ModalProps>(
     styles,
     ...rest
   }) => {
-    const [open, setOpen] = useState(true);
-    const router = useRouter();
-    const theme = useTheme();
+    const [open, setOpen] = useState(true)
+    const router = useRouter()
+    const theme = useTheme()
 
     return (
       <Modal
         afterClose={() => {
-          afterClose?.();
-          router.back();
+          afterClose?.()
+          router.back()
         }}
         enableResponsive={false}
         footer={null}
         height={height}
         onCancel={(e) => {
-          onCancel?.(e);
-          setOpen(false);
-          router.back();
+          onCancel?.(e)
+          setOpen(false)
+          router.back()
         }}
         open={open}
         styles={{
@@ -56,8 +56,8 @@ const ModalLayout = memo<ModalProps>(
       >
         {children}
       </Modal>
-    );
+    )
   },
-);
+)
 
-export default ModalLayout;
+export default ModalLayout

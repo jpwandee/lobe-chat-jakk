@@ -1,85 +1,85 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { memo }
+import { Flexbox }
 
-import ImageItem from '@/components/ImageItem';
+import ImageItem from '@/components/ImageItem'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
-    gap: 8px;
-    margin-block-end: 12px;
+    gap: 8px
+    margin-block-end: 12px
   `,
   image: css`
-    overflow: hidden;
-    flex-shrink: 0;
+    overflow: hidden
+    flex-shrink: 0
 
-    width: 60px;
-    height: 60px;
-    border-radius: ${token.borderRadius}px;
+    width: 60px
+    height: 60px
+    border-radius: ${token.borderRadius}px
   `,
   imageSingle: css`
-    position: relative;
-    transform: rotate(-3deg);
+    position: relative
+    transform: rotate(-3deg)
 
-    flex-shrink: 0;
+    flex-shrink: 0
 
-    width: 64px;
-    height: 64px;
+    width: 64px
+    height: 64px
 
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease
 
     &::before {
-      content: '';
+      content: ''
 
-      position: absolute;
-      z-index: -1;
-      inset: -4px;
+      position: absolute
+      z-index: -1
+      inset: -4px
 
-      border: 1px solid ${token.colorBorder};
-      border-radius: ${token.borderRadius}px;
+      border: 1px solid ${token.colorBorder}
+      border-radius: ${token.borderRadius}px
 
-      background: ${token.colorBgContainer};
-      box-shadow: 0 2px 8px ${token.colorBgMask};
+      background: ${token.colorBgContainer}
+      box-shadow: 0 2px 8px ${token.colorBgMask}
     }
 
     &:hover {
-      transform: rotate(-1deg) scale(1.05);
+      transform: rotate(-1deg) scale(1.05)
     }
   `,
   imageSingleInner: css`
-    overflow: hidden;
+    overflow: hidden
 
-    width: 100%;
-    height: 100%;
-    border-radius: ${token.borderRadiusSM}px;
+    width: 100%
+    height: 100%
+    border-radius: ${token.borderRadiusSM}px
 
-    background: ${token.colorBgLayout};
+    background: ${token.colorBgLayout}
   `,
-}));
+}))
 
-interface ReferenceImagesProps {
+interface referenceimagesprops {
   imageUrl?: string | null;
   imageUrls?: string[];
   layout?: 'single' | 'multiple';
 }
 
 export const ReferenceImages = memo<ReferenceImagesProps>(({ imageUrl, imageUrls, layout }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   // Collect all images
-  const allImages: string[] = [];
+  const allImages: string[] = []
   if (imageUrl) {
-    allImages.push(imageUrl);
+    allImages.push(imageUrl)
   }
   if (imageUrls && imageUrls.length > 0) {
-    allImages.push(...imageUrls);
+    allImages.push(...imageUrls)
   }
 
   // Don't render if no images
   if (allImages.length === 0) {
-    return null;
+    return null
   }
 
   // Single image layout (no label, with frame effect)
@@ -97,7 +97,7 @@ export const ReferenceImages = memo<ReferenceImagesProps>(({ imageUrl, imageUrls
           />
         </div>
       </div>
-    );
+    )
   }
 
   // Multiple images layout
@@ -116,7 +116,7 @@ export const ReferenceImages = memo<ReferenceImagesProps>(({ imageUrl, imageUrls
         </div>
       ))}
     </Flexbox>
-  );
-});
+  )
+})
 
-ReferenceImages.displayName = 'ReferenceImages';
+ReferenceImages.displayName = 'ReferenceImages'

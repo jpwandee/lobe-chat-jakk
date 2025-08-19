@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { PropsWithChildren }
+import { Flexbox }
 
 import NProgress from '@/components/NProgress';
 import SettingContainer from '@/features/Setting/SettingContainer';
@@ -17,4 +17,4 @@ const Layout = ({ children }: PropsWithChildren) => {
     </>
   );
 };
-export default Layout;
+export default Layout

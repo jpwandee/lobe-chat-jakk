@@ -1,28 +1,28 @@
-import { MCP } from '@lobehub/icons';
-import { Icon, Tag, Tooltip } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BookTextIcon, CoinsIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { MCP }
+import { Icon, Tag, Tooltip }
+import { createStyles }
+import { BookTextIcon, CoinsIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { formatIntergerNumber } from '@/utils/format';
+import { formatIntergerNumber }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     token: css`
-      border-radius: 4px;
+      border-radius: 4px
 
-      font-family: ${token.fontFamilyCode};
-      font-size: 11px;
-      color: ${token.colorTextSecondary};
+      font-family: ${token.fontFamilyCode}
+      font-size: 11px
+      color: ${token.colorTextSecondary}
 
-      background: ${token.colorFillTertiary};
+      background: ${token.colorFillTertiary}
     `,
-  };
-});
+  }
+})
 
-interface TokenTagProps {
+interface tokentagprops {
   knowledgeCount?: number;
   placement?: 'top' | 'right';
   pluginCount?: number;
@@ -31,8 +31,8 @@ interface TokenTagProps {
 
 const TokenTag = memo<TokenTagProps>(
   ({ tokenUsage, pluginCount, knowledgeCount, placement = 'right' }) => {
-    const { styles, theme } = useStyles();
-    const { t } = useTranslation('discover');
+    const { styles, theme } = useStyles()
+    const { t } = useTranslation('discover')
     return (
       <Flexbox align={'center'} gap={4} horizontal>
         <Tooltip
@@ -63,8 +63,8 @@ const TokenTag = memo<TokenTagProps>(
           </Tooltip>
         )}
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default TokenTag;
+export default TokenTag

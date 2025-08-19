@@ -1,21 +1,21 @@
-import { ModelTag } from '@lobehub/icons';
-import { Skeleton } from 'antd';
-import isEqual from 'fast-deep-equal';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ModelTag }
+import { Skeleton }
+import isEqual from 'fast-deep-equal'
+import { memo }
+import { Flexbox }
 
-import ModelSwitchPanel from '@/features/ModelSwitchPanel';
-import PluginTag from '@/features/PluginTag';
-import { useAgentEnableSearch } from '@/hooks/useAgentEnableSearch';
-import { useModelSupportToolUse } from '@/hooks/useModelSupportToolUse';
-import { useAgentStore } from '@/store/agent';
-import { agentChatConfigSelectors, agentSelectors } from '@/store/agent/selectors';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/selectors';
+import ModelSwitchPanel from '@/features/ModelSwitchPanel'
+import PluginTag from '@/features/PluginTag'
+import { useAgentEnableSearch }
+import { useModelSupportToolUse }
+import { useAgentStore }
+import { agentChatConfigSelectors, agentSelectors }
+import { useUserStore }
+import { authSelectors } from '@/store/user/selectors'
 
-import HistoryLimitTags from './HistoryLimitTags';
-import KnowledgeTag from './KnowledgeTag';
-import SearchTags from './SearchTags';
+import HistoryLimitTags from './HistoryLimitTags'
+import KnowledgeTag from './KnowledgeTag'
+import SearchTags from './SearchTags'
 
 const TitleTags = memo(() => {
   const [model, provider, hasKnowledge, isLoading] = useAgentStore((s) => [
@@ -23,16 +23,16 @@ const TitleTags = memo(() => {
     agentSelectors.currentAgentModelProvider(s),
     agentSelectors.hasKnowledge(s),
     agentSelectors.isAgentConfigLoading(s),
-  ]);
+  ])
 
-  const plugins = useAgentStore(agentSelectors.currentAgentPlugins, isEqual);
-  const enabledKnowledge = useAgentStore(agentSelectors.currentEnabledKnowledge, isEqual);
-  const enableHistoryCount = useAgentStore(agentChatConfigSelectors.enableHistoryCount);
+  const plugins = useAgentStore(agentSelectors.currentAgentPlugins, isEqual)
+  const enabledKnowledge = useAgentStore(agentSelectors.currentEnabledKnowledge, isEqual)
+  const enableHistoryCount = useAgentStore(agentChatConfigSelectors.enableHistoryCount)
 
-  const showPlugin = useModelSupportToolUse(model, provider);
-  const isLogin = useUserStore(authSelectors.isLogin);
+  const showPlugin = useModelSupportToolUse(model, provider)
+  const isLogin = useUserStore(authSelectors.isLogin)
 
-  const isAgentEnableSearch = useAgentEnableSearch();
+  const isAgentEnableSearch = useAgentEnableSearch()
 
   return isLoading && isLogin ? (
     <Skeleton.Button active size={'small'} style={{ height: 20 }} />
@@ -46,7 +46,7 @@ const TitleTags = memo(() => {
       {hasKnowledge && <KnowledgeTag data={enabledKnowledge} />}
       {enableHistoryCount && <HistoryLimitTags />}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TitleTags;
+export default TitleTags

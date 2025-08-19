@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { AnchorProps } from 'antd';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { AnchorProps }
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import { useToc } from '@/app/[variants]/(main)/discover/(detail)/features/Toc/useToc';
-import { useQuery } from '@/hooks/useQuery';
-import { AssistantNavKey } from '@/types/discover';
+import { useToc }
+import { useQuery }
+import { AssistantNavKey } from '@/types/discover'
 
-import Title from '../../../../../../features/Title';
-import Toc from '../../../../../features/Toc';
+import Title from '../../../../../../features/Title'
+import Toc from '../../../../../features/Toc'
 
 const TocList = memo(() => {
-  const { t } = useTranslation('discover');
-  const { toc = [] } = useToc();
-  const { activeTab = AssistantNavKey.Overview } = useQuery() as { activeTab: AssistantNavKey };
+  const { t } = useTranslation('discover')
+  const { toc = [] } = useToc()
+  const { activeTab = AssistantNavKey.Overview } = useQuery() as { activeTab: AssistantNavKey }
   // const { deploymentOptions = [], tools = [], prompts = [] } = useDetailContext();
   //
   // const schemaToc: AnchorProps['items'] = useMemo(() => {
@@ -56,22 +56,22 @@ const TocList = memo(() => {
   const items: AnchorProps['items'] | undefined = useMemo(() => {
     switch (activeTab) {
       case AssistantNavKey.SystemRole: {
-        return toc;
+        return toc
       }
       default: {
-        return undefined;
+        return undefined
       }
     }
-  }, [activeTab, toc]);
+  }, [activeTab, toc])
 
-  if (!items || items.length === 0) return null;
+  if (!items || items.length === 0) return null
 
   return (
     <Flexbox gap={16}>
       <Title>{t('assistants.details.sidebar.toc')}</Title>
       <Toc items={items} />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TocList;
+export default TocList

@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { useResponsive } from 'antd-style';
-import { ReactNode, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useResponsive }
+import { ReactNode, memo }
+import { Flexbox }
 
-import Footer from '@/features/Setting/Footer';
+import Footer from '@/features/Setting/Footer'
 
-import SidebarContainer from './SidebarContainer';
+import SidebarContainer from './SidebarContainer'
 
-interface DetailLayoutProps {
-  actions?: ReactNode;
-  children?: ReactNode;
-  header: ReactNode;
+interface detaillayoutprops {
+  actions?: reactnode;
+  children?: reactnode;
+  header: reactnode;
   mobile?: boolean;
-  sidebar?: ReactNode;
-  statistics?: ReactNode;
+  sidebar?: reactnode;
+  statistics?: reactnode;
 }
 
 const DetailLayout = memo<DetailLayoutProps>(
   ({ statistics, mobile, header, sidebar, children, actions }) => {
-    const { md = true } = useResponsive();
+    const { md = true } = useResponsive()
 
     if (mobile || !md)
       return (
@@ -33,7 +33,7 @@ const DetailLayout = memo<DetailLayoutProps>(
           {sidebar}
           <Footer />
         </>
-      );
+      )
 
     return (
       <>
@@ -51,8 +51,8 @@ const DetailLayout = memo<DetailLayoutProps>(
           </SidebarContainer>
         </Flexbox>
       </>
-    );
+    )
   },
-);
+)
 
-export default DetailLayout;
+export default DetailLayout

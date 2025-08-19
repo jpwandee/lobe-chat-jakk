@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { memo }
+import { Flexbox, FlexboxProps } from 'react-layout-kit'
 
 const SidebarContainer = memo<FlexboxProps>(({ children, style, ...rest }) => {
   return (
@@ -13,7 +13,7 @@ const SidebarContainer = memo<FlexboxProps>(({ children, style, ...rest }) => {
     >
       {children}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default SidebarContainer;
+export default SidebarContainer

@@ -1,28 +1,28 @@
-import { notFound } from 'next/navigation';
+import { notFound }
 
-import { isDesktop } from '@/const/version';
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import { isDesktop }
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Client from './index';
+import Client from './index'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('setting', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('setting', locale)
 
   return metadataModule.generate({
     description: t('header.desc'),
     title: t('tab.proxy'),
     url: '/settings/proxy',
-  });
-};
+  })
+}
 
-const Page = () => {
-  if (!isDesktop) return notFound();
+const page = () => {
+  if (!isDesktop) return notFound()
 
-  return <Client />;
-};
+  return <Client />
+}
 
-export default Page;
+export default Page

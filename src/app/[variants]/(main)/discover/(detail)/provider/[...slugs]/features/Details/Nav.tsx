@@ -1,44 +1,44 @@
-'use client';
+'use client'
 
-import { Icon, Tabs } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { BookOpenIcon, BrainCircuitIcon, ListIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Icon, Tabs }
+import { createStyles }
+import { BookOpenIcon, BrainCircuitIcon, ListIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { SOCIAL_URL } from '@/const/branding';
-import { ProviderNavKey } from '@/types/discover';
+import { SOCIAL_URL }
+import { ProviderNavKey }
 
-import { useDetailContext } from '../DetailProvider';
+import { useDetailContext }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     link: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
 
       &:hover {
-        color: ${token.colorInfo};
+        color: ${token.colorInfo}
       }
     `,
     nav: css`
-      border-block-end: 1px solid ${token.colorBorder};
+      border-block-end: 1px solid ${token.colorBorder}
     `,
-  };
-});
+  }
+})
 
-interface NavProps {
-  activeTab?: ProviderNavKey;
+interface navprops {
+  activeTab?: providernavkey;
   mobile?: boolean;
-  setActiveTab?: (tab: ProviderNavKey) => void;
+  setActiveTab?: (tab: providernavkey) => void;
 }
 
 const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ProviderNavKey.Overview }) => {
-  const { t } = useTranslation('discover');
-  const { identifier } = useDetailContext();
-  const { styles } = useStyles();
+  const { t } = useTranslation('discover')
+  const { identifier } = useDetailContext()
+  const { styles } = useStyles()
 
   const nav = (
     <Tabs
@@ -63,7 +63,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ProviderNavKey.O
       ]}
       onChange={(key) => setActiveTab?.(key as ProviderNavKey)}
     />
-  );
+  )
 
   return mobile ? (
     nav
@@ -95,7 +95,7 @@ const Nav = memo<NavProps>(({ mobile, setActiveTab, activeTab = ProviderNavKey.O
         </Link>
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Nav;
+export default Nav

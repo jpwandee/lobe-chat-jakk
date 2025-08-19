@@ -1,60 +1,60 @@
-'use client';
+'use client'
 
-import { UserProfile } from '@clerk/nextjs';
-import { ElementsConfig } from '@clerk/types';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
+import { UserProfile }
+import { ElementsConfig }
+import { createStyles }
+import { memo }
 
 export const useStyles = createStyles(
   ({ css, responsive, token }) =>
     ({
       cardBox: css`
-        width: 100%;
-        min-width: 100%;
-        background: transparent;
+        width: 100%
+        min-width: 100%
+        background: transparent
       `,
       footer: css`
-        display: none !important;
+        display: none !important
       `,
       headerTitle: css`
         ${responsive.mobile} {
-          margin: 0;
-          padding: 16px;
+          margin: 0
+          padding: 16px
 
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 24px;
+          font-size: 14px
+          font-weight: 400
+          line-height: 24px
 
-          opacity: 0.5;
+          opacity: 0.5
         }
       `,
       navbar: css`
-        display: none !important;
+        display: none !important
       `,
       navbarMobileMenuRow: css`
-        display: none !important;
+        display: none !important
       `,
       pageScrollBox: css`
-        padding: 0;
+        padding: 0
       `,
       profileSection: css`
         ${responsive.mobile} {
-          padding-inline: 16px;
-          background: ${token.colorBgContainer};
+          padding-inline: 16px
+          background: ${token.colorBgContainer}
         }
       `,
       rootBox: css`
-        width: 100%;
-        height: 100%;
+        width: 100%
+        height: 100%
       `,
       scrollBox: css`
-        background: transparent;
+        background: transparent
       `,
     }) as Partial<Record<keyof ElementsConfig, any>>,
-);
+)
 
-const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { styles } = useStyles(mobile);
+const client = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { styles } = useStyles(mobile)
 
   return (
     <UserProfile
@@ -63,7 +63,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
       }}
       path={'/profile'}
     />
-  );
-});
+  )
+})
 
-export default Client;
+export default Client

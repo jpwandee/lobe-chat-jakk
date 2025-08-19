@@ -1,8 +1,8 @@
-import { memo } from 'react';
+import { memo }
 
-import './index.css';
+import './index.css'
 
-interface SyncSwitchProps {
+interface syncswitchprops {
   onChange?: (checked: boolean) => void;
   value?: boolean;
 }
@@ -14,7 +14,7 @@ const SyncSwitch = memo<SyncSwitchProps>(({ value, onChange }) => {
           checked={value}
           className="switch__input"
           onChange={(e) => {
-            onChange?.(e.target.checked);
+            onChange?.(e.target.checked)
           }}
           role="switch"
           type="checkbox"
@@ -73,7 +73,7 @@ const SyncSwitch = memo<SyncSwitchProps>(({ value, onChange }) => {
         <span className="switch__text">Power</span>
       </label>
     </div>
-  );
-});
+  )
+})
 
-export default SyncSwitch;
+export default SyncSwitch

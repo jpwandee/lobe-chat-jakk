@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { useResponsive } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { useResponsive }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
-import Nav from './features/Details/Nav';
+import Nav from './features/Details/Nav'
 
 const Loading = memo(() => {
-  const { mobile } = useResponsive();
+  const { mobile } = useResponsive()
   return (
     <Flexbox gap={24}>
       <Flexbox gap={12}>
@@ -42,7 +42,7 @@ const Loading = memo(() => {
         </Flexbox>
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Loading;
+export default Loading

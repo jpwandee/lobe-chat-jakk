@@ -1,32 +1,32 @@
-import { Button, Modal } from '@lobehub/ui';
-import { FormInstance } from 'antd';
-import { memo, use, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Modal }
+import { FormInstance }
+import { memo, use, useState }
+import { useTranslation }
 
-import { useAiInfraStore } from '@/store/aiInfra';
+import { useAiInfraStore }
 
-import { ProviderSettingsContext } from '../ProviderSettingsContext';
-import ModelConfigForm from './Form';
+import { ProviderSettingsContext }
+import ModelConfigForm from './Form'
 
-interface ModelConfigModalProps {
+interface modelconfigmodalprops {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
 const ModelConfigModal = memo<ModelConfigModalProps>(({ open, setOpen }) => {
-  const { t } = useTranslation(['modelProvider', 'common']);
-  const [formInstance, setFormInstance] = useState<FormInstance>();
-  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(['modelProvider', 'common'])
+  const [formInstance, setFormInstance] = useState<FormInstance>()
+  const [loading, setLoading] = useState(false)
   const [editingProvider, createNewAiModel] = useAiInfraStore((s) => [
     s.activeAiProvider!,
     s.createNewAiModel,
-  ]);
+  ])
 
   const closeModal = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
-  const { showDeployName } = use(ProviderSettingsContext);
+  const { showDeployName } = use(ProviderSettingsContext)
 
   return (
     <Modal
@@ -40,19 +40,19 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ open, setOpen }) => {
           key="ok"
           loading={loading}
           onClick={async () => {
-            if (!editingProvider || !formInstance) return;
-            const data = formInstance.getFieldsValue();
+            if (!editingProvider || !formInstance) return
+            const data = formInstance.getFieldsValue()
 
-            setLoading(true);
+            setLoading(true)
 
             try {
-              await formInstance.validateFields();
-              await createNewAiModel({ ...data, providerId: editingProvider });
-              setLoading(false);
-              closeModal();
+              await formInstance.validateFields()
+              await createNewAiModel({ ...data, providerId: editingProvider })
+              setLoading(false)
+              closeModal()
             } catch {
               /*  */
-              setLoading(false);
+              setLoading(false)
             }
           }}
           style={{ marginInlineStart: '16px' }}
@@ -69,6 +69,6 @@ const ModelConfigModal = memo<ModelConfigModalProps>(({ open, setOpen }) => {
     >
       <ModelConfigForm onFormInstanceReady={setFormInstance} showDeployName={showDeployName} />
     </Modal>
-  );
-});
-export default ModelConfigModal;
+  )
+})
+export default ModelConfigModal

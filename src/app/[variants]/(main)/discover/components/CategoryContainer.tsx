@@ -1,7 +1,7 @@
-import { ScrollShadow } from '@lobehub/ui';
-import { PropsWithChildren, memo } from 'react';
+import { ScrollShadow }
+import { PropsWithChildren, memo }
 
-const CategoryContainer = memo<PropsWithChildren<{ top?: number }>>(({ children, top = 64 }) => {
+const categorycontainer = memo<propswithchildren< { top?: number }>>(({ children, top = 64 }) => {
   return (
     <ScrollShadow
       as={'aside'}
@@ -14,7 +14,7 @@ const CategoryContainer = memo<PropsWithChildren<{ top?: number }>>(({ children,
     >
       {children}
     </ScrollShadow>
-  );
-});
+  )
+})
 
-export default CategoryContainer;
+export default CategoryContainer

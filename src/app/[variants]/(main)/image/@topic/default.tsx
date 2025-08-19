@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import Topics from './features/Topics';
-import TopicUrlSync from './features/Topics/TopicUrlSync';
+import Topics from './features/Topics'
+import TopicUrlSync from './features/Topics/TopicUrlSync'
 
 const page = () => {
   return (
@@ -9,9 +9,9 @@ const page = () => {
       <TopicUrlSync />
       <Topics />
     </>
-  );
-};
+  )
+}
 
-page.displayName = 'ImageTopics';
+page.displayName = 'ImageTopics'
 
-export default page;
+export default page

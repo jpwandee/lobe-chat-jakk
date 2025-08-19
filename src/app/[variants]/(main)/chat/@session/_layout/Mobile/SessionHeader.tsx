@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { MessageSquarePlus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { ChatHeader }
+import { MessageSquarePlus }
+import { useRouter }
+import { memo }
+import { Flexbox }
 
-import { ProductLogo } from '@/components/Branding';
-import { MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import SyncStatusInspector from '@/features/SyncStatusInspector';
-import UserAvatar from '@/features/User/UserAvatar';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-import { useSessionStore } from '@/store/session';
-import { mobileHeaderSticky } from '@/styles/mobileHeader';
+import { ProductLogo }
+import { MOBILE_HEADER_ICON_SIZE }
+import SyncStatusInspector from '@/features/SyncStatusInspector'
+import UserAvatar from '@/features/User/UserAvatar'
+import { featureFlagsSelectors, useServerConfigStore }
+import { useSessionStore }
+import { mobileHeaderSticky } from '@/styles/mobileHeader'
 
 const Header = memo(() => {
-  const [createSession] = useSessionStore((s) => [s.createSession]);
-  const router = useRouter();
-  const { enableWebrtc, showCreateSession } = useServerConfigStore(featureFlagsSelectors);
+  const [createSession] = useSessionStore((s) => [s.createSession])
+  const router = useRouter()
+  const { enableWebrtc, showCreateSession } = useServerConfigStore(featureFlagsSelectors)
 
   return (
     <ChatHeader
@@ -40,7 +40,7 @@ const Header = memo(() => {
       }
       style={mobileHeaderSticky}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

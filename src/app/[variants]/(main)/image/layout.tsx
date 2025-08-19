@@ -1,19 +1,19 @@
-import ServerLayout from '@/components/server/ServerLayout';
-import { isServerMode } from '@/const/version';
+import ServerLayout from '@/components/server/ServerLayout'
+import { isServerMode }
 
-import NotSupportClient from './NotSupportClient';
-import Desktop from './_layout/Desktop';
-import Mobile from './_layout/Mobile';
-import { LayoutProps } from './_layout/type';
+import NotSupportClient from './NotSupportClient'
+import Desktop from './_layout/Desktop'
+import Mobile from './_layout/Mobile'
+import { LayoutProps }
 
-const AiImageLayout = ServerLayout({ Desktop, Mobile });
+const AiImageLayout = ServerLayout({ Desktop, Mobile })
 
-AiImageLayout.displayName = 'AiImageLayout';
+AiImageLayout.displayName = 'AiImageLayout'
 
-const Layout = (props: LayoutProps) => {
-  if (!isServerMode) return <NotSupportClient />;
+const layout = (props: LayoutProps) => {
+  if (!isServerMode) return <NotSupportClient />
 
-  return <AiImageLayout {...props} />;
-};
+  return <aiimagelayout {...props} />
+}
 
-export default Layout;
+export default Layout

@@ -1,29 +1,29 @@
-'use client';
+'use client'
 
-import { SiWebrtc } from '@icons-pack/react-simple-icons';
-import { Form, type FormGroupItemType, Input, InputPassword, Text, Tooltip } from '@lobehub/ui';
-import { Form as AntForm, Switch } from 'antd';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { SiWebrtc }
+import { Form, type FormGroupItemType, Input, InputPassword, Text, Tooltip }
+import { Form as AntForm, Switch }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useSyncSettings } from '@/app/[variants]/(main)/settings/hooks/useSyncSettings';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import SyncStatusInspector from '@/features/SyncStatusInspector';
-import { useUserStore } from '@/store/user';
+import { useSyncSettings }
+import { FORM_STYLE }
+import SyncStatusInspector from '@/features/SyncStatusInspector'
+import { useUserStore } from '@/store/user'
 
-import ChannelNameInput from './ChannelNameInput';
+import ChannelNameInput from './ChannelNameInput'
 
 const WebRTC = memo(() => {
-  const { t } = useTranslation('setting');
-  const [form] = Form.useForm();
+  const { t } = useTranslation('setting')
+  const [form] = Form.useForm()
 
-  const [setSettings] = useUserStore((s) => [s.setSettings]);
+  const [setSettings] = useUserStore((s) => [s.setSettings])
 
-  useSyncSettings(form);
+  useSyncSettings(form)
 
-  const channelName = AntForm.useWatch(['sync', 'webrtc', 'channelName'], form);
-  const signaling = AntForm.useWatch(['sync', 'webrtc', 'signaling'], form);
+  const channelName = AntForm.useWatch(['sync', 'webrtc', 'channelName'], form)
+  const signaling = AntForm.useWatch(['sync', 'webrtc', 'signaling'], form)
 
   const config: FormGroupItemType = {
     children: [
@@ -68,7 +68,7 @@ const WebRTC = memo(() => {
     extra: (
       <div
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
       >
         <SyncStatusInspector hiddenActions hiddenEnableGuide />
@@ -85,7 +85,7 @@ const WebRTC = memo(() => {
         </Text>
       </Flexbox>
     ),
-  };
+  }
 
   return (
     <Form
@@ -97,7 +97,7 @@ const WebRTC = memo(() => {
       variant={'borderless'}
       {...FORM_STYLE}
     />
-  );
-});
+  )
+})
 
-export default WebRTC;
+export default WebRTC

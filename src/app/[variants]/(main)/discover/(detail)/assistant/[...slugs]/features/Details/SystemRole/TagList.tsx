@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { Tag } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import Link from 'next/link';
-import qs from 'query-string';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Tag }
+import { createStyles }
+import Link from 'next/link'
+import qs from 'query-string'
+import { memo }
+import { Flexbox }
 
 const useStyles = createStyles(({ token, css }) => {
   return {
     tag: css`
-      margin: 0;
-      padding-block: 4px;
-      padding-inline: 12px;
-      border-radius: 16px;
+      margin: 0
+      padding-block: 4px
+      padding-inline: 12px
+      border-radius: 16px
 
-      color: ${token.colorTextSecondary};
+      color: ${token.colorTextSecondary}
     `,
-  };
-});
+  }
+})
 
-const TagList = memo<{ tags: string[] }>(({ tags }) => {
-  const { styles } = useStyles();
-  const showTags = Boolean(tags?.length && tags?.length > 0);
+const taglist = memo< { tags: string[] }>(({ tags }) => {
+  const { styles } = useStyles()
+  const showTags = Boolean(tags?.length && tags?.length > 0)
   return (
     showTags && (
       <Flexbox gap={8} horizontal wrap={'wrap'}>
@@ -41,7 +41,7 @@ const TagList = memo<{ tags: string[] }>(({ tags }) => {
         ))}
       </Flexbox>
     )
-  );
-});
+  )
+})
 
-export default TagList;
+export default TagList

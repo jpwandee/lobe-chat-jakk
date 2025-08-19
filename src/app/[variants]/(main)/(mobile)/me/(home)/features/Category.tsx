@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import Cell from '@/components/Cell';
+import Cell from '@/components/Cell'
 
-import { useCategory } from './useCategory';
+import { useCategory } from './useCategory'
 
 const Category = memo(() => {
-  const items = useCategory();
+  const items = useCategory()
 
-  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />);
-});
+  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />)
+})
 
-export default Category;
+export default Category

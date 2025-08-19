@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import FileViewer from '@/features/FileViewer';
-import { fileManagerSelectors, useFileStore } from '@/store/file';
+import FileViewer from '@/features/FileViewer'
+import { fileManagerSelectors, useFileStore }
 
-const FilePreview = memo<{ id: string }>(({ id }) => {
-  const file = useFileStore(fileManagerSelectors.getFileById(id));
+const filepreview = memo< { id: string }>(({ id }) => {
+  const file = useFileStore(fileManagerSelectors.getFileById(id))
 
-  if (!file) return;
+  if (!file) return
 
-  return <FileViewer {...file} />;
-});
-export default FilePreview;
+  return <FileViewer {...file} />
+})
+export default FilePreview

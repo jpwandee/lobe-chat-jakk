@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { Plus } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon }
+import { Plus }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-interface NewTopicButtonProps {
+interface newtopicbuttonprops {
   count?: number;
   onClick?: () => void;
   showMoreInfo?: boolean;
 }
 
 const NewTopicButton = memo<NewTopicButtonProps>(({ count, onClick, showMoreInfo }) => {
-  const { t } = useTranslation('image');
+  const { t } = useTranslation('image')
 
   if (showMoreInfo)
     return (
@@ -40,7 +40,7 @@ const NewTopicButton = memo<NewTopicButtonProps>(({ count, onClick, showMoreInfo
           }}
         />
       </Flexbox>
-    );
+    )
 
   return (
     <ActionIcon
@@ -56,9 +56,9 @@ const NewTopicButton = memo<NewTopicButtonProps>(({ count, onClick, showMoreInfo
       }}
       variant={'filled'}
     />
-  );
-});
+  )
+})
 
-NewTopicButton.displayName = 'NewTopicButton';
+NewTopicButton.displayName = 'NewTopicButton'
 
-export default NewTopicButton;
+export default NewTopicButton

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   Form,
@@ -9,31 +9,31 @@ import {
   SliderWithInput,
   highlighterThemes,
   mermaidThemes,
-} from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useTheme } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { Loader2Icon, TriangleAlert } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+}
+import { Skeleton }
+import { useTheme }
+import isEqual from 'fast-deep-equal'
+import { Loader2Icon, TriangleAlert }
+import { memo, useState }
+import { useTranslation }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
+import { FORM_STYLE }
+import { useUserStore }
+import { settingsSelectors } from '@/store/user/selectors'
 
-import ChatPreview from './ChatPreview';
-import ChatTransitionPreview from './ChatTransitionPreview';
-import HighlighterPreview from './HighlighterPreview';
-import MermaidPreview from './MermaidPreview';
+import ChatPreview from './ChatPreview'
+import ChatTransitionPreview from './ChatTransitionPreview'
+import HighlighterPreview from './HighlighterPreview'
+import MermaidPreview from './MermaidPreview'
 
 const ChatAppearance = memo(() => {
-  const { t } = useTranslation('setting');
-  const { general } = useUserStore(settingsSelectors.currentSettings, isEqual);
-  const theme = useTheme();
-  const [setSettings, isUserStateInit] = useUserStore((s) => [s.setSettings, s.isUserStateInit]);
-  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation('setting')
+  const { general } = useUserStore(settingsSelectors.currentSettings, isEqual)
+  const theme = useTheme()
+  const [setSettings, isUserStateInit] = useUserStore((s) => [s.setSettings, s.isUserStateInit])
+  const [loading, setLoading] = useState(false)
 
-  if (!isUserStateInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />;
+  if (!isUserStateInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />
 
   const themeItems: FormGroupItemType = {
     children: [
@@ -154,7 +154,7 @@ const ChatAppearance = memo(() => {
     ],
     extra: loading && <Icon icon={Loader2Icon} size={16} spin style={{ opacity: 0.5 }} />,
     title: t('settingChatAppearance.title'),
-  };
+  }
 
   return (
     <Form
@@ -162,14 +162,14 @@ const ChatAppearance = memo(() => {
       items={[themeItems]}
       itemsType={'group'}
       onValuesChange={async (value) => {
-        setLoading(true);
-        await setSettings({ general: value });
-        setLoading(false);
+        setLoading(true)
+        await setSettings({ general: value })
+        setLoading(false)
       }}
       variant={'borderless'}
       {...FORM_STYLE}
     />
-  );
-});
+  )
+})
 
-export default ChatAppearance;
+export default ChatAppearance

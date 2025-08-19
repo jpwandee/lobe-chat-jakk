@@ -1,44 +1,44 @@
-import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { LucideLoader2, MoreVertical, PencilLine, Trash } from 'lucide-react';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { ActionIcon, Dropdown, EditableText, Icon, type MenuProps, Text }
+import { App }
+import { createStyles }
+import { LucideLoader2, MoreVertical, PencilLine, Trash }
+import { memo, useMemo }
+import { useTranslation }
+import { Center, Flexbox }
 
-import BubblesLoading from '@/components/BubblesLoading';
-import RepoIcon from '@/components/RepoIcon';
-import { LOADING_FLAT } from '@/const/message';
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
+import BubblesLoading from '@/components/BubblesLoading'
+import RepoIcon from '@/components/RepoIcon'
+import { LOADING_FLAT }
+import { useKnowledgeBaseStore }
 
-export const knowledgeItemClass = 'knowledge-base-item';
+export const knowledgeItemClass = 'knowledge-base-item'
 
 const useStyles = createStyles(({ css }) => ({
   content: css`
-    position: relative;
-    overflow: hidden;
-    flex: 1;
+    position: relative
+    overflow: hidden
+    flex: 1
   `,
   icon: css`
-    min-width: 24px;
-    border-radius: 4px;
+    min-width: 24px
+    border-radius: 4px
   `,
   title: css`
-    flex: 1;
-    height: 28px;
-    line-height: 28px;
-    text-align: start;
+    flex: 1
+    height: 28px
+    line-height: 28px
+    text-align: start
   `,
-}));
+}))
 
-interface KnowledgeBaseItemProps {
+interface knowledgebaseitemprops {
   id: string;
   name: string;
   showMore: boolean;
 }
 
 const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
-  const { t } = useTranslation(['file', 'common']);
+  const { t } = useTranslation(['file', 'common'])
 
   const [editing, updateKnowledgeBase, removeKnowledgeBase, isLoading] = useKnowledgeBaseStore(
     (s) => [
@@ -47,19 +47,19 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
       s.removeKnowledgeBase,
       s.knowledgeBaseLoadingIds.includes(id),
     ],
-  );
+  )
 
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   const toggleEditing = (visible?: boolean) => {
     useKnowledgeBaseStore.setState(
       { knowledgeBaseRenamingId: visible ? id : null },
       false,
       'toggleEditing',
-    );
-  };
+    )
+  }
 
-  const { modal } = App.useApp();
+  const { modal } = App.useApp()
 
   const items = useMemo<MenuProps['items']>(
     () => [
@@ -68,7 +68,7 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
         key: 'rename',
         label: t('rename', { ns: 'common' }),
         onClick: () => {
-          toggleEditing(true);
+          toggleEditing(true)
         },
       },
       {
@@ -80,21 +80,21 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
         key: 'delete',
         label: t('delete', { ns: 'common' }),
         onClick: () => {
-          if (!id) return;
+          if (!id) return
 
           modal.confirm({
             centered: true,
             okButtonProps: { danger: true },
             onOk: async () => {
-              await removeKnowledgeBase(id);
+              await removeKnowledgeBase(id)
             },
             title: t('knowledgeBase.list.confirmRemoveKnowledgeBase'),
-          });
+          })
         },
       },
     ],
     [],
-  );
+  )
 
   return (
     <Flexbox
@@ -103,8 +103,8 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
       horizontal
       justify={'space-between'}
       onDoubleClick={(e) => {
-        if (!id) return;
-        if (e.altKey) toggleEditing(true);
+        if (!id) return
+        if (e.altKey) toggleEditing(true)
       }}
     >
       <Center className={isLoading ? '' : styles.icon} height={24} width={24}>
@@ -133,12 +133,12 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
           }}
           onChangeEnd={(v) => {
             if (name !== v) {
-              updateKnowledgeBase(id, { name: v });
+              updateKnowledgeBase(id, { name: v })
             }
-            toggleEditing(false);
+            toggleEditing(false)
           }}
           onClick={(e) => {
-            e.preventDefault();
+            e.preventDefault()
           }}
           onEditingChange={toggleEditing}
           showEditIcon={false}
@@ -150,8 +150,8 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
       {showMore && !editing && (
         <div
           onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault()
+            e.stopPropagation()
           }}
         >
           <Dropdown
@@ -159,7 +159,7 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
             menu={{
               items: items,
               onClick: ({ domEvent }) => {
-                domEvent.stopPropagation();
+                domEvent.stopPropagation()
               },
             }}
             trigger={['click']}
@@ -169,7 +169,7 @@ const Content = memo<KnowledgeBaseItemProps>(({ id, name, showMore }) => {
         </div>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Content;
+export default Content

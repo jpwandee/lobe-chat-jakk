@@ -1,33 +1,33 @@
-import { throttle } from 'lodash-es';
-import { useEffect, useRef } from 'react';
+import { throttle }
+import { useEffect, useRef }
 
-import { isOnServerSide } from '@/utils/env';
+import { isOnServerSide }
 
-import { SCROLL_PARENT_ID } from '../../../features/const';
+import { SCROLL_PARENT_ID }
 
-export const useScroll = (onScroll: (scroll: number, delta: number) => void) => {
-  const lastScrollTop = useRef(0);
+export const usescroll = (onScroll: (scroll: number, delta: number) => void) => {
+  const lastScrollTop = useRef(0)
 
   useEffect(() => {
-    if (isOnServerSide) return;
+    if (isOnServerSide) return
 
-    const element = document.querySelector(`#${SCROLL_PARENT_ID}`);
+    const element = document.querySelector(`#${SCROLL_PARENT_ID}`)
 
-    if (!element) return;
+    if (!element) return
 
     const handleScroll = throttle(() => {
-      const currentScroll = element.scrollTop;
-      const delta = currentScroll - lastScrollTop.current;
+      const currentScroll = element.scrollTop
+      const delta = currentScroll - lastScrollTop.current
 
-      onScroll?.(currentScroll, delta);
+      onScroll?.(currentScroll, delta)
 
-      lastScrollTop.current = currentScroll;
-    });
+      lastScrollTop.current = currentScroll
+    })
 
-    element.addEventListener('scroll', handleScroll, { passive: true });
+    element.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      element.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-};
+      element.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+}

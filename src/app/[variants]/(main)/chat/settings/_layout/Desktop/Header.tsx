@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { ChatHeader, ChatHeaderTitle } from '@lobehub/ui/chat';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ChatHeader, ChatHeaderTitle }
+import { useRouter }
+import { memo }
+import { useTranslation }
 
-import { pathString } from '@/utils/url';
+import { pathString } from '@/utils/url'
 
-import HeaderContent from '../../features/HeaderContent';
+import HeaderContent from '../../features/HeaderContent'
 
 const Header = memo(() => {
-  const { t } = useTranslation('setting');
-  const router = useRouter();
+  const { t } = useTranslation('setting')
+  const router = useRouter()
 
   return (
     <ChatHeader
@@ -20,7 +20,7 @@ const Header = memo(() => {
       right={<HeaderContent />}
       showBackButton
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

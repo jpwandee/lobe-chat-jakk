@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { Button, Highlighter, Icon } from '@lobehub/ui';
-import { Card, Result } from 'antd';
-import { ShieldX } from 'lucide-react';
-import Link from 'next/link';
-import { parseAsString, useQueryState } from 'nuqs';
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Button, Highlighter, Icon }
+import { Card, Result }
+import { ShieldX }
+import Link from 'next/link'
+import { parseAsString, useQueryState }
+import react, { memo }
+import { useTranslation }
+import { Center, Flexbox } from 'react-layout-kit'
 
 const FailedPage = memo(() => {
-  const { t } = useTranslation('oauth');
-  const [reason] = useQueryState('reason');
-  const [errorMessage] = useQueryState<string>('errorMessage', parseAsString);
+  const { t } = useTranslation('oauth')
+  const [reason] = useQueryState('reason')
+  const [errorMessage] = useQueryState<string>('errorMessage', parseAsString)
 
   return (
     <Center height="100vh">
@@ -47,9 +47,9 @@ const FailedPage = memo(() => {
         />
       </Card>
     </Center>
-  );
-});
+  )
+})
 
-FailedPage.displayName = 'FailedPage';
+FailedPage.displayName = 'FailedPage'
 
-export default FailedPage;
+export default FailedPage

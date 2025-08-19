@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { memo }
+import { useTranslation }
 
-import Cell, { CellProps } from '@/components/Cell';
-import DataImporter from '@/features/DataImporter';
-import { configService } from '@/services/export/_deprecated';
+import cell, { CellProps }
+import DataImporter from '@/features/DataImporter'
+import { configService } from '@/services/export/_deprecated'
 
 const Category = memo(() => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const items: CellProps[] = [
     {
       key: 'allAgent',
@@ -40,9 +40,9 @@ const Category = memo(() => {
       key: 'import',
       label: <DataImporter>{t('importData')}</DataImporter>,
     },
-  ];
+  ]
 
-  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />);
-});
+  return items?.map(({ key, ...item }, index) => <Cell key={key || index} {...item} />)
+})
 
-export default Category;
+export default Category

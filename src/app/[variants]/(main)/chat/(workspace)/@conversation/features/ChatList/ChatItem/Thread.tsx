@@ -1,38 +1,38 @@
-import { Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { CSSProperties, memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Text }
+import { createStyles }
+import isEqual from 'fast-deep-equal'
+import { CSSProperties, memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useChatStore } from '@/store/chat';
-import { threadSelectors } from '@/store/chat/selectors';
+import { useChatStore }
+import { threadSelectors }
 
-import ThreadItem from './ThreadItem';
+import ThreadItem from './ThreadItem'
 
 const useStyles = createStyles(({ css, token, isDarkMode }) => ({
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    padding-block: 8px 4px;
-    padding-inline: 4px;
-    border-radius: 6px;
+    padding-block: 8px 4px
+    padding-inline: 4px
+    border-radius: 6px
 
-    background: ${isDarkMode ? token.colorFillTertiary : token.colorFillQuaternary};
+    background: ${isDarkMode ? token.colorFillTertiary : token.colorFillQuaternary}
   `,
-}));
+}))
 
-interface ThreadProps {
+interface threadprops {
   id: string;
   placement: 'start' | 'end';
-  style?: CSSProperties;
+  style?: cssproperties;
 }
 
 const Thread = memo<ThreadProps>(({ id, placement, style }) => {
-  const { t } = useTranslation('chat');
-  const { styles } = useStyles();
+  const { t } = useTranslation('chat')
+  const { styles } = useStyles()
 
-  const threads = useChatStore(threadSelectors.getThreadsBySourceMsgId(id), isEqual);
+  const threads = useChatStore(threadSelectors.getThreadsBySourceMsgId(id), isEqual)
 
   return (
     <Flexbox
@@ -56,7 +56,7 @@ const Thread = memo<ThreadProps>(({ id, placement, style }) => {
         </Flexbox>
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Thread;
+export default Thread

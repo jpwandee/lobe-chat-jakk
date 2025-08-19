@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { createStyles } from 'antd-style';
-import { Suspense, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { Suspense, memo }
+import { Flexbox }
 
-import { withSuspense } from '@/components/withSuspense';
-import InitClientDB from '@/features/InitClientDB';
-import { useShowMobileWorkspace } from '@/hooks/useShowMobileWorkspace';
+import { withSuspense }
+import InitClientDB from '@/features/InitClientDB'
+import { useShowMobileWorkspace }
 
-import { LayoutProps } from './type';
+import { LayoutProps } from './type'
 
 const useStyles = createStyles(({ css, token }) => ({
   main: css`
-    position: relative;
-    overflow: hidden;
-    background: ${token.colorBgLayout};
+    position: relative
+    overflow: hidden
+    background: ${token.colorBgLayout}
   `,
-}));
+}))
 
 const Layout = memo<LayoutProps>(({ children, session }) => {
-  const showMobileWorkspace = useShowMobileWorkspace();
-  const { styles } = useStyles();
+  const showMobileWorkspace = useShowMobileWorkspace()
+  const { styles } = useStyles()
 
   return (
     <>
@@ -44,9 +44,9 @@ const Layout = memo<LayoutProps>(({ children, session }) => {
         <InitClientDB bottom={100} />
       </Suspense>
     </>
-  );
-});
+  )
+})
 
-Layout.displayName = 'MobileChatLayout';
+Layout.displayName = 'MobileChatLayout'
 
-export default withSuspense(Layout);
+export default withSuspense(Layout)

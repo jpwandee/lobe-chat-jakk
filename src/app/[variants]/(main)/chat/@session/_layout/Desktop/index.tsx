@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren }
 
 import PanelBody from './PanelBody';
 import Header from './SessionHeader';
@@ -15,4 +15,4 @@ const DesktopLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default DesktopLayout;
+export default DesktopLayout

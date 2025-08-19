@@ -1,41 +1,41 @@
-'use client';
+'use client'
 
-import { ActionIcon, Block } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { shuffle } from 'lodash-es';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Block }
+import { createStyles }
+import { shuffle }
+import { ArrowRight }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { BRANDING_NAME } from '@/const/branding';
-import { USAGE_DOCUMENTS } from '@/const/url';
-import { useSendMessage } from '@/features/ChatInput/useSend';
-import { useChatStore } from '@/store/chat';
+import { BRANDING_NAME }
+import { USAGE_DOCUMENTS }
+import { useSendMessage }
+import { useChatStore }
 
 const useStyles = createStyles(({ css, token, responsive }) => ({
   card: css`
-    padding-block: 12px;
-    padding-inline: 24px;
-    border-radius: 48px;
+    padding-block: 12px
+    padding-inline: 24px
+    border-radius: 48px
 
-    color: ${token.colorText};
+    color: ${token.colorText}
 
-    background: ${token.colorBgContainer};
+    background: ${token.colorBgContainer}
 
     ${responsive.mobile} {
-      padding-block: 8px;
-      padding-inline: 16px;
+      padding-block: 8px
+      padding-inline: 16px
     }
   `,
   icon: css`
-    color: ${token.colorTextSecondary};
+    color: ${token.colorTextSecondary}
   `,
   title: css`
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
 const qa = shuffle([
   'q01',
@@ -53,14 +53,14 @@ const qa = shuffle([
   'q13',
   'q14',
   'q15',
-]);
+])
 
-const QuestionSuggest = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const [updateInputMessage] = useChatStore((s) => [s.updateInputMessage]);
+const questionsuggest = memo< { mobile?: boolean }>(({ mobile }) => {
+  const [updateInputMessage] = useChatStore((s) => [s.updateInputMessage])
 
-  const { t } = useTranslation('welcome');
-  const { styles } = useStyles();
-  const { send: sendMessage } = useSendMessage();
+  const { t } = useTranslation('welcome')
+  const { styles } = useStyles()
+  const { send: sendMessage } = useSendMessage()
 
   return (
     <Flexbox gap={8} width={'100%'}>
@@ -76,7 +76,7 @@ const QuestionSuggest = memo<{ mobile?: boolean }>(({ mobile }) => {
       </Flexbox>
       <Flexbox gap={8} horizontal wrap={'wrap'}>
         {qa.slice(0, mobile ? 2 : 5).map((item) => {
-          const text = t(`guide.qa.${item}` as any, { appName: BRANDING_NAME });
+          const text = t(`guide.qa.${item}` as any, { appName: BRANDING_NAME })
           return (
             <Block
               align={'center'}
@@ -86,18 +86,18 @@ const QuestionSuggest = memo<{ mobile?: boolean }>(({ mobile }) => {
               horizontal
               key={item}
               onClick={() => {
-                updateInputMessage(text);
-                sendMessage({ isWelcomeQuestion: true });
+                updateInputMessage(text)
+                sendMessage({ isWelcomeQuestion: true })
               }}
               variant={'outlined'}
             >
               {t(text)}
             </Block>
-          );
+          )
         })}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default QuestionSuggest;
+export default QuestionSuggest

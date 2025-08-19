@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { Form, type FormGroupItemType } from '@lobehub/ui';
-import { Switch } from 'antd';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Form, type FormGroupItemType }
+import { Switch }
+import { memo }
+import { useTranslation }
 
-import { BRANDING_NAME } from '@/const/branding';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
+import { BRANDING_NAME }
+import { FORM_STYLE }
+import { useUserStore }
+import { preferenceSelectors } from '@/store/user/selectors'
 
 const Analytics = memo(() => {
-  const { t } = useTranslation('setting');
-  const checked = useUserStore(preferenceSelectors.userAllowTrace);
-  const [updatePreference] = useUserStore((s) => [s.updatePreference]);
+  const { t } = useTranslation('setting')
+  const checked = useUserStore(preferenceSelectors.userAllowTrace)
+  const [updatePreference] = useUserStore((s) => [s.updatePreference])
 
   const items: FormGroupItemType = {
     children: [
@@ -22,7 +22,7 @@ const Analytics = memo(() => {
           <Switch
             checked={!!checked}
             onChange={(e) => {
-              updatePreference({ telemetry: e });
+              updatePreference({ telemetry: e })
             }}
           />
         ),
@@ -33,9 +33,9 @@ const Analytics = memo(() => {
       },
     ],
     title: t('analytics.title'),
-  };
+  }
 
-  return <Form items={[items]} itemsType={'group'} variant={'borderless'} {...FORM_STYLE} />;
-});
+  return <Form items={[items]} itemsType={'group'} variant={'borderless'} {...FORM_STYLE} />
+})
 
-export default Analytics;
+export default Analytics

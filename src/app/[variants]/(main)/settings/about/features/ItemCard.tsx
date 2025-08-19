@@ -1,18 +1,18 @@
-import { Block, Icon } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { LucideIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
+import { Block, Icon }
+import { useTheme }
+import { LucideIcon }
+import Link from 'next/link'
+import { memo }
 
-export interface ItemCardProps {
+export interface itemcardprops {
   href: string;
-  icon?: LucideIcon;
+  icon?: lucideicon;
   label: string;
   value: string;
 }
 
 const ItemCard = memo<ItemCardProps>(({ label, icon, href }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Link href={href} style={{ color: 'inherit' }} target={'_blank'}>
       <Block clickable gap={12} horizontal paddingBlock={12} paddingInline={18}>
@@ -20,7 +20,7 @@ const ItemCard = memo<ItemCardProps>(({ label, icon, href }) => {
         {label}
       </Block>
     </Link>
-  );
-});
+  )
+})
 
-export default ItemCard;
+export default ItemCard

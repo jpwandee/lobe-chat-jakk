@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation }
 
-import { OllamaProviderCard } from '@/config/modelProviders';
+import { OllamaProviderCard }
 
-import ProviderDetail from '../[id]';
-import CheckError from './CheckError';
+import ProviderDetail from '../[id]'
+import CheckError from './CheckError'
 
-const Page = () => {
-  const { t } = useTranslation('modelProvider');
+const page = () => {
+  const { t } = useTranslation('modelProvider')
 
   return (
     <ProviderDetail
@@ -23,7 +23,7 @@ const Page = () => {
         },
       }}
     />
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

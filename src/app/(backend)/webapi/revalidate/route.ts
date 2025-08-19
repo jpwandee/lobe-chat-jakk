@@ -1,7 +1,7 @@
-import { revalidateTag } from 'next/cache';
-import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag }
+import { NextRequest, NextResponse }
 
-export const GET = async (request: NextRequest) => {
+export const get = async (request: NextRequest) => {
   if (!process.env.REVALIDATE_SECRET) {
     return NextResponse.json('REVALIDATE_SECRET is not set', { status: 501 });
   }
@@ -18,7 +18,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json('tag query parameter is required', { status: 400 });
   }
 
-  revalidateTag(tag);
+  revalidateTag(tag)
 
-  return Response.json({ now: Date.now(), revalidated: true });
-};
+  return Response.json({ now: Date.now(), revalidated: true })
+}

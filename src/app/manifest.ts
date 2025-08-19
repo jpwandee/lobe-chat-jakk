@@ -1,8 +1,8 @@
-import { kebabCase } from 'lodash-es';
-import type { MetadataRoute } from 'next';
+import { kebabCase }
+import type { MetadataRoute }
 
-import { BRANDING_LOGO_URL, BRANDING_NAME } from '@/const/branding';
-import { manifestModule } from '@/server/manifest';
+import { BRANDING_LOGO_URL, BRANDING_NAME }
+import { manifestModule }
 
 const manifest = (): MetadataRoute.Manifest | any => {
   return manifestModule.generate({
@@ -75,7 +75,7 @@ const manifest = (): MetadataRoute.Manifest | any => {
             url: '/screenshots/shot-5.desktop.png',
           },
         ],
-  });
-};
+  })
+}
 
-export default manifest;
+export default manifest

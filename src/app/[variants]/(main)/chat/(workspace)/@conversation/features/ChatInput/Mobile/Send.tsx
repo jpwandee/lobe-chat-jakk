@@ -1,8 +1,8 @@
-import { ActionIcon, type ActionIconSize, Button } from '@lobehub/ui';
-import { Loader2, SendHorizontal } from 'lucide-react';
-import { memo } from 'react';
+import { ActionIcon, type ActionIconSize, Button }
+import { Loader2, SendHorizontal }
+import { memo }
 
-export interface MobileChatSendButtonProps {
+export interface mobilechatsendbuttonprops {
   disabled?: boolean;
   loading?: boolean;
   onSend?: () => void;
@@ -14,7 +14,7 @@ const MobileChatSendButton = memo<MobileChatSendButtonProps>(
     const size: ActionIconSize = {
       blockSize: 36,
       size: 16,
-    };
+    }
 
     return loading ? (
       <ActionIcon active icon={Loader2} onClick={onStop} size={size} spin />
@@ -26,8 +26,8 @@ const MobileChatSendButton = memo<MobileChatSendButtonProps>(
         style={{ flex: 'none' }}
         type={'primary'}
       />
-    );
+    )
   },
-);
+)
 
-export default MobileChatSendButton;
+export default MobileChatSendButton

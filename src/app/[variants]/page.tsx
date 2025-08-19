@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
+import { Metadata }
 
-import { getCanonicalUrl } from '@/server/utils/url';
+import { getCanonicalUrl }
 
 export const metadata: Metadata = {
-  alternates: { canonical: getCanonicalUrl('/') },
-};
+  alternates: { canonical: getcanonicalurl('/') },
+}
 
-export { default } from './loading';
+export { default } from './loading'

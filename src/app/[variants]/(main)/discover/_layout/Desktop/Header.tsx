@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/chat';
-import Link from 'next/link';
-import { memo } from 'react';
+import { ChatHeader }
+import Link from 'next/link'
+import { memo }
 
-import { ProductLogo } from '@/components/Branding';
-import { isCustomBranding } from '@/const/version';
+import { ProductLogo }
+import { isCustomBranding } from '@/const/version'
 
-import CreateButton from '../../features/CreateButton';
-import StoreSearchBar from '../../features/Search';
+import CreateButton from '../../features/CreateButton'
+import StoreSearchBar from '../../features/Search'
 
 const Header = memo(() => {
   return (
@@ -31,7 +31,7 @@ const Header = memo(() => {
     >
       <StoreSearchBar />
     </ChatHeader>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

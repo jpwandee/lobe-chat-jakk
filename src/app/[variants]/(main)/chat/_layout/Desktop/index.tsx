@@ -1,11 +1,11 @@
-import { Suspense } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Suspense }
+import { Flexbox }
 
-import { isDesktop } from '@/const/version';
-import InitClientDB from '@/features/InitClientDB';
-import ProtocolUrlHandler from '@/features/ProtocolUrlHandler';
+import { isDesktop }
+import InitClientDB from '@/features/InitClientDB'
+import ProtocolUrlHandler from '@/features/ProtocolUrlHandler'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import RegisterHotkeys from './RegisterHotkeys';
 import SessionPanel from './SessionPanel';
 import Workspace from './Workspace';
@@ -34,6 +34,6 @@ const Layout = ({ children, session }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'DesktopChatLayout';
+Layout.displayName = 'DesktopChatLayout'
 
-export default Layout;
+export default Layout

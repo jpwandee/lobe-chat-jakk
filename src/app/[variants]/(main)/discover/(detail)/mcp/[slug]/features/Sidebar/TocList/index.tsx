@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { AnchorProps } from 'antd';
-import { startCase } from 'lodash-es';
-import { memo, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { AnchorProps }
+import { startCase }
+import { memo, useMemo }
+import { useTranslation }
+import { Flexbox }
 
-import { useToc } from '@/app/[variants]/(main)/discover/(detail)/features/Toc/useToc';
-import { useDetailContext } from '@/features/MCPPluginDetail/DetailProvider';
-import { useQuery } from '@/hooks/useQuery';
-import { McpNavKey } from '@/types/discover';
+import { useToc }
+import { useDetailContext }
+import { useQuery }
+import { McpNavKey } from '@/types/discover'
 
-import Title from '../../../../../../features/Title';
-import Toc from '../../../../../features/Toc';
+import Title from '../../../../../../features/Title'
+import Toc from '../../../../../features/Toc'
 
 const TocList = memo(() => {
-  const { t } = useTranslation('discover');
-  const { toc = [] } = useToc();
-  const { activeTab = McpNavKey.Overview } = useQuery() as { activeTab: McpNavKey };
-  const { deploymentOptions = [], tools = [], prompts = [] } = useDetailContext();
+  const { t } = useTranslation('discover')
+  const { toc = [] } = useToc()
+  const { activeTab = McpNavKey.Overview } = useQuery() as { activeTab: McpNavKey }
+  const { deploymentOptions = [], tools = [], prompts = [] } = useDetailContext()
 
   const deployToc: AnchorProps['items'] = useMemo(
     () =>
@@ -31,7 +31,7 @@ const TocList = memo(() => {
         }),
       })),
     [deploymentOptions, t],
-  );
+  )
 
   const schemaToc: AnchorProps['items'] = useMemo(() => {
     return [
@@ -65,34 +65,34 @@ const TocList = memo(() => {
         level: 2,
         title: t('mcp.details.schema.resources.title'),
       },
-    ].filter(Boolean) as AnchorProps['items'];
-  }, [tools, prompts, t]);
+    ].filter(Boolean) as AnchorProps['items']
+  }, [tools, prompts, t])
 
   const items: AnchorProps['items'] | undefined = useMemo(() => {
     switch (activeTab) {
       case McpNavKey.Overview: {
-        return toc;
+        return toc
       }
       case McpNavKey.Deployment: {
-        return deployToc;
+        return deployToc
       }
       case McpNavKey.Schema: {
-        return schemaToc;
+        return schemaToc
       }
       default: {
-        return undefined;
+        return undefined
       }
     }
-  }, [activeTab, toc, deployToc, schemaToc]);
+  }, [activeTab, toc, deployToc, schemaToc])
 
-  if (!items || items.length === 0) return null;
+  if (!items || items.length === 0) return null
 
   return (
     <Flexbox gap={16}>
       <Title>{t('mcp.details.sidebar.toc')}</Title>
       <Toc items={items} />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default TocList;
+export default TocList

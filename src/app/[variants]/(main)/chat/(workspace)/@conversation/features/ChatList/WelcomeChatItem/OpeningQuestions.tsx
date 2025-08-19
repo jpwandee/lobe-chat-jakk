@@ -1,48 +1,48 @@
-'use client';
+'use client'
 
-import { Block } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Block }
+import { createStyles }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useSendMessage } from '@/features/ChatInput/useSend';
-import { useChatStore } from '@/store/chat';
+import { useSendMessage }
+import { useChatStore }
 
 const useStyles = createStyles(({ css, token, responsive }) => ({
   card: css`
-    padding-block: 8px;
-    padding-inline: 16px;
-    border-radius: 48px;
-    background: ${token.colorBgContainer};
+    padding-block: 8px
+    padding-inline: 16px
+    border-radius: 48px
+    background: ${token.colorBgContainer}
 
     ${responsive.mobile} {
-      padding-block: 8px;
-      padding-inline: 16px;
+      padding-block: 8px
+      padding-inline: 16px
     }
   `,
 
   container: css`
-    padding-block: 0;
-    padding-inline: 64px 16px;
+    padding-block: 0
+    padding-inline: 64px 16px
   `,
 
   title: css`
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
   `,
-}));
+}))
 
-interface OpeningQuestionsProps {
+interface openingquestionsprops {
   mobile?: boolean;
   questions: string[];
 }
 
 const OpeningQuestions = memo<OpeningQuestionsProps>(({ mobile, questions }) => {
-  const { t } = useTranslation('welcome');
-  const [updateInputMessage] = useChatStore((s) => [s.updateInputMessage]);
+  const { t } = useTranslation('welcome')
+  const [updateInputMessage] = useChatStore((s) => [s.updateInputMessage])
 
-  const { styles } = useStyles();
-  const { send: sendMessage } = useSendMessage();
+  const { styles } = useStyles()
+  const { send: sendMessage } = useSendMessage()
 
   return (
     <div className={styles.container}>
@@ -55,8 +55,8 @@ const OpeningQuestions = memo<OpeningQuestionsProps>(({ mobile, questions }) => 
               clickable
               key={question}
               onClick={() => {
-                updateInputMessage(question);
-                sendMessage({ isWelcomeQuestion: true });
+                updateInputMessage(question)
+                sendMessage({ isWelcomeQuestion: true })
               }}
               paddingBlock={8}
               paddingInline={12}
@@ -64,11 +64,11 @@ const OpeningQuestions = memo<OpeningQuestionsProps>(({ mobile, questions }) => 
             >
               {question}
             </Block>
-          );
+          )
         })}
       </Flexbox>
     </div>
-  );
-});
+  )
+})
 
-export default OpeningQuestions;
+export default OpeningQuestions

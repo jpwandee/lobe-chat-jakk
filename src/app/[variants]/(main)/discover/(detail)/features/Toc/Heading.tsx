@@ -1,34 +1,34 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { createStyles, useTheme } from 'antd-style';
-import { kebabCase } from 'lodash-es';
-import { Heading2, Heading3, Heading4, Heading5 } from 'lucide-react';
-import Link from 'next/link';
-import { Children, ComponentProps, FC, ReactNode, isValidElement, useEffect, useMemo } from 'react';
+import { Icon }
+import { createStyles, useTheme }
+import { kebabCase }
+import { Heading2, Heading3, Heading4, Heading5 }
+import Link from 'next/link'
+import { Children, ComponentProps, FC, ReactNode, isValidElement, useEffect, useMemo }
 
-import { useToc } from './useToc';
+import { useToc }
 
-const extractTextChildren = (children: ReactNode) => {
-  let text = '';
+const extracttextchildren = (children: ReactNode) => {
+  let text = ''
 
   Children.forEach(children, (child) => {
     if (typeof child === 'string' || typeof child === 'number') {
-      text += child;
+      text += child
     } else if (isValidElement(child) && (child as any).props.children) {
-      text += extractTextChildren((child as any).props.children);
+      text += extractTextChildren((child as any).props.children)
     }
-  });
+  })
 
-  return text;
-};
+  return text
+}
 
 const HeadingIcon: any = {
-  h2: Heading2,
-  h3: Heading3,
-  h4: Heading4,
-  h5: Heading5,
-};
+  h2: heading2,;
+  h3: heading3,;
+  h4: heading4,;
+  h5: heading5,
+}
 
 const useStyles = createStyles(({ css, cx, token }) => {
   const anchor = cx(css`
@@ -50,7 +50,7 @@ const useStyles = createStyles(({ css, cx, token }) => {
 
 const createHeading = (Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`) => {
   const Heading: FC<ComponentProps<'h2'>> = ({ children, className, style, ...props }) => {
-    const { setToc, setFinished } = useToc();
+    const { setToc, setFinished }
     const { cx, styles } = useStyles();
     const text = useMemo(() => extractTextChildren(children), [children]);
     const id = kebabCase(text);
@@ -101,8 +101,8 @@ const createHeading = (Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`) => {
   return Heading;
 };
 
-export const H1 = createHeading('h1');
-export const H2 = createHeading('h2');
-export const H3 = createHeading('h3');
-export const H4 = createHeading('h4');
-export const H5 = createHeading('h5');
+export const H1 = createHeading('h1')
+export const H2 = createHeading('h2')
+export const H3 = createHeading('h3')
+export const H4 = createHeading('h4')
+export const H5 = createHeading('h5')

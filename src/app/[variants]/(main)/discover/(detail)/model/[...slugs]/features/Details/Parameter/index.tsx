@@ -1,6 +1,7 @@
-'use client';
+'use client'
 
-import { Collapse, Icon, Tag } from '@lobehub/ui';
+import { Collapse, Icon, Tag }
+
 import {
   ChartColumnBig,
   Delete,
@@ -9,21 +10,21 @@ import {
   MessageSquareText,
   Pickaxe,
   Thermometer,
-} from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+}
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import Title from '@/app/[variants]/(main)/discover/features/Title';
-import { formatTokenNumber } from '@/utils/format';
+import Title from '@/app/[variants]/(main)/discover/features/Title'
+import { formatTokenNumber }
 
-import { useDetailContext } from '../../DetailProvider';
-import ParameterItem from './ParameterItem';
+import { useDetailContext }
+import ParameterItem from './ParameterItem'
 
-interface Parameter {
+interface parameter {
   defaultValue: string | number;
   desc: string;
-  icon: LucideIcon;
+  icon: lucideicon;
   key: string;
   label: string;
   range?: (string | number)[];
@@ -31,8 +32,8 @@ interface Parameter {
 }
 
 const ParameterList = memo(() => {
-  const { t } = useTranslation('discover');
-  const data = useDetailContext();
+  const { t } = useTranslation('discover')
+  const data = useDetailContext()
 
   const items: Parameter[] = [
     {
@@ -91,7 +92,7 @@ const ParameterList = memo(() => {
       range: ['low', 'high'],
       type: 'string',
     },
-  ];
+  ]
 
   return (
     <Flexbox gap={16}>
@@ -114,7 +115,7 @@ const ParameterList = memo(() => {
         variant={'outlined'}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ParameterList;
+export default ParameterList

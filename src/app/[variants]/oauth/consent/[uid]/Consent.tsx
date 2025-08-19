@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { Button, Text } from '@lobehub/ui';
-import { Card, Divider } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Button, Text }
+import { Card, Divider }
+import { createStyles }
+import { memo, useState }
+import { useTranslation }
+import { Center, Flexbox }
 
-import OAuthApplicationLogo from './components/OAuthApplicationLogo';
+import OAuthApplicationLogo from './components/OAuthApplicationLogo'
 
-interface ClientProps {
+interface clientprops {
   clientId: string;
   clientMetadata: {
     clientName?: string;
@@ -24,107 +24,107 @@ interface ClientProps {
 
 const useStyles = createStyles(({ css, token }) => ({
   authButton: css`
-    width: 100%;
-    height: 40px;
-    border-radius: ${token.borderRadius}px;
-    font-weight: 500;
+    width: 100%
+    height: 40px
+    border-radius: ${token.borderRadius}px
+    font-weight: 500
   `,
   cancelButton: css`
-    width: 100%;
-    height: 40px;
-    border-color: ${token.colorBorderSecondary};
-    border-radius: ${token.borderRadius}px;
+    width: 100%
+    height: 40px
+    border-color: ${token.colorBorderSecondary}
+    border-radius: ${token.borderRadius}px
 
-    font-weight: 500;
-    color: ${token.colorTextBase};
+    font-weight: 500
+    color: ${token.colorTextBase}
 
-    background-color: transparent;
+    background-color: transparent
   `,
   card: css`
-    width: 100%;
-    max-width: 500px;
-    border-color: ${token.colorBorderSecondary};
-    border-radius: 12px;
+    width: 100%
+    max-width: 500px
+    border-color: ${token.colorBorderSecondary}
+    border-radius: 12px
 
-    background-color: ${token.colorBgContainer};
+    background-color: ${token.colorBgContainer}
   `,
   connector: css`
-    width: 40px;
-    height: 40px;
+    width: 40px
+    height: 40px
   `,
   connectorLine: css`
-    width: 32px;
-    height: 1px;
-    background-color: ${token.colorBorderSecondary};
+    width: 32px
+    height: 1px
+    background-color: ${token.colorBorderSecondary}
   `,
   container: css`
-    width: 100%;
-    min-height: 100vh;
-    color: ${token.colorTextBase};
-    background-color: ${token.colorBgLayout};
+    width: 100%
+    min-height: 100vh
+    color: ${token.colorTextBase}
+    background-color: ${token.colorBgLayout}
   `,
   icon: css`
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden
+    display: flex
+    align-items: center
+    justify-content: center
 
-    width: 64px;
-    height: 64px;
-    border: 1px solid ${token.colorBorderSecondary};
-    border-radius: 16px;
+    width: 64px
+    height: 64px
+    border: 1px solid ${token.colorBorderSecondary}
+    border-radius: 16px
 
-    background-color: ${token.colorBgElevated};
+    background-color: ${token.colorBgElevated}
   `,
   iconContainer: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex
+    align-items: center
+    justify-content: center
   `,
   lobeIcon: css`
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden
+    display: flex
+    align-items: center
+    justify-content: center
 
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    width: 64px
+    height: 64px
+    border-radius: 50%
 
-    background-color: ${token.colorBgElevated};
+    background-color: ${token.colorBgElevated}
   `,
   scope: css`
-    margin-block: 8px;
-    padding: 12px;
-    border-radius: 6px;
-    background: ${token.colorFillQuaternary};
+    margin-block: 8px
+    padding: 12px
+    border-radius: 6px
+    background: ${token.colorFillQuaternary}
   `,
   scopes: css`
-    width: 100%;
+    width: 100%
   `,
   title: css`
-    margin-block-end: ${token.marginLG}px;
-    font-size: 24px;
-    color: ${token.colorTextBase};
-    text-align: center;
+    margin-block-end: ${token.marginLG}px
+    font-size: 24px
+    color: ${token.colorTextBase}
+    text-align: center
   `,
-}));
+}))
 
 /**
  * 获取 Scope 的描述
  */
 function getScopeDescription(scope: string, t: any): string {
-  return t(`consent.scope.${scope.replace(':', '-')}`, scope);
+  return t(`consent.scope.${scope.replace(':', '-')}`, scope)
 }
 
 const ConsentClient = memo<ClientProps>(
   ({ uid, clientId, scopes, clientMetadata, redirectUri }) => {
-    const { styles, theme } = useStyles();
-    const { t } = useTranslation('oauth');
+    const { styles, theme } = useStyles()
+    const { t } = useTranslation('oauth')
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
-    const clientDisplayName = clientMetadata?.clientName || clientId;
+    const clientDisplayName = clientMetadata?.clientName || clientId
     return (
       <Center className={styles.container} gap={16}>
         <Flexbox gap={40}>
@@ -170,7 +170,7 @@ const ConsentClient = memo<ClientProps>(
                       loading={isLoading}
                       name="consent"
                       onClick={() => {
-                        setIsLoading(true);
+                        setIsLoading(true)
                       }}
                       type="primary"
                       value="accept"
@@ -200,10 +200,10 @@ const ConsentClient = memo<ClientProps>(
           </Flexbox>
         </Card>
       </Center>
-    );
+    )
   },
-);
+)
 
-ConsentClient.displayName = 'ConsentClient';
+ConsentClient.displayName = 'ConsentClient'
 
-export default ConsentClient;
+export default ConsentClient

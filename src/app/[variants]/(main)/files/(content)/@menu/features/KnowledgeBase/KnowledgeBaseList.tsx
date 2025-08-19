@@ -1,20 +1,20 @@
-import React from 'react';
-import { Flexbox } from 'react-layout-kit';
-import { Virtuoso } from 'react-virtuoso';
+import React from 'react'
+import { Flexbox }
+import { Virtuoso }
 
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
+import { useKnowledgeBaseStore }
 
-import EmptyStatus from './EmptyStatus';
-import Item from './Item';
-import { SkeletonList } from './SkeletonList';
+import EmptyStatus from './EmptyStatus'
+import Item from './Item'
+import { SkeletonList }
 
-const KnowledgeBaseList = () => {
-  const useFetchKnowledgeBaseList = useKnowledgeBaseStore((s) => s.useFetchKnowledgeBaseList);
-  const { data, isLoading } = useFetchKnowledgeBaseList();
+const knowledgebaselist = () => {
+  const useFetchKnowledgeBaseList = useKnowledgeBaseStore((s) => s.useFetchKnowledgeBaseList)
+  const { data, isLoading } = useFetchKnowledgeBaseList()
 
-  if (isLoading) return <SkeletonList />;
+  if (isLoading) return <SkeletonList />
 
-  if (data?.length === 0) return <EmptyStatus />;
+  if (data?.length === 0) return <EmptyStatus />
 
   return (
     <Flexbox height={'100%'}>
@@ -24,7 +24,7 @@ const KnowledgeBaseList = () => {
         itemContent={(index, data) => <Item id={data.id} key={data.id} name={data.name} />}
       />
     </Flexbox>
-  );
-};
+  )
+}
 
-export default KnowledgeBaseList;
+export default KnowledgeBaseList

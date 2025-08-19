@@ -12,6 +12,6 @@ const Page = ({ browser, os, mobile }: { browser?: string; mobile?: boolean; os?
   );
 };
 
-Page.displayName = 'SyncSetting';
+Page.displayName = 'SyncSetting'
 
-export default Page;
+export default Page

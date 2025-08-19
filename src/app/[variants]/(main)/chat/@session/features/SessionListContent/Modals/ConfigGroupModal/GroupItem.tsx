@@ -1,37 +1,37 @@
-import { ActionIcon, EditableText, SortableList } from '@lobehub/ui';
-import { App } from 'antd';
-import { createStyles } from 'antd-style';
-import { PencilLine, Trash } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, EditableText, SortableList }
+import { App }
+import { createStyles }
+import { PencilLine, Trash }
+import { memo, useState }
+import { useTranslation }
 
-import { useSessionStore } from '@/store/session';
-import { SessionGroupItem } from '@/types/session';
+import { useSessionStore }
+import { SessionGroupItem } from '@/types/session'
 
 const useStyles = createStyles(({ css }) => ({
   content: css`
-    position: relative;
-    overflow: hidden;
-    flex: 1;
+    position: relative
+    overflow: hidden
+    flex: 1
   `,
   title: css`
-    flex: 1;
-    height: 28px;
-    line-height: 28px;
-    text-align: start;
+    flex: 1
+    height: 28px
+    line-height: 28px
+    text-align: start
   `,
-}));
+}))
 
 const GroupItem = memo<SessionGroupItem>(({ id, name }) => {
-  const { t } = useTranslation('chat');
-  const { styles } = useStyles();
-  const { message, modal } = App.useApp();
+  const { t } = useTranslation('chat')
+  const { styles } = useStyles()
+  const { message, modal } = App.useApp()
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(false)
   const [updateSessionGroupName, removeSessionGroup] = useSessionStore((s) => [
     s.updateSessionGroupName,
     s.removeSessionGroup,
-  ]);
+  ])
 
   return (
     <>
@@ -50,10 +50,10 @@ const GroupItem = memo<SessionGroupItem>(({ id, name }) => {
                   type: 'primary',
                 },
                 onOk: async () => {
-                  await removeSessionGroup(id);
+                  await removeSessionGroup(id)
                 },
                 title: t('sessionGroup.confirmRemoveGroupAlert'),
-              });
+              })
             }}
             size={'small'}
           />
@@ -63,14 +63,14 @@ const GroupItem = memo<SessionGroupItem>(({ id, name }) => {
           editing={editing}
           onChangeEnd={async (input) => {
             if (name !== input) {
-              if (!input) return;
+              if (!input) return
               if (input.length === 0 || input.length > 20)
-                return message.warning(t('sessionGroup.tooLong'));
+                return message.warning(t('sessionGroup.tooLong'))
 
-              await updateSessionGroupName(id, input);
-              message.success(t('sessionGroup.renameSuccess'));
+              await updateSessionGroupName(id, input)
+              message.success(t('sessionGroup.renameSuccess'))
             }
-            setEditing(false);
+            setEditing(false)
           }}
           onEditingChange={(e) => setEditing(e)}
           showEditIcon={false}
@@ -79,7 +79,7 @@ const GroupItem = memo<SessionGroupItem>(({ id, name }) => {
         />
       )}
     </>
-  );
-});
+  )
+})
 
-export default GroupItem;
+export default GroupItem

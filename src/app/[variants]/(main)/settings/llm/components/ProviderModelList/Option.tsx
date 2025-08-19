@@ -1,35 +1,35 @@
-import { ModelIcon } from '@lobehub/icons';
-import { ActionIcon, Text, Tooltip } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { Recycle } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ModelIcon }
+import { ActionIcon, Text, Tooltip }
+import { useTheme }
+import isEqual from 'fast-deep-equal'
+import { Recycle }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { useUserStore } from '@/store/user';
-import { modelProviderSelectors } from '@/store/user/selectors';
-import { GlobalLLMProviderKey } from '@/types/user/settings';
+import { ModelInfoTags }
+import { useUserStore }
+import { modelProviderSelectors }
+import { GlobalLLMProviderKey }
 
-import CustomModelOption from './CustomModelOption';
+import CustomModelOption from './CustomModelOption'
 
-interface OptionRenderProps {
+interface optionrenderprops {
   displayName: string;
   id: string;
   isAzure?: boolean;
-  provider: GlobalLLMProviderKey;
+  provider: globalllmproviderkey;
   removed?: boolean;
 }
 const OptionRender = memo<OptionRenderProps>(({ displayName, id, provider, isAzure, removed }) => {
   const model = useUserStore(
     (s) => modelProviderSelectors.getModelCardById(id, provider)(s),
     isEqual,
-  );
-  const { t } = useTranslation('components');
-  const theme = useTheme();
+  )
+  const { t } = useTranslation('components')
+  const theme = useTheme()
   // if there is isCustom, it means it is a user defined custom model
-  if (model?.isCustom || isAzure) return <CustomModelOption id={id} provider={provider} />;
+  if (model?.isCustom || isAzure) return <CustomModelOption id={id} provider={provider} />
 
   return (
     <Flexbox
@@ -62,7 +62,7 @@ const OptionRender = memo<OptionRenderProps>(({ displayName, id, provider, isAzu
         </Tooltip>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default OptionRender;
+export default OptionRender

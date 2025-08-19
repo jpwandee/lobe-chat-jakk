@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
-import Divider from '@/components/Cell/Divider';
-import SkeletonLoading from '@/components/Loading/SkeletonLoading';
+import Divider from '@/components/Cell/Divider'
+import SkeletonLoading from '@/components/Loading/SkeletonLoading'
 
 const Loading = memo(() => {
   return (
@@ -32,7 +32,7 @@ const Loading = memo(() => {
         title={false}
       />
     </>
-  );
-});
+  )
+})
 
-export default Loading;
+export default Loading

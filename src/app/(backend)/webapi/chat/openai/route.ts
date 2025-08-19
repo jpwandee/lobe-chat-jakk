@@ -1,6 +1,6 @@
-import { POST as UniverseRoute } from '../[provider]/route';
+import { POST as UniverseRoute } from '../[provider]/route'
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 export const preferredRegion = [
   'arn1',
@@ -20,7 +20,7 @@ export const preferredRegion = [
   'sfo1',
   'sin1',
   'syd1',
-];
+]
 
 export const POST = async (req: Request) =>
-  UniverseRoute(req, { params: Promise.resolve({ provider: 'openai' }) });
+  UniverseRoute(req, { params: Promise.resolve({ provider: 'openai' }) })

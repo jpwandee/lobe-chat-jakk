@@ -1,60 +1,60 @@
-'use client';
+'use client'
 
-import { Text } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { rgba } from 'polished';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Text }
+import { createStyles }
+import { rgba }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { BrowserIcon } from '@/components/BrowserIcon';
-import { MAX_WIDTH } from '@/const/layoutTokens';
+import { BrowserIcon }
+import { MAX_WIDTH }
 
-import Card from './Card';
-import DeviceName from './DeviceName';
-import SystemIcon from './SystemIcon';
+import Card from './Card'
+import DeviceName from './DeviceName'
+import SystemIcon from './SystemIcon'
 
 const useStyles = createStyles(({ css, cx, responsive, isDarkMode, token, stylish }) => ({
   container: css`
-    position: relative;
-    width: 100%;
-    border-radius: ${token.borderRadiusLG}px;
+    position: relative
+    width: 100%
+    border-radius: ${token.borderRadiusLG}px
   `,
   content: css`
-    z-index: 2;
-    padding: 8px;
-    border-radius: ${token.borderRadiusLG - 1}px;
-    background: ${rgba(token.colorBgContainer, isDarkMode ? 0.7 : 1)};
+    z-index: 2
+    padding: 8px
+    border-radius: ${token.borderRadiusLG - 1}px
+    background: ${rgba(token.colorBgContainer, isDarkMode ? 0.7 : 1)}
   `,
   glow: cx(
     stylish.gradientAnimation,
     css`
-      pointer-events: none;
-      opacity: 0.5;
+      pointer-events: none
+      opacity: 0.5
       background-image: linear-gradient(
         -45deg,
         ${isDarkMode ? token.geekblue4 : token.geekblue},
         ${isDarkMode ? token.cyan4 : token.cyan}
-      );
-      animation-duration: 10s;
+      )
+      animation-duration: 10s
     `,
   ),
   wrapper: css`
     ${responsive.mobile} {
-      padding-block: 8px;
-      padding-inline: 4px;
+      padding-block: 8px
+      padding-inline: 4px
     }
   `,
-}));
+}))
 
-interface DeviceCardProps {
+interface devicecardprops {
   browser?: string;
   os?: string;
 }
 
 const DeviceCard = memo<DeviceCardProps>(({ browser, os }) => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('setting');
+  const { styles } = useStyles()
+  const { t } = useTranslation('setting')
 
   return (
     <Flexbox
@@ -97,7 +97,7 @@ const DeviceCard = memo<DeviceCardProps>(({ browser, os }) => {
         />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default DeviceCard;
+export default DeviceCard

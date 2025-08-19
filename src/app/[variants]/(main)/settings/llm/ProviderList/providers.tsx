@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo }
 
 import {
   Ai21ProviderCard,
@@ -43,25 +43,25 @@ import {
   XinferenceProviderCard,
   ZeroOneProviderCard,
   ZhiPuProviderCard,
-} from '@/config/modelProviders';
+}
 
-import { ProviderItem } from '../type';
-import { useAzureProvider } from './Azure';
-import { useBedrockProvider } from './Bedrock';
-import { useCloudflareProvider } from './Cloudflare';
-import { useGithubProvider } from './Github';
-import { useHuggingFaceProvider } from './HuggingFace';
-import { useOllamaProvider } from './Ollama';
-import { useOpenAIProvider } from './OpenAI';
+import { ProviderItem }
+import { useAzureProvider }
+import { useBedrockProvider }
+import { useCloudflareProvider }
+import { useGithubProvider }
+import { useHuggingFaceProvider }
+import { useOllamaProvider }
+import { useOpenAIProvider }
 
 export const useProviderList = (): ProviderItem[] => {
-  const AzureProvider = useAzureProvider();
-  const OllamaProvider = useOllamaProvider();
-  const OpenAIProvider = useOpenAIProvider();
-  const BedrockProvider = useBedrockProvider();
-  const CloudflareProvider = useCloudflareProvider();
-  const GithubProvider = useGithubProvider();
-  const HuggingFaceProvider = useHuggingFaceProvider();
+  const AzureProvider = useAzureProvider()
+  const OllamaProvider = useOllamaProvider()
+  const OpenAIProvider = useOpenAIProvider()
+  const BedrockProvider = useBedrockProvider()
+  const CloudflareProvider = useCloudflareProvider()
+  const GithubProvider = useGithubProvider()
+  const HuggingFaceProvider = useHuggingFaceProvider()
 
   return useMemo(
     () => [
@@ -124,5 +124,5 @@ export const useProviderList = (): ProviderItem[] => {
       GithubProvider,
       HuggingFaceProvider,
     ],
-  );
-};
+  )
+}

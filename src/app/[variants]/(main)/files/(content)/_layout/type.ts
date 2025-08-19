@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode }
 
-export interface LayoutProps {
-  children: ReactNode;
-  menu: ReactNode;
-  modal: ReactNode;
+export interface layoutprops {
+  children: reactnode;
+  menu: reactnode;
+  modal: reactnode;
 }

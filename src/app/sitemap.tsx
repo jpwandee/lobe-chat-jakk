@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute }
 
-import { LAST_MODIFIED, Sitemap, SitemapType } from '@/server/sitemap';
+import { LAST_MODIFIED, Sitemap, SitemapType }
 
 // Sitemap缓存配置 - 24小时重新验证
 export const revalidate = 86_400; // 24小时 - 内容页面缓存
@@ -36,19 +36,21 @@ export async function generateSitemaps() {
 }
 
 // 解析分页ID
-export function parsePaginatedId(id: string): { page?: number; type: SitemapType } {
+export function parsePaginatedId(id: string): { page?: number; type: sitemaptype }
+
+{
   if (id.includes('-')) {
     const [type, pageStr] = id.split('-');
     const page = parseInt(pageStr, 10);
     if (!isNaN(page)) {
-      return { page, type: type as SitemapType };
+      return { page, type: type as sitemaptypetype }
     }
   }
-  return { type: id as SitemapType };
+  return { type: id as sitemaptype }
 }
 
 export default async function sitemap({ id }: { id: string }): Promise<MetadataRoute.Sitemap> {
-  const { type, page } = parsePaginatedId(id);
+  const { type, page }
   const sitemapModule = new Sitemap();
 
   switch (type) {

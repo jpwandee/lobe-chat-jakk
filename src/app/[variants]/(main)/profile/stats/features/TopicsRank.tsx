@@ -1,30 +1,30 @@
-import { BarList } from '@lobehub/charts';
-import { ActionIcon, FormGroup, Icon, Modal } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { MaximizeIcon, MessageSquareIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import qs from 'query-string';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { BarList }
+import { ActionIcon, FormGroup, Icon, Modal }
+import { useTheme }
+import { MaximizeIcon, MessageSquareIcon }
+import Link from 'next/link'
+import { useRouter }
+import qs from 'query-string'
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { INBOX_SESSION_ID } from '@/const/session';
-import { useClientDataSWR } from '@/libs/swr';
-import { topicService } from '@/services/topic';
-import { TopicRankItem } from '@/types/topic';
+import { FORM_STYLE }
+import { INBOX_SESSION_ID }
+import { useClientDataSWR }
+import { topicService }
+import { TopicRankItem }
 
-export const TopicsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation('auth');
-  const theme = useTheme();
-  const router = useRouter();
+export const topicsrank = memo< { mobile?: boolean }>(({ mobile }) => {
+  const [open, setOpen] = useState(false)
+  const { t } = useTranslation('auth')
+  const theme = useTheme()
+  const router = useRouter()
   const { data, isLoading } = useClientDataSWR('rank-topics', async () =>
     topicService.rankTopics(),
-  );
+  )
 
-  const showExtra = Boolean(data && data?.length > 5);
+  const showExtra = Boolean(data && data?.length > 5)
 
   const mapData = (item: TopicRankItem) => {
     const link = qs.stringifyUrl({
@@ -34,7 +34,7 @@ export const TopicsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         ...(mobile ? { showMobileWorkspace: true } : {}),
       },
       url: '/chat',
-    });
+    })
     return {
       icon: <Icon color={theme.colorTextDescription} icon={MessageSquareIcon} size={16} />,
       link,
@@ -44,8 +44,8 @@ export const TopicsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         </Link>
       ),
       value: item.count,
-    };
-  };
+    }
+  }
 
   return (
     <>
@@ -97,7 +97,7 @@ export const TopicsRank = memo<{ mobile?: boolean }>(({ mobile }) => {
         </Modal>
       )}
     </>
-  );
-});
+  )
+})
 
-export default TopicsRank;
+export default TopicsRank

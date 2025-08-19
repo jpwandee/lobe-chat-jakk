@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { useRegisterGlobalHotkeys } from '@/hooks/useHotkeys';
+import { useRegisterGlobalHotkeys }
 
-const RegisterHotkeys = () => {
-  useRegisterGlobalHotkeys();
+const registerhotkeys = () => {
+  useRegisterGlobalHotkeys()
 
-  return null;
-};
+  return null
+}
 
-export default RegisterHotkeys;
+export default RegisterHotkeys

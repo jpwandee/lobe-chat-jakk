@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import Link from 'next/link'
+import { useRouter }
+import { memo }
+import { Flexbox }
 
-import { enableAuth, enableNextAuth } from '@/const/auth';
-import { isDeprecatedEdition } from '@/const/version';
-import DataStatistics from '@/features/User/DataStatistics';
-import UserInfo from '@/features/User/UserInfo';
-import UserLoginOrSignup from '@/features/User/UserLoginOrSignup/Community';
-import { useUserStore } from '@/store/user';
-import { authSelectors } from '@/store/user/selectors';
+import { enableAuth, enableNextAuth }
+import { isDeprecatedEdition }
+import DataStatistics from '@/features/User/DataStatistics'
+import UserInfo from '@/features/User/UserInfo'
+import UserLoginOrSignup from '@/features/User/UserLoginOrSignup/Community'
+import { useUserStore }
+import { authSelectors } from '@/store/user/selectors'
 
 const UserBanner = memo(() => {
-  const router = useRouter();
-  const isLoginWithAuth = useUserStore(authSelectors.isLoginWithAuth);
-  const [signIn] = useUserStore((s) => [s.openLogin]);
+  const router = useRouter()
+  const isLoginWithAuth = useUserStore(authSelectors.isLoginWithAuth)
+  const [signIn] = useUserStore((s) => [s.openLogin])
 
   return (
     <Flexbox gap={12} paddingBlock={8}>
@@ -36,15 +36,15 @@ const UserBanner = memo(() => {
           onClick={() => {
             // If use NextAuth, call openLogin method directly
             if (enableNextAuth) {
-              signIn();
-              return;
+              signIn()
+              return
             }
-            router.push('/login');
+            router.push('/login')
           }}
         />
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default UserBanner;
+export default UserBanner

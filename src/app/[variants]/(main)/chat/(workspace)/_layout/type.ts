@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode }
 
-export interface LayoutProps {
-  children: ReactNode;
-  conversation: ReactNode;
-  portal: ReactNode;
-  topic: ReactNode;
+export interface layoutprops {
+  children: reactnode;
+  conversation: reactnode;
+  portal: reactnode;
+  topic: reactnode;
 }

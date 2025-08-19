@@ -1,46 +1,46 @@
-import { ProviderIcon } from '@lobehub/icons';
-import { Button, type FormItemProps, FormModal, Icon, Input, Select, TextArea } from '@lobehub/ui';
-import { App } from 'antd';
-import { BrainIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ProviderIcon }
+import { Button, type FormItemProps, FormModal, Icon, Input, Select, TextArea }
+import { App }
+import { BrainIcon }
+import { useRouter }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useAiInfraStore } from '@/store/aiInfra/store';
-import { AiProviderDetailItem, UpdateAiProviderParams } from '@/types/aiProvider';
+import { useAiInfraStore }
+import { AiProviderDetailItem, UpdateAiProviderParams }
 
-interface CreateNewProviderProps {
+interface createnewproviderprops {
   id: string;
-  initialValues: AiProviderDetailItem;
+  initialValues: aiproviderdetailitem;
   onClose?: () => void;
   open?: boolean;
 }
 
 const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open, initialValues, id }) => {
-  const { t } = useTranslation(['modelProvider', 'common']);
-  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(['modelProvider', 'common'])
+  const [loading, setLoading] = useState(false)
   const [updateAiProvider, deleteAiProvider] = useAiInfraStore((s) => [
     s.updateAiProvider,
     s.deleteAiProvider,
-  ]);
+  ])
 
-  const { message, modal } = App.useApp();
-  const router = useRouter();
+  const { message, modal } = App.useApp()
+  const router = useRouter()
 
   const onFinish = async (values: UpdateAiProviderParams) => {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await updateAiProvider(id, values);
-      setLoading(false);
-      message.success(t('updateAiProvider.updateSuccess'));
-      onClose?.();
+      await updateAiProvider(id, values)
+      setLoading(false)
+      message.success(t('updateAiProvider.updateSuccess'))
+      onClose?.()
     } catch (e) {
-      console.error(e);
-      setLoading(false);
+      console.error(e)
+      setLoading(false)
     }
-  };
+  }
 
   const basicItems: FormItemProps[] = [
     {
@@ -76,7 +76,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open, initial
       minWidth: 400,
       name: 'logo',
     },
-  ];
+  ]
 
   const configItems: FormItemProps[] = [
     {
@@ -103,7 +103,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open, initial
       name: ['settings', 'sdkType'],
       rules: [{ message: t('createNewAiProvider.sdkType.required'), required: true }],
     },
-  ];
+  ]
 
   return (
     <FormModal
@@ -119,14 +119,14 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open, initial
                 },
                 okText: t('delete', { ns: 'common' }),
                 onOk: async () => {
-                  await deleteAiProvider(id);
-                  router.push('/settings/provider');
+                  await deleteAiProvider(id)
+                  router.push('/settings/provider')
 
-                  onClose?.();
-                  message.success(t('updateAiProvider.deleteSuccess'));
+                  onClose?.()
+                  message.success(t('updateAiProvider.deleteSuccess'))
                 },
                 title: t('updateAiProvider.confirmDelete'),
-              });
+              })
             }}
             type={'primary'}
           >
@@ -162,7 +162,7 @@ const CreateNewProvider = memo<CreateNewProviderProps>(({ onClose, open, initial
         </Flexbox>
       }
     />
-  );
-});
+  )
+})
 
-export default CreateNewProvider;
+export default CreateNewProvider

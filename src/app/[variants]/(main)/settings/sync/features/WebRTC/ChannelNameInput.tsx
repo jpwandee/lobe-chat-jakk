@@ -1,18 +1,18 @@
-import { ActionIcon, Input, InputProps } from '@lobehub/ui';
-import { FormInstance } from 'antd/es/form/hooks/useForm';
-import { LucideDices } from 'lucide-react';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon, Input, InputProps }
+import { FormInstance }
+import { LucideDices }
+import { memo, useState }
+import { useTranslation }
 
-import { generateRandomRoomName } from './generateRandomRoomName';
+import { generateRandomRoomName }
 
-interface ChannelNameInputProps extends Omit<InputProps, 'form'> {
-  form: FormInstance;
+interface channelnameinputprops extends omit<inputprops, 'form'> {
+  form: forminstance;
 }
 
 const ChannelNameInput = memo<ChannelNameInputProps>(({ form, ...rest }) => {
-  const { t } = useTranslation('setting');
-  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation('setting')
+  const [loading, setLoading] = useState(false)
 
   return (
     <Input
@@ -23,12 +23,12 @@ const ChannelNameInput = memo<ChannelNameInputProps>(({ form, ...rest }) => {
           icon={LucideDices}
           loading={loading}
           onClick={async () => {
-            setLoading(true);
-            const name = await generateRandomRoomName();
-            setLoading(false);
-            form.setFieldValue(['sync', 'webrtc', 'channelName'], name);
-            form.setFieldValue(['sync', 'webrtc', 'enabled'], false);
-            form.submit();
+            setLoading(true)
+            const name = await generateRandomRoomName()
+            setLoading(false)
+            form.setFieldValue(['sync', 'webrtc', 'channelName'], name)
+            form.setFieldValue(['sync', 'webrtc', 'enabled'], false)
+            form.submit()
           }}
           size={'small'}
           style={{
@@ -39,7 +39,7 @@ const ChannelNameInput = memo<ChannelNameInputProps>(({ form, ...rest }) => {
       }
       {...rest}
     />
-  );
-});
+  )
+})
 
-export default ChannelNameInput;
+export default ChannelNameInput

@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import { ActionIconGroup, ActionIconGroupProps } from '@lobehub/ui';
-import { Dices, Download, Trash2 } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIconGroup, ActionIconGroupProps }
+import { Dices, Download, Trash2 }
+import { memo }
+import { useTranslation }
 
-import { useStyles } from './styles';
-import { ActionButtonsProps } from './types';
+import { useStyles }
+import { ActionButtonsProps } from './types'
 
 // 操作按钮组件
 export const ActionButtons = memo<ActionButtonsProps>(
@@ -18,8 +18,8 @@ export const ActionButtons = memo<ActionButtonsProps>(
     showCopySeed = false,
     seedTooltip,
   }) => {
-    const { styles } = useStyles();
-    const { t } = useTranslation('image');
+    const { styles } = useStyles()
+    const { t } = useTranslation('image')
 
     return (
       <ActionIconGroup
@@ -53,8 +53,8 @@ export const ActionButtons = memo<ActionButtonsProps>(
         }
         variant="outlined"
       />
-    );
+    )
   },
-);
+)
 
-ActionButtons.displayName = 'ActionButtons';
+ActionButtons.displayName = 'ActionButtons'

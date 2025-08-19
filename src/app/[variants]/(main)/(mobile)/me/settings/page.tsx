@@ -1,30 +1,30 @@
-import { redirect } from 'next/navigation';
+import { redirect }
 
-import { metadataModule } from '@/server/metadata';
-import { translation } from '@/server/translation';
-import { DynamicLayoutProps } from '@/types/next';
-import { RouteVariants } from '@/utils/server/routeVariants';
+import { metadataModule }
+import { translation }
+import { DynamicLayoutProps }
+import { RouteVariants }
 
-import Category from './features/Category';
+import Category from './features/Category'
 
-export const generateMetadata = async (props: DynamicLayoutProps) => {
-  const locale = await RouteVariants.getLocale(props);
-  const { t } = await translation('setting', locale);
+export const generatemetadata = async (props: DynamicLayoutProps) => {
+  const locale = await RouteVariants.getLocale(props)
+  const { t } = await translation('setting', locale)
   return metadataModule.generate({
     description: t('header.desc'),
     title: t('header.title'),
     url: '/me/settings',
-  });
-};
+  })
+}
 
-const Page = async (props: DynamicLayoutProps) => {
-  const isMobile = await RouteVariants.getIsMobile(props);
+const page = async (props: DynamicLayoutProps) => {
+  const isMobile = await RouteVariants.getIsMobile(props)
 
-  if (!isMobile) return redirect('/settings/common');
+  if (!isMobile) return redirect('/settings/common')
 
-  return <Category />;
-};
+  return <Category />
+}
 
-Page.displayName = 'MeSettings';
+Page.displayName = 'MeSettings'
 
-export default Page;
+export default Page

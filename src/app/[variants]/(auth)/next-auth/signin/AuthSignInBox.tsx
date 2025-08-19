@@ -1,55 +1,55 @@
-'use client';
+'use client'
 
-import { Button, Text } from '@lobehub/ui';
-import { LobeChat } from '@lobehub/ui/brand';
-import { Col, Flex, Row, Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { AuthError } from 'next-auth';
-import { signIn } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Text }
+import { LobeChat }
+import { Col, Flex, Row, Skeleton }
+import { createStyles }
+import { AuthError }
+import { signIn }
+import { useRouter, useSearchParams }
+import { memo, useState }
+import { useTranslation }
 
-import BrandWatermark from '@/components/BrandWatermark';
-import AuthIcons from '@/components/NextAuth/AuthIcons';
-import { DOCUMENTS_REFER_URL, PRIVACY_URL, TERMS_URL } from '@/const/url';
-import { useUserStore } from '@/store/user';
+import BrandWatermark from '@/components/BrandWatermark'
+import AuthIcons from '@/components/NextAuth/AuthIcons'
+import { DOCUMENTS_REFER_URL, PRIVACY_URL, TERMS_URL }
+import { useUserStore }
 
 const useStyles = createStyles(({ css, token }) => ({
   button: css`
-    text-transform: capitalize;
+    text-transform: capitalize
   `,
   container: css`
-    min-width: 360px;
-    border: 1px solid ${token.colorBorder};
-    border-radius: ${token.borderRadiusLG}px;
-    background: ${token.colorBgContainer};
+    min-width: 360px
+    border: 1px solid ${token.colorBorder}
+    border-radius: ${token.borderRadiusLG}px
+    background: ${token.colorBgContainer}
   `,
   contentCard: css`
-    padding-block: 2.5rem;
-    padding-inline: 2rem;
+    padding-block: 2.5rem
+    padding-inline: 2rem
   `,
   description: css`
-    margin: 0;
-    color: ${token.colorTextSecondary};
+    margin: 0
+    color: ${token.colorTextSecondary}
   `,
   footer: css`
-    padding: 1rem;
-    border-block-start: 1px solid ${token.colorBorder};
-    border-radius: 0 0 8px 8px;
+    padding: 1rem
+    border-block-start: 1px solid ${token.colorBorder}
+    border-radius: 0 0 8px 8px
 
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
 
-    background: ${token.colorBgElevated};
+    background: ${token.colorBgElevated}
   `,
   text: css`
-    text-align: center;
+    text-align: center
   `,
   title: css`
-    margin: 0;
-    color: ${token.colorTextHeading};
+    margin: 0
+    color: ${token.colorTextHeading}
   `,
-}));
+}))
 
 const BtnListLoading = memo(() => {
   return (
@@ -58,8 +58,8 @@ const BtnListLoading = memo(() => {
       <Skeleton.Button active style={{ minWidth: 300 }} />
       <Skeleton.Button active style={{ minWidth: 300 }} />
     </Flex>
-  );
-});
+  )
+})
 
 /**
  * Follow the implementation from AuthJS official documentation,
@@ -67,43 +67,43 @@ const BtnListLoading = memo(() => {
  * ref: https://authjs.dev/guides/pages/signin
  */
 export default memo(() => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('clerk');
-  const router = useRouter();
-  const [loadingProvider, setLoadingProvider] = useState<string | null>(null);
+  const { styles } = useStyles()
+  const { t } = useTranslation('clerk')
+  const router = useRouter()
+  const [loadingProvider, setLoadingProvider] = useState<string | null>(null)
 
-  const oAuthSSOProviders = useUserStore((s) => s.oAuthSSOProviders);
+  const oAuthSSOProviders = useUserStore((s) => s.oAuthSSOProviders)
 
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
 
   // Redirect back to the page url, fallback to '/' if failed
-  const callbackUrl = searchParams.get('callbackUrl') ?? '/';
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/'
 
   const handleSignIn = async (provider: string) => {
-    setLoadingProvider(provider);
+    setLoadingProvider(provider)
     try {
-      await signIn(provider, { redirectTo: callbackUrl });
+      await signIn(provider, { redirectTo: callbackUrl })
     } catch (error) {
-      setLoadingProvider(null);
+      setLoadingProvider(null)
       // Signin can fail for a number of reasons, such as the user
       // not existing, or the user not having the correct role.
       // In some cases, you may want to redirect to a custom error
       if (error instanceof AuthError) {
-        return router.push(`/next-auth/?error=${error.type}`);
+        return router.push(`/next-auth/?error=${error.type}`)
       }
 
       // Otherwise if a redirects happens Next.js can handle it
       // so you can just re-thrown the error and let Next.js handle it.
       // Docs: https://nextjs.org/docs/app/api-reference/functions/redirect#server-component
-      throw error;
+      throw error
     }
-  };
+  }
 
   const footerBtns = [
     { href: DOCUMENTS_REFER_URL, id: 0, label: t('footerPageLink__help') },
     { href: PRIVACY_URL, id: 1, label: t('footerPageLink__privacy') },
     { href: TERMS_URL, id: 2, label: t('footerPageLink__terms') },
-  ];
+  ]
 
   return (
     <div className={styles.container}>
@@ -162,5 +162,5 @@ export default memo(() => {
         </Row>
       </div>
     </div>
-  );
-});
+  )
+})

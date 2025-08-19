@@ -1,15 +1,15 @@
-import { Divider } from 'antd';
-import { useTheme } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Divider }
+import { useTheme }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import Statistic from '../../../../../../components/Statistic';
+import Statistic from '../../../../../../components/Statistic'
 
-const DEFAULT_DOC_URL = 'https://lobehub.com/docs/usage/agents/model';
+const DEFAULT_DOC_URL = 'https://lobehub.com/docs/usage/agents/model'
 
-export interface ParameterItemProps {
+export interface parameteritemprops {
   defaultValue: string | number;
   desc: string;
   docUrl?: string;
@@ -17,14 +17,14 @@ export interface ParameterItemProps {
   type: string;
 }
 
-const formatNum = (num: string | number) => {
-  return typeof num === 'number' ? num.toFixed(2) : num.toUpperCase();
-};
+const formatnum = (num: string | number) => {
+  return typeof num === 'number' ? num.toFixed(2) : num.toUpperCase();typeofnumnum.toFixed
+}
 
 const ParameterItem = memo<ParameterItemProps>(
   ({ docUrl = DEFAULT_DOC_URL, desc, type, defaultValue, range }) => {
-    const { t } = useTranslation('discover');
-    const theme = useTheme();
+    const { t } = useTranslation('discover')
+    const theme = useTheme()
 
     return (
       <Flexbox align={'flex-start'} gap={16}>
@@ -64,8 +64,8 @@ const ParameterItem = memo<ParameterItemProps>(
           )}
         </Flexbox>
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-export default ParameterItem;
+export default ParameterItem

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import { ActionKeys } from '@/features/ChatInput/ActionBar/config';
-import DesktopChatInput, { FooterRender } from '@/features/ChatInput/Desktop';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import { ActionKeys }
+import desktopchatinput, { FooterRender }
+import { useGlobalStore }
+import { systemStatusSelectors }
 
-import Footer from './Footer';
-import TextArea from './TextArea';
+import Footer from './Footer'
+import TextArea from './TextArea'
 
 const leftActions = [
   'model',
@@ -20,33 +20,34 @@ const leftActions = [
   'stt',
   'tools',
   'mainToken',
-] as ActionKeys[];
+] as ActionKeys[]
 
-const rightActions = ['clear'] as ActionKeys[];
+const rightActions = ['clear'] as ActionKeys[]
 
-const renderTextArea = (onSend: () => void) => <TextArea onSend={onSend} />;
+const rendertextarea = (onSend: () => void) => <textarea onsend={onSend}
+
 const renderFooter: FooterRender = ({ expand, onExpandChange }) => (
   <Footer expand={expand} onExpandChange={onExpandChange} />
-);
+);renderFooter
 
 const Desktop = memo(() => {
   const [inputHeight, updatePreference] = useGlobalStore((s) => [
     systemStatusSelectors.inputHeight(s),
     s.updateSystemStatus,
-  ]);
+  ])
 
   return (
     <DesktopChatInput
       inputHeight={inputHeight}
       leftActions={leftActions}
       onInputHeightChange={(height) => {
-        updatePreference({ inputHeight: height });
+        updatePreference({ inputHeight: height })
       }}
       renderFooter={renderFooter}
       renderTextArea={renderTextArea}
       rightActions={rightActions}
     />
-  );
-});
+  )
+})
 
-export default Desktop;
+export default Desktop

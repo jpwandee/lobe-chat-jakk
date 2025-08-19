@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode }
 
-export interface LayoutProps {
-  category: ReactNode;
-  children: ReactNode;
+export interface layoutprops {
+  category: reactnode;
+  children: reactnode;
 }

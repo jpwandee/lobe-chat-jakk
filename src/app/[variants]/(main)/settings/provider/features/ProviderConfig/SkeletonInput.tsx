@@ -1,5 +1,5 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
+import { Skeleton } from 'antd'
 
-export const SkeletonInput = () => <Skeleton.Input active block />;
+export const SkeletonInput = () => <Skeleton.Input active block />

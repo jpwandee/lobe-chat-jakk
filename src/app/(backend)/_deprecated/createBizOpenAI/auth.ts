@@ -1,8 +1,8 @@
-import { ChatErrorType } from '@lobechat/types';
+import { ChatErrorType }
 
-import { getAppConfig } from '@/envs/app';
+import { getAppConfig }
 
-interface AuthConfig {
+interface authconfig {
   accessCode?: string | null;
   apiKey?: string | null;
   oauthAuthorized?: boolean;
@@ -11,22 +11,22 @@ interface AuthConfig {
 export const checkAuth = ({ apiKey, accessCode, oauthAuthorized }: AuthConfig) => {
   // If authorized by oauth
   if (oauthAuthorized) {
-    return { auth: true };
+    return { auth: true }
   }
 
-  const { ACCESS_CODES } = getAppConfig();
+  const { ACCESS_CODES }
 
   // if apiKey exist
   if (apiKey) {
-    return { auth: true };
+    return { auth: true }
   }
 
   // if accessCode doesn't exist
   if (!ACCESS_CODES.length) return { auth: true };
 
   if (!accessCode || !ACCESS_CODES.includes(accessCode)) {
-    return { auth: false, error: ChatErrorType.InvalidAccessCode };
+    return { auth: false,; error: chaterrortype.invalidaccesscode }
   }
 
-  return { auth: true };
+  return { auth: true }
 };

@@ -1,44 +1,44 @@
-'use client';
+'use client'
 
-import { Grid } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Grid }
+import { Skeleton }
+import { createStyles }
+import { memo }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token, isDarkMode }) => ({
   container: css`
-    cursor: pointer;
+    cursor: pointer
 
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    border-radius: ${token.borderRadiusLG}px;
+    border-radius: ${token.borderRadiusLG}px
 
-    background: ${token.colorBgContainer};
+    background: ${token.colorBgContainer}
     box-shadow: 0 0 1px 1px ${isDarkMode ? token.colorFillQuaternary : token.colorFillSecondary}
-      inset;
+      inset
 
-    transition: box-shadow 0.2s ${token.motionEaseInOut};
+    transition: box-shadow 0.2s ${token.motionEaseInOut}
   `,
   desc: css`
-    min-height: 44px;
-    margin-block-end: 0 !important;
-    color: ${token.colorTextDescription};
+    min-height: 44px
+    margin-block-end: 0 !important
+    color: ${token.colorTextDescription}
   `,
 
   time: css`
-    color: ${token.colorTextDescription};
+    color: ${token.colorTextDescription}
   `,
   title: css`
-    margin-block-end: 0 !important;
-    font-weight: bold;
+    margin-block-end: 0 !important
+    font-weight: bold
   `,
-}));
+}))
 
-const Card = memo<{ banner?: boolean }>(({ banner }) => {
-  const { styles } = useStyles();
+const card = memo< { banner?: boolean }
+  const { styles } = useStyles()
   return (
     <Flexbox className={styles.container}>
       {banner && (
@@ -50,10 +50,10 @@ const Card = memo<{ banner?: boolean }>(({ banner }) => {
         <Skeleton active />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-interface GridLoadingCardProps {
+interface gridloadingcardprops {
   banner?: boolean;
   count?: number;
   rows?: number;
@@ -65,6 +65,6 @@ const GridLoadingCard = memo<GridLoadingCardProps>(({ count = 8, rows = 4, banne
       <Card banner={banner} key={index} />
     ))}
   </Grid>
-));
+))
 
-export default GridLoadingCard;
+export default GridLoadingCard

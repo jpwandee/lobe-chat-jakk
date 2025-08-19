@@ -1,6 +1,7 @@
-'use client';
+'use client'
 
-import { ProviderCombine } from '@lobehub/icons';
+import { ProviderCombine }
+
 import {
   Avatar,
   Form,
@@ -8,111 +9,113 @@ import {
   type FormItemProps,
   Icon,
   Tooltip,
-} from '@lobehub/ui';
-import { useDebounceFn } from 'ahooks';
-import { Skeleton, Switch } from 'antd';
-import { createStyles } from 'antd-style';
-import { Loader2Icon, LockIcon } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode, memo, useCallback, useLayoutEffect, useRef } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
-import { z } from 'zod';
+}
+import { useDebounceFn }
+import { Skeleton, Switch }
+import { createStyles }
+import { Loader2Icon, LockIcon }
+import Link from 'next/link'
+import { ReactNode, memo, useCallback, useLayoutEffect, useRef }
+import { Trans, useTranslation }
+import { Center, Flexbox }
+import urlJoin from 'url-join'
+import { z }
 
-import { FormInput, FormPassword } from '@/components/FormInput';
-import { FORM_STYLE } from '@/const/layoutTokens';
-import { AES_GCM_URL, BASE_PROVIDER_DOC_URL } from '@/const/url';
-import { isDesktop, isServerMode } from '@/const/version';
-import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { FormInput, FormPassword }
+import { FORM_STYLE }
+import { AES_GCM_URL, BASE_PROVIDER_DOC_URL }
+import { isDesktop, isServerMode }
+import { aiProviderSelectors, useAiInfraStore }
+
 import {
   AiProviderDetailItem,
   AiProviderSourceEnum,
   AiProviderSourceType,
-} from '@/types/aiProvider';
+}
 
-import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey } from '../../const';
-import Checker, { CheckErrorRender } from './Checker';
-import EnableSwitch from './EnableSwitch';
-import { SkeletonInput } from './SkeletonInput';
-import UpdateProviderInfo from './UpdateProviderInfo';
+import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey }
+import checker, { CheckErrorRender }
+import EnableSwitch from './EnableSwitch'
+import { SkeletonInput }
+import UpdateProviderInfo from './UpdateProviderInfo'
 
 const useStyles = createStyles(({ css, prefixCls, responsive, token }) => ({
   aceGcm: css`
-    padding-block: 0 !important;
+    padding-block: 0 !important
     .${prefixCls}-form-item-label {
-      display: none;
+      display: none
     }
     .${prefixCls}-form-item-control {
-      width: 100%;
+      width: 100%
 
-      font-size: 12px;
-      color: ${token.colorTextSecondary};
-      text-align: center;
+      font-size: 12px
+      color: ${token.colorTextSecondary}
+      text-align: center
 
-      opacity: 0.66;
+      opacity: 0.66
 
-      transition: opacity 0.2s ${token.motionEaseInOut};
+      transition: opacity 0.2s ${token.motionEaseInOut}
 
       &:hover {
-        opacity: 1;
+        opacity: 1
       }
     }
   `,
   form: css`
     .${prefixCls}-form-item-control:has(.${prefixCls}-input,.${prefixCls}-select) {
-      flex: none;
-      width: min(70%, 800px);
-      min-width: min(70%, 800px) !important;
+      flex: none
+      width: min(70%, 800px)
+      min-width: min(70%, 800px) !important
     }
     ${responsive.mobile} {
-      width: 100%;
-      min-width: unset !important;
+      width: 100%
+      min-width: unset !important
     }
     .${prefixCls}-select-selection-overflow-item {
-      font-size: 12px;
+      font-size: 12px
     }
   `,
   help: css`
-    border-radius: 50%;
+    border-radius: 50%
 
-    font-size: 12px;
-    font-weight: 500;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    font-weight: 500
+    color: ${token.colorTextDescription}
 
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
 
     &:hover {
-      color: ${token.colorText};
-      background: ${token.colorFill};
+      color: ${token.colorText}
+      background: ${token.colorFill}
     }
   `,
   switchLoading: css`
-    width: 44px !important;
-    min-width: 44px !important;
-    height: 22px !important;
-    border-radius: 12px !important;
+    width: 44px !important
+    min-width: 44px !important
+    height: 22px !important
+    border-radius: 12px !important
   `,
-}));
+}))
 
-export interface ProviderConfigProps extends Omit<AiProviderDetailItem, 'enabled' | 'source'> {
-  apiKeyItems?: FormItemProps[];
+export interface providerconfigprops extends omit<aiproviderdetailitem, 'enabled' | 'source'> {
+  apiKeyItems?: formitemprops[];
   apiKeyUrl?: string;
   canDeactivate?: boolean;
-  checkErrorRender?: CheckErrorRender;
+  checkErrorRender?: checkerrorrender;
   className?: string;
   enabled?: boolean;
-  extra?: ReactNode;
+  extra?: reactnode;
   hideSwitch?: boolean;
   modelList?: {
     azureDeployName?: boolean;
-    notFoundContent?: ReactNode;
+    notFoundContent?: reactnode;
     placeholder?: string;
     showModelFetcher?: boolean;
   };
+
   showAceGcm?: boolean;
-  source?: AiProviderSourceType;
-  title?: ReactNode;
+  source?: aiprovidersourcetype;
+  title?: reactnode;
 }
 
 const ProviderConfig = memo<ProviderConfigProps>(
@@ -137,10 +140,10 @@ const ProviderConfig = memo<ProviderConfigProps>(
       disableBrowserRequest,
       showChecker = true,
       supportResponsesApi,
-    } = settings || {};
-    const { t } = useTranslation('modelProvider');
-    const [form] = Form.useForm();
-    const { cx, styles, theme } = useStyles();
+    } = settings || {}
+    const { t } = useTranslation('modelProvider')
+    const [form] = Form.useForm()
+    const { cx, styles, theme } = useStyles()
 
     const [
       useFetchAiProviderItem,
@@ -162,19 +165,19 @@ const ProviderConfig = memo<ProviderConfigProps>(
       aiProviderSelectors.isProviderEnableResponseApi(id)(s),
       aiProviderSelectors.isActiveProviderEndpointNotEmpty(s),
       aiProviderSelectors.isActiveProviderApiKeyNotEmpty(s),
-    ]);
+    ])
 
-    const { data } = useFetchAiProviderItem(id);
+    const { data } = useFetchAiProviderItem(id)
 
     useLayoutEffect(() => {
-      if (isLoading) return;
+      if (isLoading) return
 
       // set the first time
-      form.setFieldsValue(data);
-    }, [isLoading, id, data]);
+      form.setFieldsValue(data)
+    }, [isLoading, id, data])
 
     // 标记是否正在进行连接测试
-    const isCheckingConnection = useRef(false);
+    const isCheckingConnection = useRef(false)
 
     const handleValueChange = useCallback(
       (...params: Parameters<typeof updateAiProviderConfig>) => {
@@ -182,17 +185,17 @@ const ProviderConfig = memo<ProviderConfigProps>(
         // 但是由于 debouncedHandleValueChange 因为 debounce 的原因，本来就会晚 500ms 执行
         // 所以 isCheckingConnection.current 这时候已经更新了
         // 测试链接时已经出发一次了 updateAiProviderConfig ， 不应该重复更新
-        if (isCheckingConnection.current) return;
+        if (isCheckingConnection.current) return
 
-        updateAiProviderConfig(...params);
+        updateAiProviderConfig(...params)
       },
       [updateAiProviderConfig],
-    );
+    )
     const { run: debouncedHandleValueChange } = useDebounceFn(handleValueChange, {
       wait: 500,
-    });
+    })
 
-    const isCustom = source === AiProviderSourceEnum.Custom;
+    const isCustom = source === AiProviderSourceEnum.Custom
 
     const apiKeyItem: FormItemProps[] = !showApiKey
       ? []
@@ -228,7 +231,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
             label: t(`providerModels.config.apiKey.title`),
             name: [KeyVaultsConfigKey, LLMProviderApiTokenKey],
           },
-        ]);
+        ])
 
     const aceGcmItem: FormItemProps = {
       children: (
@@ -245,9 +248,9 @@ const ProviderConfig = memo<ProviderConfigProps>(
       ),
       className: styles.aceGcm,
       minWidth: undefined,
-    };
+    }
 
-    const showEndpoint = !!proxyUrl || isCustom;
+    const showEndpoint = !!proxyUrl || isCustom
 
     const endpointItem = showEndpoint
       ? {
@@ -273,16 +276,16 @@ const ProviderConfig = memo<ProviderConfigProps>(
           rules: [
             {
               validator: (_: any, value: string) => {
-                if (!value) return;
+                if (!value) return
 
                 return z.string().url().safeParse(value).error
                   ? Promise.reject(t('providerModels.config.baseURL.invalid'))
-                  : Promise.resolve();
+                  : Promise.resolve()
               },
             },
           ],
         }
-      : undefined;
+      : undefined
 
     /*
      * Conditions to show Client Fetch Switch
@@ -297,7 +300,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
       !disableBrowserRequest &&
       (defaultShowBrowserRequest ||
         (showEndpoint && isProviderEndpointNotEmpty) ||
-        (showApiKey && isProviderApiKeyNotEmpty));
+        (showApiKey && isProviderApiKeyNotEmpty))
     const clientFetchItem = showClientFetch && {
       children: isLoading ? (
         <Skeleton.Button active className={styles.switchLoading} />
@@ -308,7 +311,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
       label: t('providerModels.config.fetchOnClient.title'),
       minWidth: undefined,
       name: 'fetchOnClient',
-    };
+    }
 
     const configItems = [
       ...apiKeyItem,
@@ -337,13 +340,13 @@ const ProviderConfig = memo<ProviderConfigProps>(
                 model={data?.checkModel || checkModel!}
                 onAfterCheck={async () => {
                   // 重置连接测试状态，允许后续的 onValuesChange 更新
-                  isCheckingConnection.current = false;
+                  isCheckingConnection.current = false
                 }}
                 onBeforeCheck={async () => {
                   // 设置连接测试状态，阻止 onValuesChange 的重复请求
-                  isCheckingConnection.current = true;
+                  isCheckingConnection.current = true
                   // 主动保存表单最新值，确保 fetchAiProviderRuntimeState 获取最新数据
-                  await updateAiProviderConfig(id, form.getFieldsValue());
+                  await updateAiProviderConfig(id, form.getFieldsValue())
                 }}
                 provider={id}
               />
@@ -354,9 +357,9 @@ const ProviderConfig = memo<ProviderConfigProps>(
           }
         : undefined,
       showAceGcm && isServerMode && aceGcmItem,
-    ].filter(Boolean) as FormItemProps[];
+    ].filter(Boolean) as FormItemProps[]
 
-    const logoUrl = data?.logo ?? logo;
+    const logoUrl = data?.logo ?? logo
     const model: FormGroupItemType = {
       children: configItems,
 
@@ -408,7 +411,7 @@ const ProviderConfig = memo<ProviderConfigProps>(
           )}
         </Flexbox>
       ),
-    };
+    }
 
     return (
       <Form
@@ -416,15 +419,15 @@ const ProviderConfig = memo<ProviderConfigProps>(
         form={form}
         items={[model]}
         onValuesChange={(_, values) => {
-          debouncedHandleValueChange(id, values);
+          debouncedHandleValueChange(id, values)
         }}
         variant={'borderless'}
         {...FORM_STYLE}
       />
-    );
+    )
   },
-);
+)
 
-export default ProviderConfig;
+export default ProviderConfig
 
-export { SkeletonInput } from './SkeletonInput';
+export { SkeletonInput } from './SkeletonInput'

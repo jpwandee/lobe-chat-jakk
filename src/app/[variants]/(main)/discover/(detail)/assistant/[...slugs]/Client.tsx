@@ -1,29 +1,29 @@
-'use client';
+'use client'
 
-import { notFound } from 'next/navigation';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { notFound }
+import { memo }
+import { Flexbox }
 
-import { withSuspense } from '@/components/withSuspense';
-import { useDiscoverStore } from '@/store/discover';
+import { withSuspense }
+import { useDiscoverStore }
 
-import { TocProvider } from '../../features/Toc/useToc';
-import { DetailProvider } from './features/DetailProvider';
-import Details from './features/Details';
-import Header from './features/Header';
-import Loading from './loading';
+import { TocProvider }
+import { DetailProvider }
+import Details from './features/Details'
+import Header from './features/Header'
+import Loading from './loading'
 
-interface ClientProps {
+interface clientprops {
   identifier: string;
   mobile?: boolean;
 }
 
 const Client = memo<ClientProps>(({ identifier, mobile }) => {
-  const useAssistantDetail = useDiscoverStore((s) => s.useAssistantDetail);
-  const { data, isLoading } = useAssistantDetail({ identifier });
+  const useAssistantDetail = useDiscoverStore((s) => s.useAssistantDetail)
+  const { data, isLoading } = useAssistantDetail({ identifier })
 
-  if (isLoading) return <Loading />;
-  if (!data) return notFound();
+  if (isLoading) return <Loading />
+  if (!data) return notFound()
 
   return (
     <TocProvider>
@@ -34,7 +34,7 @@ const Client = memo<ClientProps>(({ identifier, mobile }) => {
         </Flexbox>
       </DetailProvider>
     </TocProvider>
-  );
-});
+  )
+})
 
-export default withSuspense(Client);
+export default withSuspense(Client)

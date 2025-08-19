@@ -1,14 +1,14 @@
-import NProgress from '@/components/NProgress';
+import NProgress from '@/components/NProgress'
 
-const Layout = () => {
+const layout = () => {
   return (
     <>
       <NProgress />
       <h2>Coming Soon!</h2>
     </>
-  );
-};
+  )
+}
 
-Layout.displayName = 'MobileAiImageLayout';
+Layout.displayName = 'MobileAiImageLayout'
 
-export default Layout;
+export default Layout

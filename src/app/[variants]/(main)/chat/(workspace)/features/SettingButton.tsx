@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { AlignJustify } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ActionIcon }
+import { AlignJustify }
+import dynamic from 'next/dynamic'
+import { memo }
+import { useTranslation }
 
-import { DESKTOP_HEADER_ICON_SIZE, MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
-import { useOpenChatSettings } from '@/hooks/useInterceptingRoutes';
-import { useSessionStore } from '@/store/session';
-import { useUserStore } from '@/store/user';
-import { settingsSelectors } from '@/store/user/selectors';
-import { HotkeyEnum } from '@/types/hotkey';
+import { DESKTOP_HEADER_ICON_SIZE, MOBILE_HEADER_ICON_SIZE }
+import { useOpenChatSettings }
+import { useSessionStore }
+import { useUserStore }
+import { settingsSelectors }
+import { HotkeyEnum }
 
 const AgentSettings = dynamic(() => import('./AgentSettings'), {
   ssr: false,
-});
+})
 
-const SettingButton = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.OpenChatSettings));
-  const { t } = useTranslation('common');
-  const openChatSettings = useOpenChatSettings();
-  const id = useSessionStore((s) => s.activeId);
+const settingbutton = memo< { mobile?: boolean }>(({ mobile }) => {
+  const hotkey = useUserStore(settingsSelectors.getHotkeyById(HotkeyEnum.OpenChatSettings))
+  const { t } = useTranslation('common')
+  const openChatSettings = useOpenChatSettings()
+  const id = useSessionStore((s) => s.activeId)
 
   return (
     <>
@@ -37,7 +37,7 @@ const SettingButton = memo<{ mobile?: boolean }>(({ mobile }) => {
       />
       <AgentSettings key={id} />
     </>
-  );
-});
+  )
+})
 
-export default SettingButton;
+export default SettingButton

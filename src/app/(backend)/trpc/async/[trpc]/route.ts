@@ -1,9 +1,9 @@
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import type { NextRequest } from 'next/server';
+import { fetchRequestHandler }
+import type { NextRequest }
 
-import { pino } from '@/libs/logger';
-import { createAsyncRouteContext } from '@/libs/trpc/async/context';
-import { asyncRouter } from '@/server/routers/async';
+import { pino }
+import { createAsyncRouteContext }
+import { asyncRouter }
 
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
@@ -19,12 +19,12 @@ const handler = (req: NextRequest) =>
     endpoint: '/trpc/async',
 
     onError: ({ error, path, type }) => {
-      pino.info(`Error in tRPC handler (async) on path: ${path}, type: ${type}`);
-      console.error(error);
+      pino.info(`Error in tRPC handler (async) on path: ${path}, type: ${type}`)
+      console.error(error)
     },
 
     req,
     router: asyncRouter,
-  });
+  })
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

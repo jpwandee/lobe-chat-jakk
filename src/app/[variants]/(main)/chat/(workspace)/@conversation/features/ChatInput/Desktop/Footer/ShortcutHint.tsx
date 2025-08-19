@@ -1,25 +1,25 @@
-import { Hotkey, combineKeys } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Hotkey, combineKeys }
+import { useTheme }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
-import { KeyEnum } from '@/types/hotkey';
+import { useUserStore }
+import { preferenceSelectors }
+import { KeyEnum } from '@/types/hotkey'
 
 const ShortcutHint = memo(() => {
-  const { t } = useTranslation('chat');
-  const theme = useTheme();
-  const useCmdEnterToSend = useUserStore(preferenceSelectors.useCmdEnterToSend);
+  const { t } = useTranslation('chat')
+  const theme = useTheme()
+  const useCmdEnterToSend = useUserStore(preferenceSelectors.useCmdEnterToSend)
 
   const sendShortcut = useCmdEnterToSend
     ? combineKeys([KeyEnum.Mod, KeyEnum.Enter])
-    : KeyEnum.Enter;
+    : KeyEnum.Enter
 
   const wrapperShortcut = useCmdEnterToSend
     ? KeyEnum.Enter
-    : combineKeys([KeyEnum.Mod, KeyEnum.Enter]);
+    : combineKeys([KeyEnum.Mod, KeyEnum.Enter])
 
   return (
     <Flexbox
@@ -34,7 +34,7 @@ const ShortcutHint = memo(() => {
       <Hotkey keys={wrapperShortcut} style={{ color: 'inherit' }} variant={'borderless'} />
       <span>{t('input.warp')}</span>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ShortcutHint;
+export default ShortcutHint

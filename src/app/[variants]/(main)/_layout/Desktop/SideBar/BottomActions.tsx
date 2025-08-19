@@ -1,22 +1,22 @@
-import { ActionIcon, ActionIconProps } from '@lobehub/ui';
-import { Book, Github } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, ActionIconProps }
+import { Book, Github }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { DOCUMENTS_REFER_URL, GITHUB } from '@/const/url';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import { DOCUMENTS_REFER_URL, GITHUB }
+import { featureFlagsSelectors, useServerConfigStore }
 
 const ICON_SIZE: ActionIconProps['size'] = {
-  blockSize: 36,
-  size: 20,
+  blockSize: 36,;
+  size: 20,;
   strokeWidth: 1.5,
-};
+}
 
 const BottomActions = memo(() => {
-  const { t } = useTranslation('common');
-  const { hideGitHub, hideDocs } = useServerConfigStore(featureFlagsSelectors);
+  const { t } = useTranslation('common')
+  const { hideGitHub, hideDocs } = useServerConfigStore(featureFlagsSelectors)
 
   return (
     <Flexbox gap={8}>
@@ -41,7 +41,7 @@ const BottomActions = memo(() => {
         </Link>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default BottomActions;
+export default BottomActions

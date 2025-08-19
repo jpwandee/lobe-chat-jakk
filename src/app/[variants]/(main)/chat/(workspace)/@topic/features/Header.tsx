@@ -1,35 +1,35 @@
-'use client';
+'use client'
 
-import { ActionIcon, Dropdown, Icon, type MenuProps } from '@lobehub/ui';
-import { App } from 'antd';
-import type { ItemType } from 'antd/es/menu/interface';
-import { LucideCheck, MoreHorizontal, Search, Trash } from 'lucide-react';
-import { memo, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, Dropdown, Icon, type MenuProps }
+import { App }
+import type { ItemType }
+import { LucideCheck, MoreHorizontal, Search, Trash }
+import { memo, useMemo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import SidebarHeader from '@/components/SidebarHeader';
-import { useChatStore } from '@/store/chat';
-import { topicSelectors } from '@/store/chat/selectors';
-import { useUserStore } from '@/store/user';
-import { preferenceSelectors } from '@/store/user/selectors';
-import { TopicDisplayMode } from '@/types/topic';
+import SidebarHeader from '@/components/SidebarHeader'
+import { useChatStore }
+import { topicSelectors }
+import { useUserStore }
+import { preferenceSelectors }
+import { TopicDisplayMode } from '@/types/topic'
 
-import TopicSearchBar from './TopicSearchBar';
+import TopicSearchBar from './TopicSearchBar'
 
 const Header = memo(() => {
-  const { t } = useTranslation(['topic', 'common']);
+  const { t } = useTranslation(['topic', 'common'])
   const [topicLength, removeUnstarredTopic, removeAllTopic] = useChatStore((s) => [
     topicSelectors.currentTopicLength(s),
     s.removeUnstarredTopic,
     s.removeSessionTopics,
-  ]);
+  ])
   const [topicDisplayMode, updatePreference] = useUserStore((s) => [
     preferenceSelectors.topicDisplayMode(s),
     s.updatePreference,
-  ]);
-  const [showSearch, setShowSearch] = useState(false);
-  const { modal } = App.useApp();
+  ])
+  const [showSearch, setShowSearch] = useState(false)
+  const { modal } = App.useApp()
 
   const items = useMemo<MenuProps['items']>(
     () => [
@@ -38,7 +38,7 @@ const Header = memo(() => {
         key: mode,
         label: t(`groupMode.${mode}`),
         onClick: () => {
-          updatePreference({ topicDisplayMode: mode });
+          updatePreference({ topicDisplayMode: mode })
         },
       })) as ItemType[]),
       {
@@ -56,7 +56,7 @@ const Header = memo(() => {
             okText: t('ok', { ns: 'common' }),
             onOk: removeUnstarredTopic,
             title: t('actions.confirmRemoveUnstarred'),
-          });
+          })
         },
       },
       {
@@ -72,12 +72,12 @@ const Header = memo(() => {
             okText: t('ok', { ns: 'common' }),
             onOk: removeAllTopic,
             title: t('actions.confirmRemoveAll'),
-          });
+          })
         },
       },
     ],
     [topicDisplayMode],
-  );
+  )
 
   return showSearch ? (
     <Flexbox padding={'12px 16px 4px'}>
@@ -93,7 +93,7 @@ const Header = memo(() => {
             menu={{
               items: items,
               onClick: ({ domEvent }) => {
-                domEvent.stopPropagation();
+                domEvent.stopPropagation()
               },
             }}
             trigger={['click']}
@@ -104,7 +104,7 @@ const Header = memo(() => {
       }
       title={`${t('title')} ${topicLength > 1 ? topicLength + 1 : ''}`}
     />
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

@@ -1,38 +1,38 @@
-import { FluentEmoji } from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { useTheme } from 'antd-style';
-import { Clock3Icon, ClockArrowUp } from 'lucide-react';
-import { memo } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { FluentEmoji }
+import { Skeleton }
+import { useTheme }
+import { Clock3Icon, ClockArrowUp }
+import { memo }
+import { Trans, useTranslation }
+import { Flexbox }
 
-import { BRANDING_NAME } from '@/const/branding';
-import { useClientDataSWR } from '@/libs/swr';
-import { userService } from '@/services/user';
-import { useUserStore } from '@/store/user';
-import { userProfileSelectors } from '@/store/user/selectors';
-import { formatIntergerNumber } from '@/utils/format';
+import { BRANDING_NAME }
+import { useClientDataSWR }
+import { userService }
+import { useUserStore }
+import { userProfileSelectors }
+import { formatIntergerNumber }
 
-import TimeLabel from './TimeLabel';
+import TimeLabel from './TimeLabel'
 
-const formatEnglishNumber = (number: number) => {
-  if (number === 1) return '1st';
-  if (number === 2) return '2nd';
-  if (number === 3) return '3rd';
-  return `${formatIntergerNumber(number)}th`;
-};
+const formatenglishnumber = (number: number) => {
+  if (number === 1) return '1st'
+  if (number === 2) return '2nd'
+  if (number === 3) return '3rd'
+  return `${formatIntergerNumber(number)}th`
+}
 
-const Welcome = memo<{ mobile?: boolean }>(({ mobile }) => {
-  const { t, i18n } = useTranslation('auth');
-  const theme = useTheme();
+const welcome = memo< { mobile?: boolean }>(({ mobile }) => {
+  const { t, i18n } = useTranslation('auth')
+  const theme = useTheme()
   const [nickname, username] = useUserStore((s) => [
     userProfileSelectors.nickName(s),
     userProfileSelectors.username(s),
-  ]);
+  ])
 
   const { data, isLoading } = useClientDataSWR('welcome', async () =>
     userService.getUserRegistrationDuration(),
-  );
+  )
 
   return (
     <Flexbox gap={8} padding={mobile ? 16 : 0}>
@@ -81,7 +81,7 @@ const Welcome = memo<{ mobile?: boolean }>(({ mobile }) => {
         <TimeLabel date={data?.updatedAt} icon={ClockArrowUp} title={t('stats.updatedAt')} />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Welcome;
+export default Welcome

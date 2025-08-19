@@ -1,100 +1,100 @@
-import { Github } from '@lobehub/icons';
-import { Grid } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Github }
+import { Grid }
+import { createStyles }
+import { memo }
+import { useTranslation }
+import { Center, Flexbox }
 
-import { ProductLogo } from '@/components/Branding';
-import { OFFICIAL_URL, imageUrl } from '@/const/url';
-import { isServerMode } from '@/const/version';
-import UserAvatar from '@/features/User/UserAvatar';
+import { ProductLogo }
+import { OFFICIAL_URL, imageUrl }
+import { isServerMode } from '@/const/version'
+import UserAvatar from '@/features/User/UserAvatar'
 
-import AiHeatmaps from '../AiHeatmaps';
-import TotalMessages from '../TotalMessages';
-import TotalWords from '../TotalWords';
+import AiHeatmaps from '../AiHeatmaps'
+import TotalMessages from '../TotalMessages'
+import TotalWords from '../TotalWords'
 
 const useStyles = createStyles(({ css, token, stylish, cx, responsive }) => ({
   avatar: css`
-    box-sizing: content-box;
-    border: 4px solid ${token.colorBgLayout};
-    background: ${token.colorText};
+    box-sizing: content-box
+    border: 4px solid ${token.colorBgLayout}
+    background: ${token.colorText}
   `,
   background: css`
-    position: relative;
+    position: relative
 
-    width: 100%;
-    padding: 24px;
+    width: 100%
+    padding: 24px
 
-    background-color: ${token.colorBgLayout};
-    background-image: url(${imageUrl('screenshot_background.webp')});
-    background-position: center;
-    background-size: 120% 120%;
+    background-color: ${token.colorBgLayout}
+    background-image: url(${imageUrl('screenshot_background.webp')})
+    background-position: center
+    background-size: 120% 120%
   `,
 
   container: css`
-    position: relative;
+    position: relative
 
-    overflow: hidden;
+    overflow: hidden
 
-    width: 100%;
-    border: 1px solid ${token.colorBorder};
-    border-radius: ${token.borderRadiusLG * 2}px;
+    width: 100%
+    border: 1px solid ${token.colorBorder}
+    border-radius: ${token.borderRadiusLG * 2}px
 
-    background: ${token.colorBgLayout};
-    box-shadow: ${token.boxShadow};
+    background: ${token.colorBgLayout}
+    box-shadow: ${token.boxShadow}
   `,
   decs: css`
-    font-size: 12px;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    color: ${token.colorTextDescription}
   `,
   footer: css`
-    font-size: 12px;
-    color: ${token.colorTextDescription};
+    font-size: 12px
+    color: ${token.colorTextDescription}
   `,
   heatmaps: css`
     .legend-month,
     footer {
-      display: none;
+      display: none
     }
   `,
   preview: cx(
     stylish.noScrollbar,
     css`
-      overflow: hidden scroll;
+      overflow: hidden scroll
 
-      width: 100%;
-      max-height: 70dvh;
-      border: 1px solid ${token.colorBorder};
-      border-radius: ${token.borderRadiusLG}px;
+      width: 100%
+      max-height: 70dvh
+      border: 1px solid ${token.colorBorder}
+      border-radius: ${token.borderRadiusLG}px
 
-      background: ${token.colorBgLayout};
+      background: ${token.colorBgLayout}
 
       * {
-        pointer-events: none;
+        pointer-events: none
 
         ::-webkit-scrollbar {
-          width: 0 !important;
-          height: 0 !important;
+          width: 0 !important
+          height: 0 !important
         }
       }
 
       ${responsive.mobile} {
-        max-height: 40dvh;
+        max-height: 40dvh
       }
     `,
   ),
   title: css`
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
+    font-size: 24px
+    font-weight: bold
+    text-align: center
   `,
-}));
+}))
 
 const Preview = memo(() => {
-  const { styles } = useStyles();
-  const { t } = useTranslation('auth');
-  const isOfficial = !isServerMode && OFFICIAL_URL.includes(location.host);
+  const { styles } = useStyles()
+  const { t } = useTranslation('auth')
+  const isOfficial = !isServerMode && OFFICIAL_URL.includes(location.host)
 
   return (
     <div className={styles.preview}>
@@ -153,7 +153,7 @@ const Preview = memo(() => {
         </Center>
       </div>
     </div>
-  );
-});
+  )
+})
 
-export default Preview;
+export default Preview

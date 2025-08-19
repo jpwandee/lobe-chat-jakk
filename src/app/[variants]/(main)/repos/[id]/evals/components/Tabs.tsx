@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { Tabs as TabsNav } from '@lobehub/ui';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Tabs as TabsNav }
+import Link from 'next/link'
+import { usePathname }
 
 export const Tabs = ({ knowledgeBaseId }: { knowledgeBaseId: string }) => {
   const pathname = usePathname();

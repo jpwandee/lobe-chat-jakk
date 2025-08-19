@@ -1,7 +1,9 @@
 export const parserPluginSettings = (
-  settingsStr?: string,
-): Record<string, Record<string, string>> => {
-  if (!settingsStr) return {};
+settingsStr?: string,
+): Record<string,
+ Record<string,
+ string>> => {
+  if (!settingsStr) return {}
 
   const settings = new Map();
 
@@ -25,5 +27,5 @@ export const parserPluginSettings = (
     }
   }
 
-  return Object.fromEntries(settings.entries());
-};
+  return Object.fromEntries(settings.entries())
+}

@@ -1,15 +1,14 @@
-import React, { useRef, useState } from 'react';
+import react, { useRef, useState }
 
-interface UseDragAndDropOptions {
-  accept?: string; // MIME type filter, e.g., 'image/*'
-  onDrop: (files: File[]) => void;
+interface usedraganddropoptions { // MIME type filter, e.g., 'image/*'
+  onDrop: (files: file[]) => void;
+  accept?: string;MIMEtypefilter,e.g.,onDrop
 }
 
 export const useDragAndDrop = ({ onDrop, accept = 'image/*' }: UseDragAndDropOptions) => {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const dragCounter = useRef(0);
-
-  const handleDragEnter = (e: React.DragEvent) => {
+  const [isDragOver, setIsDragOver] = useState(false)
+  const dragCounter = useRef(0)
+  const handledragenter = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -18,9 +17,9 @@ export const useDragAndDrop = ({ onDrop, accept = 'image/*' }: UseDragAndDropOpt
       dragCounter.current++;
       setIsDragOver(true);
     }
-  };
+  }
 
-  const handleDragLeave = (e: React.DragEvent) => {
+  const handledragleave = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -28,9 +27,9 @@ export const useDragAndDrop = ({ onDrop, accept = 'image/*' }: UseDragAndDropOpt
     if (dragCounter.current === 0) {
       setIsDragOver(false);
     }
-  };
+  }
 
-  const handleDrop = async (e: React.DragEvent) => {
+  const handledrop = async (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -52,20 +51,22 @@ export const useDragAndDrop = ({ onDrop, accept = 'image/*' }: UseDragAndDropOpt
     if (filteredFiles.length > 0) {
       onDrop(filteredFiles);
     }
-  };
+  }
 
-  const dragHandlers = {
+  const draghandlers = {
     onDragEnter: handleDragEnter,
     onDragLeave: handleDragLeave,
     onDragOver: (e: React.DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-    },
-    onDrop: handleDrop,
-  };
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
+    ,
+    onDrop: handledrop,onDrop
+  }
 
   return {
     dragHandlers,
     isDragOver,
-  };
+  }
 };

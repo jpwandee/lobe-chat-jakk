@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import urlJoin from 'url-join';
+import { memo }
+import urlJoin from 'url-join'
 
-import Menu from '@/components/Menu';
-import { useActiveSettingsKey } from '@/hooks/useActiveTabKey';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
-import { ProfileTabs } from '@/store/global/initialState';
+import Menu from '@/components/Menu'
+import { useActiveSettingsKey }
+import { useQueryRoute }
+import { ProfileTabs }
 
-import { useCategory } from '../../hooks/useCategory';
+import { useCategory } from '../../hooks/useCategory'
 
 const CategoryContent = memo(() => {
-  const activeTab = useActiveSettingsKey();
-  const cateItems = useCategory();
-  const router = useQueryRoute();
+  const activeTab = useActiveSettingsKey()
+  const cateItems = useCategory()
+  const router = useQueryRoute()
 
   return (
     <Menu
       compact
       items={cateItems}
       onClick={({ key }) => {
-        const activeKey = key === ProfileTabs.Profile ? '/' : key;
+        const activeKey = key === ProfileTabs.Profile ? '/' : key
 
-        router.push(urlJoin('/profile', activeKey));
+        router.push(urlJoin('/profile', activeKey))
       }}
       selectable
       selectedKeys={[activeTab]}
     />
-  );
-});
+  )
+})
 
-export default CategoryContent;
+export default CategoryContent

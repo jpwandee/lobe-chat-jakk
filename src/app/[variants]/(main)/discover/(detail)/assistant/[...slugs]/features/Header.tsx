@@ -1,40 +1,40 @@
-'use client';
+'use client'
 
-import { Github, MCP } from '@lobehub/icons';
-import { ActionIcon, Avatar, Button, Icon, Text, Tooltip } from '@lobehub/ui';
-import { createStyles, useResponsive } from 'antd-style';
-import { BookTextIcon, CoinsIcon, DotIcon } from 'lucide-react';
-import Link from 'next/link';
-import qs from 'query-string';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { Github, MCP }
+import { ActionIcon, Avatar, Button, Icon, Text, Tooltip }
+import { createStyles, useResponsive }
+import { BookTextIcon, CoinsIcon, DotIcon }
+import Link from 'next/link'
+import qs from 'query-string'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { formatIntergerNumber } from '@/utils/format';
+import { formatIntergerNumber }
 
-import { useCategory } from '../../../../(list)/assistant/features/Category/useCategory';
-import PublishedTime from '../../../../../../../../components/PublishedTime';
-import { useDetailContext } from './DetailProvider';
+import { useCategory }
+import PublishedTime from '../../../../../../../../components/PublishedTime'
+import { useDetailContext }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     desc: css`
-      color: ${token.colorTextSecondary};
+      color: ${token.colorTextSecondary}
     `,
     time: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     version: css`
-      font-family: ${token.fontFamilyCode};
-      font-size: 13px;
+      font-family: ${token.fontFamilyCode}
+      font-size: 13px
     `,
-  };
-});
+  }
+})
 
-const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
-  const { t } = useTranslation('discover');
+const header = memo< { mobile?: boolean }>(({ mobile: isMobile }) => {
+  const { t } = useTranslation('discover')
   const {
     author,
     identifier,
@@ -45,11 +45,11 @@ const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
     tokenUsage,
     pluginCount,
     knowledgeCount,
-  } = useDetailContext();
-  const { styles, theme } = useStyles();
-  const { mobile = isMobile } = useResponsive();
-  const categories = useCategory();
-  const cate = categories.find((c) => c.key === category);
+  } = useDetailContext()
+  const { styles, theme } = useStyles()
+  const { mobile = isMobile } = useResponsive()
+  const categories = useCategory()
+  const cate = categories.find((c) => c.key === category)
 
   const cateButton = (
     <Link
@@ -62,7 +62,7 @@ const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
         {cate?.label}
       </Button>
     </Link>
-  );
+  )
 
   return (
     <Flexbox gap={12}>
@@ -170,7 +170,7 @@ const Header = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
         )}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Header;
+export default Header

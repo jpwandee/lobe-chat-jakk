@@ -1,31 +1,30 @@
 // File: src/app/echo-test/page.tsx
-'use client';
+'use client';File
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState }
 
 // File: src/app/echo-test/page.tsx
 
 export default function EchoTest() {
-  const [lines, setLines] = useState<string[]>([]);
-  const esRef = useRef<EventSource | null>(null);
-
+  const [lines, setLines] = useState<string[]>([])
+  const esRef = useRef<EventSource | null>(null)
   const start = () => {
     // ปิดตัวเก่าถ้ามี (กันซ้อน)
     if (esRef.current) {
       esRef.current.close();
     }
-    const es = new EventSource('/api/echo');
-    es.onopen = () => setLines((s) => [...s, 'SSE open']);
-    es.onmessage = (e: MessageEvent) => setLines((s) => [...s, `MSG: ${e.data}`]);
+    const es = new EventSource('/api/echo')
+    es.onopen = () => setLines((s) => [...s, 'SSE open'])
+    es.onmessage = (e: MessageEvent) => setLines((s) => [...s, `MSG: ${e.data}`])
     es.addEventListener('hello', (e: MessageEvent) => {
-      setLines((s) => [...s, `HELLO: ${e.data}`]);
-    });
+      setLines((s) => [...s, `HELLO: ${e.data}`])
+    })
     es.addEventListener('tick', (e: MessageEvent) => {
-      setLines((s) => [...s, `TICK: ${e.data}`]);
-    });
-    es.onerror = () => setLines((s) => [...s, 'SSE error (auto-retry)']);
-    esRef.current = es;
-  };
+      setLines((s) => [...s, `TICK: ${e.data}`])
+    })
+    es.onerror = () => setLines((s) => [...s, 'SSE error (auto-retry)'])
+    esRef.current = es
+  }
 
   const stop = () => {
     if (esRef.current) {
@@ -33,7 +32,7 @@ export default function EchoTest() {
       esRef.current = null;
       setLines((s) => [...s, 'SSE closed']);
     }
-  };
+  }
 
   useEffect(() => {
     start();

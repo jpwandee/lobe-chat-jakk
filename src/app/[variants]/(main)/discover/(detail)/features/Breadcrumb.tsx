@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { CopyButton } from '@lobehub/ui';
-import { Breadcrumb as AntdBreadcrumb } from 'antd';
-import { useTheme } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { CopyButton }
+import { Breadcrumb as AntdBreadcrumb }
+import { useTheme }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { DiscoverTab } from '@/types/discover';
+import { DiscoverTab }
 
-const Breadcrumb = memo<{ identifier: string; tab: DiscoverTab }>(({ tab, identifier }) => {
-  const theme = useTheme();
-  const { t } = useTranslation('discover');
+const breadcrumb = memo< { identifier: string; tab: discovertab }>(({ tab, identifier }) => {
+  const theme = useTheme()
+  const { t } = useTranslation('discover')
   return (
     <AntdBreadcrumb
       items={[
@@ -50,7 +50,7 @@ const Breadcrumb = memo<{ identifier: string; tab: DiscoverTab }>(({ tab, identi
         },
       ]}
     />
-  );
-});
+  )
+})
 
-export default Breadcrumb;
+export default Breadcrumb

@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { Icon, Tag } from '@lobehub/ui';
-import Link from 'next/link';
-import { useRouter } from 'nextjs-toploader/app';
-import qs from 'query-string';
-import { memo, useMemo } from 'react';
+import { Icon, Tag }
+import Link from 'next/link'
+import { useRouter }
+import qs from 'query-string'
+import { memo, useMemo }
 
-import { SCROLL_PARENT_ID } from '@/app/[variants]/(main)/discover/features/const';
-import { withSuspense } from '@/components/withSuspense';
-import { useCategory } from '@/hooks/useMCPCategory';
-import { useQuery } from '@/hooks/useQuery';
-import { useDiscoverStore } from '@/store/discover';
-import { McpCategory } from '@/types/discover';
+import { SCROLL_PARENT_ID }
+import { withSuspense }
+import { useCategory }
+import { useQuery }
+import { useDiscoverStore }
+import { McpCategory } from '@/types/discover'
 
-import CategoryMenu from '../../../../components/CategoryMenu';
+import CategoryMenu from '../../../../components/CategoryMenu'
 
 const Category = memo(() => {
-  const useMcpCategories = useDiscoverStore((s) => s.useMcpCategories);
-  const { category = 'all', q } = useQuery() as { category?: McpCategory; q?: string };
-  const { data: items = [] } = useMcpCategories({ q });
-  const route = useRouter();
-  const cates = useCategory();
+  const useMcpCategories = useDiscoverStore((s) => s.useMcpCategories)
+  const { category = 'all', q } = useQuery() as { category?: McpCategory q?: string }
+  const { data: items = [] } = useMcpCategories({ q })
+  const route = useRouter()
+  const cates = useCategory()
 
   const genUrl = (key: McpCategory) =>
     qs.stringifyUrl(
@@ -29,20 +29,20 @@ const Category = memo(() => {
         url: '/discover/mcp',
       },
       { skipNull: true },
-    );
+    )
 
   const handleClick = (key: McpCategory) => {
-    route.push(genUrl(key));
-    const scrollableElement = document?.querySelector(`#${SCROLL_PARENT_ID}`);
-    if (!scrollableElement) return;
-    scrollableElement.scrollTo({ behavior: 'smooth', top: 0 });
-  };
-  const total = useMemo(() => items.reduce((acc, item) => acc + item.count, 0), [items]);
+    route.push(genUrl(key))
+    const scrollableElement = document?.querySelector(`#${SCROLL_PARENT_ID}`)
+    if (!scrollableElement) return
+    scrollableElement.scrollTo({ behavior: 'smooth', top: 0 })
+  }
+  const total = useMemo(() => items.reduce((acc, item) => acc + item.count, 0), [items])
 
   return (
     <CategoryMenu
       items={cates.map((item) => {
-        const itemData = items.find((i) => i.category === item.key);
+        const itemData = items.find((i) => i.category === item.key)
         return {
           extra:
             item.key === 'all'
@@ -71,13 +71,13 @@ const Category = memo(() => {
           ...item,
           icon: <Icon icon={item.icon} size={18} />,
           label: <Link href={genUrl(item.key)}>{item.label}</Link>,
-        };
+        }
       })}
       mode={'inline'}
       onClick={(v) => handleClick(v.key as McpCategory)}
       selectedKeys={[category]}
     />
-  );
-});
+  )
+})
 
-export default withSuspense(Category);
+export default withSuspense(Category)

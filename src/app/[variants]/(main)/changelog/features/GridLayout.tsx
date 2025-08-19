@@ -1,10 +1,11 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { FC, PropsWithChildren, ReactNode }
+import { Flexbox }
 
-const GridLayout: FC<PropsWithChildren<{ date?: ReactNode; mobile?: boolean }>> = ({
-  mobile,
-  children,
-  date,
+const GridLayout: FC<PropsWithChildren< { date?: reactnode; mobile?: boolean }
+>> = ({
+mobile,
+children,
+date,
 }) => {
   return (
     <Flexbox horizontal={!mobile} wrap={'wrap'}>
@@ -19,4 +20,4 @@ const GridLayout: FC<PropsWithChildren<{ date?: ReactNode; mobile?: boolean }>> 
   );
 };
 
-export default GridLayout;
+export default GridLayout

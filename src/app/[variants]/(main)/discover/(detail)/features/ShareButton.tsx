@@ -8,62 +8,62 @@ import {
   Modal,
   Tag,
   Text,
-} from '@lobehub/ui';
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { startCase } from 'lodash-es';
-import { LinkIcon, Share2Icon } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode, memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Center, Flexbox } from 'react-layout-kit';
+}
+import { Skeleton }
+import { createStyles }
+import { startCase }
+import { LinkIcon, Share2Icon }
+import Link from 'next/link'
+import { ReactNode, memo, useState }
+import { useTranslation }
+import { Center, Flexbox }
 
-import { useShare } from '@/hooks/useShare';
+import { useShare }
 
-import CardBanner from '../../components/CardBanner';
+import CardBanner from '../../components/CardBanner'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     banner: css`
-      overflow: hidden;
+      overflow: hidden
 
-      border: 1px solid ${token.colorBorderSecondary};
-      border-radius: ${token.borderRadiusLG}px;
+      border: 1px solid ${token.colorBorderSecondary}
+      border-radius: ${token.borderRadiusLG}px
 
-      background: ${token.colorBgContainer};
-      box-shadow: ${token.boxShadowTertiary};
+      background: ${token.colorBgContainer}
+      box-shadow: ${token.boxShadowTertiary}
     `,
     copy: css`
-      background: ${token.colorPrimary};
+      background: ${token.colorPrimary}
 
       &:hover {
-        background: ${token.colorPrimaryHover};
+        background: ${token.colorPrimaryHover}
       }
     `,
     icon: css`
-      border: 1px solid ${token.colorFillSecondary};
+      border: 1px solid ${token.colorFillSecondary}
 
       svg {
-        fill: ${token.colorTextSecondary};
+        fill: ${token.colorTextSecondary}
       }
 
       &:hover {
-        border: 1px solid ${token.colorBorderSecondary};
+        border: 1px solid ${token.colorBorderSecondary}
 
         svg {
-          fill: ${token.colorText};
+          fill: ${token.colorText}
         }
       }
     `,
-  };
-});
+  }
+})
 
-interface ShareButtonProps extends ButtonProps {
+interface sharebuttonprops extends buttonprops {
   meta?: {
-    avatar?: string | ReactNode;
+    avatar?: string | reactnode;
     desc?: string;
     hashtags?: string[];
-    tags?: ReactNode;
+    tags?: reactnode;
     title?: string;
     url: string;
   };
@@ -77,12 +77,12 @@ const ShareButton = memo<ShareButtonProps>(({ meta, ...rest }) => {
     title: '',
     url: '',
     ...meta,
-  });
-  const { t } = useTranslation('common');
-  const { styles, theme } = useStyles();
-  const [open, setOpen] = useState(false);
+  })
+  const { t } = useTranslation('common')
+  const { styles, theme } = useStyles()
+  const [open, setOpen] = useState(false)
 
-  let content;
+  let content
 
   if (meta) {
     content = (
@@ -140,9 +140,9 @@ const ShareButton = memo<ShareButtonProps>(({ meta, ...rest }) => {
           />
         </Flexbox>
       </Center>
-    );
+    )
   } else {
-    content = <Skeleton active paragraph={{ rows: 4 }} title={false} />;
+    content = <Skeleton active paragraph={{ rows: 4 }} title={false} />
   }
 
   return (
@@ -158,7 +158,7 @@ const ShareButton = memo<ShareButtonProps>(({ meta, ...rest }) => {
         {content}
       </Modal>
     </>
-  );
-});
+  )
+})
 
-export default ShareButton;
+export default ShareButton

@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { FluentEmoji } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { FluentEmoji }
+import { createStyles }
+import { memo }
+import { useTranslation }
+import { Flexbox } from 'react-layout-kit'
 
 const useStyles = createStyles(
   ({ css, token }) => css`
-    background: linear-gradient(to bottom, ${token.colorFillTertiary}, transparent);
+    background: linear-gradient(to bottom, ${token.colorFillTertiary}, transparent)
   `,
-);
+)
 
 const Hero = memo(() => {
-  const { theme, styles } = useStyles();
-  const { t } = useTranslation('changelog');
+  const { theme, styles } = useStyles()
+  const { t } = useTranslation('changelog')
   return (
     <Flexbox className={styles} gap={8} padding={24}>
       <Flexbox align={'center'} gap={12} horizontal>
@@ -23,7 +23,7 @@ const Hero = memo(() => {
       </Flexbox>
       <div style={{ color: theme.colorTextSecondary, fontSize: 16 }}>{t('addedWhileAway')}</div>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Hero;
+export default Hero

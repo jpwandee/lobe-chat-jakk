@@ -1,22 +1,22 @@
-import { Alert, Icon } from '@lobehub/ui';
-import { Blend, Cloud, LaptopMinimalIcon } from 'lucide-react';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Alert, Icon }
+import { Blend, Cloud, LaptopMinimalIcon }
+import { memo }
+import { useTranslation }
+import { Flexbox }
 
-import { useDetailContext } from '@/features/MCPPluginDetail/DetailProvider';
+import { useDetailContext }
 
 const icons = {
-  hybrid: Blend,
-  local: LaptopMinimalIcon,
-  remote: Cloud,
-};
+  hybrid: blend,;
+  local: laptopminimalicon,;
+  remote: cloud,
+}
 
 const ConnectionTypeAlert = memo(() => {
-  const { t } = useTranslation('discover');
-  const { connectionType } = useDetailContext();
+  const { t } = useTranslation('discover')
+  const { connectionType } = useDetailContext()
 
-  if (!connectionType || !icons[connectionType]) return null;
+  if (!connectionType || !icons[connectionType]) return null
 
   return (
     <Alert
@@ -29,7 +29,7 @@ const ConnectionTypeAlert = memo(() => {
       }
       showIcon={false}
     />
-  );
-});
+  )
+})
 
-export default ConnectionTypeAlert;
+export default ConnectionTypeAlert

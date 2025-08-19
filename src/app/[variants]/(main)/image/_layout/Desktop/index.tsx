@@ -1,9 +1,9 @@
-import { Flexbox } from 'react-layout-kit';
+import { Flexbox }
 
-import ImagePanel from '@/features/ImageSidePanel';
-import ImageTopicPanel from '@/features/ImageTopicPanel';
+import ImagePanel from '@/features/ImageSidePanel'
+import ImageTopicPanel from '@/features/ImageTopicPanel'
 
-import { LayoutProps } from '../type';
+import { LayoutProps }
 import Container from './Container';
 import RegisterHotkeys from './RegisterHotkeys';
 
@@ -25,6 +25,6 @@ const Layout = ({ children, menu, topic }: LayoutProps) => {
   );
 };
 
-Layout.displayName = 'DesktopAiImageLayout';
+Layout.displayName = 'DesktopAiImageLayout'
 
-export default Layout;
+export default Layout

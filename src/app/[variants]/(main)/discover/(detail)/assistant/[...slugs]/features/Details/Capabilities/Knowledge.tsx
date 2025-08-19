@@ -1,20 +1,20 @@
-import { Block } from '@lobehub/ui';
-import { Empty } from 'antd';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Block }
+import { Empty }
+import { memo }
+import { Flexbox }
 
-import { useDetailContext } from '../../DetailProvider';
-import KnowledgeItem from './KnowledgeItem';
+import { useDetailContext } from '../../DetailProvider'
+import KnowledgeItem from './KnowledgeItem'
 
 const Knowledge = memo(() => {
-  const { config } = useDetailContext();
+  const { config } = useDetailContext()
 
   if (!config?.knowledgeBases?.length)
     return (
       <Block variant={'outlined'}>
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </Block>
-    );
+    )
 
   return (
     <Flexbox gap={8}>
@@ -27,7 +27,7 @@ const Knowledge = memo(() => {
         />
       ))}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Knowledge;
+export default Knowledge

@@ -1,9 +1,9 @@
-import { ModelIcon } from '@lobehub/icons';
-import { SortableList } from '@lobehub/ui';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { ModelIcon }
+import { SortableList }
+import { memo }
+import { Flexbox }
 
-import { AiProviderModelListItem } from '@/types/aiModel';
+import { AiProviderModelListItem } from '@/types/aiModel'
 
 const ListItem = memo<AiProviderModelListItem>(({ id, displayName }) => {
   return (
@@ -14,7 +14,7 @@ const ListItem = memo<AiProviderModelListItem>(({ id, displayName }) => {
       </Flexbox>
       <SortableList.DragHandle />
     </>
-  );
-});
+  )
+})
 
-export default ListItem;
+export default ListItem

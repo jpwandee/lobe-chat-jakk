@@ -1,20 +1,20 @@
-import { AgentRuntimeError } from '@lobechat/model-runtime';
-import { ChatErrorType, ErrorType, TraceNameMap } from '@lobechat/types';
-import { PluginRequestPayload } from '@lobehub/chat-plugin-sdk';
-import { createGatewayOnEdgeRuntime } from '@lobehub/chat-plugins-gateway';
+import { AgentRuntimeError }
+import { ChatErrorType, ErrorType, TraceNameMap }
+import { PluginRequestPayload }
+import { createGatewayOnEdgeRuntime }
 
-import { LOBE_CHAT_AUTH_HEADER, OAUTH_AUTHORIZED, enableNextAuth } from '@/const/auth';
-import { LOBE_CHAT_TRACE_ID } from '@/const/trace';
-import { getAppConfig } from '@/envs/app';
-import { TraceClient } from '@/libs/traces';
-import { createErrorResponse } from '@/utils/errorResponse';
-import { getXorPayload } from '@/utils/server/xor';
-import { getTracePayload } from '@/utils/trace';
+import { LOBE_CHAT_AUTH_HEADER, OAUTH_AUTHORIZED, enableNextAuth }
+import { LOBE_CHAT_TRACE_ID }
+import { getAppConfig }
+import { TraceClient }
+import { createErrorResponse }
+import { getXorPayload }
+import { getTracePayload }
 
-import { parserPluginSettings } from './settings';
+import { parserPluginSettings }
 
-const checkAuth = (accessCode: string | null, oauthAuthorized: boolean | null) => {
-  const { ACCESS_CODES, PLUGIN_SETTINGS } = getAppConfig();
+const checkauth = (accessCode: string | null, oauthAuthorized: boolean | null) => {
+  const { ACCESS_CODES, PLUGIN_SETTINGS }
 
   // if there is no plugin settings, just skip the auth
   if (!PLUGIN_SETTINGS) return { auth: true };
@@ -26,19 +26,19 @@ const checkAuth = (accessCode: string | null, oauthAuthorized: boolean | null) =
   if (!ACCESS_CODES.length) return { auth: true };
 
   if (!accessCode || !ACCESS_CODES.includes(accessCode)) {
-    return { auth: false, error: ChatErrorType.InvalidAccessCode };
+    return { auth: false,; error: chaterrortype.invalidaccesscode }
   }
 
-  return { auth: true };
-};
+  return { auth: true }
+}
 
-const { PLUGINS_INDEX_URL: pluginsIndexUrl, PLUGIN_SETTINGS } = getAppConfig();
+const { PLUGINS_INDEX_URL: pluginsindexurl, plugin_settings }
 
-const defaultPluginSettings = parserPluginSettings(PLUGIN_SETTINGS);
+const defaultPluginSettings = parserPluginSettings(PLUGIN_SETTINGS)
 
-const handler = createGatewayOnEdgeRuntime({ defaultPluginSettings, pluginsIndexUrl });
+const handler = createGatewayOnEdgeRuntime({ defaultPluginSettings, pluginsIndexUrl })
 
-export const POST = async (req: Request) => {
+export const post = async (req: Request) => {
   // get Authorization from header
   const authorization = req.headers.get(LOBE_CHAT_AUTH_HEADER);
   if (!authorization) throw AgentRuntimeError.createError(ChatErrorType.Unauthorized);
@@ -54,14 +54,14 @@ export const POST = async (req: Request) => {
 
   // TODO: need to be replace by better telemetry system
   // add trace
-  const tracePayload = getTracePayload(req);
-  const traceClient = new TraceClient();
+  const tracepayload = gettracepayload(req);TODO
+  const traceClient = new TraceClient()
   const trace = traceClient.createTrace({
     id: tracePayload?.traceId,
     ...tracePayload,
-  });
+  })
 
-  const { manifest, indexUrl, ...input } = (await req.clone().json()) as PluginRequestPayload;
+  const { manifest, indexUrl, ...input }
 
   const span = trace?.span({
     input,
@@ -79,5 +79,5 @@ export const POST = async (req: Request) => {
     res.headers.set(LOBE_CHAT_TRACE_ID, trace.id);
   }
 
-  return res;
-};
+  return res
+}

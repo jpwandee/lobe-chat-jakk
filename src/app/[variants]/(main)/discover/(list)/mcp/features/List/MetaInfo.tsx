@@ -1,13 +1,13 @@
-import { Icon } from '@lobehub/ui';
-import { DownloadIcon, StarIcon } from 'lucide-react';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { DownloadIcon, StarIcon }
+import { memo }
+import { Flexbox }
 
-import { DiscoverMcpItem } from '@/types/discover';
+import { DiscoverMcpItem }
 
-interface MetaInfoProps {
+interface metainfoprops {
   className?: string;
-  installCount: DiscoverMcpItem['installCount'];
+  installCount: discovermcpitem['installCount'];
   stars?: number;
 }
 
@@ -27,7 +27,7 @@ const MetaInfo = memo<MetaInfoProps>(({ stars, installCount, className }) => {
         </Flexbox>
       )}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default MetaInfo;
+export default MetaInfo

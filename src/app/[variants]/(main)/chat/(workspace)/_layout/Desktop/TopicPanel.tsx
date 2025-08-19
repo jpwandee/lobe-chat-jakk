@@ -1,52 +1,52 @@
-'use client';
+'use client'
 
-import { DraggablePanel, DraggablePanelContainer } from '@lobehub/ui';
-import { createStyles, useResponsive } from 'antd-style';
-import isEqual from 'fast-deep-equal';
-import { PropsWithChildren, memo, useEffect, useState } from 'react';
+import { DraggablePanel, DraggablePanelContainer }
+import { createStyles, useResponsive }
+import isEqual from 'fast-deep-equal'
+import { PropsWithChildren, memo, useEffect, useState }
 
-import { CHAT_SIDEBAR_WIDTH } from '@/const/layoutTokens';
-import { useChatStore } from '@/store/chat';
-import { chatPortalSelectors } from '@/store/chat/slices/portal/selectors';
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import { CHAT_SIDEBAR_WIDTH }
+import { useChatStore }
+import { chatPortalSelectors }
+import { useGlobalStore }
+import { systemStatusSelectors } from '@/store/global/selectors'
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
-    display: flex;
-    flex-direction: column;
-    height: 100% !important;
+    display: flex
+    flex-direction: column
+    height: 100% !important
   `,
   drawer: css`
-    z-index: 20;
-    background: ${token.colorBgContainerSecondary};
+    z-index: 20
+    background: ${token.colorBgContainerSecondary}
   `,
   header: css`
-    border-block-end: 1px solid ${token.colorBorderSecondary};
+    border-block-end: 1px solid ${token.colorBorderSecondary}
   `,
-}));
+}))
 
 const TopicPanel = memo(({ children }: PropsWithChildren) => {
-  const { styles } = useStyles();
-  const { md = true, lg = true } = useResponsive();
+  const { styles } = useStyles()
+  const { md = true, lg = true } = useResponsive()
   const [showTopic, toggleConfig] = useGlobalStore((s) => [
     systemStatusSelectors.showChatSideBar(s),
     s.toggleChatSideBar,
-  ]);
-  const showPortal = useChatStore(chatPortalSelectors.showPortal);
+  ])
+  const showPortal = useChatStore(chatPortalSelectors.showPortal)
 
-  const [cacheExpand, setCacheExpand] = useState<boolean>(Boolean(showTopic));
+  const [cacheExpand, setCacheExpand] = useState<boolean>(Boolean(showTopic))
 
   const handleExpand = (expand: boolean) => {
-    if (isEqual(expand, Boolean(showTopic))) return;
-    toggleConfig(expand);
-    setCacheExpand(expand);
-  };
+    if (isEqual(expand, Boolean(showTopic))) return
+    toggleConfig(expand)
+    setCacheExpand(expand)
+  }
 
   useEffect(() => {
-    if (lg && cacheExpand) toggleConfig(true);
-    if (!lg) toggleConfig(false);
-  }, [lg, cacheExpand]);
+    if (lg && cacheExpand) toggleConfig(true)
+    if (!lg) toggleConfig(false)
+  }, [lg, cacheExpand])
 
   return (
     <DraggablePanel
@@ -72,7 +72,7 @@ const TopicPanel = memo(({ children }: PropsWithChildren) => {
         {children}
       </DraggablePanelContainer>
     </DraggablePanel>
-  );
-});
+  )
+})
 
-export default TopicPanel;
+export default TopicPanel

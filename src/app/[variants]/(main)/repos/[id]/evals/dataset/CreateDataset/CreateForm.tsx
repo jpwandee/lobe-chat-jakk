@@ -1,32 +1,32 @@
-import { Button, Form, Input } from '@lobehub/ui';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Form, Input }
+import { memo, useState }
+import { useTranslation }
 
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
-import { CreateNewEvalDatasets } from '@/types/eval';
+import { useKnowledgeBaseStore }
+import { CreateNewEvalDatasets }
 
-interface CreateFormProps {
+interface createformprops {
   knowledgeBaseId: string;
   onClose?: () => void;
 }
 
 const CreateForm = memo<CreateFormProps>(({ onClose, knowledgeBaseId }) => {
-  const { t } = useTranslation('ragEval');
-  const [loading, setLoading] = useState(false);
-  const createNewDataset = useKnowledgeBaseStore((s) => s.createNewDataset);
+  const { t } = useTranslation('ragEval')
+  const [loading, setLoading] = useState(false)
+  const createNewDataset = useKnowledgeBaseStore((s) => s.createNewDataset)
 
   const onFinish = async (values: CreateNewEvalDatasets) => {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await createNewDataset({ ...values, knowledgeBaseId });
-      setLoading(false);
-      onClose?.();
+      await createNewDataset({ ...values, knowledgeBaseId })
+      setLoading(false)
+      onClose?.()
     } catch (e) {
-      console.error(e);
-      setLoading(false);
+      console.error(e)
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <Form
@@ -53,7 +53,7 @@ const CreateForm = memo<CreateFormProps>(({ onClose, knowledgeBaseId }) => {
       layout={'vertical'}
       onFinish={onFinish}
     />
-  );
-});
+  )
+})
 
-export default CreateForm;
+export default CreateForm

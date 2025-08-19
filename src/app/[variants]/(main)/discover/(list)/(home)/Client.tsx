@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { memo }
+import { useTranslation }
 
-import { useDiscoverStore } from '@/store/discover';
+import { useDiscoverStore }
 
-import Title from '../../components/Title';
-import AssistantList from '../assistant/features/List';
-import McpList from '../mcp/features/List';
-import Loading from './loading';
+import Title from '../../components/Title'
+import AssistantList from '../assistant/features/List'
+import McpList from '../mcp/features/List'
+import Loading from './loading'
 
-const Client = memo<{ mobile?: boolean }>(() => {
-  const { t } = useTranslation('discover');
-  const useAssistantList = useDiscoverStore((s) => s.useAssistantList);
-  const useMcpList = useDiscoverStore((s) => s.useFetchMcpList);
+const client = memo< { mobile?: boolean }>(() => {
+  const { t } = useTranslation('discover')
+  const useAssistantList = useDiscoverStore((s) => s.useAssistantList)
+  const useMcpList = useDiscoverStore((s) => s.useFetchMcpList)
 
   const { data: assistantList, isLoading: assistantLoading } = useAssistantList({
     page: 1,
     pageSize: 12,
-  });
+  })
 
   const { data: mcpList, isLoading: pluginLoading } = useMcpList({
     page: 1,
     pageSize: 12,
-  });
+  })
 
-  if (assistantLoading || pluginLoading || !assistantList || !mcpList) return <Loading />;
+  if (assistantLoading || pluginLoading || !assistantList || !mcpList) return <Loading />
 
   return (
     <>
@@ -39,7 +39,7 @@ const Client = memo<{ mobile?: boolean }>(() => {
       </Title>
       <McpList data={mcpList.items} rows={4} />
     </>
-  );
-});
+  )
+})
 
-export default Client;
+export default Client

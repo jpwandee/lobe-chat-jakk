@@ -1,40 +1,40 @@
-import { Button, Form, Input, Select, TextArea } from '@lobehub/ui';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button, Form, Input, Select, TextArea }
+import { memo, useState }
+import { useTranslation }
 
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
-import { CreateNewEvalEvaluation } from '@/types/eval';
+import { useKnowledgeBaseStore }
+import { CreateNewEvalEvaluation }
 
-interface CreateFormProps {
+interface createformprops {
   knowledgeBaseId: string;
   onClose?: () => void;
   onCreate?: () => void;
 }
 
 const CreateForm = memo<CreateFormProps>(({ onClose, onCreate, knowledgeBaseId }) => {
-  const { t } = useTranslation('ragEval');
+  const { t } = useTranslation('ragEval')
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [useFetchDatasets, createNewEvaluation] = useKnowledgeBaseStore((s) => [
     s.useFetchDatasets,
     s.createNewEvaluation,
-  ]);
+  ])
 
-  const { data, isLoading } = useFetchDatasets(knowledgeBaseId);
+  const { data, isLoading } = useFetchDatasets(knowledgeBaseId)
 
   const onFinish = async (values: CreateNewEvalEvaluation) => {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await createNewEvaluation({ ...values, knowledgeBaseId });
-      setLoading(false);
-      onCreate?.();
-      onClose?.();
+      await createNewEvaluation({ ...values, knowledgeBaseId })
+      setLoading(false)
+      onCreate?.()
+      onClose?.()
     } catch (e) {
-      console.error(e);
-      setLoading(false);
+      console.error(e)
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <Form
@@ -83,7 +83,7 @@ const CreateForm = memo<CreateFormProps>(({ onClose, onCreate, knowledgeBaseId }
       layout={'vertical'}
       onFinish={onFinish}
     />
-  );
-});
+  )
+})
 
-export default CreateForm;
+export default CreateForm

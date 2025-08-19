@@ -1,70 +1,70 @@
-'use client';
+'use client'
 
-import { ModelIcon, ProviderIcon } from '@lobehub/icons';
-import { Block, Icon, Tag, Text } from '@lobehub/ui';
-import { Popover } from 'antd';
-import { createStyles } from 'antd-style';
-import dayjs from 'dayjs';
-import { ClockIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'nextjs-toploader/app';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ModelIcon, ProviderIcon }
+import { Block, Icon, Tag, Text }
+import { Popover }
+import { createStyles }
+import dayjs from 'dayjs'
+import { ClockIcon }
+import Link from 'next/link'
+import { useRouter }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { DiscoverModelItem } from '@/types/discover';
+import { ModelInfoTags }
+import { DiscoverModelItem } from '@/types/discover'
 
-import PublishedTime from '../../../../../../../../components/PublishedTime';
-import ModelTypeIcon from './ModelTypeIcon';
+import PublishedTime from '../../../../../../../../components/PublishedTime'
+import ModelTypeIcon from './ModelTypeIcon'
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     author: css`
-      color: ${token.colorTextDescription};
+      color: ${token.colorTextDescription}
     `,
     code: css`
-      font-family: ${token.fontFamilyCode};
+      font-family: ${token.fontFamilyCode}
     `,
     desc: css`
-      flex: 1;
-      margin: 0 !important;
-      color: ${token.colorTextSecondary};
+      flex: 1
+      margin: 0 !important
+      color: ${token.colorTextSecondary}
     `,
     footer: css`
-      margin-block-start: 16px;
-      border-block-start: 1px dashed ${token.colorBorder};
-      background: ${token.colorBgContainerSecondary};
+      margin-block-start: 16px
+      border-block-start: 1px dashed ${token.colorBorder}
+      background: ${token.colorBgContainerSecondary}
     `,
     secondaryDesc: css`
-      font-size: 12px;
-      color: ${token.colorTextDescription};
+      font-size: 12px
+      color: ${token.colorTextDescription}
     `,
     title: css`
-      margin: 0 !important;
-      font-size: 16px !important;
-      font-weight: 500 !important;
+      margin: 0 !important
+      font-size: 16px !important
+      font-weight: 500 !important
 
       &:hover {
-        color: ${token.colorLink};
+        color: ${token.colorLink}
       }
     `,
-  };
-});
+  }
+})
 
 const ModelItem = memo<DiscoverModelItem>(
   ({ identifier, displayName, contextWindowTokens, releasedAt, type, abilities, providers }) => {
-    const { t } = useTranslation(['models', 'discover']);
-    const { styles } = useStyles();
-    const router = useRouter();
-    const link = urlJoin('/discover/model', identifier);
+    const { t } = useTranslation(['models', 'discover'])
+    const { styles } = useStyles()
+    const router = useRouter()
+    const link = urlJoin('/discover/model', identifier)
     return (
       <Block
         clickable
         height={'100%'}
         onClick={() => {
-          router.push(link);
+          router.push(link)
         }}
         style={{
           overflow: 'hidden',
@@ -183,8 +183,8 @@ const ModelItem = memo<DiscoverModelItem>(
           </Flexbox>
         </Flexbox>
       </Block>
-    );
+    )
   },
-);
+)
 
-export default ModelItem;
+export default ModelItem

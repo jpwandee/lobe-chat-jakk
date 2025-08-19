@@ -1,5 +1,5 @@
-import SkeletonLoading from '@/components/Loading/SkeletonLoading';
+import SkeletonLoading from '@/components/Loading/SkeletonLoading'
 
 export default () => {
-  return <SkeletonLoading paragraph={{ rows: 8 }} />;
-};
+  return <skeletonloading paragraph= {{ rows: 8 }} />
+}

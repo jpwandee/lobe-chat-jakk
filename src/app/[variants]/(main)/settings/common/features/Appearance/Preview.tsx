@@ -1,67 +1,67 @@
-import { Block } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { rgba } from 'polished';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Block }
+import { createStyles }
+import { rgba }
+import { memo }
+import { Flexbox }
 
 const useStyles = createStyles(({ css, token }) => {
   return {
     agent: css`
-      padding: 4px;
-      border-radius: 2px;
+      padding: 4px
+      border-radius: 2px
     `,
     agentActive: css`
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     `,
     bubble: css`
-      padding: 6px;
-      border: 1px solid ${rgba(token.colorBorderSecondary, 0.66)};
-      border-radius: 3px;
-      background-color: ${token.colorBgContainer};
+      padding: 6px
+      border: 1px solid ${rgba(token.colorBorderSecondary, 0.66)}
+      border-radius: 3px
+      background-color: ${token.colorBgContainer}
     `,
     container: css`
-      overflow: hidden;
-      justify-self: flex-end;
+      overflow: hidden
+      justify-self: flex-end
 
-      width: 332px;
-      height: 200px;
-      border: 1px solid ${token.colorBorder};
-      border-radius: ${token.borderRadiusLG}px;
+      width: 332px
+      height: 200px
+      border: 1px solid ${token.colorBorder}
+      border-radius: ${token.borderRadiusLG}px
 
-      background: ${token.colorBgLayout};
+      background: ${token.colorBgLayout}
     `,
     conversation: css`
-      background: ${token.colorBgContainerSecondary};
+      background: ${token.colorBgContainerSecondary}
     `,
     header: css`
-      border-block-end: 1px solid ${token.colorBorderSecondary};
+      border-block-end: 1px solid ${token.colorBorderSecondary}
     `,
     icon: css`
-      flex: none;
-      border-radius: 2px;
-      background: ${token.colorFillSecondary};
+      flex: none
+      border-radius: 2px
+      background: ${token.colorFillSecondary}
     `,
     input: css`
-      border-block-start: 1px solid ${token.colorBorderSecondary};
+      border-block-start: 1px solid ${token.colorBorderSecondary}
     `,
     nav: css`
-      padding: 4px;
-      border-inline-end: 1px solid ${token.colorBorderSecondary};
-      background: ${token.colorBgLayout};
+      padding: 4px
+      border-inline-end: 1px solid ${token.colorBorderSecondary}
+      background: ${token.colorBgLayout}
     `,
     sidebar: css`
-      padding: 4px;
-      border-inline-end: 1px solid ${token.colorBorderSecondary};
-      background: ${token.colorBgLayout};
+      padding: 4px
+      border-inline-end: 1px solid ${token.colorBorderSecondary}
+      background: ${token.colorBgLayout}
     `,
-  };
-});
+  }
+})
 
-const AgentItem = memo<{
+const agentitem = memo< {
   active?: boolean;
   color?: string;
 }>(({ active, color }) => {
-  const { cx, styles, theme } = useStyles();
+  const { cx, styles, theme } = useStyles()
   return (
     <Flexbox
       align={'center'}
@@ -95,11 +95,11 @@ const AgentItem = memo<{
         />
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
 const Preview = memo(() => {
-  const { styles, theme } = useStyles();
+  const { styles, theme } = useStyles()
 
   const nav = (
     <Flexbox align={'center'} className={styles.nav} gap={8} width={24}>
@@ -113,7 +113,7 @@ const Preview = memo(() => {
       <Flexbox className={styles.icon} height={12} width={12} />
       <Flexbox className={styles.icon} height={12} width={12} />
     </Flexbox>
-  );
+  )
 
   const sidebar = (
     <Flexbox className={styles.sidebar} gap={4} width={72}>
@@ -139,7 +139,7 @@ const Preview = memo(() => {
       <AgentItem />
       <AgentItem />
     </Flexbox>
-  );
+  )
 
   const header = (
     <Flexbox
@@ -158,7 +158,7 @@ const Preview = memo(() => {
         <Flexbox className={styles.icon} height={10} width={10} />
       </Flexbox>
     </Flexbox>
-  );
+  )
 
   const input = (
     <Flexbox
@@ -177,7 +177,7 @@ const Preview = memo(() => {
         width={32}
       />
     </Flexbox>
-  );
+  )
 
   return (
     <Block className={styles.container} horizontal shadow variant={'outlined'}>
@@ -292,7 +292,7 @@ const Preview = memo(() => {
         {input}
       </Flexbox>
     </Block>
-  );
-});
+  )
+})
 
-export default Preview;
+export default Preview

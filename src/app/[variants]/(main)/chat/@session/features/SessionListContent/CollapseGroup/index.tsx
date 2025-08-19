@@ -1,45 +1,45 @@
-import { Icon } from '@lobehub/ui';
-import { Collapse, CollapseProps } from 'antd';
-import { createStyles } from 'antd-style';
-import { ChevronDown } from 'lucide-react';
-import { memo } from 'react';
+import { Icon }
+import { Collapse, CollapseProps }
+import { createStyles }
+import { ChevronDown }
+import { memo } from 'react'
 
 const useStyles = createStyles(({ css, prefixCls, token, responsive }) => ({
   container: css`
     .${prefixCls}-collapse-header {
-      padding-inline: 16px 10px !important;
-      border-radius: ${token.borderRadius}px !important;
-      color: ${token.colorTextDescription} !important;
+      padding-inline: 16px 10px !important
+      border-radius: ${token.borderRadius}px !important
+      color: ${token.colorTextDescription} !important
 
       ${responsive.mobile} {
-        border-radius: 0 !important;
+        border-radius: 0 !important
       }
 
       &:hover {
-        color: ${token.colorText} !important;
-        background: ${token.colorFillTertiary};
+        color: ${token.colorText} !important
+        background: ${token.colorFillTertiary}
         .${prefixCls}-collapse-extra {
-          display: block;
+          display: block
         }
       }
     }
     .${prefixCls}-collapse-extra {
-      display: none;
+      display: none
     }
     .${prefixCls}-collapse-content {
-      border-radius: 0 !important;
+      border-radius: 0 !important
     }
     .${prefixCls}-collapse-content-box {
-      padding: 0 !important;
+      padding: 0 !important
     }
   `,
   icon: css`
-    transition: all 100ms ${token.motionEaseOut};
+    transition: all 100ms ${token.motionEaseOut}
   `,
-}));
+}))
 
 const CollapseGroup = memo<CollapseProps>((props) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
   return (
     <Collapse
       bordered={false}
@@ -57,7 +57,7 @@ const CollapseGroup = memo<CollapseProps>((props) => {
       size={'small'}
       {...props}
     />
-  );
-});
+  )
+})
 
-export default CollapseGroup;
+export default CollapseGroup

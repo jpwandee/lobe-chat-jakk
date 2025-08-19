@@ -1,58 +1,50 @@
-'use client';
+'use client'
 
-import { ModelProvider } from '@lobechat/model-runtime';
-import { useTranslation } from 'react-i18next';
+import { ModelProvider }
+import { useTranslation }
 
-import { FormInput, FormPassword } from '@/components/FormInput';
-import { AzureAIProviderCard } from '@/config/modelProviders';
-import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
+import { FormInput, FormPassword }
+import { AzureAIProviderCard }
+import { aiProviderSelectors, useAiInfraStore }
 
-import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey } from '../../const';
-import { SkeletonInput } from '../../features/ProviderConfig';
-import { ProviderItem } from '../../type';
-import ProviderDetail from '../[id]';
+import { KeyVaultsConfigKey, LLMProviderApiTokenKey, LLMProviderBaseUrlKey }
+import { SkeletonInput }
+import { ProviderItem }
+import ProviderDetail from '../[id]'
 
-const providerKey = ModelProvider.AzureAI;
+const providerKey = ModelProvider.AzureAI
 
 const useProviderCard = (): ProviderItem => {
-  const { t } = useTranslation('modelProvider');
+  const { t }
 
-  const isLoading = useAiInfraStore(aiProviderSelectors.isAiProviderConfigLoading(providerKey));
+  const isLoading = useAiInfraStore(aiProviderSelectors.isAiProviderConfigLoading(providerKey))
 
   return {
     ...AzureAIProviderCard,
-    apiKeyItems: [
-      {
-        children: isLoading ? (
-          <SkeletonInput />
-        ) : (
-          <FormPassword
-            autoComplete={'new-password'}
-            placeholder={t('azureai.token.placeholder')}
-          />
-        ),
-        desc: t('azureai.token.desc'),
-        label: t('azureai.token.title'),
-        name: [KeyVaultsConfigKey, LLMProviderApiTokenKey],
-      },
-      {
-        children: isLoading ? (
-          <SkeletonInput />
-        ) : (
-          <FormInput allowClear placeholder={t('azureai.endpoint.placeholder')} />
-        ),
-        desc: t('azureai.endpoint.desc'),
-        label: t('azureai.endpoint.title'),
-        name: [KeyVaultsConfigKey, LLMProviderBaseUrlKey],
-      },
-    ],
-  };
-};
+      apiKeyItems: [
+      {; />
+      ) : (
+        <FormPassword
+        autoComplete={'new-password'}
+        placeholder={t('azureai.token.placeholder')}
+        />
+      ),; />
+      ) : (
+        <FormInput allowClear placeholder={t('azureai.endpoint.placeholder')} />
+      ),;
+    children: isloading ? (
+      <skeletoninput;
+    desc: t('azureai.endpoint.desc'),;
+    label: t('azureai.endpoint.title'),;
+    name: [keyvaultsconfigkey, llmproviderapitokenkey], }, {;
+    name: [keyvaultsconfigkey, llmproviderbaseurlkey], }, ],
+  }
+}
 
-const Page = () => {
-  const card = useProviderCard();
+const page = () => {
+  const card = useProviderCard()
 
-  return <ProviderDetail {...card} />;
-};
+  return <providerdetail {...card} />
+}
 
-export default Page;
+export default Page

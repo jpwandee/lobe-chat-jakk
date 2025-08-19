@@ -1,72 +1,72 @@
-import { createStyles } from 'antd-style';
-import { memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { createStyles }
+import { memo, useState }
+import { Flexbox }
 
-import { useChatStore } from '@/store/chat';
-import { useGlobalStore } from '@/store/global';
+import { useChatStore }
+import { useGlobalStore }
 
-import Content from './Content';
+import Content from './Content'
 
 const useStyles = createStyles(({ css, token, isDarkMode }, index: number) => ({
   active: css`
-    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary};
-    transition: background 200ms ${token.motionEaseOut};
+    background: ${isDarkMode ? token.colorFillSecondary : token.colorFillTertiary}
+    transition: background 200ms ${token.motionEaseOut}
 
     &:hover {
-      background: ${token.colorFill};
+      background: ${token.colorFill}
     }
   `,
   container: css`
-    margin-inline: 8px;
+    margin-inline: 8px
 
     &::after {
-      content: '';
+      content: ''
 
-      position: absolute;
-      inset-block: 50px ${index * 40 + 20}px;
-      inset-inline-start: 26px;
+      position: absolute
+      inset-block: 50px ${index * 40 + 20}px
+      inset-inline-start: 26px
 
-      width: 18px;
-      border-block-end: 2px solid ${token.colorBorderSecondary};
-      border-inline-start: 2px solid ${token.colorBorderSecondary};
-      border-end-start-radius: 8px;
+      width: 18px
+      border-block-end: 2px solid ${token.colorBorderSecondary}
+      border-inline-start: 2px solid ${token.colorBorderSecondary}
+      border-end-start-radius: 8px
     }
 
     &.thread-item {
-      width: calc(100% - 16px);
+      width: calc(100% - 16px)
     }
   `,
   split: css`
-    border-block-end: 1px solid ${token.colorSplit};
+    border-block-end: 1px solid ${token.colorSplit}
   `,
   wrapper: css`
-    cursor: pointer;
+    cursor: pointer
 
-    width: calc(100% - 36px);
-    margin-block: 2px;
-    padding-block: 4px;
-    padding-inline: 8px;
-    border-radius: ${token.borderRadius}px;
+    width: calc(100% - 36px)
+    margin-block: 2px
+    padding-block: 4px
+    padding-inline: 8px
+    border-radius: ${token.borderRadius}px
 
     &:hover {
-      background: ${token.colorFillSecondary};
+      background: ${token.colorFillSecondary}
     }
   `,
-}));
+}))
 
-export interface ThreadItemProps {
+export interface threaditemprops {
   id: string;
   index: number;
   title: string;
 }
 
 const ThreadItem = memo<ThreadItemProps>(({ title, id, index }) => {
-  const { styles, cx } = useStyles(index);
-  const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic);
-  const [toggleThread, activeThreadId] = useChatStore((s) => [s.switchThread, s.activeThreadId]);
-  const [isHover, setHovering] = useState(false);
+  const { styles, cx } = useStyles(index)
+  const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic)
+  const [toggleThread, activeThreadId] = useChatStore((s) => [s.switchThread, s.activeThreadId])
+  const [isHover, setHovering] = useState(false)
 
-  const active = id === activeThreadId;
+  const active = id === activeThreadId
   return (
     <Flexbox className={cx(styles.container, 'thread-item')} horizontal>
       <Flexbox height={36} width={36} />
@@ -77,20 +77,20 @@ const ThreadItem = memo<ThreadItemProps>(({ title, id, index }) => {
         flex={1}
         horizontal
         onClick={() => {
-          toggleThread(id);
-          toggleConfig(false);
+          toggleThread(id)
+          toggleConfig(false)
         }}
         onMouseEnter={() => {
-          setHovering(true);
+          setHovering(true)
         }}
         onMouseLeave={() => {
-          setHovering(false);
+          setHovering(false)
         }}
       >
         {<Content active={active} id={id} showMore={isHover} title={title} />}
       </Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ThreadItem;
+export default ThreadItem

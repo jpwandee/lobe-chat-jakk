@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { Center } from 'react-layout-kit';
+import { Center }
 
-import { useImageStore } from '@/store/image';
-import { generationBatchSelectors, generationTopicSelectors } from '@/store/image/selectors';
+import { useImageStore }
+import { generationBatchSelectors, generationTopicSelectors }
 
-import GenerationFeed from '../GenerationFeed';
-import PromptInput from '../PromptInput';
-import EmptyState from './EmptyState';
-import SkeletonList from './SkeletonList';
+import GenerationFeed from '../GenerationFeed'
+import PromptInput from '../PromptInput'
+import EmptyState from './EmptyState'
+import SkeletonList from './SkeletonList'
 
-const ImageWorkspaceContent = () => {
+const imageworkspacecontent = () => {
   const activeTopicId = useImageStore(generationTopicSelectors.activeGenerationTopicId);
   const useFetchGenerationBatches = useImageStore((s) => s.useFetchGenerationBatches);
   const isCurrentGenerationTopicLoaded = useImageStore(
@@ -24,7 +24,7 @@ const ImageWorkspaceContent = () => {
     return <SkeletonList />;
   }
 
-  if (!hasGenerations) return <EmptyState />;
+  if (!hasGenerations) return <EmptyState />
 
   return (
     <>
@@ -42,7 +42,7 @@ const ImageWorkspaceContent = () => {
         <PromptInput disableAnimation={true} showTitle={false} />
       </Center>
     </>
-  );
-};
+  )
+}
 
-export default ImageWorkspaceContent;
+export default ImageWorkspaceContent

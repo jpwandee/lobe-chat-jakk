@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { EditableText, Text } from '@lobehub/ui';
-import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { EditableText, Text }
+import { memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { useUserStore } from '@/store/user';
-import { syncSettingsSelectors } from '@/store/user/selectors';
+import { useUserStore }
+import { syncSettingsSelectors } from '@/store/user/selectors'
 
 const DeviceName = memo(() => {
-  const { t } = useTranslation('setting');
+  const { t } = useTranslation('setting')
 
   const [deviceName, setSettings] = useUserStore((s) => [
     syncSettingsSelectors.deviceName(s),
     s.setSettings,
-  ]);
+  ])
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(false)
 
   const updateDeviceName = (deviceName: string) => {
-    setSettings({ sync: { deviceName } });
-    setEditing(false);
-  };
+    setSettings({ sync: { deviceName } })
+    setEditing(false)
+  }
 
   return (
     <Flexbox
@@ -34,7 +34,7 @@ const DeviceName = memo(() => {
       {!deviceName && !editing && (
         <Flexbox
           onClick={() => {
-            setEditing(true);
+            setEditing(true)
           }}
           style={{ cursor: 'pointer' }}
         >
@@ -48,7 +48,7 @@ const DeviceName = memo(() => {
         }}
         onBlur={(e) => updateDeviceName(e.target.value)}
         onChange={(e) => {
-          updateDeviceName(e);
+          updateDeviceName(e)
         }}
         onEditingChange={setEditing}
         size={'large'}
@@ -56,7 +56,7 @@ const DeviceName = memo(() => {
         variant={'filled'}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default DeviceName;
+export default DeviceName

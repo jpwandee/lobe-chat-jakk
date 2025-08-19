@@ -1,7 +1,7 @@
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
+import { useKnowledgeBaseStore }
 
-export const useKnowledgeBaseItem = (id: string) => {
-  const useFetchKnowledgeBaseItem = useKnowledgeBaseStore((s) => s.useFetchKnowledgeBaseItem);
+export const useknowledgebaseitem = (id: string) => {
+  const useFetchKnowledgeBaseItem = useKnowledgeBaseStore((s) => s.useFetchKnowledgeBaseItem)
 
-  return useFetchKnowledgeBaseItem(id);
-};
+  return useFetchKnowledgeBaseItem(id)
+}

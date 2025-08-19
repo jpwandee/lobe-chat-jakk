@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { memo } from 'react';
+import { memo }
 
-import PageTitle from '@/components/PageTitle';
-import { withSuspense } from '@/components/withSuspense';
-import { useChatStore } from '@/store/chat';
-import { topicSelectors } from '@/store/chat/selectors';
-import { useSessionStore } from '@/store/session';
-import { sessionMetaSelectors } from '@/store/session/selectors';
+import PageTitle from '@/components/PageTitle'
+import { withSuspense }
+import { useChatStore }
+import { topicSelectors }
+import { useSessionStore }
+import { sessionMetaSelectors } from '@/store/session/selectors'
 
 const Title = memo(() => {
-  const agentTitle = useSessionStore(sessionMetaSelectors.currentAgentTitle);
+  const agentTitle = useSessionStore(sessionMetaSelectors.currentAgentTitle)
 
-  const topicTitle = useChatStore((s) => topicSelectors.currentActiveTopic(s)?.title);
-  return <PageTitle title={[topicTitle, agentTitle].filter(Boolean).join(' · ')} />;
-});
+  const topicTitle = useChatStore((s) => topicSelectors.currentActiveTopic(s)?.title)
+  return <PageTitle title={[topicTitle, agentTitle].filter(Boolean).join(' · ')} />
+})
 
-export default withSuspense(Title);
+export default withSuspense(Title)

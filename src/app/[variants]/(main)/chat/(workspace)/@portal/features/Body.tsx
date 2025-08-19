@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { css, cx } from 'antd-style';
-import { PropsWithChildren } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { css, cx }
+import { PropsWithChildren }
+import { Flexbox }
 
 const body = css`
-  :has(.portal-artifact) {
-    overflow: hidden;
-    padding-block-end: 12px;
-  }
+:has(.portal-artifact) {
+  overflow: hidden;
+  padding-block-end: 12px;
+}
 `;
 
 const Body = ({ children }: PropsWithChildren) => {
@@ -24,4 +24,4 @@ const Body = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default Body;
+export default Body

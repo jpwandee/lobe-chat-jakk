@@ -1,11 +1,11 @@
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import type { NextRequest } from 'next/server';
+import { fetchRequestHandler }
+import type { NextRequest }
 
-import { pino } from '@/libs/logger';
-import { createEdgeContext } from '@/libs/trpc/edge/context';
-import { edgeRouter } from '@/server/routers/edge';
+import { pino }
+import { createEdgeContext }
+import { edgeRouter }
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
@@ -17,12 +17,12 @@ const handler = (req: NextRequest) =>
     endpoint: '/trpc/edge',
 
     onError: ({ error, path }) => {
-      pino.info(`Error in tRPC handler (edge) on path: ${path}`);
-      console.error(error);
+      pino.info(`Error in tRPC handler (edge) on path: ${path}`)
+      console.error(error)
     },
 
     req,
     router: edgeRouter,
-  });
+  })
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

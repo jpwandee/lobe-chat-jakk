@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { isCustomBranding } from '@/const/version';
+import { isCustomBranding }
 
-import Footer from './Footer';
-import ProviderGrid from './ProviderGrid';
+import Footer from './Footer'
+import ProviderGrid from './ProviderGrid'
 
-const Page = () => {
+const page = () => {
   return (
     <>
       <ProviderGrid />
       {!isCustomBranding && <Footer />}
     </>
-  );
-};
+  )
+}
 
-Page.displayName = 'ProviderGrid';
+Page.displayName = 'ProviderGrid'
 
-export default Page;
+export default Page

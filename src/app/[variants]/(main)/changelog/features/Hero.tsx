@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { useResponsive, useTheme } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { useResponsive, useTheme }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { BRANDING_NAME, SOCIAL_URL } from '@/const/branding';
-import { OFFICIAL_SITE } from '@/const/url';
+import { BRANDING_NAME, SOCIAL_URL }
+import { OFFICIAL_SITE } from '@/const/url'
 
-import GridLayout from './GridLayout';
+import GridLayout from './GridLayout'
 
 const Hero = memo(() => {
-  const { t } = useTranslation('changelog');
-  const theme = useTheme();
-  const { mobile } = useResponsive();
+  const { t } = useTranslation('changelog')
+  const theme = useTheme()
+  const { mobile } = useResponsive()
   return (
     <GridLayout>
       <Flexbox gap={16} style={{ paddingTop: 32, zIndex: 1 }}>
@@ -34,7 +34,7 @@ const Hero = memo(() => {
         </Flexbox>
       </Flexbox>
     </GridLayout>
-  );
-});
+  )
+})
 
-export default Hero;
+export default Hero

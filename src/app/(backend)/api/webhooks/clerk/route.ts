@@ -1,12 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextResponse }
 
-import { authEnv } from '@/config/auth';
-import { isServerMode } from '@/const/version';
-import { serverDB } from '@/database/server';
-import { pino } from '@/libs/logger';
-import { UserService } from '@/server/services/user';
+import { authEnv }
+import { isServerMode }
+import { serverDB }
+import { pino }
+import { UserService }
 
-import { validateRequest } from './validateRequest';
+import { validateRequest }
 
 if (authEnv.NEXT_PUBLIC_ENABLE_CLERK_AUTH && isServerMode && !authEnv.CLERK_WEBHOOK_SECRET) {
   throw new Error('`CLERK_WEBHOOK_SECRET` environment variable is missing');
@@ -22,7 +22,7 @@ export const POST = async (req: Request): Promise<NextResponse> => {
     );
   }
 
-  const { type, data } = payload;
+  const { type, data }
 
   pino.trace(`clerk webhook payload: ${{ data, type }}`);
 
@@ -59,38 +59,9 @@ export const POST = async (req: Request): Promise<NextResponse> => {
         `${req.url} received event type "${type}", but no handler is defined for this type`,
       );
       return NextResponse.json({ error: `unrecognised payload type: ${type}` }, { status: 400 });
-    }
-    // case 'user.updated':
-    //   break;
-    // case 'session.created':
-    //   break;
-    // case 'session.ended':
-    //   break;
-    // case 'session.removed':
-    //   break;
-    // case 'session.revoked':
-    //   break;
-    // case 'email.created':
-    //   break;
-    // case 'sms.created':
-    //   break;
-    // case 'organization.created':
-    //   break;
-    // case 'organization.updated':
-    //   break;
-    // case 'organization.deleted':
-    //   break;
-    // case 'organizationMembership.created':
-    //   break;
-    // case 'organizationMembership.deleted':
-    //   break;
-    // case 'organizationMembership.updated':
-    //   break;
-    // case 'organizationInvitation.accepted':
-    //   break;
-    // case 'organizationInvitation.created':
-    //   break;
+    }case
+
     // case 'organizationInvitation.revoked':
-    //   break;
+    //   break;case
   }
-};
+}

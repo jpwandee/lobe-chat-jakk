@@ -1,32 +1,32 @@
-import { Button, Icon } from '@lobehub/ui';
-import { createStyles } from 'antd-style';
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { Flexbox, FlexboxProps } from 'react-layout-kit';
+import { Button, Icon }
+import { createStyles }
+import { ChevronRight }
+import Link from 'next/link'
+import { memo }
+import { Flexbox, FlexboxProps }
 
 const useStyles = createStyles(({ css, token }) => ({
   more: css`
-    display: flex;
-    align-items: center;
-    color: ${token.colorTextSecondary};
+    display: flex
+    align-items: center
+    color: ${token.colorTextSecondary}
   `,
   title: css`
-    margin-block: 0;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 1.2;
+    margin-block: 0
+    font-size: 16px
+    font-weight: bold
+    line-height: 1.2
   `,
-}));
+}))
 
-interface BlockProps extends FlexboxProps {
+interface blockprops extends flexboxprops {
   more?: string;
   moreLink?: string;
   title: string;
 }
 
 const Block = memo<BlockProps>(({ title, more, moreLink, children, ...rest }) => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <Flexbox gap={16} style={{ position: 'relative' }} width={'100%'}>
@@ -43,7 +43,7 @@ const Block = memo<BlockProps>(({ title, more, moreLink, children, ...rest }) =>
       </Flexbox>
       <Flexbox {...rest}>{children}</Flexbox>
     </Flexbox>
-  );
-});
+  )
+})
 
-export default Block;
+export default Block

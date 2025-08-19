@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { ChatHeader } from '@lobehub/ui/mobile';
-import { memo, useState } from 'react';
+import { ChatHeader }
+import { memo, useState }
 
-import { INBOX_SESSION_ID } from '@/const/session';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import { INBOX_SESSION_ID }
+import { useQueryRoute }
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig'
 
-import SettingButton from '../../../features/SettingButton';
-import ShareButton from '../../../features/ShareButton';
-import ChatHeaderTitle from './ChatHeaderTitle';
+import SettingButton from '../../../features/SettingButton'
+import ShareButton from '../../../features/ShareButton'
+import ChatHeaderTitle from './ChatHeaderTitle'
 
 const MobileHeader = memo(() => {
-  const router = useQueryRoute();
-  const [open, setOpen] = useState(false);
+  const router = useQueryRoute()
+  const [open, setOpen] = useState(false)
 
-  const { isAgentEditable } = useServerConfigStore(featureFlagsSelectors);
+  const { isAgentEditable } = useServerConfigStore(featureFlagsSelectors)
 
   return (
     <ChatHeader
@@ -32,7 +32,7 @@ const MobileHeader = memo(() => {
       showBackButton
       style={{ width: '100%' }}
     />
-  );
-});
+  )
+})
 
-export default MobileHeader;
+export default MobileHeader

@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import { useResponsive, useTheme } from 'antd-style';
-import { ReactNode, memo, useRef } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useResponsive, useTheme }
+import { ReactNode, memo, useRef }
+import { Flexbox }
 
-import Header from '@/app/[variants]/(main)/settings/_layout/Desktop/Header';
-import SideBar from '@/app/[variants]/(main)/settings/_layout/Desktop/SideBar';
-import Footer from '@/features/Setting/Footer';
+import Header from '@/app/[variants]/(main)/settings/_layout/Desktop/Header'
+import SideBar from '@/app/[variants]/(main)/settings/_layout/Desktop/SideBar'
+import Footer from '@/features/Setting/Footer'
 
-interface SettingLayoutProps {
-  activeTitle?: ReactNode;
-  category: ReactNode;
-  children: ReactNode;
+interface settinglayoutprops {
+  activeTitle?: reactnode;
+  category: reactnode;
+  children: reactnode;
   desc?: string;
   title?: string;
 }
 
 const SettingModalLayout = memo<SettingLayoutProps>(
   ({ children, category, desc, title, activeTitle }) => {
-    const ref = useRef<any>(null);
-    const theme = useTheme();
-    const { md = true, mobile = false } = useResponsive();
+    const ref = useRef<any>(null)
+    const theme = useTheme()
+    const { md = true, mobile = false } = useResponsive()
 
     return (
       <Flexbox horizontal={md} width={'100%'}>
@@ -62,10 +62,10 @@ const SettingModalLayout = memo<SettingLayoutProps>(
           <Footer />
         </Flexbox>
       </Flexbox>
-    );
+    )
   },
-);
+)
 
-SettingModalLayout.displayName = 'SettingModalLayout';
+SettingModalLayout.displayName = 'SettingModalLayout'
 
-export default SettingModalLayout;
+export default SettingModalLayout

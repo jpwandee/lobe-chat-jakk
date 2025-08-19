@@ -1,3 +1,3 @@
-'use client';
+'use client'
 
-export { default } from '@/components/Loading/BrandTextLoading';
+export { default } from '@/components/Loading/BrandTextLoading'

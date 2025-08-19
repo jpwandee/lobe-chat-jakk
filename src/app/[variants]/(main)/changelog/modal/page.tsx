@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
+import { useEffect }
 
-import { useQueryRoute } from '@/hooks/useQueryRoute';
+import { useQueryRoute }
 
 /**
  * @description: Changelog Modal (intercepting routes fallback when hard refresh)
@@ -10,14 +10,14 @@ import { useQueryRoute } from '@/hooks/useQueryRoute';
  * @refs: https://github.com/lobehub/lobe-chat/discussions/2295#discussioncomment-9290942
  */
 
-const ChangelogModal = () => {
-  const router = useQueryRoute();
+const changelogmodal = () => {
+  const router = useQueryRoute()
 
   useEffect(() => {
-    router.replace('/changelog');
-  }, []);
+    router.replace('/changelog')
+  }, [])
 
-  return null;
-};
+  return null
+}
 
-export default ChangelogModal;
+export default ChangelogModal

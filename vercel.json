@@ -1,8 +1,8 @@
 {
   "framework": "nextjs",
-  "installCommand": "pnpm install --no-frozen-lockfile || bun install",
-  "buildCommand": "pnpm -w build || bun run -w vercel:build",
-  "env": {
-    "NODE_OPTIONS": "--max-old-space-size=6144"
+  "installCommand": "bun install || pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm -w build",
+  "functions": {
+    "maxDuration": 300
   }
 }

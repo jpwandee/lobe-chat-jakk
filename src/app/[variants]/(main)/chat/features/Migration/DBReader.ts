@@ -4,17 +4,19 @@ import {
   ImportSessionGroup,
   ImportTopic,
   ImporterEntryData,
-} from '@/types/importer';
+}
 
-interface V2DB_File {
+interface v2db_file {
   /**
    * create Time
    */
   createdAt: number;
+
   /**
    * file data array buffer
    */
-  data: ArrayBuffer;
+  data: arraybuffer;
+
   /**
    * file type
    * @example 'image/png'
@@ -22,28 +24,34 @@ interface V2DB_File {
   fileType: string;
   id: string;
   metadata: any;
+
   /**
    * file name
    * @example 'test.png'
    */
   name: string;
+
   /**
    * the mode database save the file
    * local mean save the raw file into data
    * url mean upload the file to a cdn and then save the url
    */
   saveMode: 'local' | 'url';
+
   /**
    * file size
    */
   size: number;
+
   /**
    * file url if saveMode is url
    */
   url: string;
 }
 
-interface V2DB_MESSAGE {
+interface v2db_message {
+  // foreign keys
+  parentId?: string;
   content: string;
   createdAt: number;
   error?: any;
@@ -52,27 +60,23 @@ interface V2DB_MESSAGE {
   fromModel?: string;
   fromProvider?: string;
   id: string;
-  observationId?: string;
-  // foreign keys
-  parentId?: string;
+  observationId?: string;foreignkeysparentId?
   plugin?: any;
   pluginError?: any;
   pluginState?: any;
-
   quotaId?: string;
   role: string;
   sessionId?: string;
   tool_call_id?: string;
   tools?: object[];
   topicId?: string;
-
   traceId?: string;
   translate?: object | false;
   tts?: any;
   updatedAt: number;
 }
 
-interface DB_Plugin {
+interface db_plugin {
   createdAt: number;
   id: string;
   identifier: string;
@@ -82,19 +86,19 @@ interface DB_Plugin {
   updatedAt: number;
 }
 
-interface DB_Session {
-  config: object;
-  createdAt: number;
-  group?: string;
+interface db_session {
   // 原 Agent 类型
   id: string;
+  config: object;
+  createdAt: number;
+  group?: string;Agentid
   meta: object;
   pinned?: number;
   type?: 'agent' | 'group';
   updatedAt: number;
 }
 
-interface DB_SessionGroup {
+interface db_sessiongroup {
   createdAt: number;
   id: string;
   name: string;
@@ -102,7 +106,7 @@ interface DB_SessionGroup {
   updatedAt: number;
 }
 
-interface DB_Topic {
+interface db_topic {
   createdAt: number;
   favorite?: number;
   id: string;
@@ -111,7 +115,7 @@ interface DB_Topic {
   updatedAt: number;
 }
 
-interface DB_User {
+interface db_user {
   avatar?: string;
   createdAt: number;
   id: string;
@@ -120,25 +124,25 @@ interface DB_User {
   uuid: string;
 }
 
-interface MigrationData {
-  files: V2DB_File[];
-  messages: V2DB_MESSAGE[];
-  plugins: DB_Plugin[];
-  sessionGroups: DB_SessionGroup[];
-  sessions: DB_Session[];
-  topics: DB_Topic[];
-  users: DB_User[];
+interface migrationdata {
+  files: v2db_file[];
+  messages: v2db_message[];
+  plugins: db_plugin[];
+  sessionGroups: db_sessiongroup[];
+  sessions: db_session[];
+  topics: db_topic[];
+  users: db_user[];
 }
 
-const LOBE_CHAT_LOCAL_DB_NAME = 'LOBE_CHAT_DB';
+const LOBE_CHAT_LOCAL_DB_NAME = 'LOBE_CHAT_DB'
 
-const V2DB_LASET_SCHEMA_VERSION = 7;
-export class V2DBReader {
-  private dbName: string = LOBE_CHAT_LOCAL_DB_NAME;
-  private storeNames: string[];
+const V2DB_LASET_SCHEMA_VERSION = 7
+export class v2dbreader {
+  private dbName: string = lobe_chat_local_db_name;dbName
+  private storeNames: string[];storeNames
 
-  constructor(storeNames: string[]) {
-    this.storeNames = storeNames;
+  constructor(storenames: string[]) {
+    this.storeNames = storeNames
   }
 
   /**
@@ -147,25 +151,26 @@ export class V2DBReader {
   async readAllData(): Promise<MigrationData> {
     try {
       // 打开数据库连接
-      const db = await this.openDB();
+      const db = await this.openDB()
 
       // 并行读取所有表的数据
       const results = await Promise.all(
         this.storeNames.map((storeName) => this.readStore(db, storeName)),
-      );
+      )
 
       // 构建返回结果
       const migrationData = this.storeNames.reduce((acc, storeName, index) => {
         // @ts-expect-error
-        acc[storeName] = results[index];
-        return acc;
-      }, {} as MigrationData);
+        acc[storeName] = results[index]
+        return acc
+      }, {} as MigrationData)
 
       // 关闭数据库连接
-      db.close();
+      db.close()
 
-      return migrationData;
-    } catch (error) {
+      return migrationData
+    }
+    catch (error) {
       console.error('读取数据库失败:', error);
       throw error;
     }
@@ -180,7 +185,6 @@ export class V2DBReader {
         createdAt: msg.createdAt,
         // 处理 error
         error: msg.error || msg.pluginError,
-
         // 处理额外信息
         extra: {
           fromModel: msg.fromModel,
@@ -188,10 +192,8 @@ export class V2DBReader {
           translate: msg.translate as any,
           tts: msg.tts,
         },
-
         files: msg.files,
         id: msg.id,
-
         // 复制原有字段
         observationId: msg.observationId,
         parentId: msg.parentId,
@@ -202,15 +204,11 @@ export class V2DBReader {
         sessionId: msg.sessionId,
         tool_call_id: msg.tool_call_id,
         tools: msg.tools as any,
-
         topicId: msg.topicId,
-
         traceId: msg.traceId,
-
         updatedAt: msg.updatedAt,
       }),
-    );
-
+    )
     // 转换 sessionGroups
     const sessionGroups = data.sessionGroups.map(
       (group): ImportSessionGroup => ({
@@ -221,8 +219,7 @@ export class V2DBReader {
         sort: group.sort || null,
         updatedAt: group.updatedAt,
       }),
-    );
-
+    )
     // 转换 sessions
     const sessions = data.sessions.map(
       (session): ImportSession => ({
@@ -236,22 +233,20 @@ export class V2DBReader {
         type: session.type || 'agent',
         updatedAt: new Date(session.updatedAt).toString(),
       }),
-    );
-
+    )
     const topics = data.topics.map(
       (topic): ImportTopic => ({
         ...topic,
         favorite: topic.favorite ? true : undefined,
       }),
-    );
-
+    )
     return {
       messages,
       sessionGroups,
       sessions,
       topics,
-      version: V2DB_LASET_SCHEMA_VERSION,
-    };
+      version: v2db_laset_schema_version,sessionGroups,sessions,topics,version
+    }
   }
 
   /**
@@ -259,14 +254,14 @@ export class V2DBReader {
    */
   private openDB(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName);
+      const request = indexedDB.open(this.dbName)
 
       // eslint-disable-next-line unicorn/prefer-add-event-listener
       request.onerror = () => {
-        reject(request.error);
-      };
-      request.onsuccess = () => resolve(request.result);
-    });
+        reject(request.error)
+      }
+      request.onsuccess = () => resolve(request.result)
+    })
   }
 
   /**
@@ -275,16 +270,16 @@ export class V2DBReader {
   private readStore(db: IDBDatabase, storeName: string): Promise<any[]> {
     return new Promise((resolve, reject) => {
       try {
-        const transaction = db.transaction(storeName, 'readonly');
-        const store = transaction.objectStore(storeName);
-        const request = store.getAll();
+        const transaction = db.transaction(storeName, 'readonly')
+        const store = transaction.objectStore(storeName)
+        const request = store.getAll()
 
         // eslint-disable-next-line unicorn/prefer-add-event-listener
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error)
+        request.onsuccess = () => resolve(request.result)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    });
+    })
   }
 }

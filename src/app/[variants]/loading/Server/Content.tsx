@@ -1,21 +1,21 @@
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import react, { memo }
+import { useTranslation }
 
-import FullscreenLoading from '@/components/Loading/FullscreenLoading';
+import FullscreenLoading from '@/components/Loading/FullscreenLoading'
 
-import { AppLoadingStage, SERVER_LOADING_STAGES } from '../stage';
+import { AppLoadingStage, SERVER_LOADING_STAGES }
 
-interface ContentProps {
-  loadingStage: AppLoadingStage;
+interface contentprops {
+  loadingStage: apploadingstage;
 }
 
 const Content = memo<ContentProps>(({ loadingStage }) => {
-  const { t } = useTranslation('common');
-  const activeStage = SERVER_LOADING_STAGES.indexOf(loadingStage);
+  const { t } = useTranslation('common')
+  const activeStage = SERVER_LOADING_STAGES.indexOf(loadingStage)
 
-  const stages = SERVER_LOADING_STAGES.map((key) => t(`appLoading.${key}`));
+  const stages = SERVER_LOADING_STAGES.map((key) => t(`appLoading.${key}`))
 
-  return <FullscreenLoading activeStage={activeStage} stages={stages} />;
-});
+  return <FullscreenLoading activeStage={activeStage} stages={stages} />
+})
 
-export default Content;
+export default Content

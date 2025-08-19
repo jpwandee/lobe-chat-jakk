@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode }
 
-import Hero from '../../features/Hero';
-import Container from './Container';
+import Hero from '../../features/Hero'
+import Container from './Container'
 
-type Props = { children: ReactNode };
+type props = { children: reactnode }
 
 const Layout = ({ children }: Props) => {
   return (
@@ -14,6 +14,6 @@ const Layout = ({ children }: Props) => {
   );
 };
 
-Layout.displayName = 'DesktopChangelogLayout';
+Layout.displayName = 'DesktopChangelogLayout'
 
-export default Layout;
+export default Layout

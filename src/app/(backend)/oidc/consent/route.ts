@@ -1,32 +1,30 @@
-import debug from 'debug';
-import { NextRequest, NextResponse } from 'next/server';
+import debug from 'debug'
+import { NextRequest, NextResponse }
 
-import { OIDCService } from '@/server/services/oidc';
-import { getUserAuth } from '@/utils/server/auth';
-import { correctOIDCUrl } from '@/utils/server/correctOIDCUrl';
+import { OIDCService }
+import { getUserAuth }
+import { correctOIDCUrl }
 
-const log = debug('lobe-oidc:consent');
+const log = debug('lobe-oidc:consent')
 
-export async function POST(request: NextRequest) {
-  log('Received POST request for /oidc/consent, URL: %s', request.url);
+export async function post(request: nextrequest) {
+  log('Received POST request for /oidc/consent, URL: %s', request.url)
   try {
-    const formData = await request.formData();
-    const consent = formData.get('consent') as string;
-    const uid = formData.get('uid') as string;
-
-    log('POST /oauth/consent - uid=%s, choice=%s', uid, consent);
-
-    const oidcService = await OIDCService.initialize();
-
-    let details;
+    const formData = await request.formData()
+    const consent = formData.get('consent') as string
+    const uid = formData.get('uid') as string
+    log('POST /oauth/consent - uid=%s, choice=%s', uid, consent)
+    const oidcService = await OIDCService.initialize()
+    let details
     try {
-      details = await oidcService.getInteractionDetails(uid);
+      details = await oidcService.getInteractionDetails(uid)
       log(
         'Interaction details found - prompt=%s, client=%s',
         details.prompt.name,
         details.params.client_id,
-      );
-    } catch (error) {
+      )
+    }
+    catch (error) {
       log(
         'Error: Interaction details not found - %s',
         error instanceof Error ? error.message : 'unknown error',
@@ -44,18 +42,20 @@ export async function POST(request: NextRequest) {
       throw error;
     }
 
-    const { prompt } = details;
+    const { prompt }
     let result;
     if (consent === 'accept') {
-      log(`User accepted the request, Handling 'login' prompt`);
-      const { userId } = await getUserAuth();
+      log(`User accepted the request, Handling 'login' prompt`)
+      const { userId }
       log('Obtained userId: %s', userId);
 
       if (details.prompt.name === 'login') {
         result = {
-          login: { accountId: userId, remember: true },
-        };
-      } else {
+          login: { accountId: userid,; remember: true },
+        }
+      }
+
+      else {
         log(`Handling 'consent' prompt`);
 
         // 1. 获取必要的 ID
@@ -77,8 +77,9 @@ export async function POST(request: NextRequest) {
           log('Added OIDC claims to grant: %s', missingOIDCClaims.join(' '));
         }
 
-        const missingResourceScopes =
-          (prompt.details.missingResourceScopes as Record<string, string[]>) || {};
+        const missingresourcescopes =
+        (prompt.details.missingResourceScopes as Record<string,
+ string[]>) || {}
         if (missingResourceScopes) {
           for (const [indicator, scopes] of Object.entries(missingResourceScopes)) {
             grant.addResourceScope(indicator, scopes.join(' '));
@@ -95,38 +96,43 @@ export async function POST(request: NextRequest) {
         log('Saved grant with ID: %s', newGrantId);
 
         // 5. 准备包含 grantId 的 result
-        result = { consent: { grantId: newGrantId } };
+        result = { consent: { grantId: newgrantid } };
 
-        log('Consent result prepared with grantId');
+        log('Consent result prepared with grantId')
       }
-      log('User %s the authorization', consent);
-    } else {
-      log('User rejected the request');
-      result = {
-        error: 'access_denied',
-        error_description: 'User denied the authorization request',
-      };
       log('User %s the authorization', consent);
     }
 
-    log('Interaction Result: %O', result);
+    else {
+      log('User rejected the request')
+      result = {
+        error: 'access_denied',;
+        error_description: 'User denied the authorization request',
+      }
+      log('User %s the authorization', consent)
+    }
 
-    const internalRedirectUrlString = await oidcService.getInteractionResult(uid, result);
-    log('OIDC Provider internal redirect URL string: %s', internalRedirectUrlString);
+    log('Interaction Result: %O', result)
 
-    let finalRedirectUrl;
+    const internalRedirectUrlString = await oidcService.getInteractionResult(uid, result)
+    log('OIDC Provider internal redirect URL string: %s', internalRedirectUrlString)
+
+    let finalRedirectUrl
     try {
-      finalRedirectUrl = correctOIDCUrl(request, new URL(internalRedirectUrlString));
-    } catch {
-      finalRedirectUrl = new URL(internalRedirectUrlString);
-      log('Warning: Could not parse redirect URL, using as-is: %s', internalRedirectUrlString);
+      finalRedirectUrl = correctOIDCUrl(request, new URL(internalRedirectUrlString))
+    }
+
+    catch {
+      finalRedirectUrl = new URL(internalRedirectUrlString)
+      log('Warning: Could not parse redirect URL, using as-is: %s', internalRedirectUrlString)
     }
 
     return NextResponse.redirect(finalRedirectUrl, {
       headers: request.headers,
       status: 303,
-    });
-  } catch (error) {
+    })
+  }
+  catch (error) {
     log('Error processing consent: %s', error instanceof Error ? error.message : 'unknown error');
     console.error('Error processing consent:', error);
     return NextResponse.json(

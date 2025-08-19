@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { ModelTag, ProviderIcon } from '@lobehub/icons';
-import { Tag } from '@lobehub/ui';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ModelTag, ProviderIcon }
+import { Tag }
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import { OFFICIAL_URL } from '@/const/url';
+import { OFFICIAL_URL }
 
-import ShareButton from '../../../../../features/ShareButton';
-import { useDetailContext } from '../../DetailProvider';
-import ProviderConfig from './ProviderConfig';
+import ShareButton from '../../../../../features/ShareButton'
+import { useDetailContext } from '../../DetailProvider'
+import ProviderConfig from './ProviderConfig'
 
 const ActionButton = memo(() => {
-  const { models = [], identifier, name } = useDetailContext();
-  const { t } = useTranslation('providers');
+  const { models = [], identifier, name } = useDetailContext()
+  const { t } = useTranslation('providers')
   return (
     <Flexbox align={'center'} gap={8} horizontal width={'100%'}>
       <ProviderConfig />
@@ -39,7 +39,7 @@ const ActionButton = memo(() => {
         }}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default ActionButton;
+export default ActionButton

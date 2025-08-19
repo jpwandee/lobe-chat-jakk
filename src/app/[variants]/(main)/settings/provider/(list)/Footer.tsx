@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import { useTheme } from 'antd-style';
-import Link from 'next/link';
-import { memo } from 'react';
-import { Trans } from 'react-i18next';
-import { Center } from 'react-layout-kit';
+import { useTheme }
+import Link from 'next/link'
+import { memo }
+import { Trans }
+import { Center }
 
-import { MORE_MODEL_PROVIDER_REQUEST_URL } from '@/const/url';
+import { MORE_MODEL_PROVIDER_REQUEST_URL } from '@/const/url'
 
 const Footer = memo(() => {
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Center
       style={{
@@ -30,7 +30,7 @@ const Footer = memo(() => {
         </Trans>
       </div>
     </Center>
-  );
-});
+  )
+})
 
-export default Footer;
+export default Footer

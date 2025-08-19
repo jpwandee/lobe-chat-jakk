@@ -1,19 +1,19 @@
-import { Icon } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { LucideIcon, SquareArrowOutUpRight } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { useTheme }
+import { LucideIcon, SquareArrowOutUpRight }
+import Link from 'next/link'
+import { memo }
+import { Flexbox }
 
-export interface ItemLinkProps {
+export interface itemlinkprops {
   href: string;
-  icon?: LucideIcon;
+  icon?: lucideicon;
   label: string;
   value: string;
 }
 
 const ItemLink = memo<ItemLinkProps>(({ label, href }) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Link href={href} style={{ color: 'inherit' }} target={'_blank'}>
@@ -22,7 +22,7 @@ const ItemLink = memo<ItemLinkProps>(({ label, href }) => {
         <Icon color={theme.colorTextDescription} icon={SquareArrowOutUpRight} size={14} />
       </Flexbox>
     </Link>
-  );
-});
+  )
+})
 
-export default ItemLink;
+export default ItemLink

@@ -1,10 +1,10 @@
-import { serverFeatureFlags } from '@/config/featureFlags';
-import { OpenAIProviderCard } from '@/config/modelProviders';
+import { serverFeatureFlags }
+import { OpenAIProviderCard }
 
-import ProviderDetail from '../[id]';
+import ProviderDetail from '../[id]'
 
-const Page = async () => {
-  const { showOpenAIProxyUrl, showOpenAIApiKey } = serverFeatureFlags();
+const page = async () => {
+  const { showOpenAIProxyUrl, showOpenAIApiKey } = serverFeatureFlags()
 
   return (
     <ProviderDetail
@@ -17,7 +17,7 @@ const Page = async () => {
         showApiKey: showOpenAIApiKey,
       }}
     />
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

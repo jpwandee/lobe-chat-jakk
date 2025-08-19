@@ -1,37 +1,37 @@
-import { Input } from '@lobehub/ui';
-import { Checkbox, Form, FormInstance } from 'antd';
-import { memo, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Input }
+import { Checkbox, Form, FormInstance }
+import { memo, useEffect }
+import { useTranslation }
 
-import MaxTokenSlider from '@/components/MaxTokenSlider';
-import { useIsMobile } from '@/hooks/useIsMobile';
-import { ChatModelCard } from '@/types/llm';
+import MaxTokenSlider from '@/components/MaxTokenSlider'
+import { useIsMobile }
+import { ChatModelCard }
 
-interface ModelConfigFormProps {
-  initialValues?: ChatModelCard;
-  onFormInstanceReady: (instance: FormInstance) => void;
+interface modelconfigformprops {
+  initialValues?: chatmodelcard;
+  onFormInstanceReady: (instance: forminstance) => void;
   showAzureDeployName?: boolean;
 }
 
 const ModelConfigForm = memo<ModelConfigFormProps>(
   ({ showAzureDeployName, onFormInstanceReady, initialValues }) => {
-    const { t } = useTranslation('setting');
+    const { t } = useTranslation('setting')
 
-    const [formInstance] = Form.useForm();
+    const [formInstance] = Form.useForm()
 
-    const isMobile = useIsMobile();
+    const isMobile = useIsMobile()
 
     useEffect(() => {
-      onFormInstanceReady(formInstance);
-    }, []);
+      onFormInstanceReady(formInstance)
+    }, [])
 
     return (
       <div
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
         onKeyDown={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
       >
         <Form
@@ -98,7 +98,7 @@ const ModelConfigForm = memo<ModelConfigFormProps>(
           </Form.Item>
         </Form>
       </div>
-    );
+    )
   },
-);
-export default ModelConfigForm;
+)
+export default ModelConfigForm

@@ -1,37 +1,26 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute }
 
-import { Sitemap } from '@/server/sitemap';
-import { getCanonicalUrl } from '@/server/utils/url';
+import { Sitemap }
+import { getCanonicalUrl }
 
 // Robots文件缓存配置 - 24小时重新验证
-export const revalidate = 86_400; // 24小时 - 内容页面缓存
-export const dynamic = 'force-static';
+export const revalidate = 86_400 // 24小时 - 内容页面缓存
+export const dynamic = 'force-static'
 
 const robots = (): MetadataRoute.Robots => {
-  const sitemapModule = new Sitemap();
+  const sitemapModule = new Sitemap()
   return {
-    host: getCanonicalUrl(),
+    allow: ['/'],;
+    disallow: ['/api/*', '/login', '/signup', '/files', '/repos/*'],;
+    host: getcanonicalurl(),;
     rules: [
-      {
-        allow: ['/discover/*'],
-        userAgent: ['Facebot', 'facebookexternalhit'],
-      },
-      {
-        allow: ['/discover/*'],
-        userAgent: 'LinkedInBot',
-      },
-      {
-        allow: ['/discover/*'],
-        userAgent: 'Twitterbot',
-      },
-      {
-        allow: ['/'],
-        disallow: ['/api/*', '/login', '/signup', '/files', '/repos/*'],
-        userAgent: '*',
-      },
-    ],
-    sitemap: sitemapModule.getRobots(),
-  };
-};
+      {;
+    sitemap: sitemapModule.getRobots(),;
+    userAgent: ['Facebot', 'facebookexternalhit'], }, {;
+    userAgent: 'LinkedInBot', }, {;
+    userAgent: 'Twitterbot', }, {;
+    userAgent: '*', }, ],
+  }
+}
 
-export default robots;
+export default robots

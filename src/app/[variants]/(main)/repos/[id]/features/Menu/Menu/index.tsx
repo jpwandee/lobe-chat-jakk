@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { Icon } from '@lobehub/ui';
-import { FileText, GaugeIcon } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { memo, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { Icon }
+import { FileText, GaugeIcon }
+import Link from 'next/link'
+import { usePathname }
+import { memo, useMemo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import Menu from '@/components/Menu';
-import type { MenuProps } from '@/components/Menu';
-import { useKnowledgeBaseStore } from '@/store/knowledgeBase';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import Menu from '@/components/Menu'
+import type { MenuProps }
+import { useKnowledgeBaseStore }
+import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig'
 
 const FileMenu = memo(() => {
-  const { t } = useTranslation('knowledgeBase');
-  const pathname = usePathname();
-  const { enableRAGEval } = useServerConfigStore(featureFlagsSelectors);
-  const id = useKnowledgeBaseStore((s) => s.activeKnowledgeBaseId);
+  const { t } = useTranslation('knowledgeBase')
+  const pathname = usePathname()
+  const { enableRAGEval } = useServerConfigStore(featureFlagsSelectors)
+  const id = useKnowledgeBaseStore((s) => s.activeKnowledgeBaseId)
 
   const [activeKey, setActiveKey] = useState(
     pathname.startsWith(`/repos/${id}/evals`) ? 'eval' : 'files',
-  );
+  )
 
   const items = useMemo(
     () =>
@@ -48,7 +48,7 @@ const FileMenu = memo(() => {
         // },
       ].filter(Boolean) as MenuProps['items'],
     [t],
-  );
+  )
 
   return (
     <Flexbox>
@@ -56,13 +56,13 @@ const FileMenu = memo(() => {
         compact
         items={items}
         onClick={({ key }) => {
-          setActiveKey(key);
+          setActiveKey(key)
         }}
         selectable
         selectedKeys={[activeKey]}
       />
     </Flexbox>
-  );
-});
+  )
+})
 
-export default FileMenu;
+export default FileMenu

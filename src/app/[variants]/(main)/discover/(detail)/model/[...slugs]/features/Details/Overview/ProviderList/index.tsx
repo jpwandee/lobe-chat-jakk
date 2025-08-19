@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import { ProviderIcon } from '@lobehub/icons';
-import { ActionIcon, Block, Icon, Tooltip } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { BadgeCheck, BookIcon, ChevronRightIcon, KeyIcon } from 'lucide-react';
-import Link from 'next/link';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ProviderIcon }
+import { ActionIcon, Block, Icon, Tooltip }
+import { useTheme }
+import { BadgeCheck, BookIcon, ChevronRightIcon, KeyIcon }
+import Link from 'next/link'
+import { memo }
+import { useTranslation }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import InlineTable from '@/components/InlineTable';
-import { ModelInfoTags } from '@/components/ModelSelect';
-import { BASE_PROVIDER_DOC_URL } from '@/const/url';
-import { formatPriceByCurrency, formatTokenNumber } from '@/utils/format';
-import { getTextInputUnitRate, getTextOutputUnitRate } from '@/utils/pricing';
+import InlineTable from '@/components/InlineTable'
+import { ModelInfoTags }
+import { BASE_PROVIDER_DOC_URL }
+import { formatPriceByCurrency, formatTokenNumber }
+import { getTextInputUnitRate, getTextOutputUnitRate }
 
-import { useDetailContext } from '../../../DetailProvider';
+import { useDetailContext } from '../../../DetailProvider'
 
 const ProviderList = memo(() => {
-  const { providers = [] } = useDetailContext();
-  const { t } = useTranslation('discover');
-  const theme = useTheme();
+  const { providers = [] } = useDetailContext()
+  const { t } = useTranslation('discover')
+  const theme = useTheme()
 
   return (
     <Block variant={'outlined'}>
@@ -38,7 +38,7 @@ const ProviderList = memo(() => {
                     <div style={{ fontWeight: 500 }}>{record.name}</div>
                   </Flexbox>
                 </Link>
-              );
+              )
             },
             sorter: (a, b) => a.name.localeCompare(b.name),
             title: t('tab.provider'),
@@ -48,8 +48,8 @@ const ProviderList = memo(() => {
             dataIndex: 'model.abilities',
             key: 'abilities',
             render: (_, record) => {
-              if (!record?.model?.abilities) return '--';
-              return <ModelInfoTags {...record?.model?.abilities} />;
+              if (!record?.model?.abilities) return '--'
+              return <ModelInfoTags {...record?.model?.abilities} />
             },
             title: t('models.abilities'),
             width: 120,
@@ -76,9 +76,9 @@ const ProviderList = memo(() => {
                   ? formatTokenNumber(record.model.maxDimension)
                   : '--',
             sorter: (a, b) => {
-              const aValue = a.model?.maxOutput || a.model?.maxDimension || 0;
-              const bValue = b.model?.maxOutput || b.model?.maxDimension || 0;
-              return aValue - bValue;
+              const aValue = a.model?.maxOutput || a.model?.maxDimension || 0
+              const bValue = b.model?.maxOutput || b.model?.maxDimension || 0
+              return aValue - bValue
             },
             title: (
               <Tooltip title={t('models.providerInfo.maxOutputTooltip')}>
@@ -91,15 +91,15 @@ const ProviderList = memo(() => {
             dataIndex: 'model.inputPrice',
             key: 'inputPrice',
             render: (_, record) => {
-              const inputRate = getTextInputUnitRate(record.model?.pricing);
+              const inputRate = getTextInputUnitRate(record.model?.pricing)
               return inputRate
                 ? '$' + formatPriceByCurrency(inputRate, record.model.pricing?.currency)
-                : '--';
+                : '--'
             },
             sorter: (a, b) => {
-              const aRate = getTextInputUnitRate(a.model?.pricing) || 0;
-              const bRate = getTextInputUnitRate(b.model?.pricing) || 0;
-              return aRate - bRate;
+              const aRate = getTextInputUnitRate(a.model?.pricing) || 0
+              const bRate = getTextInputUnitRate(b.model?.pricing) || 0
+              return aRate - bRate
             },
             title: (
               <Tooltip title={t('models.providerInfo.inputTooltip')}>
@@ -112,15 +112,15 @@ const ProviderList = memo(() => {
             dataIndex: 'model.outputPrice',
             key: 'outputPrice',
             render: (_, record) => {
-              const outputRate = getTextOutputUnitRate(record.model?.pricing);
+              const outputRate = getTextOutputUnitRate(record.model?.pricing)
               return outputRate
                 ? '$' + formatPriceByCurrency(outputRate, record.model.pricing?.currency)
-                : '--';
+                : '--'
             },
             sorter: (a, b) => {
-              const aRate = getTextOutputUnitRate(a.model?.pricing) || 0;
-              const bRate = getTextOutputUnitRate(b.model?.pricing) || 0;
-              return aRate - bRate;
+              const aRate = getTextOutputUnitRate(a.model?.pricing) || 0
+              const bRate = getTextOutputUnitRate(b.model?.pricing) || 0
+              return aRate - bRate
             },
             title: (
               <Tooltip title={t('models.providerInfo.outputTooltip')}>
@@ -134,7 +134,7 @@ const ProviderList = memo(() => {
             dataIndex: 'action',
             key: 'action',
             render: (_, record) => {
-              const isLobeHub = record.id === 'lobehub';
+              const isLobeHub = record.id === 'lobehub'
               return (
                 <Flexbox align="center" gap={4} horizontal justify={'flex-end'}>
                   {isLobeHub && (
@@ -173,7 +173,7 @@ const ProviderList = memo(() => {
                     />
                   </Link>
                 </Flexbox>
-              );
+              )
             },
             title: '',
             width: 120,
@@ -184,7 +184,7 @@ const ProviderList = memo(() => {
         scroll={{ x: 1000 }}
       />
     </Block>
-  );
-});
+  )
+})
 
-export default ProviderList;
+export default ProviderList

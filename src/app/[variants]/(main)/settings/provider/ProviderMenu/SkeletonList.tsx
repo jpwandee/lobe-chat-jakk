@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { Skeleton } from 'antd';
-import { createStyles } from 'antd-style';
-import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { Skeleton }
+import { createStyles }
+import { memo }
+import { Flexbox } from 'react-layout-kit'
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   avatar: css`
-    border-radius: 6px;
+    border-radius: 6px
   `,
   container: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex
+    align-items: center
+    justify-content: center
 
-    height: 40px;
-    padding-block: 8px;
-    padding-inline: 12px;
+    height: 40px
+    padding-block: 8px
+    padding-inline: 12px
 
     .${prefixCls}-skeleton-content {
-      display: flex;
-      flex-direction: column;
+      display: flex
+      flex-direction: column
     }
   `,
   paragraph: css`
     > li {
-      height: 20px !important;
+      height: 20px !important
     }
   `,
-}));
+}))
 
 export const Placeholder = memo(() => {
-  const { styles } = useStyles();
+  const { styles } = useStyles()
 
   return (
     <Skeleton
@@ -46,8 +46,8 @@ export const Placeholder = memo(() => {
       }}
       title={false}
     />
-  );
-});
+  )
+})
 
 export const SkeletonList = memo(() => (
   <Flexbox flex={1} gap={4} style={{ paddingTop: 6 }}>
@@ -55,6 +55,6 @@ export const SkeletonList = memo(() => (
       <Placeholder key={i} />
     ))}
   </Flexbox>
-));
+))
 
-export default SkeletonList;
+export default SkeletonList

@@ -1,14 +1,14 @@
-import { Collapse } from '@lobehub/ui';
-import { useTheme } from 'antd-style';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Collapse }
+import { useTheme }
+import { memo }
+import { useTranslation }
 
-import { useDetailContext } from '../../DetailProvider';
+import { useDetailContext } from '../../DetailProvider'
 
 const Summary = memo(() => {
-  const { description, summary } = useDetailContext();
-  const { t } = useTranslation('discover');
-  const theme = useTheme();
+  const { description, summary } = useDetailContext()
+  const { t } = useTranslation('discover')
+  const theme = useTheme()
   return (
     <Collapse
       defaultActiveKey={['summary']}
@@ -32,7 +32,7 @@ const Summary = memo(() => {
       size={'small'}
       variant={'borderless'}
     />
-  );
-});
+  )
+})
 
-export default Summary;
+export default Summary

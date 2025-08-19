@@ -1,44 +1,44 @@
-'use client';
+'use client'
 
-import { ActionIcon } from '@lobehub/ui';
-import { Drawer } from 'antd';
-import { createStyles } from 'antd-style';
-import { MenuIcon } from 'lucide-react';
-import { memo, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
-import urlJoin from 'url-join';
+import { ActionIcon }
+import { Drawer }
+import { createStyles }
+import { MenuIcon }
+import { memo, useState }
+import { Flexbox }
+import urlJoin from 'url-join'
 
-import Menu from '@/components/Menu';
-import { withSuspense } from '@/components/withSuspense';
-import { useQueryRoute } from '@/hooks/useQueryRoute';
-import { DiscoverTab } from '@/types/discover';
+import Menu from '@/components/Menu'
+import { withSuspense }
+import { useQueryRoute }
+import { DiscoverTab }
 
-import { useNav } from '../../../features/useNav';
+import { useNav } from '../../../features/useNav'
 
 export const useStyles = createStyles(({ css, token }) => ({
   activeNavItem: css`
-    background: ${token.colorFillTertiary};
+    background: ${token.colorFillTertiary}
   `,
   container: css`
-    height: auto;
-    padding-block: 4px;
-    background: ${token.colorBgLayout};
+    height: auto
+    padding-block: 4px
+    background: ${token.colorBgLayout}
   `,
   navItem: css`
-    font-weight: 500;
+    font-weight: 500
   `,
   title: css`
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 18px
+    font-weight: 700
+    line-height: 1.2
   `,
-}));
+}))
 
 const Nav = memo(() => {
-  const [open, setOpen] = useState(false);
-  const { styles, theme } = useStyles();
-  const { items, activeKey, activeItem } = useNav();
-  const router = useQueryRoute();
+  const [open, setOpen] = useState(false)
+  const { styles, theme } = useStyles()
+  const { items, activeKey, activeItem } = useNav()
+  const router = useQueryRoute()
 
   return (
     <>
@@ -79,9 +79,9 @@ const Nav = memo(() => {
           items={items}
           onClick={({ key }) => {
             if (key === DiscoverTab.Home) {
-              router.push('/discover');
+              router.push('/discover')
             } else {
-              router.push(urlJoin('/discover', key));
+              router.push(urlJoin('/discover', key))
             }
           }}
           selectable
@@ -89,7 +89,7 @@ const Nav = memo(() => {
         />
       </Drawer>
     </>
-  );
-});
+  )
+})
 
-export default withSuspense(Nav);
+export default withSuspense(Nav)

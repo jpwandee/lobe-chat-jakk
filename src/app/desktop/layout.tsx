@@ -1,13 +1,13 @@
-import { notFound } from 'next/navigation';
-import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactNode } from 'react';
+import { notFound }
+import { NuqsAdapter }
+import { ReactNode }
 
-import { isDesktop } from '@/const/version';
-import GlobalLayout from '@/layout/GlobalProvider';
-import { ServerConfigStoreProvider } from '@/store/serverConfig/Provider';
+import { isDesktop }
+import GlobalLayout from '@/layout/GlobalProvider'
+import { ServerConfigStoreProvider }
 
-interface RootLayoutProps {
-  children: ReactNode;
+interface rootlayoutprops {
+  children: reactnode;
 }
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
@@ -28,4 +28,4 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
   );
 };
 
-export default RootLayout;
+export default RootLayout

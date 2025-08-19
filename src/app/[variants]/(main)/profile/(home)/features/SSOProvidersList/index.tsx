@@ -1,42 +1,42 @@
-import { ActionIcon, CopyButton, List } from '@lobehub/ui';
-import { RotateCw, Unlink } from 'lucide-react';
-import { CSSProperties, memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flexbox } from 'react-layout-kit';
+import { ActionIcon, CopyButton, List }
+import { RotateCw, Unlink }
+import { CSSProperties, memo, useState }
+import { useTranslation }
+import { Flexbox }
 
-import { modal, notification } from '@/components/AntdStaticMethods';
-import AuthIcons from '@/components/NextAuth/AuthIcons';
-import { useOnlyFetchOnceSWR } from '@/libs/swr';
-import { userService } from '@/services/user';
-import { useUserStore } from '@/store/user';
-import { userProfileSelectors } from '@/store/user/selectors';
+import { modal, notification }
+import AuthIcons from '@/components/NextAuth/AuthIcons'
+import { useOnlyFetchOnceSWR }
+import { userService }
+import { useUserStore }
+import { userProfileSelectors }
 
-const { Item } = List;
+const { Item }
 
 const providerNameStyle: CSSProperties = {
   textTransform: 'capitalize',
-};
+}
 
 export const SSOProvidersList = memo(() => {
-  const [userProfile] = useUserStore((s) => [userProfileSelectors.userProfile(s)]);
-  const { t } = useTranslation('auth');
+  const [userProfile] = useUserStore((s) => [userProfileSelectors.userProfile(s)])
+  const { t } = useTranslation('auth')
 
-  const [allowUnlink, setAllowUnlink] = useState<boolean>(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [allowUnlink, setAllowUnlink] = useState<boolean>(false)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const { data, isLoading, mutate } = useOnlyFetchOnceSWR('profile-sso-providers', async () => {
-    const list = await userService.getUserSSOProviders();
-    setAllowUnlink(list?.length > 1);
-    return list;
-  });
+    const list = await userService.getUserSSOProviders()
+    setAllowUnlink(list?.length > 1)
+    return list
+  })
 
   const handleUnlinkSSO = async (provider: string, providerAccountId: string) => {
     if (data?.length === 1 || !data) {
       // At least one SSO provider should be linked
       notification.error({
         message: t('profile.sso.unlink.forbidden'),
-      });
-      return;
+      })
+      return
     }
     modal.confirm({
       content: t('profile.sso.unlink.description', {
@@ -48,12 +48,12 @@ export const SSOProvidersList = memo(() => {
         danger: true,
       },
       onOk: async () => {
-        await userService.unlinkSSOProvider(provider, providerAccountId);
-        mutate();
+        await userService.unlinkSSOProvider(provider, providerAccountId)
+        mutate()
       },
       title: <span style={providerNameStyle}>{t('profile.sso.unlink.title', { provider })}</span>,
-    });
-  };
+    })
+  }
 
   return isLoading ? (
     <Flexbox align={'center'} gap={4} horizontal>
@@ -86,7 +86,7 @@ export const SSOProvidersList = memo(() => {
         />
       ))}
     </Flexbox>
-  );
-});
+  )
+})
 
-export default SSOProvidersList;
+export default SSOProvidersList

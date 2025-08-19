@@ -1,17 +1,20 @@
-'use client';
+'use client'
 
-import { OpenAIProviderCard } from '@/config/modelProviders';
-import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
+import { OpenAIProviderCard }
+import { featureFlagsSelectors, useServerConfigStore }
 
-import { ProviderItem } from '../../type';
+import { ProviderItem }
 
 export const useOpenAIProvider = (): ProviderItem => {
-  const { showOpenAIProxyUrl, showOpenAIApiKey } = useServerConfigStore(featureFlagsSelectors);
+  const { showOpenAIProxyUrl, showOpenAIApiKey }
+
   return {
     ...OpenAIProviderCard,
     proxyUrl: showOpenAIProxyUrl && {
       placeholder: 'https://api.openai.com/v1',
-    },
-    showApiKey: showOpenAIApiKey,
-  };
-};
+    }
+
+    ,
+    showApiKey: showopenaiapikey,showApiKey
+  }
+}
